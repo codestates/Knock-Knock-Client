@@ -2,7 +2,7 @@
 name: ERROR ISSUE CARD
 about: "[ERROR] 에러종류/에러메시지"
 title: "[ERROR] 에러종류/에러메시지"
-labels: bug, help wanted, errors
+labels: bug, errors, help wanted
 assignees: yrkimyy
 
 ---
