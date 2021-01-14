@@ -1,0 +1,86 @@
+.B_header {
+  background-color: olive;
+  padding: 1.5rem;
+}
+
+li {
+  list-style: none;
+  display: block;
+  cursor: pointer;
+}
+
+.B_flexbox-container {
+  display: flex;
+  width: auto;
+}
+
+.B_SideBarSec {
+  border: 1px solid black;
+  background-color: rgb(228, 230, 168);
+  width: 130px;
+}
+
+.B_filterBtn {
+  border: 1.5px solid black;
+  width: 70px;
+  margin: 97px 0px 40px;
+  display: flex;
+  background-color: rgb(253, 253, 0);
+}
+
+.B_filterBtn:hover {
+  border: 1.5px solid yellow;
+}
+
+.B_RoomContaniner {
+  order: 1;
+  flex: 1;
+  background-color: #f27777;
+  padding: 1rem;
+  overflow: scroll;
+  height: 600px;
+}
+
+.B_RoomCard {
+  position: relative;
+  display: flex;
+  /* float: left; */
+  background: #fff;
+  border: 2px solid rgb(250, 250, 167);
+  margin: 20px 0px 0px 20px;
+  width: 60px;
+  height: 130px;
+  padding: 100px;
+  border-radius: 14%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.B_Img1 {
+  position: relative;
+  flex: 4;
+  width: 240px;
+  height: 240px;
+}
+
+.B_RoomCard:hover {
+  border: 3px solid rgb(248, 248, 117);
+}
+
+.B_desc {
+  flex: 6;
+  font-size: 20px;
+  text-align: center;
+}
+
+.B_footer {
+  display: absolute;
+  background-color: #0099cc;
+  color: #ffffff;
+  text-align: center;
+  font: bold;
+  font-size: 15px;
+  padding: 25px;
+}
