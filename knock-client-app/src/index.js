@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CreateRoom from "./components/board/createRoom";
+//import CreateRoom from "./components/board/createRoom";
 import "./index.css";
 
 import App from "./App";

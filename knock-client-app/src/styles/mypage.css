@@ -1,7 +1,7 @@
 .mypageContainer {
   display: flex;
   width: 100%;
-  height: 690px;
+  height: 920px;
   border: 1px solid black;
 }
 
@@ -17,7 +17,7 @@
 .mypageContainer_profileSec {
   display: flex;
   flex-direction: column;
-  flex: 4;
+  flex: 3;
   background: #f7e462;
   border: 1px solid black;
 }
@@ -85,14 +85,65 @@
   flex-direction: column;
   flex: 6;
   border: 1px solid black;
+  overflow: scroll;
 }
 
 .boardListSec_openboardWrap {
-  flex: 3;
+  display: flex;
+  flex-direction: column;
+  flex: 5;
   border: 1px solid black;
 }
 
-.boardListSec_closeboardWrap {
-  flex: 3;
+.openboardWrap_title {
+  flex: 1;
+  padding-left: 3%;
   border: 1px solid black;
+}
+
+.openboardWrap_boardList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 9;
+  border: 1px solid black;
+}
+
+.boardList_openboard {
+  height: 100px;
+  width: 80%;
+  margin: 2%;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+
+/* ------------------------------------------- */
+
+.boardListSec_closeboardWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  border: 1px solid black;
+}
+
+.closeboardWrap_title {
+  flex: 1;
+  padding-left: 3%;
+  border: 1px solid black;
+}
+
+.closeboardWrap_boardList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 9;
+  border: 1px solid black;
+}
+
+.boardList_closeboard {
+  height: 100px;
+  width: 80%;
+  margin: 2%;
+  border: 1px solid black;
+  border-radius: 30px;
 }

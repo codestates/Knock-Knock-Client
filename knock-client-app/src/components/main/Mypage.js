@@ -53,19 +53,44 @@ class Mypage extends React.Component {
         </div>
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">
-            <div className="openboardWrap_title"></div>
+            <div className="openboardWrap_title">
+              <h1>열린 게시물</h1>
+            </div>
             <div className="openboardWrap_boardList">
-              <div className="boardList_openboard"></div>
-              <div className="boardList_openboard"></div>
-              <div className="boardList_openboard"></div>
+              <div className="boardList_openboard">board1</div>
+              <div className="boardList_openboard">board2</div>
+              <div className="boardList_openboard">board3</div>
+              <div className="boardList_openboard">board1</div>
+              <div className="boardList_openboard">board2</div>
+              <div className="boardList_openboard">board3</div>
+              <div className="boardList_openboard">board1</div>
+              <div className="boardList_openboard">board2</div>
+              <div className="boardList_openboard">board3</div>
+              <div className="boardList_openboard">board1</div>
+              <div className="boardList_openboard">board2</div>
+              <div className="boardList_openboard">board3</div>
             </div>
           </div>
           <div className="boardListSec_closeboardWrap">
-            <div className="closeboardWrap_title"></div>
+            <div className="closeboardWrap_title">
+              <h1>닫힌 게시물</h1>
+            </div>
             <div className="closeboardWrap_boardList">
-              <div className="boardList_closeboard"></div>
-              <div className="boardList_closeboard"></div>
-              <div className="boardList_closeboard"></div>
+              <div className="boardList_closeboard">board1</div>
+              <div className="boardList_closeboard">board2</div>
+              <div className="boardList_closeboard">board3</div>
+              <div className="boardList_closeboard">board1</div>
+              <div className="boardList_closeboard">board2</div>
+              <div className="boardList_closeboard">board3</div>
+              <div className="boardList_closeboard">board1</div>
+              <div className="boardList_closeboard">board2</div>
+              <div className="boardList_closeboard">board3</div>
+              <div className="boardList_closeboard">board1</div>
+              <div className="boardList_closeboard">board2</div>
+              <div className="boardList_closeboard">board3</div>
+              <div className="boardList_closeboard">board1</div>
+              <div className="boardList_closeboard">board2</div>
+              <div className="boardList_closeboard">board3</div>
             </div>
           </div>
         </div>
