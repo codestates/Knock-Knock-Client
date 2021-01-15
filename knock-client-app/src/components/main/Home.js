@@ -3,8 +3,13 @@ import "../../styles/home.css";
 import Nav from "../nav";
 import explainImg from "../../images/explainImg.png";
 import testImg1 from "../../images/testImg1.png";
+import axios from "axios";
 
 const Home = () => {
+  axios.get("/user").then((res) => {
+    console.log(res);
+  });
+
   return (
     <div className="container">
       <header className="header">

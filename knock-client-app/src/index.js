@@ -5,11 +5,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Home from "./components/main/Home";
+import Mypage from "./components/main/Mypage";
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Home />
+    <Mypage />
   </React.StrictMode>,
   document.getElementById("root")
 );
