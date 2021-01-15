@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/home.css";
 
-import explainImg from "../../images/explainImg.png";
-import testImg1 from "../../images/testImg1.png";
+import explainImg from "../../images/homeImg/explainImg.png";
+import testImg1 from "../../images/homeImg/testImg1.png";
 import axios from "axios";
 
 const Home = () => {
-  axios.get("/user").then((res) => {
-    console.log(res);
-  });
+  // axios.get("/user").then((res) => {
+  //   console.log(res);
+  // });
 
   return (
     <div className="H_container">
@@ -97,8 +97,18 @@ const Home = () => {
           <img src={testImg1} alt="" />
         </div>
       </section>
-      <section className="H_sec4"></section>
-      <footer className="H_homeFooter"></footer>
+      <section className="H_sec4">
+        하이 린수 프로젝트 여기여기 ?
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+      </section>
+      <footer className="H_footer">
+        <div className="H_GoToBoard" onClick={() => alert("인수바보")}>
+          더보기
+        </div>
+      </footer>
     </div>
   );
 };
