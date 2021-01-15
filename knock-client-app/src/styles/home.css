@@ -215,6 +215,8 @@ select:hover {
 }
 
 .H_exhibition {
+  animation: mymove 5s infinite;
+  animation-delay: 10s;
   position: relative;
   display: flex;
   float: left;
@@ -230,7 +232,14 @@ select:hover {
   align-items: center;
   flex-direction: column;
 }
-
+@keyframes mymove {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 100%;
+  }
+}
 /* ------------------------------ */
 
 .H_footer {

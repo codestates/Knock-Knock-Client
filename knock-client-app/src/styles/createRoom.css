@@ -1,0 +1,9 @@
+.C_footer {
+  display: absolute;
+  background-color: #f7ea5b;
+  color: #ffffff;
+  text-align: center;
+  font: bold;
+  font-size: 15px;
+  padding: 25px;
+}

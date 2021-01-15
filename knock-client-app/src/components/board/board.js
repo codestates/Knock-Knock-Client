@@ -1,9 +1,9 @@
 import React from "react";
 import "../../styles/board.css";
-import together from "../../images/together.png";
-import closed from "../../images/closed.png";
-import question from "../../images/Question.png";
-import study from "../../images/studyGroup.png";
+import together from "../../images/boardImg/together.png";
+import closed from "../../images/boardImg/closed.png";
+import question from "../../images/boardImg/Question.png";
+import study from "../../images/boardImg/studyGroup.png";
 
 const PublicBoard = () => {
   const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];

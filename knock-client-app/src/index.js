@@ -1,15 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CreateRoom from "./components/board/createRoom";
 import "./index.css";
-
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <CreateRoom /> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
