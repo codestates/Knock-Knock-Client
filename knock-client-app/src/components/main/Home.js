@@ -92,8 +92,18 @@ const Home = () => {
           <img src={testImg1} alt="" />
         </div>
       </section>
-      <section className="H_sec4"></section>
-      <footer className="H_homeFooter"></footer>
+      <section className="H_sec4">
+        하이 린수 프로젝트 여기여기 ?
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+      </section>
+      <footer className="H_footer">
+        <div className="H_GoToBoard" onClick={() => alert("인수바보")}>
+          더보기
+        </div>
+      </footer>
     </div>
   );
 };
