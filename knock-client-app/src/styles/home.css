@@ -106,7 +106,8 @@ section {
   border-radius: 50px;
 }
 
-select {
+.H_boardType,
+.H_boardPeopleNum {
   flex: 3;
   height: 70px;
   border-radius: 100px;
@@ -116,7 +117,8 @@ select {
   border: none;
 }
 
-select:hover {
+.H_boardType:hover,
+.H_boardPeopleNum:hover {
   background: #f7e462;
 }
 

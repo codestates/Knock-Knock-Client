@@ -5,7 +5,10 @@ import PublicBoard from "../src/components/board/board";
 import Home from "./components/main/Home";
 import Mypage from "./components/main/Mypage";
 import CreateRoom from "./components/board/createRoom";
-// mypage 테스트를 위한 임시 경로 지정(나중에 수정 해야됨)
+
+// accountMng 계정관리 페이지 라우팅을 위한 임시 컴포넌트
+import AccountMng from "./components/main/AccountMng";
+
 const App = () => {
   return (
     <Router>
@@ -29,14 +32,22 @@ const App = () => {
           <PublicBoard />
         </Route>
 
-        <Route exact path="/mypage">
-          <Mypage />
-        </Route>
+        <Route exact path="/mypage" component={Mypage} />
+
         <Route exact path="/createRoom">
           <CreateRoom />
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        {/* 
+          accountMng 계정관리 페이지 라우팅을 위한 임시 경로 
+          나중에 수정 해야됨
+        */}
+
+        <Route exact path="/accountManage">
+          <AccountMng />
         </Route>
       </Switch>
     </Router>

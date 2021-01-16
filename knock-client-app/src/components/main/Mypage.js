@@ -2,73 +2,123 @@ import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
 
+import Profile from "./Profile";
+
 class Mypage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.accountMngHandler = this.accountMngHandler.bind(this);
+
+    this.state = {
+      isAccountMng: true,
+    };
+  }
+
+  accountMngHandler() {
+    this.props.history.push("/accountManage");
+    this.setState({ isAccountMng: false });
   }
 
   render() {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        <div className="mypageContainer_profileSec">
-          <div className="profileSec_profileImg">
-            <img
-              width="200"
-              height="200"
-              src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-              alt=""
-            />
-          </div>
-          <div className="profileSec_name_mood">
-            <p className="profileSec_username">정인수</p>
-            <p className="profileSec_mood">으악!</p>
-          </div>
-          <div className="profileSec_btns">
-            <button className="profileSec_btns_accountMng">계정 관리</button>
-            <button className="profileSec_btns_projectMng">
-              프로젝트 관리
-            </button>
-          </div>
-          <div className="profileSec_stacks">
-            <img
-              width="50"
-              height="50"
-              src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-              alt=""
-            />
-            <img
-              width="50"
-              height="50"
-              src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-              alt=""
-            />
-            <img
-              width="50"
-              height="50"
-              src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-              alt=""
-            />
-          </div>
-        </div>
+        <Profile
+          isAccountMng={this.state.isAccountMng}
+          accountMngHandler={this.accountMngHandler}
+        />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">
             <div className="openboardWrap_title">
               <h1>열린 게시물</h1>
             </div>
             <div className="openboardWrap_boardList">
-              <div className="boardList_openboard">board1</div>
-              <div className="boardList_openboard">board2</div>
-              <div className="boardList_openboard">board3</div>
-              <div className="boardList_openboard">board1</div>
-              <div className="boardList_openboard">board2</div>
-              <div className="boardList_openboard">board3</div>
-              <div className="boardList_openboard">board1</div>
-              <div className="boardList_openboard">board2</div>
-              <div className="boardList_openboard">board3</div>
-              <div className="boardList_openboard">board1</div>
-              <div className="boardList_openboard">board2</div>
-              <div className="boardList_openboard">board3</div>
+              <div className="boardList_openboard">
+                <div className="boardList_openboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>진행중</h2>
+                </div>
+                <div className="boardList_openboard_detail">
+                  <div className="openboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_openboard">
+                <div className="boardList_openboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>진행중</h2>
+                </div>
+                <div className="boardList_openboard_detail">
+                  <div className="openboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_openboard">
+                <div className="boardList_openboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>진행중</h2>
+                </div>
+                <div className="boardList_openboard_detail">
+                  <div className="openboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_openboard">
+                <div className="boardList_openboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>진행중</h2>
+                </div>
+                <div className="boardList_openboard_detail">
+                  <div className="openboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_openboard">
+                <div className="boardList_openboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>진행중</h2>
+                </div>
+                <div className="boardList_openboard_detail">
+                  <div className="openboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
           <div className="boardListSec_closeboardWrap">
@@ -76,21 +126,91 @@ class Mypage extends React.Component {
               <h1>닫힌 게시물</h1>
             </div>
             <div className="closeboardWrap_boardList">
-              <div className="boardList_closeboard">board1</div>
-              <div className="boardList_closeboard">board2</div>
-              <div className="boardList_closeboard">board3</div>
-              <div className="boardList_closeboard">board1</div>
-              <div className="boardList_closeboard">board2</div>
-              <div className="boardList_closeboard">board3</div>
-              <div className="boardList_closeboard">board1</div>
-              <div className="boardList_closeboard">board2</div>
-              <div className="boardList_closeboard">board3</div>
-              <div className="boardList_closeboard">board1</div>
-              <div className="boardList_closeboard">board2</div>
-              <div className="boardList_closeboard">board3</div>
-              <div className="boardList_closeboard">board1</div>
-              <div className="boardList_closeboard">board2</div>
-              <div className="boardList_closeboard">board3</div>
+              <div className="boardList_closeboard">
+                <div className="boardList_closeboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>종료</h2>
+                </div>
+                <div className="boardList_closeboard_detail">
+                  <div className="closeboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_closeboard">
+                <div className="boardList_closeboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>종료</h2>
+                </div>
+                <div className="boardList_closeboard_detail">
+                  <div className="closeboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_closeboard">
+                <div className="boardList_closeboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>종료</h2>
+                </div>
+                <div className="boardList_closeboard_detail">
+                  <div className="closeboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_closeboard">
+                <div className="boardList_closeboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>종료</h2>
+                </div>
+                <div className="boardList_closeboard_detail">
+                  <div className="closeboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="boardList_closeboard">
+                <div className="boardList_closeboard_brief">
+                  <h1>파이썬 2주안에 뽀개기</h1>
+                  <h2>인원: 6/10</h2>
+                  <h2>종료</h2>
+                </div>
+                <div className="boardList_closeboard_detail">
+                  <div className="closeboard_detail_title_writer">
+                    <h1>파이썬 2주안에 뽀개기</h1>
+                    <h2>그룹장: jnoodle</h2>
+                  </div>
+                  <p>
+                    2주 안에 다같이 파이썬을 뽀개 봅시다. 매주 러버덕 형식으로
+                    파이썬을 공부하고, 예제를 따라합니다.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
