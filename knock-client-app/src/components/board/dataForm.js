@@ -26,14 +26,14 @@ const DataForm = (props) => {
             <textarea placeholder="백엔드" />
           </div>
         </div>
-        :
+        {/* :
         <div className="Q_three">
           <p>2. 원하시는 스택을 추가해주세요.</p>
           <select className="Stack">
             <option>스택을 선택해주세요.</option>
             <option>Javascript</option>
           </select>
-        </div>
+        </div> */}
         {props.category === "Study"}?
         <div className="Q_three">
           <p>3. 원하시는 스택을 추가해주세요.</p>

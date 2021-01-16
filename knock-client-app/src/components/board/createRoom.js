@@ -28,6 +28,7 @@ const CreateRoom = () => {
       <div>
         <textarea placeholder="제목을 입력해주세요"></textarea>
       </div>
+      <DataForm category={category} />
       <CKEditor
         editor={ClassicEditor}
         data="<h1>인수님 피곤해요?</h1>"
@@ -46,7 +47,6 @@ const CreateRoom = () => {
           console.log("Focus.", editor);
         }}
       />
-      <DataForm category={category} />
       <footer className="C_footer">
         <button>SAVE</button>
       </footer>

@@ -1,0 +1,14 @@
+.mypageContainer_profileSec {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  background: #f7e462;
+  border: 1px solid black;
+}
+
+.MyList {
+  display: flex;
+  width: 100px;
+  height: auto;
+  border: 1px solid black;
+}

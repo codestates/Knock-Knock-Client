@@ -7,6 +7,8 @@ import Home from "./components/main/Home";
 import Mypage from "./components/main/Mypage";
 import CreateRoom from "./components/board/createRoom";
 import RoomInfo from "./components/board/roomInfo";
+import MngAccount from "./components/main/MngAccount";
+import MngHistory from "./components/main/MngHistory";
 
 // mypage 테스트를 위한 임시 경로 지정(나중에 수정 해야됨)
 const App = () => {
@@ -22,30 +24,36 @@ const App = () => {
         <div className="navbar_mypage">
           <Link to="/mypage">Mypage</Link>
         </div>
+
         <div className="navbar_mypage">
           <Link to="/createRoom">CreateRoom</Link>
         </div>
         <div className="navbar_mypage">
           <Link to="/roominfo">지울꺼임</Link>
         </div>
+        <div className="navbar_mypage">
+          <Link to="/mngHistory">지울꺼임2</Link>
+        </div>
       </div>
 
       <Switch>
         {/* navbar 경로 */}
-        <Route path="/board" component={PublicBoard} />
+        <Route exact path="/board" component={PublicBoard} />
 
-        <Route path="/mypage" component={Mypage} />
+        <Route exact path="/mypage" component={Mypage} />
 
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
 
         {/* board 경로 */}
-        <Route path="/roomInfo" component={RoomInfo} />
+        <Route exact path="/roomInfo" component={RoomInfo} />
 
-        <Route path="/createRoom" component={CreateRoom} />
+        <Route exact path="/createRoom" component={CreateRoom} />
 
         {/* Mypage 경로 */}
 
-        <Route path="/mngAccount" component={AccountMng} />
+        <Route exact path="/mngAccount" component={MngAccount} />
+
+        <Route exact path="/mngHistory" component={MngHistory} />
       </Switch>
     </Router>
   );

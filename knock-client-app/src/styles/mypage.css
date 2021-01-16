@@ -66,6 +66,11 @@
   border: none;
 }
 
+.profileSec_btns_false {
+  background: none;
+  font-weight: 900;
+}
+
 .profileSec_stacks {
   display: flex;
   justify-content: center;
@@ -114,7 +119,36 @@
   width: 80%;
   margin: 2%;
   border: 1px solid black;
-  border-radius: 30px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.boardList_openboard_brief {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_openboard_detail {
+  opacity: 0;
+  border-top: 1px solid black;
+  transition: all 0.1s ease;
+}
+
+.openboard_detail_title_writer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_openboard:hover {
+  height: 200px;
+}
+
+.boardList_openboard:hover .boardList_openboard_detail {
+  height: 200px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ------------------------------------------- */
@@ -145,5 +179,80 @@
   width: 80%;
   margin: 2%;
   border: 1px solid black;
-  border-radius: 30px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.boardList_closeboard_brief {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_closeboard_detail {
+  opacity: 0;
+  border-top: 1px solid black;
+  transition: all 0.1s ease;
+}
+
+.closeboard_detail_title_writer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_closeboard:hover {
+  height: 200px;
+}
+
+.boardList_closeboard:hover .boardList_closeboard_detail {
+  height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* AccountMng 계정관리 Styles */
+
+.mypageContainer_editUserInfoFormSec {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+  border: 1px solid black;
+}
+
+.editUserInfoFormSec_term {
+  flex: 3;
+  border: 1px solid black;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_propensity {
+  flex: 3;
+  border: 1px solid black;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_mood {
+  flex: 3;
+  border: 1px solid black;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_saveBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editUserInfoFormSec_saveBtn button {
+  width: 200px;
+  height: 100px;
+  border: none;
+  border-radius: 20px;
+  background: #f7e462;
+  font-size: 30px;
+  font-weight: 900;
 }
