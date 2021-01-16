@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
 import "../../styles/createRoom.css";
-const CreateRoom = () => {
-  const [category, setCategory] = useState("");
+// import Context from "../../utils/context";
 
+const CreateRoom = () => {
+  // const [category, setCategory] = useContext(Context).categoryContext;
+  const [category, setCategory] = useState("");
   const setting = (e) => {
     setCategory(e.target.value);
   };
@@ -26,6 +28,7 @@ const CreateRoom = () => {
       <div>
         <textarea placeholder="제목을 입력해주세요"></textarea>
       </div>
+      <DataForm category={category} />
       <CKEditor
         editor={ClassicEditor}
         data="<h1>인수님 피곤해요?</h1>"
@@ -44,7 +47,6 @@ const CreateRoom = () => {
           console.log("Focus.", editor);
         }}
       />
-      <DataForm />
       <footer className="C_footer">
         <button>SAVE</button>
       </footer>

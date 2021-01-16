@@ -4,7 +4,7 @@ import "../../styles/mypage.css";
 
 import Profile from "./Profile";
 
-class AccountMng extends React.Component {
+class MngAccount extends React.Component {
   constructor(props) {
     super(props);
 
@@ -57,4 +57,4 @@ class AccountMng extends React.Component {
   }
 }
 
-export default AccountMng;
+export default MngAccount;

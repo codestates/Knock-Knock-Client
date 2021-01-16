@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../styles/home.css";
 
 import explainImg from "../../images/homeImg/explainImg.png";
 import testImg1 from "../../images/homeImg/testImg1.png";
-import axios from "axios";
+// import axios from "axios";
 
 const Home = () => {
-  // axios.get("/user").then((res) => {
-  //   console.log(res);
-  // });
-
   return (
     <div className="H_container">
       <header className="H_header"></header>
@@ -99,6 +95,18 @@ const Home = () => {
       </section>
       <section className="H_sec4">
         하이 린수 프로젝트 여기여기 ?
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
         <div className="H_exhibition">
           <img className="" alt="" />
           <p className="">I wanna make a dreamteam</p>
