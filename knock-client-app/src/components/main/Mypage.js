@@ -8,14 +8,15 @@ class Mypage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.accountMngHandler = this.accountMngHandler.bind(this);
+    this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
 
     this.state = {
       isAccountMng: true,
+      isMypage: false,
     };
   }
 
-  accountMngHandler() {
+  accountMngClickHandler() {
     this.props.history.push("/accountManage");
     this.setState({ isAccountMng: false });
   }
@@ -26,7 +27,8 @@ class Mypage extends React.Component {
         <div className="mypageContainer_blankSec"></div>
         <Profile
           isAccountMng={this.state.isAccountMng}
-          accountMngHandler={this.accountMngHandler}
+          isMypage={this.state.isMypage}
+          accountMngClickHandler={this.accountMngClickHandler}
         />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">

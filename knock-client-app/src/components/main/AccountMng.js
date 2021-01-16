@@ -8,16 +8,30 @@ class AccountMng extends React.Component {
   constructor(props) {
     super(props);
 
+    this.mypageClickHandler = this.mypageClickHandler.bind(this);
+
     this.state = {
       username: "jnoodle",
+      isMypage: true,
     };
+
+    console.log(this.props);
+  }
+
+  mypageClickHandler() {
+    // 사용자 info 값 전달해야됨
+    // this.props.history.push("/mypage");
+    // this.setState({ isMypage: false });
   }
 
   render() {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        <Profile />
+        <Profile
+          isMypage={this.state.isMypage}
+          mypageClickHandler={this.mypageClickHandler}
+        />
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
             <div className="editUserInfoFormSec_term_phrase">

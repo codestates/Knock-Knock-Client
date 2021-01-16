@@ -23,19 +23,29 @@ class Profile extends React.Component {
           <p className="profileSec_mood">으악!</p>
         </div>
         <div className="profileSec_btns">
-          <button className="profileSec_btns_mypage">마이페이지</button>
+          {this.props.isMypage ? (
+            <button
+              className="profileSec_btns_mypage"
+              onClick={() => this.props.mypageClickHandler()}
+            >
+              마이페이지
+            </button>
+          ) : (
+            <button className="profileSec_btns_false">
+              &gt;마이페이지&lt;
+            </button>
+          )}
+
           <button className="profileSec_btns_historyMng">히스토리</button>
           {this.props.isAccountMng ? (
             <button
               className="profileSec_btns_accountMng"
-              onClick={() => this.props.accountMngHandler()}
+              onClick={() => this.props.accountMngClickHandler()}
             >
               계정 관리
             </button>
           ) : (
-            <button className="profileSec_btns_isAccountMng_false">
-              &gt;계정관리&lt;
-            </button>
+            <button className="profileSec_btns_false">&gt;계정관리&lt;</button>
           )}
         </div>
         <div className="profileSec_stacks">
