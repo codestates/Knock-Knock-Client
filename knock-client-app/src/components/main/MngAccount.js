@@ -14,14 +14,12 @@ class MngAccount extends React.Component {
       username: "jnoodle",
       isMypage: true,
     };
-
-    console.log(this.props);
   }
 
   mypageClickHandler() {
     // 사용자 info 값 전달해야됨
-    // this.props.history.push("/mypage");
-    // this.setState({ isMypage: false });
+    this.props.history.push("/mypage");
+    this.setState({ isMypage: false });
   }
 
   render() {

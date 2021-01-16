@@ -16,7 +16,7 @@ class Mypage extends React.Component {
     };
   }
 
-  accountMngHandler() {
+  accountMngClickHandler() {
     this.props.history.push("/mngAccount");
     this.setState({ isAccountMng: false });
   }
