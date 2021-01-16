@@ -215,8 +215,8 @@ select:hover {
 }
 
 .H_exhibition {
-  animation: mymove 5s infinite;
-  animation-delay: 10s;
+  animation: mymove 10s infinite;
+  animation-delay: 2s;
   position: relative;
   display: flex;
   float: left;
