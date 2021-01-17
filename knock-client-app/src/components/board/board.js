@@ -23,7 +23,7 @@ const PublicBoard = () => {
             })}
           </ul>
         </nav>
-        <body className="B_RoomContaniner">
+        <tbody className="B_RoomContaniner">
           <div className="B_RoomCard">
             <img src={together} className="B_Img1" alt="" />
             <p className="B_desc">I wanna make a dreamteam</p>
@@ -40,7 +40,7 @@ const PublicBoard = () => {
             <img src={question} className="B_Img4" alt="" />
             <p className="B_desc">Do you wanna build the snowMan?</p>
           </div>
-        </body>
+        </tbody>
       </div>
       <footer className="B_footer">Welcome to the party</footer>
     </div>

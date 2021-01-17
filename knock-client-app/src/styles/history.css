@@ -1,14 +1,49 @@
-.mypageContainer_profileSec {
-  display: flex;
-  flex-direction: column;
-  flex: 3;
-  background: #f7e462;
-  border: 1px solid black;
+.Journal_box {
+  border-radius: 15px;
+  width: 600px;
+  height: auto;
+  margin: 225px 200px 10px;
+  padding: 0px 100px 120px;
+  border: 2px solid black;
 }
 
-.MyList {
-  display: flex;
-  width: 100px;
+.His_submit {
+  display: block;
+  margin: -10px 300px 0px;
+  width: 90px;
   height: auto;
-  border: 1px solid black;
+  border-radius: 15px;
+  background-color: #525151;
+}
+
+.His_submit_p {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.His_JournalForm {
+  border-radius: 20px;
+  display: block;
+  margin: 3px 200px 0px;
+  padding: 10px 20px 30px;
+  margin-bottom: 10px;
+  width: auto;
+  height: 100px;
+  border: 2px solid black;
+  list-style-type: none;
+}
+
+.Retro_list {
+  display: table-column;
+  overflow: scroll;
+}
+.Journal_username {
+  padding: 2px 0px 0px;
+}
+.Journal_date {
+  padding: 2px 0px 0px;
+}
+.Journal_text {
+  padding: 2px 0px 0px;
 }
