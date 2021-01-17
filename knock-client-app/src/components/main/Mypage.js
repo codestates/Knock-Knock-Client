@@ -14,6 +14,8 @@ class Mypage extends React.Component {
       isAccountMng: true,
       isMypage: false,
     };
+
+    console.log(this.props);
   }
 
   accountMngClickHandler() {
@@ -29,6 +31,7 @@ class Mypage extends React.Component {
           isAccountMng={this.state.isAccountMng}
           isMypage={this.state.isMypage}
           accountMngClickHandler={this.accountMngClickHandler}
+          userInfo={this.props.location.state}
         />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">
