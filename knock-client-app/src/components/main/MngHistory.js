@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProfileEdit from "./ProfileEditForm";
 import "../../styles/history.css";
+import "../../styles/mypage.css";
 import SendRetrospect from "./retrospect";
 
 class MngHistory extends Component {
@@ -11,7 +12,8 @@ class MngHistory extends Component {
     this.keepJournal = this.keepJournal.bind(this);
 
     this.state = {
-      // isClick: false,
+      isClick: false,
+      isOpne: false,
       journals: [],
     };
     this.journals = [];
@@ -47,11 +49,17 @@ class MngHistory extends Component {
         <ProfileEdit />
 
         <div className="mypageContainer_editUserInfoFormSec">
-          <textarea
-            className="Journal_box"
-            placeholder="Why not to keep a journal about what you did!!!??"
-            onChange={(e) => this.keepJournal(e)}
-          />
+          {this.props.isOpne === false ? (
+            <textarea
+              className="Journal_box"
+              cols="50"
+              rows="30"
+              placeholder="Why not to keep a journal about what you did!!!??"
+              onChange={(e) => this.keepJournal(e)}
+            />
+          ) : (
+            <div className="His_JournalForm"></div>
+          )}
           <button onClick={() => this.registerJouranl()} className="His_submit">
             <p className="His_submit_p">등록</p>
           </button>
@@ -65,18 +73,3 @@ class MngHistory extends Component {
 }
 
 export default MngHistory;
-
-// const MngHistory = () => {
-//   return (
-//     <div className="mypageContainer">
-//       <div className="mypageContainer_blankSec"></div>
-//       <ProfileEdit />
-
-//       <div className="mypageContainer_editUserInfoFormSec">
-//         <>ㅁㅇㄹㄴㅁㅇㄹ</>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MngHistory;

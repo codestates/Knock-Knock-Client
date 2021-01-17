@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../styles/profileEdit.css";
-class Profile extends Component {
+class ProfileEdit extends Component {
   constructor(props) {
     super(props);
 
@@ -21,7 +21,7 @@ class Profile extends Component {
     console.log(this.state);
     return (
       <div className="mypageContainer_profileSec">
-        <header className="P_header">
+        <header className="P_headers">
           <p className="P_subtitle">히스토리</p>
         </header>
         <nav className="List_container">
@@ -66,10 +66,9 @@ class Profile extends Component {
             </ul>
           </div>
         </nav>
-        <div className="journal"></div>
       </div>
     );
   }
 }
 
-export default Profile;
+export default ProfileEdit;
