@@ -18,7 +18,6 @@ class ProfileEdit extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="mypageContainer_profileSec">
         <header className="P_headers">

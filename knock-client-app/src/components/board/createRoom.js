@@ -20,10 +20,10 @@ const CreateRoom = () => {
     <div className="App">
       <h2>Create Post</h2>
       <select onChange={(e) => setting(e)}>
-        <option>카테코리를 선택해주세요</option>
-        <option>Project</option>
-        <option>Study</option>
-        <option>Question</option>
+        <option value="">카테코리를 선택해주세요</option>
+        <option value="Project">Project</option>
+        <option value="Study">Study</option>
+        <option value="Question">Question</option>
       </select>
       <div>
         <textarea placeholder="제목을 입력해주세요"></textarea>

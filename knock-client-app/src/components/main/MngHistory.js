@@ -10,10 +10,11 @@ class MngHistory extends Component {
 
     this.registerJouranl = this.registerJouranl.bind(this);
     this.keepJournal = this.keepJournal.bind(this);
+    this.IsOpen = this.IsOpen.bind(this);
 
     this.state = {
       isClick: false,
-      isOpne: false,
+      isOpen: false,
       journals: [],
     };
     this.journals = [];
@@ -41,31 +42,72 @@ class MngHistory extends Component {
     return this.setState({ journals: this.journals });
   }
 
+  IsOpen() {
+    this.state.isOpen === false
+      ? this.setState({ isOpen: true })
+      : this.setState({ isOpen: false });
+  }
+
   render() {
-    // console.log("props", this.state);
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
         <ProfileEdit />
 
+        <button
+          onClick={() => {
+            this.IsOpen();
+          }}
+        >
+          isTest
+        </button>
+
         <div className="mypageContainer_editUserInfoFormSec">
-          {this.props.isOpne === false ? (
-            <textarea
-              className="Journal_box"
-              cols="50"
-              rows="30"
-              placeholder="Why not to keep a journal about what you did!!!??"
-              onChange={(e) => this.keepJournal(e)}
-            />
+          {this.state.isOpen === false ? (
+            <>
+              <p>OPEN</p>
+              <textarea
+                className="Journal_box"
+                cols="30"
+                rows="15"
+                placeholder="Why not to keep a journal about what you did!!!??"
+                onChange={(e) => this.keepJournal(e)}
+              />
+              <button
+                onClick={() => this.registerJouranl()}
+                className="His_submit"
+              >
+                <p className="His_submit_p">등록</p>
+              </button>
+              <ul className="Retro_list">
+                <SendRetrospect value={this.state.journals} />
+              </ul>
+            </>
           ) : (
-            <div className="His_JournalForm"></div>
+            <div>
+              <p>Closed</p>
+              <div className="His_JournalForm">
+                <p className="Journal_username">IM24 정인수</p>
+                <p className="Journal_date">2021-01-03</p>
+                <p className="Journal_text">나는 오늘 css에게 버림받았다.</p>
+              </div>
+              <div className="His_JournalForm">
+                <p className="Journal_username">IM24 정인수</p>
+                <p className="Journal_date">2021-01-03</p>
+                <p className="Journal_text">나는 오늘 css에게 버림받았다.</p>
+              </div>
+              <div className="His_JournalForm">
+                <p className="Journal_username">IM24 정인수</p>
+                <p className="Journal_date">2021-01-03</p>
+                <p className="Journal_text">나는 오늘 css에게 버림받았다.</p>
+              </div>
+              <div className="His_JournalForm">
+                <p className="Journal_username">IM24 정인수</p>
+                <p className="Journal_date">2021-01-03</p>
+                <p className="Journal_text">나는 오늘 css에게 버림받았다.</p>
+              </div>
+            </div>
           )}
-          <button onClick={() => this.registerJouranl()} className="His_submit">
-            <p className="His_submit_p">등록</p>
-          </button>
-          <ul className="Retro_list">
-            <SendRetrospect value={this.state.journals} />
-          </ul>
         </div>
       </div>
     );
