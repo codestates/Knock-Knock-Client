@@ -5,7 +5,7 @@ const RoomInfo = () => {
 
   return (
     <div>
-      <header>
+      <header className ="board">
         <div>여기는 게시판 글입니다.</div>
       </header>
       <nav className="B_SideBarSec">
@@ -18,6 +18,7 @@ const RoomInfo = () => {
             );
           })}
         </ul>
+        
       </nav>
     </div>
   );

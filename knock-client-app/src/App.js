@@ -38,22 +38,51 @@ const App = () => {
 
       <Switch>
         {/* navbar 경로 */}
-        <Route exact path="/board" component={PublicBoard} />
 
-        <Route exact path="/mypage" component={Mypage} />
+        <Route
+          exact
+          path="/board"
+          render={(routeProps) => <PublicBoard {...routeProps} />}
+        />
 
-        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/mypage"
+          render={(routeProps) => <Mypage {...routeProps} />}
+        />
+
+        <Route
+          exact
+          path="/"
+          render={(routeProps) => <Home {...routeProps} />}
+        />
 
         {/* board 경로 */}
-        <Route exact path="/roomInfo" component={RoomInfo} />
+        <Route
+          exact
+          path="/roomInfo"
+          render={(routeProps) => <RoomInfo {...routeProps} />}
+        />
 
-        <Route exact path="/createRoom" component={CreateRoom} />
+        <Route
+          exact
+          path="/createRoom"
+          render={(routeProps) => <CreateRoom {...routeProps} />}
+        />
 
         {/* Mypage 경로 */}
 
-        <Route exact path="/mngAccount" component={MngAccount} />
+        <Route
+          exact
+          path="/mngAccount"
+          render={(routeProps) => <MngAccount {...routeProps} />}
+        />
 
-        <Route exact path="/mngHistory" component={MngHistory} />
+        <Route
+          exact
+          path="/mngHistory"
+          render={(routeProps) => <MngHistory {...routeProps} />}
+        />
       </Switch>
     </Router>
   );

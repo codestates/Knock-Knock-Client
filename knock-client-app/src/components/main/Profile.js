@@ -12,15 +12,19 @@ class Profile extends React.Component {
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">
           <img
-            width="200"
-            height="200"
+            width="320"
+            height="320"
             src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
             alt=""
           />
         </div>
         <div className="profileSec_name_mood">
-          <p className="profileSec_username">정인수</p>
-          <p className="profileSec_mood">으악!</p>
+          <p className="profileSec_username">
+            {this.props.userInfo ? this.props.userInfo.userGrade : ""}
+          </p>
+          <p className="profileSec_mood">
+            {this.props.userInfo ? this.props.userInfo.userMood : ""}
+          </p>
         </div>
         <div className="profileSec_btns">
           {this.props.isMypage ? (

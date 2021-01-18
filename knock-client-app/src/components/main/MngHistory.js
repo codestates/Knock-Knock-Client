@@ -3,7 +3,6 @@ import ProfileEdit from "./ProfileEditForm";
 import "../../styles/history.css";
 import "../../styles/mypage.css";
 import SendRetrospect from "./retrospect";
-
 class MngHistory extends Component {
   constructor(props) {
     super(props);
@@ -31,14 +30,12 @@ class MngHistory extends Component {
     date[0] = month;
     date[1] = day;
     let register_At = date.reverse();
-
     let regiJournal = {
       username: "IM24 이준희",
       date: register_At.join("-"),
       retrospect: this.retrospect,
     };
     this.journals.unshift(regiJournal);
-
     return this.setState({ journals: this.journals });
   }
 
@@ -65,27 +62,25 @@ class MngHistory extends Component {
         <div className="mypageContainer_editUserInfoFormSec">
           {this.state.isOpen === false ? (
             <>
-              <p>OPEN</p>
-              <textarea
-                className="Journal_box"
-                cols="30"
-                rows="15"
-                placeholder="Why not to keep a journal about what you did!!!??"
-                onChange={(e) => this.keepJournal(e)}
-              />
-              <button
-                onClick={() => this.registerJouranl()}
-                className="His_submit"
-              >
-                <p className="His_submit_p">등록</p>
-              </button>
+              <div className="His_submitForm">
+                <textarea
+                  className="Journal_box"
+                  placeholder="Why not to keep a journal about what you did!!!??"
+                  onChange={(e) => this.keepJournal(e)}
+                />
+
+                <div className="His_submit">
+                  <button onClick={() => this.registerJouranl()}>
+                    <p className="His_submit_p">등록</p>
+                  </button>
+                </div>
+              </div>
               <ul className="Retro_list">
                 <SendRetrospect value={this.state.journals} />
               </ul>
             </>
           ) : (
-            <div>
-              <p>Closed</p>
+            <div className="His_closeJournalForm">
               <div className="His_JournalForm">
                 <p className="Journal_username">IM24 정인수</p>
                 <p className="Journal_date">2021-01-03</p>
