@@ -1,41 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../styles/home.css";
 
-import explainImg from "../../images/explainImg.png";
-import testImg1 from "../../images/testImg1.png";
+import explainImg from "../../images/homeImg/explainImg.png";
+import testImg1 from "../../images/homeImg/testImg1.png";
+// import axios from "axios";
 
 const Home = () => {
   return (
     <div className="H_container">
-      <header className="H_header"></header>
       <section className="H_sec1">
         <div className="H_sec1_wrap1">
           <div className="H_mainDoor">
-            <div className="H_doorLeft">
-              <svg
-                width="209"
-                height="670"
-                viewBox="0 0 209 898"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M208.5 130V760L0 897.5V0L208.5 130Z" fill="#F7E462" />
-              </svg>
-            </div>
-            <div className="H_doorRight">
-              <svg
-                width="209"
-                height="670"
-                viewBox="0 0 225 897"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M-1.52588e-05 129.928V759.577L225 897V0L-1.52588e-05 129.928Z"
-                  fill="#F7E462"
-                />
-              </svg>
-            </div>
+            <img
+              src="https://maxcdn.icons8.com/app/uploads/2019/10/teamwork-illustration-design-process.png"
+              alt=""
+            />
           </div>
         </div>
         <div className="H_sec1_wrap2">
@@ -44,6 +23,11 @@ const Home = () => {
           </div>
         </div>
         <div className="H_sec1_wrap3">
+          <div className="H_mainSimpleExplain">
+            <h1>Knock Knock!</h1>
+            <p>새로운 사람들과 의미있는 무언가를 만들어볼 준비가 되셨나요?</p>
+            <p>함께 나아가고 여러분의 발자취를 남겨보세요!</p>
+          </div>
           <div className="H_searchContainer">
             <select className="H_boardType">
               <option value="">게시물 유형</option>
@@ -60,28 +44,25 @@ const Home = () => {
             </select>
             <div className="H_searchBoxBoundary">|</div>
             <input type="text" className="H_boardSearchTextBox" />
-            <button className="H_boardSearchBtn">
-              <i className="H_fa fa-search"></i>
-            </button>
-          </div>
-          <div className="H_mainSimpleExplain">
-            <p>
-              코딩 프로젝트, 스터디를 찾아주는 사이트입니다. 여러분이 원하는
-            </p>
-            <p>그룹을 찾고 만들어보세요!</p>
+            <div className="H_boardSearchBtn">
+              <img
+                className="H_borardSearchBtnIcon"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png"
+              />
+            </div>
           </div>
         </div>
       </section>
       <section className="H_sec2">
         <div className="H_sec2_wrap1">
-          <img src={explainImg} className="H_explainImg" alt="" />
-        </div>
-        <div className="H_sec2_wrap2">
           <p>새로운 사람들과 함께 나아가고 여러분의 발자취를 남겨보세요!</p>
           <p>
             여러분의 스터디, 프로젝트를 차분히 시작하거나 직접 참여해보세요!
           </p>
           <p>이제, 여러분의 시작을 두드리세요!</p>
+        </div>
+        <div className="H_sec2_wrap2">
+          <img src={explainImg} className="H_explainImg" alt="" />
         </div>
       </section>
       <section className="H_sec3">
@@ -92,8 +73,30 @@ const Home = () => {
           <img src={testImg1} alt="" />
         </div>
       </section>
-      <section className="H_sec4"></section>
-      <footer className="H_homeFooter"></footer>
+      <section className="H_sec4">
+        하이 린수 프로젝트 여기여기 ?
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+        <div className="H_exhibition">
+          <img className="" alt="" />
+          <p className="">I wanna make a dreamteam</p>
+        </div>
+      </section>
+      <footer className="H_footer">
+        <div className="H_GoToBoard" onClick={() => alert("인수바보")}>
+          더보기
+        </div>
+      </footer>
     </div>
   );
 };

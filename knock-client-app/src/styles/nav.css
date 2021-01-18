@@ -1,5 +1,19 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  position: fixed;
+  width: 100%;
   list-style: none;
+  border: 1px solid black;
+}
+
+.navbar_home {
+  flex: 9;
+}
+
+.navbar_board {
+  flex: 1;
+}
+
+.navbar_mypage {
+  flex: 1;
 }
