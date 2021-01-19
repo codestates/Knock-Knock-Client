@@ -1,0 +1,41 @@
+.B_flexbox-container {
+  display: flex;
+  width: auto;
+}
+
+.C_filterBtn {
+  border: 1.5px solid black;
+  width: 70px;
+  margin: 97px 0px 40px;
+  display: flex;
+  background-color: rgb(253, 253, 0);
+}
+
+.C_filterBtn:hover {
+  border: 1.5px solid yellow;
+}
+
+.C_SideBarSec {
+  border: 1px solid black;
+  background-color: rgb(228, 230, 168);
+  width: 130px;
+}
+
+.C_RoomContaniner {
+  order: 1;
+  flex: 1;
+  background-color: #ecb6b6;
+  padding: 1rem;
+  overflow: scroll;
+  height: 600px;
+}
+
+.C_footer {
+  display: absolute;
+  background-color: #0099cc;
+  color: #ffffff;
+  text-align: center;
+  font: bold;
+  font-size: 15px;
+  padding: 25px;
+}

@@ -1,9 +1,24 @@
+.ck.ck-editor__editable {
+  min-height: 700px;
+}
+
+.Create_Container {
+  display: block;
+  width: 100%;
+}
+
+.title_Box {
+}
+
+.Dataform {
+}
+
 .C_footer {
-  display: absolute;
+  display: static;
+  margin-top: 25%;
   background-color: #f7ea5b;
   color: #ffffff;
   text-align: center;
   font: bold;
   font-size: 15px;
-  padding: 25px;
 }

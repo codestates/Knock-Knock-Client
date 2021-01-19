@@ -6,9 +6,9 @@ class ProfileEdit extends Component {
     super(props);
 
     this.state = {
-      isClick: false,
       projectList: [
         {
+          id: 1,
           category: "Study",
           projectTitle: "즐거운 CSS 배우기",
           stacks: ["React", "JS", "HTML", "CSS"],
@@ -16,6 +16,7 @@ class ProfileEdit extends Component {
           status: "OPEN",
         },
         {
+          id: 2,
           category: "Project",
           projectTitle: "신나는 프로젝트와 함께 1",
           stacks: ["React", "JS", "HTML", "CSS"],
@@ -23,6 +24,7 @@ class ProfileEdit extends Component {
           status: "OPEN",
         },
         {
+          id: 3,
           category: "Project",
           projectTitle: "험난한 프로젝트랑 즐겁게",
           stacks: ["React", "JS", "HTML", "CSS"],
@@ -30,6 +32,7 @@ class ProfileEdit extends Component {
           status: "OPEN",
         },
         {
+          id: 4,
           category: "Project",
           projectTitle: "무난한 프로젝트와 함께",
           stacks: ["React", "JS", "HTML", "CSS"],
@@ -37,6 +40,7 @@ class ProfileEdit extends Component {
           status: "OPEN",
         },
         {
+          id: 5,
           category: "Study",
           projectTitle: "페어프로그래밍을 배워보자",
           stacks: ["React", "JS", "HTML", "CSS"],
@@ -44,6 +48,7 @@ class ProfileEdit extends Component {
           status: "CLOSED",
         },
         {
+          id: 6,
           category: "Question",
           projectTitle: "코딩으로 보는 오늘의 운세",
           stacks: ["React", "Algorithm"],
@@ -51,6 +56,7 @@ class ProfileEdit extends Component {
           status: "OPEN",
         },
         {
+          id: 7,
           category: "Question",
           projectTitle: "나는 어떻게 여기까지 왔는가?",
           createdAt: "2020-01-17",
@@ -61,13 +67,11 @@ class ProfileEdit extends Component {
     };
 
     this.filter = this.filter.bind(this);
-    this.isClick = this.isClick.bind(this);
+    this.openDoor = this.openDoor.bind(this);
   }
 
-  isClick() {
-    !this.state.isClick
-      ? this.setState({ isClick: true })
-      : this.setState({ isClick: false });
+  openDoor(e) {
+    console.log(e.nativeEvent.path[0].attributes[1].value);
   }
 
   filter(event) {
@@ -102,27 +106,37 @@ class ProfileEdit extends Component {
         </select>
 
         <nav className="List_container">
-          {filteredProject.map((project) => {
+          {filteredProject.map((project, idx) => {
             return (
-              <div className="MyList" onClick={() => this.isClick()}>
-                <ul className="Context">
-                  <li value="Project">{project.category}</li>
-                  <li className="Context_projectTitle">
-                    {project.projectTitle}
-                  </li>
-                  {project.stacks ? (
-                    <li>{project.stacks.join("/")}</li>
-                  ) : (
-                    <li>스택 없음</li>
-                  )}
-                </ul>
-                <div className="MyList_status">
-                  <div className="status_createdAt">{project.createdAt}</div>
-                  {project.status === "OPEN" ? (
-                    <div className="status_projectOn">{project.status}</div>
-                  ) : (
-                    <div className="status_projectOff">{project.status}</div>
-                  )}
+              <div onClick={this.openDoor} value={project.id}>
+                <div className="MyList" key={idx} value={project.id}>
+                  <ul className="Context" value={project.id}>
+                    <li value="Project" value={project.id}>
+                      {project.category}
+                    </li>
+                    <li className="Context_projectTitle" value={project.id}>
+                      {project.projectTitle}
+                    </li>
+                    {project.stacks ? (
+                      <li value={project.id}>{project.stacks.join("/")}</li>
+                    ) : (
+                      <li value={project.id}>스택 없음</li>
+                    )}
+                  </ul>
+                  <div className="MyList_status" value={project.id}>
+                    <div className="status_createdAt" value={project.id}>
+                      {project.createdAt}
+                    </div>
+                    {project.status === "OPEN" ? (
+                      <div className="status_projectOn" value={project.id}>
+                        {project.status}
+                      </div>
+                    ) : (
+                      <div className="status_projectOff" value={project.id}>
+                        {project.status}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );
