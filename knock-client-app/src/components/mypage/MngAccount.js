@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
-
+import { mbti } from "../../utils/options";
 import Profile from "./Profile";
 
 class MngAccount extends React.Component {
@@ -24,6 +24,14 @@ class MngAccount extends React.Component {
     this.propensity = [];
     this.mood = "";
     this.stack = [];
+
+    this.mbtiChecker = mbti.map((el, idx) => {
+      return (
+        <option key={idx} value={el}>
+          {el}
+        </option>
+      );
+    });
   }
 
   mypageClickHandler() {
@@ -94,60 +102,7 @@ class MngAccount extends React.Component {
           <div className="editUserInfoFormSec_propensity">
             <div className="editUserInfoFormSec_propensity_phrase">
               <h1>{this.state.username}님의 성향을 체크해주세요</h1>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="소심한"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="소극적">소심한</label>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="적극적"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="적극적">적극적</label>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="냉소적"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="냉소적">냉소적</label>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="계획적"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="계획적">계획적</label>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="랑랑한"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="랑랑한">랑랑한</label>
-              <input
-                onChange={(e) => {
-                  this.userPropensity(e);
-                }}
-                type="checkbox"
-                value="완벽한"
-                className="propensity_checker"
-              ></input>
-              <label htmlFor="완벽한">완벽한</label>
+              <select>{this.mbtiChecker}</select>
             </div>
           </div>
           <div className="editUserInfoFormSec_mood">
@@ -166,36 +121,6 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
-
-              <input
-                onChange={(e) => {
-                  this.userStack(e);
-                }}
-                type="checkbox"
-                value="Javascript"
-                className="userStack"
-              ></input>
-              <label htmlFor="Javascript">Javascript</label>
-
-              <input
-                onChange={(e) => {
-                  this.userStack(e);
-                }}
-                type="checkbox"
-                value="Python"
-                className="userStack"
-              ></input>
-              <label htmlFor="Python">Python</label>
-
-              <input
-                onChange={(e) => {
-                  this.userStack(e);
-                }}
-                type="checkbox"
-                value="React"
-                className="userStack"
-              ></input>
-              <label htmlFor="React">React</label>
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">

@@ -16,9 +16,10 @@ const axios = require("axios");
 const App = () => {
   return (
     <Router>
-      <ModalRouter />
       <div className="navbar">
         <div className="navbar_home">
+          <ModalRouter />
+
           <Link to="/">HOME</Link>
         </div>
         <div className="navbar_board">

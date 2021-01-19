@@ -33,6 +33,10 @@ export default function ModalRouter() {
     setIsOpen(false);
   }
 
+  function componentWillMount() {
+    Modal.setAppElement("root");
+  }
+
   return (
     <div>
       <button onClick={openModal}>시작하기</button>
@@ -41,6 +45,7 @@ export default function ModalRouter() {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
+        ariaHideApp={false}
         contentLabel="Example Modal"
       >
         <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>

@@ -34,7 +34,7 @@ const PublicBoard = () => {
   };
 
   return (
-    <div classNmae="B_container">
+    <div className="B_container">
       {/* <header className="B_header"></header> */}
       <div className="B_flexbox-container">
         <nav className="B_SideBarSec">
@@ -48,7 +48,7 @@ const PublicBoard = () => {
             })}
           </ul>
         </nav>
-        <tbody className="B_RoomContaniner">
+        <div className="B_RoomContaniner">
           {posts.map((post) => {
             if (post.open) {
               if (post.category === "Project") {
@@ -142,7 +142,7 @@ const PublicBoard = () => {
               );
             }
           })}
-        </tbody>
+        </div>
       </div>
       <div className="B_footer">Welcome to the party</div>
     </div>

@@ -16,7 +16,7 @@ const RoomInfo = () => {
       <nav className="C_SideBarSec">
         <ul>{sideBar}</ul>
       </nav>
-      <tbody className="C_RoomContaniner"></tbody>
+      <div className="C_RoomContaniner"></div>
       <footer className="C_footer">Welcome to the party</footer>
     </div>
   );

@@ -1,6 +1,26 @@
 /*
 로직에서 select tag에 있는 옵션들을 이곳에 정렬시켜놓자.
 */
+
+const mbti = [
+  "INTJ",
+  "INPT",
+  "ENTJ",
+  "ENTP",
+  "ISTJ",
+  "ESTJ",
+  "ESFJ",
+  "ISFJ",
+  "ESTP",
+  "ISTP",
+  "ESFP",
+  "ISFP",
+  "ENFJ",
+  "INFJ",
+  "INFP",
+  "ENFP",
+];
+
 const stacks = [
   "C#",
   "C++",
@@ -79,4 +99,4 @@ const fakeData = [
   },
 ];
 
-export { stacks, fakeData };
+export { stacks, fakeData, mbti };
