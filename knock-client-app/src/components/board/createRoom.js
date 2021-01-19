@@ -10,7 +10,7 @@ const CreateRoom = () => {
   // const [category, setCategory] = useContext(Context).categoryContext;
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
-  const [crew,setCrew]= useState("");
+  const [crew, setCrew] = useState("");
   const [positon, setPosition] = useState("");
   const [stack, setStack] = useState("");
   const [description, setDescription] = useState("");
@@ -30,9 +30,9 @@ const CreateRoom = () => {
     !e.target.value ? setTitle("") : setTitle(e.target.value);
   };
 
-  const getCrew = (e)=>{
-    !e.target.value ? setCrew("") : setCrew(e.target.value)
-  }
+  const getCrew = (e) => {
+    !e.target.value ? setCrew("") : setCrew(e.target.value);
+  };
 
   const getPosition = (e) => {
     !e.target.value ? setPosition("") : setPosition(e.target.value);
@@ -58,6 +58,7 @@ const CreateRoom = () => {
       <div>
         <textarea placeholder="제목을 입력해주세요"></textarea>
       </div>
+
       <DataForm
         category={category}
         crew={getCrew}
@@ -66,7 +67,7 @@ const CreateRoom = () => {
         stack={getStack}
         description={getDescription}
       />
-      
+
       <CKEditor
         editor={ClassicEditor}
         data="<h1>인수님 피곤해요?</h1>"
@@ -85,6 +86,7 @@ const CreateRoom = () => {
           console.log("Focus.", editor);
         }}
       />
+
       <footer className="C_footer">
         <button>SAVE</button>
       </footer>

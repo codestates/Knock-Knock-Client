@@ -71,7 +71,7 @@ class ProfileEdit extends Component {
   }
 
   openDoor(e) {
-    console.log(e.nativeEvent.path[0].attributes[1].value);
+    console.log(e.nativeEvent.path[0].attributes.value.value);
   }
 
   filter(event) {

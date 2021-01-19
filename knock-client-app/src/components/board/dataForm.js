@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 const DataForm = (props) => {
   // const [category, setCategory] = useContext(Context).categoryContext;
   console.log("프랍스", props);
+
   return (
     <>
       <form>
