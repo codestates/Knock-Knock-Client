@@ -15,10 +15,10 @@
 
 .C_footer {
   display: static;
-  margin-top: 25%;
   background-color: #f7ea5b;
   color: #ffffff;
   text-align: center;
   font: bold;
+  padding: 25px;
   font-size: 15px;
 }

@@ -300,3 +300,30 @@
 .H_GoToBoard:hover {
   border: 1px solid #cc0000;
 }
+
+/* ---------------------------------------*/
+
+.login_logo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.google {
+  height: 70px;
+  width: 70px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.google:hover {
+  border: 1px solid yellow;
+}
+
+.github {
+  height: 70px;
+  width: 70px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.github:hover {
+  border: 1px solid yellow;
+}

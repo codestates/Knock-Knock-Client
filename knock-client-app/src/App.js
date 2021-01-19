@@ -4,16 +4,19 @@ import "./styles/nav.css";
 // import Context from "../utils/context.js";
 import PublicBoard from "../src/components/board/board";
 import Home from "./components/main/Home";
-import Mypage from "./components/main/Mypage";
+import Mypage from "./components/mypage/Mypage";
 import CreateRoom from "./components/board/createRoom";
 import RoomInfo from "./components/board/roomInfo";
-import MngAccount from "./components/main/MngAccount";
-import MngHistory from "./components/main/MngHistory";
+import MngAccount from "./components/mypage/MngAccount";
+import MngHistory from "./components/mypage/MngHistory";
+import ModalRouter from "./components/main/ModalRouter";
+
 const axios = require("axios");
-// mypage 테스트를 위한 임시 경로 지정(나중에 수정 해야됨)
+
 const App = () => {
   return (
     <Router>
+      <ModalRouter />
       <div className="navbar">
         <div className="navbar_home">
           <Link to="/">HOME</Link>

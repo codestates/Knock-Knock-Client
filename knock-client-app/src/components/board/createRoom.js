@@ -4,10 +4,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
 import "../../styles/createRoom.css";
 const axios = require("axios");
-// import Context from "../../utils/context";
 
 const CreateRoom = () => {
-  // const [category, setCategory] = useContext(Context).categoryContext;
   const [category, setCategory] = useState("Project");
   const [title, setTitle] = useState("");
   const [crew, setCrew] = useState("");
@@ -107,6 +105,7 @@ const CreateRoom = () => {
           console.log("Focus.", editor);
         }}
       />
+
       <footer className="C_footer">
         <button onClick={() => postRoomInfo()}>SAVE</button>
       </footer>

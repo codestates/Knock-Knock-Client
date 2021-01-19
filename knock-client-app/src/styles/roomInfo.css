@@ -29,13 +29,3 @@
   overflow: scroll;
   height: 600px;
 }
-
-.C_footer {
-  display: absolute;
-  background-color: #0099cc;
-  color: #ffffff;
-  text-align: center;
-  font: bold;
-  font-size: 15px;
-  padding: 25px;
-}

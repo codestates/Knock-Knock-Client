@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import stacks from "../board/options";
+import { stacks } from "../../utils/options";
+import StackSelector from "./stackSelector";
 
 const DataForm = (props) => {
   const [message, setMessage] = useState("");
@@ -90,19 +91,15 @@ const DataForm = (props) => {
 
             <div className="Q_three">
               <p>3. 원하시는 스택을 추가해주세요.</p>
-              <select className="Stack">{stack}</select>
+              <StackSelector />
+              {/* <select className="Stack">{stack}</select> */}
             </div>
           </>
         ) : (
           <div className="Q_three">
-            <p>2.스택을 추가해주세요.</p>
-            <select className="Stack">{stack}</select>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                addStack();
-              }}
-            ></button>
+            ß<p>2.스택을 추가해주세요.</p>
+            <StackSelector />
+            {/* <select className="Stack">{stack}</select> */}
           </div>
         )}
       </form>

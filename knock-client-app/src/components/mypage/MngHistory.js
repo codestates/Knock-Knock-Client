@@ -42,7 +42,7 @@ class MngHistory extends Component {
 
   dangerBtn() {
     axios({
-      method: "POST",
+      method: "delete",
       url: "/deletePost",
       WithCredentials: true,
       headers: { "content-Type": "application/json" },
@@ -57,7 +57,7 @@ class MngHistory extends Component {
         <ProfileEdit />
 
         <div className="mypageContainer_editUserInfoFormSec">
-          <p></p>
+          <p>{}</p>
           <button
             onClick={() => {
               this.dangerBtn();
