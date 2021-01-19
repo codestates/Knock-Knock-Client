@@ -9,12 +9,13 @@ const axios = require("axios");
 const CreateRoom = () => {
   const [category, setCategory] = useState("Category");
   const [title, setTitle] = useState("");
-  const [crew, setCrew] = useState("");
-  const [position, setPosition] = useState([]);
-  const [stack, setStack] = useState("");
   const [description, setDescription] = useState("");
   const [roominfo, setRoomInfo] = useState("");
   const [isCreater, setIsCreater] = useState(true);
+
+  const [crew, setCrew] = useState(0); // project 필수 Study 필수 Question 없음
+  const [position, setPosition] = useState([]); // project 필수 Study 없음 Question 없음
+  const [stack, setStack] = useState([]); // project 필수 Study 선택 Question 선택
 
   const moveToCreater = () => {
     this.props.history.push("/createRoom");
@@ -31,23 +32,19 @@ const CreateRoom = () => {
     });
   };
 
-  const getTitle = (e) => {
-    !e.target.value ? setTitle("") : setTitle(e.target.value);
-  };
-
   const getCrew = (e) => {
     setCrew(e);
     console.log("crew", crew);
   };
 
   const getPosition = (e) => {
-    setPosition(e);
+    setPosition(position.concat(e));
     console.log("position", position);
     console.log(e);
   };
 
   const getStack = (e) => {
-    !e.target.value ? setStack("") : setStack(e.target.value);
+    setStack(stack.concat(e));
   };
 
   const postRoomInfo = () => {
@@ -82,13 +79,16 @@ const CreateRoom = () => {
         <>{postStudyType}</>
       </select>
       <div>
-        <textarea className="title" placeholder="제목을 입력하세요"></textarea>
+        <textarea
+          className="title"
+          placeholder="제목을 입력하세요"
+          onChange={(e) => setTitle(e.target.value)}
+        ></textarea>
       </div>
 
       <DataForm
         category={category}
         crew={getCrew}
-        title={getTitle}
         position={getPosition}
         stack={getStack}
       ></DataForm>
@@ -112,7 +112,9 @@ const CreateRoom = () => {
       />
 
       <footer className="C_footer">
-        <button onClick={() => postRoomInfo()}>SAVE</button>
+        <div className="sendBtn" onClick={() => postRoomInfo()}>
+          완료
+        </div>
       </footer>
     </div>
   );
