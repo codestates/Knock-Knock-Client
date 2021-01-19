@@ -24,6 +24,9 @@ class MngAccount extends React.Component {
     this.propensity = [];
     this.mood = "";
     this.stack = [];
+    this.authorizationCode = window.location.href
+      .split("code=")[1]
+      .split("&")[0];
 
     this.mbtiChecker = mbti.map((el, idx) => {
       return (
@@ -32,6 +35,13 @@ class MngAccount extends React.Component {
         </option>
       );
     });
+  }
+
+  componentDidMount() {
+    // axios.post("http://localhost:4000/oauth", {
+    //   oauth: "google",
+    //   authorizationCode: this.authorizationCode,
+    // });
   }
 
   mypageClickHandler() {

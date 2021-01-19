@@ -19,9 +19,14 @@ const customStyles = {
 
 export default function ModalRouter() {
   var subtitle;
+  const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=http://localhost:3000/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile`;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
+  }
+
+  function googleOAuthHandler() {
+    window.location.href = googleOAuthUrl;
   }
 
   function afterOpenModal() {
@@ -54,7 +59,7 @@ export default function ModalRouter() {
           <div className="login_logo">
             <img
               className="google"
-              onClick={(e) => console.log(e)}
+              onClick={googleOAuthHandler}
               alt=""
               value="google"
               src={google}

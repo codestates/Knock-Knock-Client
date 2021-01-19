@@ -42,7 +42,6 @@ const App = () => {
 
       <Switch>
         {/* navbar 경로 */}
-
         <Route
           exact
           path="/board"

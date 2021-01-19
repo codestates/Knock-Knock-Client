@@ -6,7 +6,9 @@ import question from "../../images/boardImg/Question.png";
 import study from "../../images/boardImg/studyGroup.png";
 import axios from "axios";
 
-const PublicBoard = () => {
+const PublicBoard = (props) => {
+  console.log(props.location.state);
+
   const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
 
   const [posts, setPosts] = useState([]);
@@ -16,17 +18,24 @@ const PublicBoard = () => {
     // You need to restrict it at some point
     // This is just dummy code and should be replaced by actual
 
-    const posts = await axios.get("http://localhost:4000/posts");
+    const { boardType, boardPeopleNum, boardSearchText } = props.location.state;
 
-    let postStacksArr = posts.data.data[0].post_stacks
-      .slice(1, -1)
-      .split(",")
-      .map((stack) => {
-        return stack.trim().slice(1, -1);
-      });
+    console.log(props.location.state);
+    const posts = await axios.get(
+      `http://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`
+    );
 
-    setPostStacks(postStacksArr);
-    setPosts(posts.data.data);
+    if (posts.data.data[0].post_stacks) {
+      let postStacksArr = posts.data.data[0].post_stacks
+        .slice(1, -1)
+        .split(",")
+        .map((stack) => {
+          return stack.trim().slice(1, -1);
+        });
+
+      setPostStacks(postStacksArr);
+      setPosts(posts.data.data);
+    }
   }, []);
 
   const roomCardClickHandler = (event) => {

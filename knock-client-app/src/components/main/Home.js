@@ -3,9 +3,31 @@ import "../../styles/home.css";
 
 import explainImg from "../../images/homeImg/explainImg.png";
 import testImg1 from "../../images/homeImg/testImg1.png";
-// import axios from "axios";
+import axios from "axios";
 
-const Home = () => {
+const Home = (props) => {
+  const searchParams = {
+    boardType: "",
+    boardPeopleNum: "",
+    boardSearchText: "",
+  };
+
+  function boardTypeHandler(event) {
+    searchParams.boardType = event.target.value;
+  }
+
+  function boardPeopleNumHandler(event) {
+    searchParams.boardPeopleNum = event.target.value;
+  }
+
+  function boardSearchTextHandler(event) {
+    searchParams.boardSearchText = event.target.value;
+  }
+
+  async function boardSearchClickHandler() {
+    props.history.push("/board", searchParams);
+  }
+
   return (
     <div className="H_container">
       <section className="H_sec1">
@@ -29,13 +51,16 @@ const Home = () => {
             <p>함께 나아가고 여러분의 발자취를 남겨보세요!</p>
           </div>
           <div className="H_searchContainer">
-            <select className="H_boardType">
+            <select className="H_boardType" onChange={boardTypeHandler}>
               <option value="">게시물 유형</option>
               <option value="project">프로젝트</option>
               <option value="study">스터디</option>
             </select>
             <div className="H_searchBoxBoundary">|</div>
-            <select className="H_boardPeopleNum">
+            <select
+              className="H_boardPeopleNum"
+              onChange={boardPeopleNumHandler}
+            >
               <option value="">인원수</option>
               <option value="2">2명</option>
               <option value="3">3명</option>
@@ -43,11 +68,16 @@ const Home = () => {
               <option value="more">4명 이상</option>
             </select>
             <div className="H_searchBoxBoundary">|</div>
-            <input type="text" className="H_boardSearchTextBox" />
+            <input
+              type="text"
+              className="H_boardSearchTextBox"
+              onChange={boardSearchTextHandler}
+            />
             <div className="H_boardSearchBtn">
               <img
                 className="H_borardSearchBtnIcon"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png"
+                onClick={boardSearchClickHandler}
               />
             </div>
           </div>
