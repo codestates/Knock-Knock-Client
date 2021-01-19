@@ -19,7 +19,6 @@ const App = () => {
       <div className="navbar">
         <div className="navbar_home">
           <ModalRouter />
-
           <Link to="/">HOME</Link>
         </div>
         <div className="navbar_board">

@@ -4,6 +4,7 @@ import "../../styles/createRoom.css";
 
 const DataForm = (props) => {
   const [message, setMessage] = useState("");
+  const stackStorage = [];
 
   const isCheck = (e) => {
     e.target.checked
@@ -11,20 +12,20 @@ const DataForm = (props) => {
       : setMessage("인원선택을 해주세요");
   };
 
-  const choiceStack = () => {};
+  const choiceStack = (e) => {
+    if (e.target.checked) {
+      stackStorage.push(e.target.value);
+    } else {
+      stackStorage.splice(stackStorage.indexOf(e.target.value), 1);
+    }
+    props.stack(stackStorage);
+  };
   const storage = [];
 
   const isPosition = (e) => {
-    storage.push(e.target.value);
-    if (storage.length === 2) {
-      if (storage.reduce((cur, pre) => cur + pre) !== props.crew) {
-        alert("인원수에 맞게 포지션의 비율을 다시 입력해주세요.");
-      } else {
-        props.position(storage[0], storage[1]);
-      }
-    }
-    console.log(storage);
+    props.position(e.target.value);
   };
+
   const howMany = [2, 3, 4, 5];
 
   const getTogether = howMany.map((el, idx) => {
@@ -47,9 +48,19 @@ const DataForm = (props) => {
 
   const stack = stacks.map((el, idx) => {
     return (
-      <option key={idx} value={el}>
-        {el}
-      </option>
+      <>
+        <input
+          onChange={(e) => {
+            choiceStack(e);
+          }}
+          type="checkbox"
+          id={el}
+          name="stack"
+          value={el}
+          key={idx}
+        />
+        <label htmlFor={el}>{el}</label>
+      </>
     );
   });
 
@@ -58,8 +69,8 @@ const DataForm = (props) => {
   };
 
   return (
-    <div className="DataForm">
-      <form>
+    <div className="Data_Container">
+      <form className="DataForm">
         <div className="Q_one">
           <p>1. 인원을 선택해주세요.[project는 최대 4명이 권장사항 입니다.]</p>
           <>{getTogether}</>
@@ -91,14 +102,14 @@ const DataForm = (props) => {
             </div>
 
             <div className="Q_three">
-              <p>3. 원하시는 스택을 추가해주세요.</p>
-              <select className="Stack">{stack}</select>
+              <p>3.스택을 추가해주세요.</p>
+              <div className="Stack">{stack}</div>
             </div>
           </>
         ) : (
           <div className="Q_three">
             <p>2.스택을 추가해주세요.</p>
-            <select className="Stack">{stack}</select>
+            <div className="Stack">{stack}</div>
           </div>
         )}
       </form>
