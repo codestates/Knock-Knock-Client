@@ -52,8 +52,8 @@ class ProfileEdit extends Component {
         <nav className="List_container">
           {filteredProject.map((project, idx) => {
             return (
-              <div onClick={this.openDoor} value={project.id}>
-                <div className="MyList" key={idx} value={project.id}>
+              <div onClick={this.openDoor} key={idx} value={project.id}>
+                <div className="MyList" value={project.id}>
                   <ul className="Context" value={project.id}>
                     <li value="Project" value={project.id}>
                       {project.category}

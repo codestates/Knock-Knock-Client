@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { stacks } from "../../utils/options";
-import StackSelector from "./stackSelector";
+import "../../styles/createRoom.css";
 
 const DataForm = (props) => {
   const [message, setMessage] = useState("");
@@ -56,8 +56,9 @@ const DataForm = (props) => {
   const addStack = () => {
     return <>{stack}</>;
   };
+
   return (
-    <>
+    <div className="DataForm">
       <form>
         <div className="Q_one">
           <p>1. 인원을 선택해주세요.[project는 최대 4명이 권장사항 입니다.]</p>
@@ -91,19 +92,17 @@ const DataForm = (props) => {
 
             <div className="Q_three">
               <p>3. 원하시는 스택을 추가해주세요.</p>
-              <StackSelector />
-              {/* <select className="Stack">{stack}</select> */}
+              <select className="Stack">{stack}</select>
             </div>
           </>
         ) : (
           <div className="Q_three">
-            ß<p>2.스택을 추가해주세요.</p>
-            <StackSelector />
-            {/* <select className="Stack">{stack}</select> */}
+            <p>2.스택을 추가해주세요.</p>
+            <select className="Stack">{stack}</select>
           </div>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

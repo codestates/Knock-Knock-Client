@@ -3,16 +3,23 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
 import "../../styles/createRoom.css";
+
 const axios = require("axios");
 
 const CreateRoom = () => {
-  const [category, setCategory] = useState("Project");
+  const [category, setCategory] = useState("Category");
   const [title, setTitle] = useState("");
   const [crew, setCrew] = useState("");
   const [position, setPosition] = useState([]);
   const [stack, setStack] = useState("");
   const [description, setDescription] = useState("");
   const [roominfo, setRoomInfo] = useState("");
+  const [isCreater, setIsCreater] = useState(true);
+
+  const moveToCreater = () => {
+    this.props.history.push("/createRoom");
+    setIsCreater(false);
+  };
 
   const createRoom = () => {
     axios({
@@ -56,11 +63,11 @@ const CreateRoom = () => {
     // setRoomInfo(body);
   };
 
-  const studyType = ["Project", "Study", "Question"];
+  const studyType = ["Category", "Project", "Study", "Question"];
 
   const postStudyType = studyType.map((el, idx) => {
     return (
-      <option value={el} key={idx}>
+      <option className="listFont" value={el} key={idx}>
         {el}
       </option>
     );
@@ -68,25 +75,23 @@ const CreateRoom = () => {
 
   return (
     <div className="Create_Container">
-      <h2>Create Post</h2>
-      <select onChange={(e) => setCategory(e.target.value)}>
+      <select
+        className="Category"
+        onChange={(e) => setCategory(e.target.value)}
+      >
         <>{postStudyType}</>
       </select>
       <div>
-        <textarea
-          className="title_Box"
-          placeholder="제목을 입력해주세요"
-        ></textarea>
+        <textarea className="title" placeholder="제목을 입력하세요"></textarea>
       </div>
 
       <DataForm
-        className="Dataform"
         category={category}
         crew={getCrew}
         title={getTitle}
         position={getPosition}
         stack={getStack}
-      />
+      ></DataForm>
 
       <CKEditor
         editor={ClassicEditor}

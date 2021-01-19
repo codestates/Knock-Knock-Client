@@ -281,7 +281,7 @@
 /* ------------------------------ */
 
 .H_footer {
-  background-color: #0099cc;
+  background-color: yellow;
   color: #ffffff;
   text-align: center;
   font: bold;
@@ -294,7 +294,7 @@
   display: block;
   padding: 10px 10px 10px 10px;
   width: 90px;
-  background-color: blue;
+  background-color: #391b1b;
 }
 
 .H_GoToBoard:hover {
