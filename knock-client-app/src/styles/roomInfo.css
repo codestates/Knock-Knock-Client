@@ -1,6 +1,17 @@
-.B_flexbox-container {
-  display: flex;
+.C_flexbox-container {
   width: auto;
+}
+
+/*----this is sidebar---*/
+.Body_sec {
+  display: flex;
+}
+
+.C_SideBarSec {
+  flex: 1;
+  border: 1px solid black;
+  background-color: rgb(246, 255, 0);
+  /* margin-right: 60%; */
 }
 
 .C_filterBtn {
@@ -8,24 +19,85 @@
   width: 70px;
   margin: 97px 0px 40px;
   display: flex;
-  background-color: rgb(253, 253, 0);
+  background-color: #f7e462;
 }
 
 .C_filterBtn:hover {
-  border: 1.5px solid yellow;
+  background-color: white;
 }
-
-.C_SideBarSec {
-  border: 1px solid black;
-  background-color: rgb(228, 230, 168);
-  width: 130px;
-}
-
+/*----this is main block---*/
 .C_RoomContaniner {
-  order: 1;
-  flex: 1;
-  background-color: #ecb6b6;
-  padding: 1rem;
+  flex: 9;
+  margin-top: 2.5%;
+  margin-left: 4%;
+  border: 1px solid black;
+  background-color: brown;
   overflow: scroll;
-  height: 600px;
+}
+
+.PostCard {
+  float: left;
+  width: 30%;
+  height: 60%;
+  margin-right: 70%;
+  border: 1px solid black;
+}
+
+.card1 {
+  width: 200px;
+  height: 200px;
+}
+
+.RoomInfo {
+  margin-left: 30%;
+  margin-bottom: 10%;
+  height: 60%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.ReplyZone {
+  margin-top: 15%;
+  background-color: #f7e462;
+}
+
+.ReplyPlace {
+  flex: 7;
+  display: table-column;
+  overflow: scroll;
+}
+
+.ReplyBox {
+  display: block;
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 16px 100px 16px 16px;
+  border: 1px solid black;
+  color: #777;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.SendBtn {
+  height: 50px;
+  width: 7%;
+  margin-left: 80%;
+  color: white;
+  background-color: #391b1b;
+  border: 1px solid #391b1b;
+}
+/*----this is bottom block---*/
+.C_footer {
+  display: absolute;
+  bottom: 0;
+  background-color: #f7ea5b;
+  color: #ffffff;
+  text-align: center;
+  font-style: inherit;
+  height: 60px;
+  z-index: 1;
+  overflow: hidden;
+  min-width: 994px;
+  width: 100%;
+  font-size: 17px;
 }

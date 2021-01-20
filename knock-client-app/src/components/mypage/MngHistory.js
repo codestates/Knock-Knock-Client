@@ -60,6 +60,7 @@ class MngHistory extends Component {
   }
 
   render() {
+    console.log(this.state.userPosts);
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
