@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/history.css";
 
 const SendRetrospect = (props) => {
+  console.log(props);
   const list = props.value.map((value, idx) => {
     if (idx >= 0) {
       return (
