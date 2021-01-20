@@ -1,10 +1,22 @@
 import React from "react";
+import axios from "axios";
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      userInfo: {},
+    };
+  }
+
+  async componentDidMount() {
+    // 사용자 ID 부분 수정해야함!!!!!!!!!
+    const userInfo = await axios.get("http://localhost:4000/profile/1");
+    this.setState({
+      userInfo: userInfo.data.userData,
+    });
+    console.log(userInfo);
   }
 
   render() {
@@ -20,10 +32,10 @@ class Profile extends React.Component {
         </div>
         <div className="profileSec_name_mood">
           <p className="profileSec_username">
-            {this.props.userInfo ? this.props.userInfo.userGrade : ""}
+            {this.state.userInfo ? this.state.userInfo.username : ""}
           </p>
           <p className="profileSec_mood">
-            {this.props.userInfo ? this.props.userInfo.userMood : ""}
+            {this.state.userInfo ? this.state.userInfo.mood : ""}
           </p>
         </div>
         <div className="profileSec_btns">
@@ -40,7 +52,12 @@ class Profile extends React.Component {
             </button>
           )}
 
-          <button className="profileSec_btns_historyMng">히스토리</button>
+          <button
+            className="profileSec_btns_historyMng"
+            onClick={() => this.props.retrospectClickHandler()}
+          >
+            히스토리
+          </button>
           {this.props.isAccountMng ? (
             <button
               className="profileSec_btns_accountMng"
@@ -53,6 +70,9 @@ class Profile extends React.Component {
           )}
         </div>
         <div className="profileSec_stacks">
+          {/* 
+            사용자 스택 보여줘야함
+          */}
           <img
             width="50"
             height="50"
