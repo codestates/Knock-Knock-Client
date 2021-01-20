@@ -15,7 +15,7 @@ class MngAccount extends React.Component {
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
-    this.getTest = this.getTest.bind(this);
+    //this.getOAuthUserInfo = this.getOAuthUserInfo.bind(this);
 
     this.state = {
       isMypage: true,
@@ -26,12 +26,6 @@ class MngAccount extends React.Component {
     this.mood = "";
     this.stack = [];
 
-    // if (window.location.href.split("code=")[1]) {
-    //   this.authorizationCode = window.location.href
-    //     .split("code=")[1]
-    //     .split("&")[0];
-    // }
-
     this.mbtiChecker = mbti.map((el, idx) => {
       return (
         <option key={idx} value={el}>
@@ -41,17 +35,25 @@ class MngAccount extends React.Component {
     });
   }
 
-  async getTest(authorizationCode) {
-    const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
-      authorizationCode: authorizationCode,
-    });
-    console.log(oauthUserInfo);
-  }
+  // async getOAuthUserInfo(authorizationCode) {
+  //   console.log(authorizationCode);
+  //   const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+  //     authorizationCode: authorizationCode,
+  //   });
 
-  componentDidMount() {
+  //   console.log(oauthUserInfo);
+  // }
+
+  async componentDidMount() {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
-    this.getTest(authorizationCode);
+
+    if (authorizationCode) {
+      const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+        authorizationCode: authorizationCode,
+      });
+      console.log(oauthUserInfo);
+    }
   }
 
   mypageClickHandler() {
@@ -108,11 +110,11 @@ class MngAccount extends React.Component {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        {/* <Profile
+        <Profile
           isMypage={this.state.isMypage}
           mypageClickHandler={this.mypageClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
-        /> */}
+        />
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
             <div className="editUserInfoFormSec_term_phrase">

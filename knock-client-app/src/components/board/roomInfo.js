@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/roomInfo.css";
-const RoomInfo = () => {
+const RoomInfo = (props) => {
   const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
   const sideBar = btnList.map((el, idx) => {
     return (
@@ -9,6 +9,8 @@ const RoomInfo = () => {
       </li>
     );
   });
+
+  console.log(props.location.state);
 
   return (
     <div className="C_flexbox-container">

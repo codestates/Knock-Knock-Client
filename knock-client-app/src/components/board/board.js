@@ -55,13 +55,21 @@ const PublicBoard = (props) => {
     setPosts(posts.data.data);
   }, []);
 
-  const roomCardClickHandler = (event) => {
+  const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
-    for (let post of posts) {
-      if (post.id === Number(postId)) {
-        props.history.push("/roomInfo", post);
-      }
-    }
+
+    axios
+      .get(`http://localhost:4000/comments?postid=${postId}`)
+      .then((postComments) => {
+        for (let post of posts) {
+          if (post.id === Number(postId)) {
+            props.history.push("/roomInfo", {
+              ...post,
+              ...postComments.data.data,
+            });
+          }
+        }
+      });
   };
 
   return (
