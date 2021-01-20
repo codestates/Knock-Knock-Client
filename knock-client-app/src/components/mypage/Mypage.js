@@ -9,18 +9,30 @@ class Mypage extends React.Component {
     super(props);
 
     this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
+    this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
 
     this.state = {
       isAccountMng: true,
       isMypage: false,
+      userPosts: [],
     };
+  }
 
-    console.log(this.props);
+  async componentDidMount() {
+    // 사용자 ID 부분 수정해야함!!!!!!!!!
+    const userInfo = await axios.get("http://localhost:4000/profile/1");
+    this.setState({
+      userPosts: userInfo.data.postData,
+    });
   }
 
   accountMngClickHandler() {
     this.props.history.push("/mngAccount");
     this.setState({ isAccountMng: false });
+  }
+
+  retrospectClickHandler() {
+    this.props.history.push("/mngHistory");
   }
 
   render() {
@@ -31,7 +43,7 @@ class Mypage extends React.Component {
           isAccountMng={this.state.isAccountMng}
           isMypage={this.state.isMypage}
           accountMngClickHandler={this.accountMngClickHandler}
-          userInfo={this.props.location.state}
+          retrospectClickHandler={this.retrospectClickHandler}
         />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">

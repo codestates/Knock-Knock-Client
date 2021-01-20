@@ -6,15 +6,14 @@ class ProfileEdit extends Component {
     super(props);
 
     this.state = {
-      fakeData,
       projectCategory: "",
     };
 
     this.filter = this.filter.bind(this);
-    this.openDoor = this.openDoor.bind(this);
+    this.boardRetroHandler = this.boardRetroHandler.bind(this);
   }
 
-  openDoor(e) {
+  boardRetroHandler(e) {
     console.log(e.nativeEvent.path[0].attributes.value.value);
   }
 
@@ -23,19 +22,35 @@ class ProfileEdit extends Component {
   }
 
   render() {
-    let filteredProject = [];
+    let postStacksArr = [];
+
+    let filteredPosts = [];
 
     if (this.state.projectCategory === "") {
-      filteredProject = this.state.fakeData;
+      filteredPosts = this.props.userPosts;
     } else {
-      this.state.fakeData.forEach((project) => {
-        if (project.category === this.state.projectCategory) {
-          filteredProject.push(project);
+      this.props.userPosts.forEach((post) => {
+        if (post.category === this.state.projectCategory) {
+          filteredPosts.push(post);
         }
       });
     }
 
-    console.log(filteredProject);
+    filteredPosts.forEach((post) => {
+      if (post.post_stacks) {
+        postStacksArr.push(
+          post.post_stacks
+            .slice(1, -1)
+            .split(",")
+            .map((stack) => {
+              return stack.trim().slice(1, -1);
+            })
+        );
+      } else {
+        postStacksArr.push(null);
+      }
+    });
+
     return (
       <div className="mypageContainer_profileSec">
         <header className="P_headers">
@@ -50,34 +65,40 @@ class ProfileEdit extends Component {
         </select>
 
         <nav className="List_container">
-          {filteredProject.map((project, idx) => {
+          {filteredPosts.map((project, idx) => {
             return (
-              <div onClick={this.openDoor} key={idx} value={project.id}>
+              <div
+                onClick={this.boardRetroHandler}
+                key={idx}
+                value={project.id}
+              >
                 <div className="MyList" value={project.id}>
-                  <ul className="Context" value={project.id}>
-                    <li value="Project" value={project.id}>
+                  <div className="Context" value={project.id}>
+                    <div value="Project" value={project.id}>
                       {project.category}
-                    </li>
-                    <li className="Context_projectTitle" value={project.id}>
-                      {project.projectTitle}
-                    </li>
-                    {project.stacks ? (
-                      <li value={project.id}>{project.stacks.join("/")}</li>
+                    </div>
+                    <div className="Context_projectTitle" value={project.id}>
+                      {project.title}
+                    </div>
+                    {postStacksArr[idx] ? (
+                      postStacksArr[idx].map((stack) => {
+                        return <div value={project.id}>{stack}</div>;
+                      })
                     ) : (
-                      <li value={project.id}>스택 없음</li>
+                      <div value={project.id}>스택 없음</div>
                     )}
-                  </ul>
+                  </div>
                   <div className="MyList_status" value={project.id}>
                     <div className="status_createdAt" value={project.id}>
-                      {project.createdAt}
+                      {project.created_at.split("T")[0]}
                     </div>
-                    {project.status === "OPEN" ? (
+                    {project.open ? (
                       <div className="status_projectOn" value={project.id}>
-                        {project.status}
+                        open
                       </div>
                     ) : (
                       <div className="status_projectOff" value={project.id}>
-                        {project.status}
+                        closed
                       </div>
                     )}
                   </div>

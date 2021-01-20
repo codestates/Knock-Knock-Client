@@ -12,6 +12,7 @@ class MngHistory extends Component {
     this.state = {
       isClick: false,
       journals: [],
+      userPosts: [],
     };
     this.journals = [];
     this.retrospect = "";
@@ -19,6 +20,14 @@ class MngHistory extends Component {
     this.registerJouranl = this.registerJouranl.bind(this);
     this.keepJournal = this.keepJournal.bind(this);
     this.dangerBtn = this.dangerBtn.bind(this);
+  }
+
+  async componentDidMount() {
+    // 사용자 ID 부분 수정해야함!!!!!!!!!
+    const userInfo = await axios.get("http://localhost:4000/profile/1");
+    this.setState({
+      userPosts: userInfo.data.postData,
+    });
   }
 
   keepJournal(value) {
@@ -54,7 +63,7 @@ class MngHistory extends Component {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        <ProfileEdit />
+        <ProfileEdit userPosts={this.state.userPosts} />
 
         <div className="mypageContainer_editUserInfoFormSec">
           <p>{}</p>

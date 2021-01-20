@@ -18,28 +18,50 @@ const PublicBoard = (props) => {
     // You need to restrict it at some point
     // This is just dummy code and should be replaced by actual
 
-    const { boardType, boardPeopleNum, boardSearchText } = props.location.state;
+    let posts;
 
-    console.log(props.location.state);
-    const posts = await axios.get(
-      `http://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`
-    );
+    if (props.location.state) {
+      const {
+        boardType,
+        boardPeopleNum,
+        boardSearchText,
+      } = props.location.state;
 
-    if (posts.data.data[0].post_stacks) {
-      let postStacksArr = posts.data.data[0].post_stacks
-        .slice(1, -1)
-        .split(",")
-        .map((stack) => {
-          return stack.trim().slice(1, -1);
-        });
-
-      setPostStacks(postStacksArr);
-      setPosts(posts.data.data);
+      posts = await axios.get(
+        `http://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`
+      );
+    } else {
+      posts = await axios.get(
+        `http://localhost:4000/search?category=&total=&title=`
+      );
     }
+
+    let postStacksArr = [];
+
+    posts.data.data.forEach((post) => {
+      if (post.post_stacks) {
+        postStacksArr.push(
+          post.post_stacks
+            .slice(1, -1)
+            .split(",")
+            .map((stack) => {
+              return stack.trim().slice(1, -1);
+            })
+        );
+      }
+    });
+
+    setPostStacks(postStacksArr);
+    setPosts(posts.data.data);
   }, []);
 
   const roomCardClickHandler = (event) => {
-    console.log(event.nativeEvent.path[0].attributes.value.value);
+    const postId = event.nativeEvent.path[0].attributes.value.value;
+    for (let post of posts) {
+      if (post.id === Number(postId)) {
+        props.history.push("/roomInfo", post);
+      }
+    }
   };
 
   return (
@@ -58,7 +80,9 @@ const PublicBoard = (props) => {
           </ul>
         </nav>
         <div className="B_RoomContaniner">
-          {posts.map((post) => {
+          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}
+
+          {posts.map((post, idx) => {
             if (post.open) {
               if (post.category === "Project") {
                 return (
@@ -86,7 +110,7 @@ const PublicBoard = (props) => {
                       프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
                     </div>
                     <div className="B_RoomCard-stacks">
-                      {postStacks.map((stack) => {
+                      {postStacks[idx].map((stack) => {
                         return <div className="B_RoomCard-stack">{stack}</div>;
                       })}
                     </div>
@@ -151,6 +175,7 @@ const PublicBoard = (props) => {
               );
             }
           })}
+          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}
         </div>
       </div>
       <div className="B_footer">Welcome to the party</div>

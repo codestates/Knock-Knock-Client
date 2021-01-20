@@ -14,6 +14,7 @@ class MngAccount extends React.Component {
     this.userMood = this.userMood.bind(this);
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
+    this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
 
     this.state = {
       username: "jnoodle",
@@ -24,9 +25,12 @@ class MngAccount extends React.Component {
     this.propensity = [];
     this.mood = "";
     this.stack = [];
-    this.authorizationCode = window.location.href
-      .split("code=")[1]
-      .split("&")[0];
+
+    if (window.location.href.split("code=")[1]) {
+      this.authorizationCode = window.location.href
+        .split("code=")[1]
+        .split("&")[0];
+    }
 
     this.mbtiChecker = mbti.map((el, idx) => {
       return (
@@ -38,10 +42,15 @@ class MngAccount extends React.Component {
   }
 
   componentDidMount() {
-    // axios.post("http://localhost:4000/oauth", {
-    //   oauth: "google",
-    //   authorizationCode: this.authorizationCode,
-    // });
+    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
+    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
+    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
+    // if (this.authorizationCode) {
+    //   axios.post("http://localhost:4000/oauth", {
+    //     oauth: "google",
+    //     authorizationCode: this.authorizationCode,
+    //   });
+    // }
   }
 
   mypageClickHandler() {
@@ -89,6 +98,10 @@ class MngAccount extends React.Component {
     this.props.history.push("/mypage", userInfo);
   }
 
+  retrospectClickHandler() {
+    this.props.history.push("/mngHistory");
+  }
+
   render() {
     console.log(this.state.userInfo);
     return (
@@ -97,6 +110,7 @@ class MngAccount extends React.Component {
         <Profile
           isMypage={this.state.isMypage}
           mypageClickHandler={this.mypageClickHandler}
+          retrospectClickHandler={this.retrospectClickHandler}
         />
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
