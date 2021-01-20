@@ -57,19 +57,11 @@ const PublicBoard = (props) => {
 
   const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
-
-    axios
-      .get(`http://localhost:4000/comments?postid=${postId}`)
-      .then((postComments) => {
-        for (let post of posts) {
-          if (post.id === Number(postId)) {
-            props.history.push("/roomInfo", {
-              ...post,
-              ...postComments.data.data,
-            });
-          }
-        }
-      });
+    for (let post of posts) {
+      if (post.id === Number(postId)) {
+        props.history.push("/roomInfo", post);
+      }
+    }
   };
 
   return (
