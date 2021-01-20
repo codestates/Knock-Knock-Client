@@ -15,22 +15,22 @@ class MngAccount extends React.Component {
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
+    this.getTest = this.getTest.bind(this);
 
     this.state = {
-      username: "jnoodle",
       isMypage: true,
-      userInfo: [],
+      userInfo: {},
     };
     this.grade = "";
     this.propensity = [];
     this.mood = "";
     this.stack = [];
 
-    if (window.location.href.split("code=")[1]) {
-      this.authorizationCode = window.location.href
-        .split("code=")[1]
-        .split("&")[0];
-    }
+    // if (window.location.href.split("code=")[1]) {
+    //   this.authorizationCode = window.location.href
+    //     .split("code=")[1]
+    //     .split("&")[0];
+    // }
 
     this.mbtiChecker = mbti.map((el, idx) => {
       return (
@@ -41,16 +41,17 @@ class MngAccount extends React.Component {
     });
   }
 
+  async getTest(authorizationCode) {
+    const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+      authorizationCode: authorizationCode,
+    });
+    console.log(oauthUserInfo);
+  }
+
   componentDidMount() {
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // if (this.authorizationCode) {
-    //   axios.post("http://localhost:4000/oauth", {
-    //     oauth: "google",
-    //     authorizationCode: this.authorizationCode,
-    //   });
-    // }
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get("code");
+    this.getTest(authorizationCode);
   }
 
   mypageClickHandler() {
@@ -107,11 +108,11 @@ class MngAccount extends React.Component {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        <Profile
+        {/* <Profile
           isMypage={this.state.isMypage}
           mypageClickHandler={this.mypageClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
-        />
+        /> */}
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
             <div className="editUserInfoFormSec_term_phrase">
