@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/history.css";
 
 const PostReply = (props) => {
-  console.log("프랍스", props);
+  console.log("프랍스22", props.value);
   const comment = props.value.map((value, idx) => {
     if (idx >= 0) {
       return (
