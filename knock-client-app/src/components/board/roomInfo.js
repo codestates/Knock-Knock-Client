@@ -11,7 +11,8 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `http://localhost:4000/comments?postid=${props.location.state.id}`
+      `https://localhost:4000/comments?postid=${props.location.state.id}`,
+      { withCredentials: true }
     );
 
     setReply(postComments.data.data);
@@ -22,19 +23,25 @@ const RoomInfo = (props) => {
       setErrmessage("텍스트를 입력하세요");
     } else {
       setErrmessage("");
-      axios.get("http://localhost:4000/profile/1").then((getUserInfo) => {
-        const { id, username } = getUserInfo.data.userData;
-        axios
-          .post("http://localhost:4000/comments", {
-            writer: username,
-            comment: text,
-            userid: id,
-            postid: props.location.state.id,
-          })
-          .then((postComments) => {
-            setReply(postComments.data.data);
-          });
-      });
+      axios
+        .get("https://localhost:4000/profile/1", { withCredentials: true })
+        .then((getUserInfo) => {
+          const { id, username } = getUserInfo.data.userData;
+          axios
+            .post(
+              "https://localhost:4000/comments",
+              {
+                writer: username,
+                comment: text,
+                userid: id,
+                postid: props.location.state.id,
+              },
+              { withCredentials: true }
+            )
+            .then((postComments) => {
+              setReply(postComments.data.data);
+            });
+        });
     }
   };
 

@@ -28,11 +28,13 @@ const PublicBoard = (props) => {
       } = props.location.state;
 
       posts = await axios.get(
-        `http://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`
+        `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
+        { withCredentials: true }
       );
     } else {
       posts = await axios.get(
-        `http://localhost:4000/search?category=&total=&title=`
+        `https://localhost:4000/search?category=&total=&title=`,
+        { withCredentials: true }
       );
     }
 

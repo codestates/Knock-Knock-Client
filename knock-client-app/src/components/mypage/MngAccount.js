@@ -37,22 +37,29 @@ class MngAccount extends React.Component {
 
   // async getOAuthUserInfo(authorizationCode) {
   //   console.log(authorizationCode);
-  //   const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+  //   const oauthUserInfo = await axios.post("https://localhost:4000/oauth", {
   //     authorizationCode: authorizationCode,
   //   });
 
   //   console.log(oauthUserInfo);
   // }
 
-  async componentDidMount() {
+  componentDidMount() {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
 
     if (authorizationCode) {
-      const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
-        authorizationCode: authorizationCode,
-      });
-      console.log(oauthUserInfo);
+      axios
+        .post(
+          "https://localhost:4000/oauth",
+          {
+            authorizationCode: authorizationCode,
+          },
+          { withCredentials: true }
+        )
+        .then((oauthUserInfo) => {
+          this.setState({ userInfo: oauthUserInfo.data.data });
+        });
     }
   }
 

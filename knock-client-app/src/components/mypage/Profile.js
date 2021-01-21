@@ -12,7 +12,9 @@ class Profile extends React.Component {
 
   async componentDidMount() {
     // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("http://localhost:4000/profile/1");
+    const userInfo = await axios.get("https://localhost:4000/profile/1", {
+      withCredentials: true,
+    });
     this.setState({
       userInfo: userInfo.data.userData,
     });
