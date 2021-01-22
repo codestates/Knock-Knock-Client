@@ -4,32 +4,58 @@ import axios from "axios";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       userInfo: {},
     };
+
+    console.log("this.props.userInfo = ", this.props);
   }
 
   async componentDidMount() {
     // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("http://localhost:4000/profile/1");
-    this.setState({
-      userInfo: userInfo.data.userData,
-    });
-    console.log(userInfo);
+    // 세션 해결 후 수정!!!!!!!
+    // const userInfo = await axios.get(`https://localhost:4000/profile/1`);
+    // this.setState({
+    //   userInfo: userInfo.data.userData,
+    // });
+    // console.log(userInfo);
+
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get("code");
+
+    if (authorizationCode) {
+      await axios
+        .post(
+          "https://localhost:4000/oauth",
+          {
+            authorizationCode: authorizationCode,
+          },
+          { withCredentials: true }
+        )
+        .then(async (oauthUserInfo) => {
+          await axios.get(
+            `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
+            {
+              withCredentials: true,
+            }
+          );
+        });
+    }
+
+    // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
+    const userInfo = await axios.post(
+      "https://localhost:4000/profile",
+      {},
+      { withCredentials: true }
+    );
+
+    this.setState({ userInfo: userInfo.data.data });
   }
 
   render() {
     return (
       <div className="mypageContainer_profileSec">
-        <div className="profileSec_profileImg">
-          <img
-            width="320"
-            height="320"
-            src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-            alt=""
-          />
-        </div>
+        <div className="profileSec_profileImg">{/* 프로필 사진 이미지 */}</div>
         <div className="profileSec_name_mood">
           <p className="profileSec_username">
             {this.state.userInfo ? this.state.userInfo.username : ""}
@@ -73,24 +99,6 @@ class Profile extends React.Component {
           {/* 
             사용자 스택 보여줘야함
           */}
-          <img
-            width="50"
-            height="50"
-            src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-            alt=""
-          />
-          <img
-            width="50"
-            height="50"
-            src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-            alt=""
-          />
-          <img
-            width="50"
-            height="50"
-            src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-            alt=""
-          />
         </div>
       </div>
     );

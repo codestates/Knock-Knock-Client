@@ -36,6 +36,7 @@ class ProfileEdit extends Component {
       });
     }
 
+    // 스택 가공 코드 수정 해야함 [이준희]
     filteredPosts.forEach((post) => {
       if (post.post_stacks) {
         postStacksArr.push(

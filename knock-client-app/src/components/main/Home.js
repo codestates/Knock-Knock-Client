@@ -28,6 +28,10 @@ const Home = (props) => {
     props.history.push("/board", searchParams);
   }
 
+  function moreBoardHandler() {
+    props.history.push("/board");
+  }
+
   return (
     <div className="H_container">
       <section className="H_sec1">
@@ -123,7 +127,7 @@ const Home = (props) => {
         </div>
       </section>
       <footer className="H_footer">
-        <div className="H_GoToBoard" onClick={() => alert("인수바보")}>
+        <div className="H_GoToBoard" onClick={moreBoardHandler}>
           더보기
         </div>
       </footer>

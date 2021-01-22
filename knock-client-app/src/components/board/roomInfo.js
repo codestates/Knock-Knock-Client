@@ -104,11 +104,13 @@ const RoomInfo = (props) => {
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
 
-  const getPostComments = () => {
-    // const postComments = await axios.get(
-    //   `http://localhost:4000/comments?postid=${props.location.state.id}`
-    // );
-    //setReply(postComments.data.data);
+  const getPostComments = async () => {
+    const postComments = await axios.get(
+      `https://localhost:4000/comments/${props.location.state.id}`,
+      { withCredentials: true }
+    );
+
+    setReply(postComments.data.data);
   };
 
   const sendReply = () => {
@@ -122,11 +124,27 @@ const RoomInfo = (props) => {
       setErrmessage("텍스트를 입력하세요");
     } else {
       setErrmessage("");
-      replyInfo = {
-        writer: "Im24기 이준희",
-        created_at: updated_At,
-        comment: text,
-      };
+
+      // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
+      axios
+        .get("https://localhost:4000/profile/1", { withCredentials: true })
+        .then((getUserInfo) => {
+          const { id, username } = getUserInfo.data.userData;
+          axios
+            .post(
+              "https://localhost:4000/comments",
+              {
+                writer: username,
+                comment: text,
+                userid: id,
+                postid: props.location.state.id,
+              },
+              { withCredentials: true }
+            )
+            .then((postComments) => {
+              setReply(postComments.data.data);
+            });
+        });
     }
     setReply(() => [...reply, replyInfo]);
   };

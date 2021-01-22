@@ -9,10 +9,12 @@ import axios from "axios";
 const PublicBoard = (props) => {
   console.log(props.location.state);
 
-  const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
+  const btnList = ["All", "Study", "Project", "Q&A"];
 
   const [posts, setPosts] = useState([]);
   const [postStacks, setPostStacks] = useState([]);
+
+  const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
   useEffect(async () => {
     // You need to restrict it at some point
@@ -28,31 +30,48 @@ const PublicBoard = (props) => {
       } = props.location.state;
 
       posts = await axios.get(
-        `http://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`
+        `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
+        { withCredentials: true }
       );
     } else {
       posts = await axios.get(
-        `http://localhost:4000/search?category=&total=&title=`
+        `https://localhost:4000/search?category=&total=&title=`,
+        { withCredentials: true }
       );
     }
 
-    let postStacksArr = [];
-
+    // 전체 게시물을 보여주기 posts 값 가공
+    let postsArr = [];
     posts.data.data.forEach((post) => {
+      let postObj = {
+        id: post.id,
+        category: post.category,
+        title: post.title,
+        total: post.total,
+        open: post.open,
+        frontend: post.frontend,
+        backend: post.backend,
+      };
+
+      // 스택 가공 코드 수정 해야함 [이준희]
       if (post.post_stacks) {
-        postStacksArr.push(
-          post.post_stacks
-            .slice(1, -1)
-            .split(",")
-            .map((stack) => {
-              return stack.trim().slice(1, -1);
-            })
-        );
+        postObj.post_stacks = post.post_stacks.slice(1, -1).split(",");
       }
+
+      postsArr.push(postObj);
     });
 
-    setPostStacks(postStacksArr);
-    setPosts(posts.data.data);
+    setPosts(postsArr);
+
+    // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
+    await axios
+      .post("https://localhost:4000/profile", {}, { withCredentials: true })
+      .then((user) => {
+        setIsUser(user);
+      })
+      .catch(() => {
+        setIsUser("");
+      });
   }, []);
 
   const roomCardClickHandler = async (event) => {
@@ -77,10 +96,20 @@ const PublicBoard = (props) => {
                 </li>
               );
             })}
+            {isUser ? (
+              <li
+                className="B_filterBtn"
+                onClick={() => props.history.push("/createRoom")}
+              >
+                그룹만들기
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </nav>
         <div className="B_RoomContaniner">
-          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}
+          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! / 컴포넌트화 [이준희] */}
 
           {posts.map((post, idx) => {
             if (post.open) {
@@ -110,7 +139,7 @@ const PublicBoard = (props) => {
                       프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
                     </div>
                     <div className="B_RoomCard-stacks">
-                      {postStacks[idx].map((stack) => {
+                      {post.post_stacks.map((stack) => {
                         return <div className="B_RoomCard-stack">{stack}</div>;
                       })}
                     </div>

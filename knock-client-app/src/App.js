@@ -11,8 +11,6 @@ import MngAccount from "./components/mypage/MngAccount";
 import MngHistory from "./components/mypage/MngHistory";
 import ModalRouter from "./components/main/ModalRouter";
 
-const axios = require("axios");
-
 const App = () => {
   return (
     <Router>

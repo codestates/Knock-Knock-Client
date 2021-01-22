@@ -13,16 +13,12 @@ const DataForm = (props) => {
   };
 
   const choiceStack = (e) => {
-    if (e.target.checked) {
-      stackStorage.push(e.target.value);
-    } else {
-      stackStorage.splice(stackStorage.indexOf(e.target.value), 1);
-    }
-    props.stack(stackStorage);
+    props.stack(e.target.value);
   };
   const storage = [];
 
   const isPosition = (e) => {
+    // 비율에 대한 에러 [이준희]
     props.position(e.target.value);
   };
 
@@ -63,10 +59,6 @@ const DataForm = (props) => {
       </>
     );
   });
-
-  const addStack = () => {
-    return <>{stack}</>;
-  };
 
   return (
     <div className="Data_Container">
