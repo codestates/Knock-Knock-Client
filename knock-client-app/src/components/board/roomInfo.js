@@ -11,8 +11,7 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      //${props.location.state.id}
-      `https://localhost:4000/comments`,
+      `https://localhost:4000/comments/${props.location.state.id}`,
       { withCredentials: true }
     );
 
@@ -34,7 +33,7 @@ const RoomInfo = (props) => {
       axios
         .get("https://localhost:4000/profile", { withCredentials: true })
         .then((getUserInfo) => {
-          const { id, username } = getUserInfo.data.userData;
+          const { id, username } = getUserInfo.data.userdata;
           axios
             .post(
               "https://localhost:4000/comments",
@@ -69,7 +68,7 @@ const RoomInfo = (props) => {
   }
 
   useEffect(() => {
-    console.log("리플라이 받아오니?", reply);
+    getPostComments();
   });
 
   return (

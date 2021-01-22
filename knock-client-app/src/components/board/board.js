@@ -9,11 +9,11 @@ import axios from "axios";
 const PublicBoard = (props) => {
   console.log("프랍스 로케이션 스테이트", props.location);
 
-  const btnList = ["All", "Study", "Project", "Q&A"];
+  //const btnList = ["All", "Study", "Project", "Q&A"];
 
   const [posts, setPosts] = useState([]);
   const [postStacks, setPostStacks] = useState([]);
-
+  const [postFilter, setPostFilter] = useState("");
   const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
   useEffect(async () => {
@@ -35,10 +35,17 @@ const PublicBoard = (props) => {
         { withCredentials: true }
       );
     } else {
-      postsList = await axios.get(
-        `https://localhost:4000/search?category=&total=&title=`,
-        { withCredentials: true }
-      );
+      if (postFilter && postFilter !== "All") {
+        postsList = await axios.get(
+          `https://localhost:4000/search?category=${postFilter}&total=&title=`,
+          { withCredentials: true }
+        );
+      } else {
+        postsList = await axios.get(
+          `https://localhost:4000/search?category=&total=&title=`,
+          { withCredentials: true }
+        );
+      }
     }
 
     // 전체 게시물을 보여주기 postsList 값 가공
@@ -56,7 +63,7 @@ const PublicBoard = (props) => {
 
       // 스택 가공 코드 수정 해야함 [이준희]
       if (post.post_stacks) {
-        postObj.post_stacks = post.post_stacks.slice(1, -1).split(",");
+        postObj.post_stacks = post.post_stacks.split(",");
       }
 
       postsArr.push(postObj);
@@ -66,14 +73,13 @@ const PublicBoard = (props) => {
 
     // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
     axios
-      .get("https://localhost:4000/profile", {}, { withCredentials: true })
+      .get("https://localhost:4000/profile", { withCredentials: true })
       .then((user) => {
         setIsUser(user);
-      })
-      .catch(() => {
-        setIsUser("");
       });
-  }, []);
+
+    console.log("isUser = ", isUser);
+  }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
@@ -84,29 +90,51 @@ const PublicBoard = (props) => {
     }
   };
 
+  const postFilterHandler = (event) => {
+    setPostFilter(event.target.attributes[1].value);
+  };
+
   return (
     <div className="B_container">
       {/* <header className="B_header"></header> */}
       <div className="B_flexbox-container">
         <nav className="B_SideBarSec">
           <ul>
-            {btnList.map((el, idx) => {
-              return (
-                <li className="B_filterBtn" key={idx}>
-                  {el}
-                </li>
-              );
-            })}
-            {/* {isUser ? ( */}
+            <li className="B_filterBtn" value="All" onClick={postFilterHandler}>
+              All
+            </li>
             <li
               className="B_filterBtn"
-              onClick={() => props.history.push("/createRoom")}
+              value="Study"
+              onClick={postFilterHandler}
             >
-              그룹만들기
+              Study
             </li>
-            {/*) : (
-               <></>
-             )} */}
+            <li
+              className="B_filterBtn"
+              value="Project"
+              onClick={postFilterHandler}
+            >
+              Project
+            </li>
+            <li
+              className="B_filterBtn"
+              value="Question"
+              onClick={postFilterHandler}
+            >
+              Q{"&"}A
+            </li>
+
+            {isUser ? (
+              <li
+                className="B_filterBtn"
+                onClick={() => props.history.push("/createRoom")}
+              >
+                그룹만들기
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </nav>
         <div className="B_RoomContaniner">

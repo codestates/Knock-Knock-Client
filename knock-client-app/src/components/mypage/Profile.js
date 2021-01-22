@@ -17,7 +17,7 @@ class Profile extends React.Component {
     const authorizationCode = url.searchParams.get("code");
 
     if (authorizationCode) {
-      axios
+      await axios
         .post(
           "https://localhost:4000/oauth",
           {
@@ -26,7 +26,8 @@ class Profile extends React.Component {
           { withCredentials: true }
         )
         .then(async (oauthUserInfo) => {
-          axios.get(
+          console.log("오어스 oauthUserInfo = ", oauthUserInfo);
+          await axios.get(
             `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
             {
               withCredentials: true,
@@ -35,15 +36,17 @@ class Profile extends React.Component {
         });
     }
 
-    const userInfo = await axios.get("https://localhost:4000/profile", {
-      withCredentials: true,
-    });
-
-    this.setState({ userInfo: userInfo.data.data });
+    await axios
+      .get("https://localhost:4000/profile", {
+        withCredentials: true,
+      })
+      .then((userInfo) => {
+        console.log("프로필 userInfo = ", userInfo);
+        this.setState({ userInfo: userInfo.data.userdata });
+      });
   }
 
   render() {
-    console.log("하하하하", this.state.userInfo);
     return (
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">

@@ -14,7 +14,7 @@ class Mypage extends React.Component {
     this.state = {
       isAccountMng: true,
       isMypage: false,
-      userPosts: [],
+      userPosts: [1, 2],
       openPosts: [],
       closedPosts: [],
     };
@@ -22,10 +22,13 @@ class Mypage extends React.Component {
 
   async componentDidMount() {
     // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("https://localhost:4000/profile");
+    const userInfo = await axios.get("https://localhost:4000/profile", {
+      withCredentials: true,
+    });
 
+    console.log("userInfo.data.postdata = ", userInfo);
     this.setState({
-      userPosts: userInfo.data.postData,
+      userPosts: userInfo.data.postdata,
     });
   }
 

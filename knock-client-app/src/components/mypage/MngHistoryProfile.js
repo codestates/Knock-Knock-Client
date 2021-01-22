@@ -10,11 +10,11 @@ class ProfileEdit extends Component {
     };
 
     this.filter = this.filter.bind(this);
-    this.boardRetroHandler = this.boardRetroHandler.bind(this);
+    this.retroClickHandler = this.retroClickHandler.bind(this);
   }
 
-  boardRetroHandler(e) {
-    console.log(e.nativeEvent.path[0].attributes.value.value);
+  retroClickHandler(e) {
+    this.props.boardRetroHandler(e.nativeEvent.path[0].attributes.value.value);
   }
 
   filter(event) {
@@ -39,14 +39,7 @@ class ProfileEdit extends Component {
     // 스택 가공 코드 수정 해야함 [이준희]
     filteredPosts.forEach((post) => {
       if (post.post_stacks) {
-        postStacksArr.push(
-          post.post_stacks
-            .slice(1, -1)
-            .split(",")
-            .map((stack) => {
-              return stack.trim().slice(1, -1);
-            })
-        );
+        postStacksArr.push(post.post_stacks.slice(1, -1).split(","));
       } else {
         postStacksArr.push(null);
       }
@@ -56,6 +49,9 @@ class ProfileEdit extends Component {
       <div className="mypageContainer_profileSec">
         <header className="P_headers">
           <p className="P_subtitle">히스토리</p>
+          <button onClick={() => this.props.mypageHandleFromHisPro()}>
+            마이페이지
+          </button>
         </header>
 
         <select className="List_filter" onChange={this.filter}>
@@ -69,7 +65,7 @@ class ProfileEdit extends Component {
           {filteredPosts.map((project, idx) => {
             return (
               <div
-                onClick={this.boardRetroHandler}
+                onClick={this.retroClickHandler}
                 key={idx}
                 value={project.id}
               >

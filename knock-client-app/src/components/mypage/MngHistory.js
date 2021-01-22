@@ -3,7 +3,7 @@ import ProfileEdit from "./MngHistoryProfile";
 import "../../styles/history.css";
 import "../../styles/mypage.css";
 import SendRetrospect from "./Retrospect";
-const axios = require("axios");
+import axios from "axios";
 
 class MngHistory extends Component {
   constructor(props) {
@@ -20,6 +20,8 @@ class MngHistory extends Component {
     this.registerJouranl = this.registerJouranl.bind(this);
     this.keepJournal = this.keepJournal.bind(this);
     this.dangerBtn = this.dangerBtn.bind(this);
+    this.boardRetroHandler = this.boardRetroHandler.bind(this);
+    this.mypageHandleFromHisPro = this.mypageHandleFromHisPro.bind(this);
   }
 
   async componentDidMount() {
@@ -28,7 +30,7 @@ class MngHistory extends Component {
       withCredentials: true,
     });
     this.setState({
-      userPosts: userInfo.data.postData,
+      userPosts: userInfo.data.postdata,
     });
     /*==========================================================================*/
     // axios
@@ -37,6 +39,24 @@ class MngHistory extends Component {
     //     console.log("드디어!! 히스토리!!  = ", userInfo);
     //   });
     /*=========================================================================*/
+  }
+
+  /*
+    *문제 있음*
+    게시물에 해당하는 회고만 나오는게 아니라 사용자가 가지고 있는
+    모든 회고를 다 가져옴.
+    즉, 마치 사용자ID 로 조회한것처럼 나옴
+  */
+  async boardRetroHandler(retroNum) {
+    const retroInfo = await axios.get(
+      `https://localhost:4000/diary/${retroNum}`,
+      { withCredentials: true }
+    );
+    console.log("retroInfo =", retroInfo);
+  }
+
+  mypageHandleFromHisPro() {
+    this.props.history.push("/mypage");
   }
 
   keepJournal(value) {
@@ -73,7 +93,11 @@ class MngHistory extends Component {
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
-        <ProfileEdit userPosts={this.state.userPosts} />
+        <ProfileEdit
+          userPosts={this.state.userPosts}
+          boardRetroHandler={this.boardRetroHandler}
+          mypageHandleFromHisPro={this.mypageHandleFromHisPro}
+        />
 
         <div className="mypageContainer_editUserInfoFormSec">
           <p>{}</p>
