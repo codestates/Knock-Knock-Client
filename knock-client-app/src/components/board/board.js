@@ -7,8 +7,6 @@ import study from "../../images/boardImg/studyGroup.png";
 import axios from "axios";
 
 const PublicBoard = (props) => {
-  console.log(props.location.state);
-
   const btnList = ["All", "Study", "Project", "Q&A"];
 
   const [posts, setPosts] = useState([]);
@@ -20,7 +18,9 @@ const PublicBoard = (props) => {
     // You need to restrict it at some point
     // This is just dummy code and should be replaced by actual
 
-    let posts;
+    let postsList;
+
+    console.log("props.location.state = ", props.location.state);
 
     if (props.location.state) {
       const {
@@ -28,21 +28,20 @@ const PublicBoard = (props) => {
         boardPeopleNum,
         boardSearchText,
       } = props.location.state;
-
-      posts = await axios.get(
+      postsList = await axios.get(
         `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
         { withCredentials: true }
       );
     } else {
-      posts = await axios.get(
+      postsList = await axios.get(
         `https://localhost:4000/search?category=&total=&title=`,
         { withCredentials: true }
       );
     }
 
-    // 전체 게시물을 보여주기 posts 값 가공
+    // 전체 게시물을 보여주기 postsList 값 가공
     let postsArr = [];
-    posts.data.data.forEach((post) => {
+    postsList.data.data.forEach((post) => {
       let postObj = {
         id: post.id,
         category: post.category,
@@ -63,9 +62,8 @@ const PublicBoard = (props) => {
 
     setPosts(postsArr);
 
-    // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
     await axios
-      .post("https://localhost:4000/profile", {}, { withCredentials: true })
+      .get("https://localhost:4000/profile", { withCredentials: true })
       .then((user) => {
         setIsUser(user);
       })

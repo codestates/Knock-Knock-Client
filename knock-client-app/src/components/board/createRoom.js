@@ -51,16 +51,11 @@ const CreateRoom = (props) => {
     }
   };
 
-  // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
   const postRoomInfo = () => {
     axios
-      .post(
-        "https://localhost:4000/profile",
-        {},
-        {
-          withCredentials: true,
-        }
-      )
+      .get("https://localhost:4000/profile", {
+        withCredentials: true,
+      })
       .then((userInfo) => {
         const body = {
           writer: userInfo.data.data.username,
