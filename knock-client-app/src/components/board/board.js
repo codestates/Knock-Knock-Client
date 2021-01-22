@@ -72,7 +72,7 @@ const PublicBoard = (props) => {
       .catch(() => {
         setIsUser("");
       });
-  }, []);
+  }, [props.location.state]);
 
   const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
