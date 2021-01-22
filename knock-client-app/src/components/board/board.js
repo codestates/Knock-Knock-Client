@@ -7,7 +7,7 @@ import study from "../../images/boardImg/studyGroup.png";
 import axios from "axios";
 
 const PublicBoard = (props) => {
-  console.log(props.location.state);
+  console.log("프랍스 로케이션 스테이트", props.location);
 
   const btnList = ["All", "Study", "Project", "Q&A"];
 
@@ -64,8 +64,8 @@ const PublicBoard = (props) => {
     setPosts(postsArr);
 
     // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
-    await axios
-      .post("https://localhost:4000/profile", {}, { withCredentials: true })
+    axios
+      .get("https://localhost:4000/profile", {}, { withCredentials: true })
       .then((user) => {
         setIsUser(user);
       })
@@ -96,16 +96,16 @@ const PublicBoard = (props) => {
                 </li>
               );
             })}
-            {isUser ? (
-              <li
-                className="B_filterBtn"
-                onClick={() => props.history.push("/createRoom")}
-              >
-                그룹만들기
-              </li>
-            ) : (
-              <></>
-            )}
+            {/* {isUser ? ( */}
+            <li
+              className="B_filterBtn"
+              onClick={() => props.history.push("/createRoom")}
+            >
+              그룹만들기
+            </li>
+            {/*) : (
+               <></>
+             )} */}
           </ul>
         </nav>
         <div className="B_RoomContaniner">

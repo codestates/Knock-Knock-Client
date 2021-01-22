@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "../../styles/profileEdit.css";
-import { fakeData } from "../../utils/options";
+import "../../styles/history_profile.css";
+
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);

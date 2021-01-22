@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import PrintLogo from "./PrintStackLogo"; // lines number of 101 to 104
 
 class Profile extends React.Component {
   constructor(props) {
@@ -12,19 +13,11 @@ class Profile extends React.Component {
   }
 
   async componentDidMount() {
-    // 사용자 ID 부분 수정해야함!!!!!!!!!
-    // 세션 해결 후 수정!!!!!!!
-    // const userInfo = await axios.get(`https://localhost:4000/profile/1`);
-    // this.setState({
-    //   userInfo: userInfo.data.userData,
-    // });
-    // console.log(userInfo);
-
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
 
     if (authorizationCode) {
-      await axios
+      axios
         .post(
           "https://localhost:4000/oauth",
           {
@@ -33,7 +26,7 @@ class Profile extends React.Component {
           { withCredentials: true }
         )
         .then(async (oauthUserInfo) => {
-          await axios.get(
+          axios.get(
             `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
             {
               withCredentials: true,
@@ -41,21 +34,15 @@ class Profile extends React.Component {
           );
         });
     }
-
-    // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
-    const userInfo = await axios.post(
-      "https://localhost:4000/profile",
-      {},
-      { withCredentials: true }
-    );
-
-    this.setState({ userInfo: userInfo.data.data });
   }
 
   render() {
+    console.log("하하하하", this.state.userInfo);
     return (
       <div className="mypageContainer_profileSec">
-        <div className="profileSec_profileImg">{/* 프로필 사진 이미지 */}</div>
+        <div className="profileSec_profileImg">
+          {/* 프로필 사진 이미지 [이준희]*/}
+        </div>
         <div className="profileSec_name_mood">
           <p className="profileSec_username">
             {this.state.userInfo ? this.state.userInfo.username : ""}
@@ -73,9 +60,7 @@ class Profile extends React.Component {
               마이페이지
             </button>
           ) : (
-            <button className="profileSec_btns_false">
-              &gt;마이페이지&lt;
-            </button>
+            <button className="profileSec_btns_false">마이페이지</button>
           )}
 
           <button
@@ -92,13 +77,17 @@ class Profile extends React.Component {
               계정 관리
             </button>
           ) : (
-            <button className="profileSec_btns_false">&gt;계정관리&lt;</button>
+            <button className="profileSec_btns_false">계정관리</button>
           )}
         </div>
         <div className="profileSec_stacks">
-          {/* 
-            사용자 스택 보여줘야함
-          */}
+          {/* 밑에 있는 로직은 로고를 이미지로 보여주기 위한 컴포넌트 [PrintStackLogo.js]구상중 */}
+          {/* <PrintLogo
+            Logo={this.state.userInfo ? this.state.userInfo.user_stacks : ""}
+          /> */}
+          <div>
+            {this.state.userInfo ? this.state.userInfo.user_stacks : ""}
+          </div>
         </div>
       </div>
     );

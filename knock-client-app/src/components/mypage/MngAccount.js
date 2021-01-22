@@ -37,9 +37,7 @@ class MngAccount extends React.Component {
       return (
         <>
           <input
-            // onChange={(e) => {
-            //   choiceStack(e);
-            // }}
+            onChange={this.userStack}
             type="checkbox"
             id={el}
             name="stack"
@@ -85,7 +83,7 @@ class MngAccount extends React.Component {
       username: this.grade,
       persona: this.propensity,
       mood: this.mood,
-      user_stacks: `[js]`,
+      user_stacks: `${String(this.stack)}`,
     };
     console.log("userInfo = ", userInfo);
 
@@ -102,8 +100,6 @@ class MngAccount extends React.Component {
   retrospectClickHandler() {
     this.props.history.push("/mngHistory");
   }
-
-  // !계정관리 스택 체크 이벤트 메소드!
 
   render() {
     return (
@@ -151,7 +147,7 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
-              {/* 스택 추가 부분 넣기 [이준희] */}
+              <div className="Stack">{this.stackList}</div>
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">

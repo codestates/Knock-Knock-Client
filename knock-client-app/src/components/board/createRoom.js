@@ -54,31 +54,28 @@ const CreateRoom = (props) => {
   // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
   const postRoomInfo = () => {
     axios
-      .post(
-        "https://localhost:4000/profile",
-        {},
-        {
-          withCredentials: true,
-        }
-      )
+      .get("https://localhost:4000/profile", {
+        withCredentials: true,
+      })
       .then((userInfo) => {
-        const body = {
-          writer: userInfo.data.data.username,
-          category: category,
-          title: title,
-          total: crew,
-          backend: position[0],
-          frontend: position[1],
-          // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
-          post_stacks: `[${String(stack)}]`,
-          content: description,
-        };
-        console.log("body = ", body);
-        axios
-          .post("https://localhost:4000/posts", body, { withCredentials: true })
-          .then(() => {
-            props.history.push("/board");
-          });
+        console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
+        // const body = {
+        //   writer: userInfo.data.data.username,
+        //   category: category,
+        //   title: title,
+        //   total: crew,
+        //   backend: position[0],
+        //   frontend: position[1],
+        //   // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
+        //   post_stacks: `[${String(stack)}]`,
+        //   content: description,
+        // };
+        // console.log("body = ", body);
+        // axios
+        //   .post("https://localhost:4000/posts", body, { withCredentials: true })
+        //   .then(() => {
+        //     props.history.push("/board");
+        //   });
       });
   };
 

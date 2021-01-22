@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ProfileEdit from "./ProfileEditForm";
+import ProfileEdit from "./MngHistoryProfile";
 import "../../styles/history.css";
 import "../../styles/mypage.css";
-import SendRetrospect from "./retrospect";
+import SendRetrospect from "./Retrospect";
 const axios = require("axios");
 
 class MngHistory extends Component {
@@ -24,7 +24,7 @@ class MngHistory extends Component {
 
   async componentDidMount() {
     // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("https://localhost:4000/profile/1", {
+    const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });
     this.setState({
