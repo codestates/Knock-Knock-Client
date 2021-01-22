@@ -18,3 +18,10 @@
 .navbar_mypage {
   flex: 1;
 }
+
+.StackLogo {
+  /* display: inline; */
+  float: left;
+  width: auto;
+  height: 50px;
+}

@@ -1,11 +1,13 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
+
 import Profile from "./Profile";
 
 class Mypage extends React.Component {
   constructor(props) {
     super(props);
+
     this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
 
@@ -20,9 +22,7 @@ class Mypage extends React.Component {
 
   async componentDidMount() {
     // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("https://localhost:4000/profile/1", {
-      withCredentials: true,
-    });
+    const userInfo = await axios.get("https://localhost:4000/profile");
 
     this.setState({
       userPosts: userInfo.data.postData,

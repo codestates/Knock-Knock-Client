@@ -4,7 +4,6 @@ import "../../styles/createRoom.css";
 
 const DataForm = (props) => {
   const [message, setMessage] = useState("");
-  const stackStorage = [];
 
   const isCheck = (e) => {
     e.target.checked
@@ -15,7 +14,6 @@ const DataForm = (props) => {
   const choiceStack = (e) => {
     props.stack(e.target.value);
   };
-  const storage = [];
 
   const isPosition = (e) => {
     // 비율에 대한 에러 [이준희]

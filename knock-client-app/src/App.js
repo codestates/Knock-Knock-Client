@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./styles/nav.css";
+import "./styles/navAndLogo.css";
 // import Context from "../utils/context.js";
 import PublicBoard from "../src/components/board/board";
 import Home from "./components/main/Home";

@@ -23,7 +23,7 @@ const Home = (props) => {
   function boardSearchTextHandler(event) {
     searchParams.boardSearchText = event.target.value;
   }
-
+  // 홈에서 검색 필터
   async function boardSearchClickHandler() {
     props.history.push("/board", searchParams);
   }

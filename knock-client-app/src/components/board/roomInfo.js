@@ -11,14 +11,21 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `https://localhost:4000/comments/${props.location.state.id}`,
+      //${props.location.state.id}
+      `https://localhost:4000/comments`,
       { withCredentials: true }
     );
 
     setReply(postComments.data.data);
   };
 
-  const sendReply = (e) => {
+  const sendReply = () => {
+    let date = new Date().toLocaleDateString().split("/");
+    let [day, month] = [date[0], date[1]];
+    date[0] = month;
+    date[1] = day;
+    let updated_At = date.reverse();
+    let replyInfo = {};
     if (text === "") {
       setErrmessage("텍스트를 입력하세요");
     } else {
@@ -41,9 +48,11 @@ const RoomInfo = (props) => {
             )
             .then((postComments) => {
               setReply(postComments.data.data);
+              // console.log("이게 뭘까 궁금하네", postComments);
             });
         });
     }
+    setReply(() => [...reply, replyInfo]);
   };
 
   const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
@@ -60,8 +69,8 @@ const RoomInfo = (props) => {
   }
 
   useEffect(() => {
-    getPostComments();
-  }, []);
+    console.log("리플라이 받아오니?", reply);
+  });
 
   return (
     <div className="C_flexbox-container">

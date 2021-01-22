@@ -21,16 +21,6 @@ const CreateRoom = (props) => {
     setIsCreater(false);
   };
 
-  const createRoom = () => {
-    axios({
-      url: "/createRoom",
-      method: "POST",
-      data: {},
-      withCredentials: true,
-      headers: "application/json",
-    });
-  };
-
   const getCrew = (e) => {
     setCrew(e);
     console.log("crew", crew);
@@ -57,8 +47,9 @@ const CreateRoom = (props) => {
         withCredentials: true,
       })
       .then((userInfo) => {
+        console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
         const body = {
-          writer: userInfo.data.data.username,
+          writer: userInfo.data.userData.username,
           category: category,
           title: title,
           total: crew,
