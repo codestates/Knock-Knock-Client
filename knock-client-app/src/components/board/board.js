@@ -55,7 +55,7 @@ const PublicBoard = (props) => {
     setPosts(posts.data.data);
   }, []);
 
-  const roomCardClickHandler = (event) => {
+  const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
     for (let post of posts) {
       if (post.id === Number(postId)) {

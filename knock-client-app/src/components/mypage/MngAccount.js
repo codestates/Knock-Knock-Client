@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
-import { mbti } from "../../utils/options";
+import { mbti, stacks } from "../../utils/options";
 import Profile from "./Profile";
 
 class MngAccount extends React.Component {
@@ -15,22 +15,16 @@ class MngAccount extends React.Component {
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
+    //this.getOAuthUserInfo = this.getOAuthUserInfo.bind(this);
 
     this.state = {
-      username: "jnoodle",
       isMypage: true,
-      userInfo: [],
+      userInfo: {},
     };
     this.grade = "";
     this.propensity = [];
     this.mood = "";
     this.stack = [];
-
-    if (window.location.href.split("code=")[1]) {
-      this.authorizationCode = window.location.href
-        .split("code=")[1]
-        .split("&")[0];
-    }
 
     this.mbtiChecker = mbti.map((el, idx) => {
       return (
@@ -39,18 +33,45 @@ class MngAccount extends React.Component {
         </option>
       );
     });
+
+    this.stackList = stacks.map((el, idx) => {
+      return (
+        <>
+          <input
+            // onChange={(e) => {
+            //   choiceStack(e);
+            // }}
+            type="checkbox"
+            id={el}
+            name="stack"
+            value={el}
+            key={idx}
+          />
+          <label htmlFor={el}>{el}</label>
+        </>
+      );
+    });
   }
 
-  componentDidMount() {
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // OAuth 얘기 끝나면 바로 시작하기!!!!!!!!!!!!!!!!
-    // if (this.authorizationCode) {
-    //   axios.post("http://localhost:4000/oauth", {
-    //     oauth: "google",
-    //     authorizationCode: this.authorizationCode,
-    //   });
-    // }
+  // async getOAuthUserInfo(authorizationCode) {
+  //   console.log(authorizationCode);
+  //   const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+  //     authorizationCode: authorizationCode,
+  //   });
+
+  //   console.log(oauthUserInfo);
+  // }
+
+  async componentDidMount() {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get("code");
+
+    if (authorizationCode) {
+      const oauthUserInfo = await axios.post("http://localhost:4000/oauth", {
+        authorizationCode: authorizationCode,
+      });
+      console.log(oauthUserInfo);
+    }
   }
 
   mypageClickHandler() {
@@ -145,6 +166,7 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
+              <div className="Stack">{this.stackList}</div>
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">
