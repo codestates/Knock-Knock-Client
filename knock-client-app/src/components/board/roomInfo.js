@@ -11,7 +11,7 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `https://localhost:4000/comments?postid=${props.location.state.id}`,
+      `https://localhost:4000/comments/${props.location.state.id}`,
       { withCredentials: true }
     );
 

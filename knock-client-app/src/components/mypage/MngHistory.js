@@ -30,6 +30,13 @@ class MngHistory extends Component {
     this.setState({
       userPosts: userInfo.data.postData,
     });
+    /*==========================================================================*/
+    // axios
+    //   .post("https://localhost:4000/profile", {}, { withCredentials: true })
+    //   .then((userInfo) => {
+    //     console.log("드디어!! 히스토리!!  = ", userInfo);
+    //   });
+    /*=========================================================================*/
   }
 
   keepJournal(value) {

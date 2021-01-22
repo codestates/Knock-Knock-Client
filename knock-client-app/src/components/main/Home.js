@@ -29,7 +29,7 @@ const Home = (props) => {
   }
 
   function moreBoardHandler() {
-    props.history.push("/board", searchParams);
+    props.history.push("/board");
   }
 
   return (

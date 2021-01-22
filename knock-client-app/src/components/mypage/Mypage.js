@@ -1,13 +1,11 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
-
 import Profile from "./Profile";
 
 class Mypage extends React.Component {
   constructor(props) {
     super(props);
-
     this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
 

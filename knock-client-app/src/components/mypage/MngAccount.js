@@ -15,14 +15,13 @@ class MngAccount extends React.Component {
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
-    //this.getOAuthUserInfo = this.getOAuthUserInfo.bind(this);
 
     this.state = {
       isMypage: true,
       userInfo: {},
     };
     this.grade = "";
-    this.propensity = [];
+    this.propensity = "";
     this.mood = "";
     this.stack = [];
 
@@ -33,34 +32,6 @@ class MngAccount extends React.Component {
         </option>
       );
     });
-  }
-
-  // async getOAuthUserInfo(authorizationCode) {
-  //   console.log(authorizationCode);
-  //   const oauthUserInfo = await axios.post("https://localhost:4000/oauth", {
-  //     authorizationCode: authorizationCode,
-  //   });
-
-  //   console.log(oauthUserInfo);
-  // }
-
-  componentDidMount() {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get("code");
-
-    if (authorizationCode) {
-      axios
-        .post(
-          "https://localhost:4000/oauth",
-          {
-            authorizationCode: authorizationCode,
-          },
-          { withCredentials: true }
-        )
-        .then((oauthUserInfo) => {
-          this.setState({ userInfo: oauthUserInfo.data.data });
-        });
-    }
   }
 
   mypageClickHandler() {
@@ -74,13 +45,7 @@ class MngAccount extends React.Component {
   }
 
   userPropensity(value) {
-    if (value.target.checked) {
-      this.propensity.push(value.target.value);
-    } else {
-      this.propensity.splice(this.propensity.indexOf(value.target.value), 1);
-    }
-
-    console.log(this.propensity);
+    this.propensity = value.target.value;
   }
 
   userStack(value) {
@@ -99,21 +64,30 @@ class MngAccount extends React.Component {
 
   storageInfo() {
     let userInfo = {
-      userGrade: this.grade,
-      propensity: this.propensity,
-      userMood: this.mood,
-      userStack: this.stack,
+      username: this.grade,
+      persona: this.propensity,
+      mood: this.mood,
+      user_stacks: `[js]`,
     };
+    console.log("userInfo = ", userInfo);
 
-    this.props.history.push("/mypage", userInfo);
+    axios
+      .post("https://localhost:4000/profile", userInfo, {
+        withCredentials: true,
+      })
+      .then((updatedUserInfo) => {
+        console.log("수정된 사용자 정보 = ", updatedUserInfo);
+        this.props.history.push("/mypage", userInfo);
+      });
   }
 
   retrospectClickHandler() {
     this.props.history.push("/mngHistory");
   }
 
+  // !계정관리 스택 체크 이벤트 메소드!
+
   render() {
-    console.log(this.state.userInfo);
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
@@ -121,6 +95,7 @@ class MngAccount extends React.Component {
           isMypage={this.state.isMypage}
           mypageClickHandler={this.mypageClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
+          userInfo={this.state.userInfo}
         />
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
@@ -136,7 +111,10 @@ class MngAccount extends React.Component {
           <div className="editUserInfoFormSec_propensity">
             <div className="editUserInfoFormSec_propensity_phrase">
               <h1>{this.state.username}님의 성향을 체크해주세요</h1>
-              <select>{this.mbtiChecker}</select>
+              <select onChange={this.userPropensity}>
+                <option value="">성향을 체크해주세요</option>
+                {this.mbtiChecker}
+              </select>
             </div>
           </div>
           <div className="editUserInfoFormSec_mood">
@@ -155,6 +133,7 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
+              {/* 스택 추가 부분 넣기 [이준희] */}
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">

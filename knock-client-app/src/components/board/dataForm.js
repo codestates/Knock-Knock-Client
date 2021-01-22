@@ -13,12 +13,7 @@ const DataForm = (props) => {
   };
 
   const choiceStack = (e) => {
-    if (e.target.checked) {
-      stackStorage.push(e.target.value);
-    } else {
-      stackStorage.splice(stackStorage.indexOf(e.target.value), 1);
-    }
-    props.stack(stackStorage);
+    props.stack(e.target.value);
   };
   const storage = [];
 
