@@ -13,7 +13,8 @@ const PublicBoard = (props) => {
 
   const [posts, setPosts] = useState([]);
   const [postStacks, setPostStacks] = useState([]);
-  const [isUser, setIsUser] = useState("");
+
+  const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
   useEffect(async () => {
     // You need to restrict it at some point
@@ -51,7 +52,7 @@ const PublicBoard = (props) => {
         frontend: post.frontend,
         backend: post.backend,
       };
-      
+
       // 스택 가공 코드 수정 해야함 [이준희]
       if (post.post_stacks) {
         postObj.post_stacks = post.post_stacks.slice(1, -1).split(",");
@@ -61,7 +62,7 @@ const PublicBoard = (props) => {
     });
 
     setPosts(postsArr);
- 
+
     // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
     await axios
       .post("https://localhost:4000/profile", {}, { withCredentials: true })
@@ -108,7 +109,7 @@ const PublicBoard = (props) => {
           </ul>
         </nav>
         <div className="B_RoomContaniner">
-          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}
+          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! / 컴포넌트화 [이준희] */}
 
           {posts.map((post, idx) => {
             if (post.open) {

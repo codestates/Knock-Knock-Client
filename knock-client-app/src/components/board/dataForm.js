@@ -18,6 +18,7 @@ const DataForm = (props) => {
   const storage = [];
 
   const isPosition = (e) => {
+    // 비율에 대한 에러 [이준희]
     props.position(e.target.value);
   };
 
@@ -58,10 +59,6 @@ const DataForm = (props) => {
       </>
     );
   });
-
-  const addStack = () => {
-    return <>{stack}</>;
-  };
 
   return (
     <div className="Data_Container">
