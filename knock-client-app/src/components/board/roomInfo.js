@@ -23,6 +23,8 @@ const RoomInfo = (props) => {
       setErrmessage("텍스트를 입력하세요");
     } else {
       setErrmessage("");
+
+      // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
       axios
         .get("https://localhost:4000/profile/1", { withCredentials: true })
         .then((getUserInfo) => {
