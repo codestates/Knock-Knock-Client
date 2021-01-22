@@ -21,16 +21,6 @@ const CreateRoom = (props) => {
     setIsCreater(false);
   };
 
-  const createRoom = () => {
-    axios({
-      url: "/createRoom",
-      method: "POST",
-      data: {},
-      withCredentials: true,
-      headers: "application/json",
-    });
-  };
-
   const getCrew = (e) => {
     setCrew(e);
     console.log("crew", crew);
@@ -59,23 +49,23 @@ const CreateRoom = (props) => {
       })
       .then((userInfo) => {
         console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
-        // const body = {
-        //   writer: userInfo.data.data.username,
-        //   category: category,
-        //   title: title,
-        //   total: crew,
-        //   backend: position[0],
-        //   frontend: position[1],
-        //   // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
-        //   post_stacks: `[${String(stack)}]`,
-        //   content: description,
-        // };
-        // console.log("body = ", body);
-        // axios
-        //   .post("https://localhost:4000/posts", body, { withCredentials: true })
-        //   .then(() => {
-        //     props.history.push("/board");
-        //   });
+        const body = {
+          writer: userInfo.data.userData.username,
+          category: category,
+          title: title,
+          total: crew,
+          backend: position[0],
+          frontend: position[1],
+          // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
+          post_stacks: `[${String(stack)}]`,
+          content: description,
+        };
+        console.log("body = ", body);
+        axios
+          .post("https://localhost:4000/posts", body, { withCredentials: true })
+          .then(() => {
+            props.history.push("/board");
+          });
       });
   };
 
