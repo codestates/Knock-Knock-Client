@@ -3,6 +3,7 @@
 */
 
 const mbti = [
+  "성향을 체크해주세요:)",
   "INTJ",
   "INPT",
   "ENTJ",

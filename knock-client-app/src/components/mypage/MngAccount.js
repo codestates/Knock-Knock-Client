@@ -70,7 +70,6 @@ class MngAccount extends React.Component {
     } else {
       this.stack.splice(this.stack.indexOf(value.target.value), 1);
     }
-
     console.log(this.stack);
   }
 
@@ -125,10 +124,7 @@ class MngAccount extends React.Component {
           <div className="editUserInfoFormSec_propensity">
             <div className="editUserInfoFormSec_propensity_phrase">
               <h1>{this.state.username}님의 성향을 체크해주세요</h1>
-              <select onChange={this.userPropensity}>
-                <option value="">성향을 체크해주세요</option>
-                {this.mbtiChecker}
-              </select>
+              <select onChange={this.userPropensity}>{this.mbtiChecker}</select>
             </div>
           </div>
           <div className="editUserInfoFormSec_mood">
