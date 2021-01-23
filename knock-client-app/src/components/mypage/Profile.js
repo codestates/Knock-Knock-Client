@@ -6,6 +6,7 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLogin: false,
       userInfo: {},
     };
 
@@ -33,9 +34,10 @@ class Profile extends React.Component {
               withCredentials: true,
             }
           );
+          this.setState({ isLogin: true });
+          console.log("isLogin=", this.state.isLogin);
         });
     }
-
     await axios
       .get("https://localhost:4000/profile", {
         withCredentials: true,
@@ -47,6 +49,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    console.log("스테이트 안에 유저인포=", this.state.userInfo);
     return (
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">

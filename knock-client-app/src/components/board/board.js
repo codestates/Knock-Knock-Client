@@ -82,6 +82,10 @@ const PublicBoard = (props) => {
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
+    console.log(
+      "click시 발생하는 것 =",
+      event.nativeEvent.path[0].attributes.value
+    );
     const postId = event.nativeEvent.path[0].attributes.value.value;
     for (let post of posts) {
       if (post.id === Number(postId)) {

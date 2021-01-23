@@ -8,22 +8,48 @@ const RoomInfo = (props) => {
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
+  const [position, setPosition] = useState("");
+
+  // const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
+  // const sideBar = btnList.map((el, idx) => {
+  //   return (
+  //     <li className="C_filterBtn" key={idx}>
+  //       {el}
+  //     </li>
+  //   );
+  // });
+
+  const submitForm = () => {
+    if (position) {
+      axios({
+        method: "post",
+        url: `https://localhost:4000/join`,
+        body: {
+          position: position,
+          postid: props.location.state.id,
+        },
+      }).then((data) => {
+        data.data
+          ? alert(`${position} 포지션으로 신청되었습니다.`)
+          : alert("다시 시도해주세요.");
+      });
+      // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
+    } else {
+      // setErrmessage("원하는 포지션을 선택해주세요.");
+      alert("원하는 포지션을 선택해주세요.");
+    }
+  };
 
   const getPostComments = async () => {
     const postComments = await axios.get(
       `https://localhost:4000/comments/${props.location.state.id}`,
       { withCredentials: true }
     );
-
+    console.log(postComments);
     setReply(postComments.data.data);
   };
 
   const sendReply = () => {
-    let date = new Date().toLocaleDateString().split("/");
-    let [day, month] = [date[0], date[1]];
-    date[0] = month;
-    date[1] = day;
-    let updated_At = date.reverse();
     let replyInfo = {};
     if (text === "") {
       setErrmessage("텍스트를 입력하세요");
@@ -47,21 +73,11 @@ const RoomInfo = (props) => {
             )
             .then((postComments) => {
               setReply(postComments.data.data);
-              // console.log("이게 뭘까 궁금하네", postComments);
             });
         });
     }
     setReply(() => [...reply, replyInfo]);
   };
-
-  const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
-  const sideBar = btnList.map((el, idx) => {
-    return (
-      <li className="C_filterBtn" key={idx}>
-        {el}
-      </li>
-    );
-  });
 
   function commentChangeHandler(event) {
     setText(event.target.value);
@@ -69,21 +85,42 @@ const RoomInfo = (props) => {
 
   useEffect(() => {
     getPostComments();
-  });
+  }, [props.location.state.id]);
 
   return (
     <div className="C_flexbox-container">
       <header className="board"></header>
       <div className="Body_sec">
-        <nav className="C_SideBarSec">
-          <ul>{sideBar}</ul>
-        </nav>
+        <nav className="C_SideBarSec">{/* <ul>{sideBar}</ul> */}</nav>
         <div className="C_RoomContaniner">
           <div className="PostCard">
             <img src={together} className="card1" />
           </div>
           <div className="RoomInfo">
             이 부분이 룸 인포가 들어가는 부분입니다.
+            <div className="Sel_Position">
+              <input
+                onChange={(e) => setPosition(e.target.value)}
+                type="radio"
+                id="frontend"
+                value="frontend"
+                key="frontend"
+                name="position"
+              ></input>
+              <label htmlFor="frontend">프론트엔드</label>
+              <input
+                onChange={(e) => setPosition(e.target.value)}
+                type="radio"
+                id="backend"
+                value="backend"
+                key="backend"
+                name="position"
+              ></input>
+              <label htmlFor="backend">백엔드</label>
+              <button className="submitBtn" onClick={() => submitForm()}>
+                신청하기
+              </button>
+            </div>
           </div>
           {/* 룸인포 -> 방정보/ 프로젝트or스터디orQuestion에 대한 소개글 [피그마 참고]*/}
           <div className="ReplyZone">
