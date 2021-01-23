@@ -39,7 +39,7 @@ class ProfileEdit extends Component {
     // 스택 가공 코드 수정 해야함 [이준희]
     filteredPosts.forEach((post) => {
       if (post.post_stacks) {
-        postStacksArr.push(post.post_stacks.slice(1, -1).split(","));
+        postStacksArr.push(post.post_stacks.split(","));
       } else {
         postStacksArr.push(null);
       }

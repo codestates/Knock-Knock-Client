@@ -12,9 +12,11 @@ class MngHistory extends Component {
     this.state = {
       isClick: false,
       journals: [],
+      userData: {},
       userPosts: [],
+      selectOneHisInfo: {},
+      isRetroListAndInput: false,
     };
-    this.journals = [];
     this.retrospect = "";
 
     this.registerJouranl = this.registerJouranl.bind(this);
@@ -22,14 +24,19 @@ class MngHistory extends Component {
     this.dangerBtn = this.dangerBtn.bind(this);
     this.boardRetroHandler = this.boardRetroHandler.bind(this);
     this.mypageHandleFromHisPro = this.mypageHandleFromHisPro.bind(this);
+    this.retroDeleteHandler = this.retroDeleteHandler.bind(this);
   }
 
   async componentDidMount() {
-    // 사용자 ID 부분 수정해야함!!!!!!!!!
     const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });
+
+    userInfo.data.postdata.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
     this.setState({
+      userData: userInfo.data.userdata,
       userPosts: userInfo.data.postdata,
     });
     /*==========================================================================*/
@@ -41,18 +48,27 @@ class MngHistory extends Component {
     /*=========================================================================*/
   }
 
-  /*
-    *문제 있음*
-    게시물에 해당하는 회고만 나오는게 아니라 사용자가 가지고 있는
-    모든 회고를 다 가져옴.
-    즉, 마치 사용자ID 로 조회한것처럼 나옴
-  */
   async boardRetroHandler(retroNum) {
-    const retroInfo = await axios.get(
-      `https://localhost:4000/diary/${retroNum}`,
-      { withCredentials: true }
-    );
-    console.log("retroInfo =", retroInfo);
+    const retros = await axios.get(`https://localhost:4000/diary/${retroNum}`, {
+      withCredentials: true,
+    });
+
+    let selectOneHisInfo;
+    this.state.userPosts.forEach((post) => {
+      if (post.id === Number(retroNum)) {
+        selectOneHisInfo = post;
+      }
+    });
+
+    retros.data.data.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+
+    this.setState({
+      isRetroListAndInput: true,
+      selectOneHisInfo,
+      journals: retros.data.data,
+    });
   }
 
   mypageHandleFromHisPro() {
@@ -64,28 +80,47 @@ class MngHistory extends Component {
   }
 
   registerJouranl() {
-    let date = new Date().toLocaleDateString().split("/");
-    let [day, month] = [date[0], date[1]];
-    date[0] = month;
-    date[1] = day;
-    let register_At = date.reverse();
     let regiJournal = {
-      username: "IM24 이준희",
-      date: register_At.join("-"),
-      retrospect: this.retrospect,
+      postid: this.state.selectOneHisInfo.id,
+      content: this.retrospect,
     };
-    this.journals.unshift(regiJournal);
-    return this.setState({ journals: this.journals });
+    axios
+      .post("https://localhost:4000/diary", regiJournal, {
+        withCredentials: true,
+      })
+      .then((regiJournal) => {
+        regiJournal.data.data.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        this.setState({ journals: regiJournal.data.data });
+      });
+  }
+
+  retroDeleteHandler(delRetroId) {
+    axios
+      .delete("https://localhost:4000/diary", {
+        data: {
+          diaryid: delRetroId,
+          postid: this.state.selectOneHisInfo.id,
+        },
+        withCredentials: true,
+      })
+      .then((afterDelJournals) => {
+        afterDelJournals.data.data.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        this.setState({ journals: afterDelJournals.data.data });
+      });
   }
 
   dangerBtn() {
-    axios({
-      method: "delete",
-      url: "/deletePost",
-      WithCredentials: true,
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({ roomId: "몰라요", userId: "이것도몰라요" }),
-    });
+    // axios({
+    //   method: "delete",
+    //   url: "/deletePost",
+    //   WithCredentials: true,
+    //   headers: { "content-Type": "application/json" },
+    //   body: JSON.stringify({ roomId: "몰라요", userId: "이것도몰라요" }),
+    // });
   }
 
   render() {
@@ -109,22 +144,33 @@ class MngHistory extends Component {
           >
             레포삭제
           </button>
-          <div className="His_submitForm">
-            <textarea
-              className="Journal_box"
-              placeholder="Why not to keep a journal about what you did!!!??"
-              onChange={(e) => this.keepJournal(e)}
-            />
+          {this.state.isRetroListAndInput ? (
+            <>
+              <h1>{this.state.selectOneHisInfo.title}</h1>
+              <div className="His_submitForm">
+                <textarea
+                  className="Journal_box"
+                  placeholder="Why not to keep a journal about what you did!!!??"
+                  onChange={(e) => this.keepJournal(e)}
+                />
 
-            <div className="His_submit">
-              <button onClick={() => this.registerJouranl()}>
-                <p className="His_submit_p">등록</p>
-              </button>
-            </div>
-          </div>
-          <ul className="Retro_list">
-            <SendRetrospect value={this.state.journals} />
-          </ul>
+                <div className="His_submit">
+                  <button onClick={() => this.registerJouranl()}>
+                    <p className="His_submit_p">등록</p>
+                  </button>
+                </div>
+              </div>
+              <ul className="Retro_list">
+                <SendRetrospect
+                  journals={this.state.journals}
+                  userData={this.state.userData}
+                  retroDeleteHandler={this.retroDeleteHandler}
+                />
+              </ul>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );
