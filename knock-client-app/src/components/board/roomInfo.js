@@ -74,6 +74,8 @@ const RoomInfo = (props) => {
       { withCredentials: true }
     );
 
+    console.log("postComments = ", postComments);
+
     setReply(postComments.data.data);
   };
 
@@ -107,9 +109,31 @@ const RoomInfo = (props) => {
     setReply(() => [...reply, replyInfo]);
   };
 
-  function commentChangeHandler(event) {
+  const commentChangeHandler = (event) => {
     setText(event.target.value);
-  }
+  };
+
+  /*
+    댓글 삭제 메소드
+    PostReply 컴포넌트로 props 내린 후 댓글의 id 를
+    매개변수로 받아서 처리
+  */
+  const deleteCommentHandler = (delCommentId) => {
+    console.log("delCommentId = ", delCommentId);
+    axios
+      .delete("https://localhost:4000/comments", {
+        data: {
+          postid: props.location.state.id,
+          commentid: delCommentId,
+        },
+        withCredentials: true,
+      })
+      .then((afterDelCommentList) => {
+        alert("댓글을 삭제했습니다!");
+        console.log("afterDelCommentList = ", afterDelCommentList);
+        setReply(afterDelCommentList.data.data);
+      });
+  };
 
   useEffect(() => {
     getPostComments();
@@ -165,12 +189,18 @@ const RoomInfo = (props) => {
           <div className="ReplyZone">
             {errmessage ? (
               <ul>
-                <PostReply value={reply} />
+                <PostReply
+                  value={reply}
+                  deleteCommentHandler={deleteCommentHandler}
+                />
                 <li>{errmessage}</li>
               </ul>
             ) : (
               <ul>
-                <PostReply value={reply} />
+                <PostReply
+                  value={reply}
+                  deleteCommentHandler={deleteCommentHandler}
+                />
               </ul>
             )}
             <textarea onChange={commentChangeHandler} className="ReplyBox" />

@@ -15,6 +15,7 @@ class MngHistory extends Component {
       userData: {},
       userPosts: [],
       selectOneHisInfo: {},
+      currentPostId: "",
       isRetroListAndInput: false,
     };
     this.retrospect = "";
@@ -68,6 +69,7 @@ class MngHistory extends Component {
       isRetroListAndInput: true,
       selectOneHisInfo,
       journals: retros.data.data,
+      currentPostId: retroNum,
     });
   }
 
@@ -114,17 +116,28 @@ class MngHistory extends Component {
   }
 
   dangerBtn() {
-    // axios({
-    //   method: "delete",
-    //   url: "/deletePost",
-    //   WithCredentials: true,
-    //   headers: { "content-Type": "application/json" },
-    //   body: JSON.stringify({ roomId: "몰라요", userId: "이것도몰라요" }),
-    // });
+    axios
+      .delete(`https://localhost:4000/posts`, {
+        data: {
+          postid: this.state.currentPostId,
+        },
+        withCredentials: true,
+      })
+      .then((posts) => {
+        alert("참여한 게시물을 삭제하였습니다!");
+
+        posts.data.data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        this.setState({
+          userPosts: posts.data.data,
+          isRetroListAndInput: false,
+          journals: [],
+        });
+      });
   }
 
   render() {
-    console.log(this.state.userPosts);
     return (
       <div className="mypageContainer">
         <div className="mypageContainer_blankSec"></div>
@@ -136,14 +149,19 @@ class MngHistory extends Component {
 
         <div className="mypageContainer_editUserInfoFormSec">
           <p>{}</p>
-          <button
-            onClick={() => {
-              this.dangerBtn();
-            }}
-            className="DangerBtn"
-          >
-            레포삭제
-          </button>
+          {this.state.isRetroListAndInput ? (
+            <button
+              onClick={() => {
+                this.dangerBtn();
+              }}
+              className="DangerBtn"
+            >
+              레포삭제
+            </button>
+          ) : (
+            <></>
+          )}
+
           {this.state.isRetroListAndInput ? (
             <>
               <h1>{this.state.selectOneHisInfo.title}</h1>

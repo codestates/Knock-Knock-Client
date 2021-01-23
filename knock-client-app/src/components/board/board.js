@@ -59,6 +59,8 @@ const PublicBoard = (props) => {
         open: post.open,
         frontend: post.frontend,
         backend: post.backend,
+        created_at: post.created_at,
+        updated_at: post.updated_at,
       };
 
       // 스택 가공 코드 수정 해야함 [이준희]
@@ -68,6 +70,8 @@ const PublicBoard = (props) => {
 
       postsArr.push(postObj);
     });
+
+    postsArr.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     setPosts(postsArr);
 
@@ -165,15 +169,19 @@ const PublicBoard = (props) => {
                     <div className="B_RoomCard-title" value={post.id}>
                       {post.title}
                     </div>
-                    <div className="B_RoomCard-total">
+                    <div className="B_RoomCard-total" value={post.id}>
                       최대 인원 {post.total}명
                     </div>
-                    <div className="B_RoomCard-position">
+                    <div className="B_RoomCard-position" value={post.id}>
                       프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
                     </div>
                     <div className="B_RoomCard-stacks">
                       {post.post_stacks.map((stack) => {
-                        return <div className="B_RoomCard-stack">{stack}</div>;
+                        return (
+                          <div className="B_RoomCard-stack" value={post.id}>
+                            {stack}
+                          </div>
+                        );
                       })}
                     </div>
                   </div>

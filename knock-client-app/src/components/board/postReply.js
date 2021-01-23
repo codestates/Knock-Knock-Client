@@ -1,39 +1,36 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/history.css";
 
 const PostReply = (props) => {
-  const deleteComment = (e) => {
-    console.log(props.value);
-    // console.log("??", e.target);
-    console.log(
-      "asdas",
-      props.value.filter((el) => el.id.includes(e.target.value))
-    );
+  const [userId, setUserId] = useState("");
 
-    // const body ={
+  useEffect(async () => {
+    const userInfo = await axios.get("https://localhost:4000/profile", {
+      withCredentials: true,
+    });
 
-    // }
-    const userInfo = axios
-      .get("https://localhost:4000/profile", {
-        withCredentials: true,
-      })
-      .then((data) => {
-        console.log(data);
-        // if( data.data.userdata.id === props.value)
-        // axios.delete("https://localhost:4000/comments", {});
-      });
-  };
+    setUserId(userInfo.data.userdata.id);
+  });
+
+  // 날짜기준으로 정렬 하기
+  // 혹시몰라서 놔둠
+  //props.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
   const comment = props.value.map((value, idx) => {
     if (idx >= 0) {
       return (
         <li key={idx} value={value.id} className="postReply">
-          <button value={value.id} onClick={(e) => deleteComment(e)}>
-            삭제버튼
-          </button>
           <p className="reply_username">{value.writer}</p>
           <p className="reply_date">{value.created_at}</p>
           <p className="reply_text">{value.comment}</p>
+          {value.user_id === userId ? (
+            <button onClick={() => props.deleteCommentHandler(value.id)}>
+              삭제버튼
+            </button>
+          ) : (
+            <></>
+          )}
         </li>
       );
     }
