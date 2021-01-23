@@ -5,10 +5,15 @@ import PostReply from "./postReply";
 import axios from "axios";
 
 const RoomInfo = (props) => {
+  console.log("이 안에는 뭐가 있나요 ?= ", props);
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
   const [position, setPosition] = useState("");
+  const [positionRatio, setPositionRatio] = useState({
+    backend: 0,
+    frontend: 0,
+  });
 
   // const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
   // const sideBar = btnList.map((el, idx) => {
@@ -20,23 +25,46 @@ const RoomInfo = (props) => {
   // });
 
   const submitForm = () => {
-    if (position) {
-      axios({
-        method: "post",
-        url: `https://localhost:4000/join`,
-        body: {
-          position: position,
-          postid: props.location.state.id,
-        },
-      }).then((data) => {
-        data.data
-          ? alert(`${position} 포지션으로 신청되었습니다.`)
-          : alert("다시 시도해주세요.");
-      });
-      // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
-    } else {
-      // setErrmessage("원하는 포지션을 선택해주세요.");
-      alert("원하는 포지션을 선택해주세요.");
+    console.log("이게 무엇인거 :??", positionRatio);
+    if (props.location.state.category === "Project") {
+      position === "frontend"
+        ? setPositionRatio({ frontend: 1, backend: 0 })
+        : setPositionRatio({ frontend: 0, backend: 1 });
+    }
+
+    const body = {
+      backend: positionRatio.backend,
+      frontend: positionRatio.frontend,
+      postid: props.location.state.id,
+      category: props.location.state.category,
+    };
+
+    console.log("바디가 무엇일까 ?", body);
+    if (props.location.state.category === "Project") {
+      if (position) {
+        axios
+          .post(`https://localhost:4000/join`, body, { withCredentials: true })
+          .then((data) => {
+            console.log("data", data);
+            data.data !== "바보"
+              ? alert(`${position} 포지션으로 신청되었습니다.`)
+              : alert("다시 시도해주세요.");
+          });
+        // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
+      } else {
+        // setErrmessage("원하는 포지션을 선택해주세요.");
+        alert("원하는 포지션을 선택해주세요.");
+      }
+    } else if (props.location.state.category === "Study") {
+      axios
+        .post(`https://localhost:4000/join`, body, { withCredentials: true })
+        .then((data) => {
+          console.log("data", data);
+          //만약 이미 참가한 상태의 유저라면 "이미 그룹에 속해있습니다."
+          //만약 방이 클로스가 되었다면 "Closed된 게시글 입니다."
+
+          alert("다시 시도해주세요.");
+        });
     }
   };
 
@@ -45,7 +73,7 @@ const RoomInfo = (props) => {
       `https://localhost:4000/comments/${props.location.state.id}`,
       { withCredentials: true }
     );
-    console.log(postComments);
+
     setReply(postComments.data.data);
   };
 
@@ -98,30 +126,41 @@ const RoomInfo = (props) => {
           </div>
           <div className="RoomInfo">
             이 부분이 룸 인포가 들어가는 부분입니다.
-            <div className="Sel_Position">
-              <input
-                onChange={(e) => setPosition(e.target.value)}
-                type="radio"
-                id="frontend"
-                value="frontend"
-                key="frontend"
-                name="position"
-              ></input>
-              <label htmlFor="frontend">프론트엔드</label>
-              <input
-                onChange={(e) => setPosition(e.target.value)}
-                type="radio"
-                id="backend"
-                value="backend"
-                key="backend"
-                name="position"
-              ></input>
-              <label htmlFor="backend">백엔드</label>
-              <button className="submitBtn" onClick={() => submitForm()}>
-                신청하기
-              </button>
-            </div>
+            {props.location.state.category !== "Question" ? (
+              <div className="Sel_Position">
+                {props.location.state.category !== "Study" ? (
+                  <>
+                    <input
+                      onChange={(e) => setPosition(e.target.value)}
+                      type="radio"
+                      id="frontend"
+                      value="frontend"
+                      key="frontend"
+                      name="position"
+                    ></input>
+                    <label htmlFor="frontend">프론트엔드</label>
+                    <input
+                      onChange={(e) => setPosition(e.target.value)}
+                      type="radio"
+                      id="backend"
+                      value="backend"
+                      key="backend"
+                      name="position"
+                    ></input>
+                    <label htmlFor="backend">백엔드</label>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <button className="submitBtn" onClick={() => submitForm()}>
+                  신청하기
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
+
           {/* 룸인포 -> 방정보/ 프로젝트or스터디orQuestion에 대한 소개글 [피그마 참고]*/}
           <div className="ReplyZone">
             {errmessage ? (
