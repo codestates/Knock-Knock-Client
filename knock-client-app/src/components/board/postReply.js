@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../../styles/history.css";
+import "../../styles/roomInfo.css";
 
 const PostReply = (props) => {
   const [userId, setUserId] = useState("");
@@ -18,19 +18,30 @@ const PostReply = (props) => {
   //props.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   const comment = props.value.map((value, idx) => {
+    let created_at;
+    if (value.created_at) {
+      created_at = value.created_at.split("T")[0];
+    }
     if (idx >= 0) {
       return (
         <li key={idx} value={value.id} className="postReply">
-          <p className="reply_username">{value.writer}</p>
-          <p className="reply_date">{value.created_at}</p>
-          <p className="reply_text">{value.comment}</p>
           {value.user_id === userId ? (
-            <button onClick={() => props.deleteCommentHandler(value.id)}>
-              삭제버튼
+            <button
+              className="reply_del_btn"
+              onClick={() => props.deleteCommentHandler(value.id)}
+            >
+              X
             </button>
           ) : (
             <></>
           )}
+          <div className="reply_info">
+            <div className="reply_username_date">
+              <p className="reply_username">{value.writer}</p>
+              <p className="reply_date">{created_at}</p>
+            </div>
+            <p className="reply_text">{value.comment}</p>
+          </div>
         </li>
       );
     }

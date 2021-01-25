@@ -55,6 +55,7 @@ const PublicBoard = (props) => {
         id: post.id,
         category: post.category,
         title: post.title,
+        content: post.content,
         total: post.total,
         open: post.open,
         frontend: post.frontend,

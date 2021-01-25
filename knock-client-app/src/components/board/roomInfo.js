@@ -140,49 +140,120 @@ const RoomInfo = (props) => {
   }, [props.location.state.id]);
 
   return (
-    <div className="C_flexbox-container">
-      <header className="board"></header>
-      <div className="Body_sec">
-        <nav className="C_SideBarSec">{/* <ul>{sideBar}</ul> */}</nav>
-        <div className="C_RoomContaniner">
-          <div className="PostCard">
-            <img src={together} className="card1" />
-          </div>
+    <>
+      <div className="C_flexbox-container">
+        <header className="board"></header>
+        <div className="C_SideBarSec">{/* <ul>{sideBar}</ul> */}</div>
+        <div className="Body_sec">
           <div className="RoomInfo">
-            이 부분이 룸 인포가 들어가는 부분입니다.
-            {props.location.state.category !== "Question" ? (
-              <div className="Sel_Position">
-                {props.location.state.category !== "Study" ? (
-                  <>
-                    <input
-                      onChange={(e) => setPosition(e.target.value)}
-                      type="radio"
-                      id="frontend"
-                      value="frontend"
-                      key="frontend"
-                      name="position"
-                    ></input>
-                    <label htmlFor="frontend">프론트엔드</label>
-                    <input
-                      onChange={(e) => setPosition(e.target.value)}
-                      type="radio"
-                      id="backend"
-                      value="backend"
-                      key="backend"
-                      name="position"
-                    ></input>
-                    <label htmlFor="backend">백엔드</label>
-                  </>
-                ) : (
-                  <></>
-                )}
-                <button className="submitBtn" onClick={() => submitForm()}>
-                  신청하기
-                </button>
+            <div className="RoomInfo_Brief">
+              <img src={together} className="Brief_img" />
+              <div className="Brief_info">
+                <div className="B_info-category">
+                  {props.location.state.category}
+                </div>
+                <div className="B_info-title">{props.location.state.title}</div>
+                <div className="B_info-total">
+                  최대 인원 {props.location.state.total}명
+                </div>
+                <div className="B_info-position">
+                  프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
+                  {props.location.state.backend}명
+                </div>
+                <div className="B_info-stacks">
+                  {props.location.state.post_stacks.map((stack) => {
+                    return <div className="B_info-stack">{stack}</div>;
+                  })}
+                </div>
               </div>
-            ) : (
-              <></>
-            )}
+            </div>
+            <div className="RoomInfo_Detail">
+              <div className="Detail_info-wrap">
+                <div className="Detail_info">
+                  <div className="D_info-category">
+                    {props.location.state.category}
+                  </div>
+                  <div className="D_info-title">
+                    {props.location.state.title}
+                  </div>
+                  <div className="D_info_total_position">
+                    <div className="D_info-total">
+                      최대 인원 {props.location.state.total}명
+                    </div>
+                    <div className="D_info-position">
+                      프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
+                      {props.location.state.backend}명
+                    </div>
+                  </div>
+
+                  <div className="D_info-stacks-wrap">
+                    <div className="D_info-stacks-title">스택</div>
+                    <div className="D_info-stakcs">
+                      {props.location.state.post_stacks}
+                    </div>
+                  </div>
+
+                  <div className="D_info-content-wrap">
+                    <div className="D_info-content-title">소개</div>
+                    <div className="D_info-content">
+                      {props.location.state.content}
+                    </div>
+                  </div>
+                </div>
+                <div className="Detail_info-involve">
+                  <div className="Detail_info-involve-title">포지션</div>
+                  {props.location.state.category !== "Question" ? (
+                    <div className="Detail_info-involve-position">
+                      {props.location.state.category !== "Study" ? (
+                        <>
+                          <label
+                            htmlFor="frontend"
+                            className="involve_frontend-label"
+                          >
+                            프론트엔드
+                          </label>
+                          <input
+                            onChange={(e) => setPosition(e.target.value)}
+                            type="radio"
+                            id="frontend"
+                            value="frontend"
+                            key="frontend"
+                            name="position"
+                            className="involve_position-chkBox"
+                          ></input>
+
+                          <label
+                            htmlFor="backend"
+                            className="involve_backend-label"
+                          >
+                            백엔드
+                          </label>
+                          <input
+                            onChange={(e) => setPosition(e.target.value)}
+                            type="radio"
+                            id="backend"
+                            value="backend"
+                            key="backend"
+                            name="position"
+                            className="involve_position-chkBox"
+                          ></input>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <button
+                        className="submitBtn"
+                        onClick={() => submitForm()}
+                      >
+                        신청하기
+                      </button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* 룸인포 -> 방정보/ 프로젝트or스터디orQuestion에 대한 소개글 [피그마 참고]*/}
@@ -203,15 +274,16 @@ const RoomInfo = (props) => {
                 />
               </ul>
             )}
-            <textarea onChange={commentChangeHandler} className="ReplyBox" />
-            <button onClick={sendReply} className="SendBtn">
-              Send
-            </button>
+            <div className="Reply_input_form">
+              <textarea onChange={commentChangeHandler} className="ReplyBox" />
+              <button onClick={sendReply} className="SendBtn">
+                Send
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <footer className="C_footer">Welcome to the party</footer>
-    </div>
+    </>
   );
 };
 export default RoomInfo;

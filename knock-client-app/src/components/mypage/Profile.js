@@ -27,7 +27,6 @@ class Profile extends React.Component {
           { withCredentials: true }
         )
         .then(async (oauthUserInfo) => {
-          console.log("오어스 oauthUserInfo = ", oauthUserInfo);
           await axios.get(
             `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
             {
