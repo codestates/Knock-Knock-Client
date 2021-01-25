@@ -49,12 +49,6 @@ class MngAccount extends React.Component {
         </>
       );
     });
-
-    const userdata = axios({
-      method: "GET",
-      url: "https://localhost:4000/profile",
-      withCredentials: true,
-    });
   }
 
   mypageClickHandler() {

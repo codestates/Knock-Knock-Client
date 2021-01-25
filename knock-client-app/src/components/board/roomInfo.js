@@ -40,7 +40,6 @@ const RoomInfo = (props) => {
       category: props.location.state.category,
     };
 
-    console.log("바디가 무엇일까 ?", body);
     if (props.location.state.category === "Project") {
       if (position) {
         axios

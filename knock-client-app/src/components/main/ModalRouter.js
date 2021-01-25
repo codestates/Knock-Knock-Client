@@ -1,12 +1,10 @@
 /* eslint-disable */
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Modal from "react-modal";
 import "../../styles/home.css";
 import github from "../../images/logo/github.png";
 import google from "../../images/logo/google.png";
 import { BrowserRouter as Route, Link } from "react-router-dom";
-import PublicBoard from "../board/board";
-import Mypage from "../mypage/Mypage";
 
 const customStyles = {
   content: {
@@ -20,7 +18,7 @@ const customStyles = {
   },
 };
 
-const ModalRouter = (props) => {
+const ModalRouter = () => {
   var subtitle;
   const googleOAuthUrl = `
       https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=https://localhost:3000/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
@@ -28,22 +26,19 @@ const ModalRouter = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(false);
 
-  const componets = {
-    게시판: PublicBoard,
-    마이페이지: Mypage,
-  };
-
   function openModal() {
     setIsOpen(true);
   }
 
   function googleOAuthHandler() {
     window.location.href = googleOAuthUrl;
+    setIsOpen(false);
   }
 
-  function componentDidMount() {
-    if (window.localStorage.getItem("isLogin")) setIsLogin(true);
-  }
+  useEffect(() => {
+    console.log("asdsadasdsadsada");
+    if (window.localStorage.getItem("isLogin") === "true") setIsLogin(true);
+  });
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -60,13 +55,14 @@ const ModalRouter = (props) => {
 
   function logOut() {
     setIsLogin(false);
+    setIsOpen(false);
     window.localStorage.removeItem("isLogin");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("userid");
   }
 
   console.log("asdasdasasd", isLogin);
-  return !isLogin ? (
+  return isLogin ? (
     <div>
       <button onClick={openModal}>로그인상태</button>
       <Modal
@@ -79,13 +75,13 @@ const ModalRouter = (props) => {
         <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>
         <div>나는 멋진 감자</div>
         <div className="navBtn">
-          <span className="navbar_board">
+          <span onClick={closeModal} className="navbar_board">
             <Link to="/board">BOARD</Link>
           </span>
-          <span className="navbar_mypage">
+          <span onClick={closeModal} className="navbar_mypage">
             <Link to="/mypage">Mypage</Link>
           </span>
-          <span className="navbar_mypage">
+          <span onClick={closeModal} className="navbar_mypage">
             <Link to="/createRoom">CreateRoom</Link>
           </span>
         </div>
