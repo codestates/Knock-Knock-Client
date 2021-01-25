@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-const ModalRouter = () => {
+const ModalRouter = (props) => {
   var subtitle;
   const googleOAuthUrl = `
       https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=https://localhost:3000/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
@@ -34,11 +34,14 @@ const ModalRouter = () => {
     window.location.href = googleOAuthUrl;
     setIsOpen(false);
   }
-
   useEffect(() => {
-    console.log("asdsadasdsadsada");
-    if (window.localStorage.getItem("isLogin") === "true") setIsLogin(true);
-  });
+    console.log(
+      "window.localStorage.get = ",
+      window.localStorage.getItem("isLogin")
+    );
+
+    if (props.isModalLogin) setIsLogin(true);
+  }, [props.isModalLogin]);
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -50,7 +53,7 @@ const ModalRouter = () => {
   }
 
   function componentWillMount() {
-    Modal.setAppElement("root");
+    //Modal.setAppElement("root");
   }
 
   function logOut() {
@@ -59,6 +62,7 @@ const ModalRouter = () => {
     window.localStorage.removeItem("isLogin");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("userid");
+    props.accHistory.push("/");
   }
 
   console.log("asdasdasasd", isLogin);

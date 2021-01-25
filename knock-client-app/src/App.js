@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./styles/navAndLogo.css";
 // import Context from "../utils/context.js";
@@ -13,13 +13,24 @@ import MngHistory from "./components/mypage/MngHistory";
 import ModalRouter from "./components/main/ModalRouter";
 
 const App = () => {
+  const [isModalLogin, setIsModalLogin] = useState(false);
+  const [accHistory, setAccHistory] = useState({});
+
+  function modalLoginHandler() {
+    setIsModalLogin(true);
+  }
+
+  function getHistoryHandler(history) {
+    setAccHistory(history);
+  }
+
   return (
     <Router>
       <div className="navbar">
         <div className="navbar_home">
           <Link to="/">HOME</Link>
         </div>
-        <ModalRouter />
+        <ModalRouter isModalLogin={isModalLogin} accHistory={accHistory} />
       </div>
 
       <Switch>
@@ -33,7 +44,13 @@ const App = () => {
         <Route
           exact
           path="/mypage"
-          render={(routeProps) => <Mypage {...routeProps} />}
+          render={(routeProps) => (
+            <Mypage
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+              modalLoginHandler={modalLoginHandler}
+            />
+          )}
         />
 
         <Route
@@ -60,7 +77,13 @@ const App = () => {
         <Route
           exact
           path="/mngAccount"
-          render={(routeProps) => <MngAccount {...routeProps} />}
+          render={(routeProps) => (
+            <MngAccount
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+              modalLoginHandler={modalLoginHandler}
+            />
+          )}
         />
 
         <Route

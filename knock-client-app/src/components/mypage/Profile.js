@@ -27,7 +27,7 @@ class Profile extends React.Component {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
 
-    if (authorizationCode) {
+    if (authorizationCode && !window.localStorage.getItem("isLogin")) {
       await axios
         .post(
           "https://localhost:4000/oauth",
@@ -37,7 +37,6 @@ class Profile extends React.Component {
           { withCredentials: true }
         )
         .then(async (oauthUserInfo) => {
-          console.log("오어스 oauthUserInfo = ", oauthUserInfo);
           await axios.get(
             `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
             {
@@ -60,10 +59,8 @@ class Profile extends React.Component {
           userInfo.data.userdata.username
         );
         window.localStorage.setItem("isLogin", true);
-        console.log(
-          "로컬에 들어갔니?",
-          window.localStorage.getItem("userid", "username", "isLogin")
-        );
+        this.props.modalLoginHandler();
+        this.props.getHisfromAccWithProfile();
       });
     // .then((value) => {
     // console.log("로그인 테스팅", value);
