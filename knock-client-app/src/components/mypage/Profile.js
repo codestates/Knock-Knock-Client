@@ -1,12 +1,22 @@
+/* eslint-disable */
 import React from "react";
 import axios from "axios";
 import PrintLogo from "./PrintStackLogo"; // lines number of 101 to 104
+/*
+window.localStorage.setItem =>인자값두개 (키,벨류)
+ 현재 인자값으로 넣어야할 것 -> userid / username / isLogin은 true
+ 타이밍은 오어스 로그인
 
+ window.localStorage.getItem => (키)
+
+window.localStorage.removeItem => (키)
+ 로그아웃 버튼을 누르면 모든 userid / username 삭제 / isLogin은 false
+
+*/
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false,
       userInfo: {},
     };
 
@@ -34,8 +44,6 @@ class Profile extends React.Component {
               withCredentials: true,
             }
           );
-          this.setState({ isLogin: true });
-          console.log("isLogin=", this.state.isLogin);
         });
     }
     await axios
@@ -45,11 +53,23 @@ class Profile extends React.Component {
       .then((userInfo) => {
         console.log("프로필 userInfo = ", userInfo);
         this.setState({ userInfo: userInfo.data.userdata });
+        //로그인 시 로컬스토리지에 사용자 정보가 들어간다.
+        window.localStorage.setItem("userid", userInfo.data.userdata.id);
+        window.localStorage.setItem(
+          "username",
+          userInfo.data.userdata.username
+        );
+        window.localStorage.setItem("isLogin", true);
+        console.log(
+          "로컬에 들어갔니?",
+          window.localStorage.getItem("userid", "username", "isLogin")
+        );
       });
+    // .then((value) => {
+    // console.log("로그인 테스팅", value);
   }
 
   render() {
-    console.log("스테이트 안에 유저인포=", this.state.userInfo);
     return (
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import axios from "axios";
 import "../../styles/mypage.css";
@@ -48,6 +49,12 @@ class MngAccount extends React.Component {
         </>
       );
     });
+
+    const userdata = axios({
+      method: "GET",
+      url: "https://localhost:4000/profile",
+      withCredentials: true,
+    });
   }
 
   mypageClickHandler() {
@@ -65,12 +72,9 @@ class MngAccount extends React.Component {
   }
 
   userStack(value) {
-    if (value.target.checked) {
-      this.stack.push(value.target.value);
-    } else {
-      this.stack.splice(this.stack.indexOf(value.target.value), 1);
-    }
-    console.log(this.stack);
+    value.target.checked
+      ? this.stack.push(value.target.value)
+      : this.stack.splice(this.stack.indexOf(value.target.value), 1);
   }
 
   userMood(value) {
@@ -84,7 +88,7 @@ class MngAccount extends React.Component {
       mood: this.mood,
       user_stacks: `${String(this.stack)}`,
     };
-    console.log("userInfo = ", userInfo);
+    this.setState({ userInfo: userInfo });
 
     axios
       .post("https://localhost:4000/profile", userInfo, {
@@ -113,23 +117,24 @@ class MngAccount extends React.Component {
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
             <div className="editUserInfoFormSec_term_phrase">
-              <h1>{this.state.username}님의 기수를 선택해주세요</h1>
+              <h1>코드스테이츠의 기수와 이름을 반드시 입력해주세요.</h1>
+
               <input
                 onChange={(e) => this.userGrade(e)}
                 tpye="text"
-                placeholder="PRE7기 이준희"
+                placeholder="예시) PRE7기 이준희"
               />
             </div>
           </div>
           <div className="editUserInfoFormSec_propensity">
             <div className="editUserInfoFormSec_propensity_phrase">
-              <h1>{this.state.username}님의 성향을 체크해주세요</h1>
+              <h1>회원님의 성향을 체크해주세요</h1>
               <select onChange={this.userPropensity}>{this.mbtiChecker}</select>
             </div>
           </div>
           <div className="editUserInfoFormSec_mood">
             <div className="editUserInfoFormSec_mood_phrase">
-              <h1>{this.state.username}님의 오늘 기분에 대해 알려주세요</h1>
+              <h1> 오늘 기분에 대해 알려주세요</h1>
               <textarea
                 onChange={(e) => {
                   this.userMood(e);

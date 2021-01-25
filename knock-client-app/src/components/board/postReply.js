@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../../styles/history.css";
@@ -11,6 +12,7 @@ const PostReply = (props) => {
     });
 
     setUserId(userInfo.data.userdata.id);
+    console.log(userId);
   });
 
   // 날짜기준으로 정렬 하기
@@ -24,7 +26,7 @@ const PostReply = (props) => {
           <p className="reply_username">{value.writer}</p>
           <p className="reply_date">{value.created_at}</p>
           <p className="reply_text">{value.comment}</p>
-          {value.user_id === userId ? (
+          {props.value[0].user.id === userId ? (
             <button onClick={() => props.deleteCommentHandler(value.id)}>
               삭제버튼
             </button>
