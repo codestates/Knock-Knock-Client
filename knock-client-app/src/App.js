@@ -44,7 +44,13 @@ const App = () => {
         <Route
           exact
           path="/mypage"
-          render={(routeProps) => <Mypage {...routeProps} />}
+          render={(routeProps) => (
+            <Mypage
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+              modalLoginHandler={modalLoginHandler}
+            />
+          )}
         />
 
         <Route

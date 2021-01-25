@@ -43,13 +43,6 @@ class MngHistory extends Component {
       userData: userInfo.data.userdata,
       userPosts: userInfo.data.postdata,
     });
-    /*==========================================================================*/
-    // axios
-    //   .post("https://localhost:4000/profile", {}, { withCredentials: true })
-    //   .then((userInfo) => {
-    //     console.log("드디어!! 히스토리!!  = ", userInfo);
-    //   });
-    /*=========================================================================*/
   }
 
   async boardRetroHandler(retroNum) {
@@ -141,6 +134,19 @@ class MngHistory extends Component {
   }
 
   sendEmailForRetroHandler() {
+    let sendEmailStr = "";
+
+    this.state.journals.forEach((journal) => {
+      for (let key in journal) {
+        if (key === "created_at") {
+          sendEmailStr += `작성일: ${journal.created_at.split("T")[0]} \n`;
+        }
+        if (key === "content") {
+          sendEmailStr += `내용: ${journal.content} \n`;
+        }
+      }
+    });
+
     emailjs
       .send(
         "service_3hy8xhq",
@@ -149,7 +155,7 @@ class MngHistory extends Component {
           to_name: this.state.userData.username,
           from_name: "KnockKnock",
           post_title: this.state.selectOneHisInfo.title,
-          message: this.state.journals,
+          message: sendEmailStr,
         },
         "user_i7cqOYLkPzGQWTE60qCvw"
       )
@@ -182,6 +188,8 @@ class MngHistory extends Component {
           ) : (
             <></>
           )}
+
+          <button onClick={this.sendEmailForRetroHandler}>회고 겟또</button>
 
           {this.state.isRetroListAndInput ? (
             <>

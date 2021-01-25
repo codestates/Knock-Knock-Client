@@ -10,11 +10,12 @@ class Mypage extends React.Component {
 
     this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
+    this.getHisfromAccWithProfile = this.getHisfromAccWithProfile.bind(this);
 
     this.state = {
       isAccountMng: true,
       isMypage: false,
-      userPosts: [1, 2],
+      userPosts: [],
       openPosts: [],
       closedPosts: [],
     };
@@ -41,6 +42,10 @@ class Mypage extends React.Component {
     this.props.history.push("/mngHistory");
   }
 
+  getHisfromAccWithProfile() {
+    this.props.getHistoryHandler(this.props.history);
+  }
+
   render() {
     let openPosts = [];
     let closedPosts = [];
@@ -61,6 +66,8 @@ class Mypage extends React.Component {
           isMypage={this.state.isMypage}
           accountMngClickHandler={this.accountMngClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
+          modalLoginHandler={this.props.modalLoginHandler}
+          getHisfromAccWithProfile={this.getHisfromAccWithProfile}
         />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">

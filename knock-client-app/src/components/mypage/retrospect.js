@@ -10,7 +10,12 @@ const SendRetrospect = ({ journals, userData, retroDeleteHandler }) => {
           <li key={idx} className="His_JournalForm">
             <p className="Journal_username">{userData.username}</p>
             <p className="Journal_date">{journal.created_at.split("T")[0]}</p>
-            <p className="Journal_text">{journal.content}</p>
+            <div
+              className="Journal_text"
+              dangerouslySetInnerHTML={{
+                __html: journal.content.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
+              }}
+            ></div>
           </li>
           <button onClick={() => retroDeleteHandler(journal.id)}>삭제</button>
         </>
