@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import "../../styles/navAndLogo.css";
 import { stacks } from "../../utils/options";

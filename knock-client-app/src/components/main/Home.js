@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React from "react";
 import "../../styles/home.css";
 
 import explainImg from "../../images/homeImg/explainImg.png";
 import testImg1 from "../../images/homeImg/testImg1.png";
-import axios from "axios";
 
 const Home = (props) => {
   const searchParams = {

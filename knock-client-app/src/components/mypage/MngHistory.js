@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import ProfileEdit from "./MngHistoryProfile";
 import "../../styles/history.css";

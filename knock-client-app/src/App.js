@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+/* eslint-disable */
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./styles/navAndLogo.css";
 // import Context from "../utils/context.js";
@@ -16,25 +17,9 @@ const App = () => {
     <Router>
       <div className="navbar">
         <div className="navbar_home">
-          <ModalRouter />
           <Link to="/">HOME</Link>
         </div>
-        <div className="navbar_board">
-          <Link to="/board">BOARD</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/mypage">Mypage</Link>
-        </div>
-
-        <div className="navbar_mypage">
-          <Link to="/createRoom">CreateRoom</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/roominfo">지울꺼임</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/mngHistory">지울꺼임2</Link>
-        </div>
+        <ModalRouter />
       </div>
 
       <Switch>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../../styles/roomInfo.css";
@@ -11,6 +12,7 @@ const PostReply = (props) => {
     });
 
     setUserId(userInfo.data.userdata.id);
+    console.log(userId);
   });
 
   // 날짜기준으로 정렬 하기

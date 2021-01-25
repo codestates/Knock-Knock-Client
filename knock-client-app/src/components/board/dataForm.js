@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import { stacks } from "../../utils/options";
 import "../../styles/createRoom.css";
 
