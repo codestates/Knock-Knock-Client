@@ -195,13 +195,21 @@ const RoomInfo = (props) => {
 
                   <div className="D_info-content-wrap">
                     <div className="D_info-content-title">소개</div>
-                    <div className="D_info-content">
-                      {props.location.state.content}
-                    </div>
+                    <div
+                      className="D_info-content"
+                      dangerouslySetInnerHTML={{
+                        __html: props.location.state.content,
+                      }}
+                    ></div>
                   </div>
                 </div>
                 <div className="Detail_info-involve">
-                  <div className="Detail_info-involve-title">포지션</div>
+                  {props.location.state.category === "Project" ? (
+                    <div className="Detail_info-involve-title">포지션</div>
+                  ) : (
+                    <div className="Detail_info-involve-title">스터디 참여</div>
+                  )}
+
                   {props.location.state.category !== "Question" ? (
                     <div className="Detail_info-involve-position">
                       {props.location.state.category !== "Study" ? (
@@ -241,12 +249,21 @@ const RoomInfo = (props) => {
                       ) : (
                         <></>
                       )}
-                      <button
-                        className="submitBtn"
-                        onClick={() => submitForm()}
-                      >
-                        신청하기
-                      </button>
+                      {props.location.state.category === "Project" ? (
+                        <button
+                          className="submitBtn"
+                          onClick={() => submitForm()}
+                        >
+                          신청하기
+                        </button>
+                      ) : (
+                        <button
+                          className="study_submitBtn"
+                          onClick={() => submitForm()}
+                        >
+                          신청하기
+                        </button>
+                      )}
                     </div>
                   ) : (
                     <></>

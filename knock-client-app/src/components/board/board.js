@@ -110,7 +110,7 @@ const PublicBoard = (props) => {
         <nav className="B_SideBarSec">
           <ul>
             <li className="B_filterBtn" value="All" onClick={postFilterHandler}>
-              All
+              ALL
             </li>
             <li
               className="B_filterBtn"
@@ -164,26 +164,28 @@ const PublicBoard = (props) => {
                       alt=""
                       value={post.id}
                     />
-                    <div className="B_RoomCard-category" value={post.id}>
-                      {post.category}
-                    </div>
-                    <div className="B_RoomCard-title" value={post.id}>
-                      {post.title}
-                    </div>
-                    <div className="B_RoomCard-total" value={post.id}>
-                      최대 인원 {post.total}명
-                    </div>
-                    <div className="B_RoomCard-position" value={post.id}>
-                      프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
-                    </div>
-                    <div className="B_RoomCard-stacks">
-                      {post.post_stacks.map((stack) => {
-                        return (
-                          <div className="B_RoomCard-stack" value={post.id}>
-                            {stack}
-                          </div>
-                        );
-                      })}
+                    <div className="B_RommCard-info">
+                      <div className="B_RoomCard-category" value={post.id}>
+                        {post.category}
+                      </div>
+                      <div className="B_RoomCard-title" value={post.id}>
+                        {post.title}
+                      </div>
+                      <div className="B_RoomCard-total" value={post.id}>
+                        최대 인원 {post.total}명
+                      </div>
+                      <div className="B_RoomCard-position" value={post.id}>
+                        프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
+                      </div>
+                      <div className="B_RoomCard-stacks" value={post.id}>
+                        {post.post_stacks.map((stack) => {
+                          return (
+                            <div className="B_RoomCard-stack" value={post.id}>
+                              {stack}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 );
@@ -201,32 +203,28 @@ const PublicBoard = (props) => {
                       alt=""
                       value={post.id}
                     />
-                    <p className="B_RoomCard-title" value={post.id}>
+                    <div className="B_RoomCard-category" value={post.id}>
+                      {post.category}
+                    </div>
+                    <div className="B_RoomCard-title" value={post.id}>
                       {post.title}
-                    </p>
+                    </div>
+                    <div className="B_RoomCard-total" value={post.id}>
+                      최대 인원 {post.total}명
+                    </div>
+                    <div className="B_RoomCard-stacks" value={post.id}>
+                      {post.post_stacks.map((stack) => {
+                        return (
+                          <div className="B_RoomCard-stack" value={post.id}>
+                            {stack}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 );
               }
-              if (post.category === "Question") {
-                return (
-                  <div
-                    className="B_RoomCard"
-                    value={post.id}
-                    onClick={roomCardClickHandler}
-                  >
-                    <img
-                      src={question}
-                      className="B_RoomCard-Img4"
-                      alt=""
-                      value={post.id}
-                    />
-                    <p className="B_RoomCard-title" value={post.id}>
-                      {post.title}
-                    </p>
-                  </div>
-                );
-              }
-            } else {
+            } else if (post.category === "Question") {
               return (
                 <div
                   className="B_RoomCard"
@@ -234,16 +232,34 @@ const PublicBoard = (props) => {
                   onClick={roomCardClickHandler}
                 >
                   <img
-                    src={closed}
-                    className="B_RoomCard-Img2"
+                    src={question}
+                    className="B_RoomCard-Img4"
                     alt=""
                     value={post.id}
                   />
-                  <p className="B_RoomCard-title" value={post.id}>
+                  <div className="B_RoomCard-category" value={post.id}>
+                    {post.category}
+                  </div>
+                  <div className="B_RoomCard-title" value={post.id}>
                     {post.title}
-                  </p>
+                  </div>
+                  <div className="B_RoomCard-stacks" value={post.id}>
+                    {post.post_stacks ? (
+                      post.post_stacks.map((stack) => {
+                        return (
+                          <div className="B_RoomCard-stack" value={post.id}>
+                            {stack}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
               );
+            } else {
+              return <></>;
             }
           })}
           {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}

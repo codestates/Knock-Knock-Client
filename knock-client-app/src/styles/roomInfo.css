@@ -172,7 +172,7 @@
   outline: 0;
   height: 1.3vw;
   width: 1.3vw;
-
+  border: 1px solid gray;
   border-radius: 3px;
   margin-right: 2vw;
 }
@@ -210,6 +210,12 @@
 
 .submitBtn {
   margin-left: 3vw;
+  width: 5vw;
+  height: 3vw;
+  border: none;
+}
+
+.study_submitBtn {
   width: 5vw;
   height: 3vw;
   border: none;
@@ -253,16 +259,17 @@
   cursor: pointer;
   position: relative;
   border: none;
+  font-size: 2px;
   border-radius: 100px;
-  padding-left: 0.47vw;
-  padding-right: 0.47vw;
-  padding-top: 0.3vw;
-  padding-bottom: 0.3vw;
-  background-color: rgb(231, 88, 88);
-  right: 1vw;
+  padding-left: 0.452vw;
+  padding-right: 0.44vw;
+  padding-top: 0.35vw;
+  padding-bottom: 0.25vw;
+  background-color: #ed462f;
+  right: 0.8vw;
   bottom: 0.8vw;
   text-align: center;
-  color: white;
+  color: rgb(12, 12, 12);
 }
 
 .Reply_input_form {

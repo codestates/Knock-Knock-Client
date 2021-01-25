@@ -4,6 +4,7 @@ import "../../styles/history.css";
 import "../../styles/mypage.css";
 import SendRetrospect from "./Retrospect";
 import axios from "axios";
+import emailjs from "emailjs-com";
 
 class MngHistory extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class MngHistory extends Component {
     this.boardRetroHandler = this.boardRetroHandler.bind(this);
     this.mypageHandleFromHisPro = this.mypageHandleFromHisPro.bind(this);
     this.retroDeleteHandler = this.retroDeleteHandler.bind(this);
+    this.sendEmailForRetroHandler = this.sendEmailForRetroHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -134,6 +136,24 @@ class MngHistory extends Component {
           isRetroListAndInput: false,
           journals: [],
         });
+      });
+  }
+
+  sendEmailForRetroHandler() {
+    emailjs
+      .send(
+        "service_3hy8xhq",
+        "template_4xcepjp",
+        {
+          to_name: this.state.userData.username,
+          from_name: "KnockKnock",
+          post_title: this.state.selectOneHisInfo.title,
+          message: this.state.journals,
+        },
+        "user_i7cqOYLkPzGQWTE60qCvw"
+      )
+      .then((result) => {
+        console.log("이메일 보내기 = ", result);
       });
   }
 
