@@ -16,6 +16,7 @@ class MngAccount extends React.Component {
     this.storageInfo = this.storageInfo.bind(this);
     this.userStack = this.userStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
+    this.getHisfromAccWithProfile = this.getHisfromAccWithProfile.bind(this);
 
     this.state = {
       isMypage: true,
@@ -48,12 +49,6 @@ class MngAccount extends React.Component {
           <label htmlFor={el}>{el}</label>
         </>
       );
-    });
-
-    const userdata = axios({
-      method: "GET",
-      url: "https://localhost:4000/profile",
-      withCredentials: true,
     });
   }
 
@@ -88,7 +83,6 @@ class MngAccount extends React.Component {
       mood: this.mood,
       user_stacks: `${String(this.stack)}`,
     };
-    this.setState({ userInfo: userInfo });
 
     axios
       .post("https://localhost:4000/profile", userInfo, {
@@ -96,12 +90,17 @@ class MngAccount extends React.Component {
       })
       .then((updatedUserInfo) => {
         console.log("수정된 사용자 정보 = ", updatedUserInfo);
+        //this.setState({userInfo: updatedUserInfo.data.userdata})
         this.props.history.push("/mypage", userInfo);
       });
   }
 
   retrospectClickHandler() {
     this.props.history.push("/mngHistory");
+  }
+
+  getHisfromAccWithProfile() {
+    this.props.getHistoryHandler(this.props.history);
   }
 
   render() {
@@ -113,6 +112,8 @@ class MngAccount extends React.Component {
           mypageClickHandler={this.mypageClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
           userInfo={this.state.userInfo}
+          modalLoginHandler={this.props.modalLoginHandler}
+          getHisfromAccWithProfile={this.getHisfromAccWithProfile}
         />
         <div className="mypageContainer_editUserInfoFormSec">
           <div className="editUserInfoFormSec_term">
