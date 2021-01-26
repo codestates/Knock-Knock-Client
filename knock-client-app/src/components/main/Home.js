@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React from "react";
 import "../../styles/home.css";
 
 import explainImg from "../../images/homeImg/explainImg.png";
 import testImg1 from "../../images/homeImg/testImg1.png";
-import axios from "axios";
 
 const Home = (props) => {
   const searchParams = {
@@ -23,9 +23,13 @@ const Home = (props) => {
   function boardSearchTextHandler(event) {
     searchParams.boardSearchText = event.target.value;
   }
-
+  // 홈에서 검색 필터
   async function boardSearchClickHandler() {
     props.history.push("/board", searchParams);
+  }
+
+  function moreBoardHandler() {
+    props.history.push("/board");
   }
 
   return (
@@ -123,7 +127,7 @@ const Home = (props) => {
         </div>
       </section>
       <footer className="H_footer">
-        <div className="H_GoToBoard" onClick={() => alert("인수바보")}>
+        <div className="H_GoToBoard" onClick={moreBoardHandler}>
           더보기
         </div>
       </footer>

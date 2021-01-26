@@ -10,6 +10,7 @@ class Mypage extends React.Component {
 
     this.accountMngClickHandler = this.accountMngClickHandler.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
+    this.getHisfromAccWithProfile = this.getHisfromAccWithProfile.bind(this);
 
     this.state = {
       isAccountMng: true,
@@ -21,11 +22,13 @@ class Mypage extends React.Component {
   }
 
   async componentDidMount() {
-    // 사용자 ID 부분 수정해야함!!!!!!!!!
-    const userInfo = await axios.get("http://localhost:4000/profile/1");
+    const userInfo = await axios.get("https://localhost:4000/profile", {
+      withCredentials: true,
+    });
 
+    console.log("userInfo.data.postdata = ", userInfo);
     this.setState({
-      userPosts: userInfo.data.postData,
+      userPosts: userInfo.data.postdata,
     });
   }
 
@@ -36,6 +39,10 @@ class Mypage extends React.Component {
 
   retrospectClickHandler() {
     this.props.history.push("/mngHistory");
+  }
+
+  getHisfromAccWithProfile() {
+    this.props.getHistoryHandler(this.props.history);
   }
 
   render() {
@@ -58,6 +65,8 @@ class Mypage extends React.Component {
           isMypage={this.state.isMypage}
           accountMngClickHandler={this.accountMngClickHandler}
           retrospectClickHandler={this.retrospectClickHandler}
+          modalLoginHandler={this.props.modalLoginHandler}
+          getHisfromAccWithProfile={this.getHisfromAccWithProfile}
         />
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">

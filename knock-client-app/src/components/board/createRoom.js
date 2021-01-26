@@ -1,12 +1,12 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
 import "../../styles/createRoom.css";
+import axios from "axios";
 
-const axios = require("axios");
-
-const CreateRoom = () => {
+const CreateRoom = (props) => {
   const [category, setCategory] = useState("Category");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -22,16 +22,6 @@ const CreateRoom = () => {
     setIsCreater(false);
   };
 
-  const createRoom = () => {
-    axios({
-      url: "/createRoom",
-      method: "POST",
-      data: {},
-      withCredentials: true,
-      headers: "application/json",
-    });
-  };
-
   const getCrew = (e) => {
     setCrew(e);
     console.log("crew", crew);
@@ -44,20 +34,39 @@ const CreateRoom = () => {
   };
 
   const getStack = (e) => {
-    setStack(stack.concat(e));
+    if (stack.includes(e)) {
+      stack.splice(stack.indexOf(e), 1);
+      setStack(stack);
+    } else {
+      setStack(() => [...stack, e]);
+    }
   };
 
   const postRoomInfo = () => {
-    const body = {
-      category: category,
-      title: title,
-      crew: crew,
-      position: position,
-      stack: stack,
-      description: description,
-    };
-    console.log("?????", body);
-    // setRoomInfo(body);
+    axios
+      .get("https://localhost:4000/profile", {
+        withCredentials: true,
+      })
+      .then((userInfo) => {
+        console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
+        const body = {
+          writer: userInfo.data.userdata.username,
+          category: category,
+          title: title,
+          total: crew,
+          backend: position[0],
+          frontend: position[1],
+          // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
+          post_stacks: `${String(stack)}`,
+          content: description,
+        };
+        console.log("body = ", body);
+        axios
+          .post("https://localhost:4000/posts", body, { withCredentials: true })
+          .then(() => {
+            props.history.push("/board");
+          });
+      });
   };
 
   const studyType = ["Category", "Project", "Study", "Question"];

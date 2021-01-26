@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./styles/nav.css";
+import "./styles/navAndLogo.css";
 // import Context from "../utils/context.js";
 import PublicBoard from "../src/components/board/board";
 import Home from "./components/main/Home";
@@ -11,32 +12,25 @@ import MngAccount from "./components/mypage/MngAccount";
 import MngHistory from "./components/mypage/MngHistory";
 import ModalRouter from "./components/main/ModalRouter";
 
-const axios = require("axios");
-
 const App = () => {
+  const [isModalLogin, setIsModalLogin] = useState(false);
+  const [accHistory, setAccHistory] = useState({});
+
+  function modalLoginHandler() {
+    setIsModalLogin(true);
+  }
+
+  function getHistoryHandler(history) {
+    setAccHistory(history);
+  }
+
   return (
     <Router>
       <div className="navbar">
         <div className="navbar_home">
-          <ModalRouter />
           <Link to="/">HOME</Link>
         </div>
-        <div className="navbar_board">
-          <Link to="/board">BOARD</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/mypage">Mypage</Link>
-        </div>
-
-        <div className="navbar_mypage">
-          <Link to="/createRoom">CreateRoom</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/roominfo">지울꺼임</Link>
-        </div>
-        <div className="navbar_mypage">
-          <Link to="/mngHistory">지울꺼임2</Link>
-        </div>
+        <ModalRouter isModalLogin={isModalLogin} accHistory={accHistory} />
       </div>
 
       <Switch>
@@ -50,7 +44,13 @@ const App = () => {
         <Route
           exact
           path="/mypage"
-          render={(routeProps) => <Mypage {...routeProps} />}
+          render={(routeProps) => (
+            <Mypage
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+              modalLoginHandler={modalLoginHandler}
+            />
+          )}
         />
 
         <Route
@@ -77,7 +77,13 @@ const App = () => {
         <Route
           exact
           path="/mngAccount"
-          render={(routeProps) => <MngAccount {...routeProps} />}
+          render={(routeProps) => (
+            <MngAccount
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+              modalLoginHandler={modalLoginHandler}
+            />
+          )}
         />
 
         <Route
