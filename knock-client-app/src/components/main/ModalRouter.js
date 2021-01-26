@@ -40,7 +40,8 @@ const ModalRouter = (props) => {
       window.localStorage.getItem("isLogin")
     );
 
-    if (props.isModalLogin) setIsLogin(true);
+    if (props.isModalLogin || window.localStorage.getItem("isLogin"))
+      setIsLogin(true);
   }, [props.isModalLogin]);
 
   function afterOpenModal() {
@@ -52,20 +53,18 @@ const ModalRouter = (props) => {
     setIsOpen(false);
   }
 
-  function componentWillMount() {
-    //Modal.setAppElement("root");
-  }
-
   function logOut() {
     setIsLogin(false);
     setIsOpen(false);
+    //로컬 스토리지 정보삭제와 함께 session 연결고리를 끊어준다.
     window.localStorage.removeItem("isLogin");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("userid");
-    props.accHistory.push("/");
+    //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
+    if (props.accHistory.location.pathname !== "/") props.accHistory.push("/");
   }
 
-  console.log("asdasdasasd", isLogin);
+  console.log("각시탈", props.accHistory);
   return isLogin ? (
     <div>
       <button onClick={openModal}>로그인상태</button>
