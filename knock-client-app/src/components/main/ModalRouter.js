@@ -5,6 +5,7 @@ import "../../styles/home.css";
 import github from "../../images/logo/github.png";
 import google from "../../images/logo/google.png";
 import { BrowserRouter as Route, Link } from "react-router-dom";
+const axios = require("axios");
 
 const customStyles = {
   content: {
@@ -60,6 +61,10 @@ const ModalRouter = (props) => {
     window.localStorage.removeItem("isLogin");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("userid");
+    axios({
+      method: "post",
+      url: "https://localhost:4000/profile/signout",
+    });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
     if (props.accHistory.location.pathname !== "/") props.accHistory.push("/");
   }

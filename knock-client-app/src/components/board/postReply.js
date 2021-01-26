@@ -26,7 +26,7 @@ const PostReply = (props) => {
     }
     if (idx >= 0) {
       return (
-        <li key={idx} value={value.id} className="postReply">
+        <li key={idx} id={value.id} value={value.id} className="postReply">
           {props.value[0].user.id === userId ? (
             <button
               className="reply_del_btn"
