@@ -24,9 +24,9 @@ class Profile extends React.Component {
   }
 
   async componentDidMount() {
+// 최초 O-auth로그인 후 사용자에 대한 세션발급 요청
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
-
     if (authorizationCode && !window.localStorage.getItem("isLogin")) {
       await axios
         .post(
@@ -52,13 +52,15 @@ class Profile extends React.Component {
       .then((userInfo) => {
         console.log("프로필 userInfo = ", userInfo);
         this.setState({ userInfo: userInfo.data.userdata });
-        //로그인 시 로컬스토리지에 사용자 정보가 들어간다.
+
+        //서버에서 사용자 정보를 가져오면서 로컬스토리지에 사용자 정보가 들어간다.
         window.localStorage.setItem("userid", userInfo.data.userdata.id);
         window.localStorage.setItem(
           "username",
           userInfo.data.userdata.username
         );
         window.localStorage.setItem("isLogin", true);
+        //히스토리와 App.js -> mngAccount -> profile
         this.props.modalLoginHandler();
         this.props.getHisfromAccWithProfile();
       });

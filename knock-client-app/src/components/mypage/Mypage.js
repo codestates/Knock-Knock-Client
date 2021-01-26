@@ -22,7 +22,6 @@ class Mypage extends React.Component {
   }
 
   async componentDidMount() {
-    // 사용자 ID 부분 수정해야함!!!!!!!!!
     const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });

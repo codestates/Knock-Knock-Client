@@ -18,12 +18,7 @@ const PublicBoard = (props) => {
   const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
   useEffect(async () => {
-    // You need to restrict it at some point
-    // This is just dummy code and should be replaced by actual
-
     let postsList;
-
-    console.log("props.location.state = ", props.location.state);
 
     if (props.location.state) {
       const {
@@ -31,17 +26,20 @@ const PublicBoard = (props) => {
         boardPeopleNum,
         boardSearchText,
       } = props.location.state;
+      // 모든 값을 필터에 넣었을 때
       postsList = await axios.get(
         `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
         { withCredentials: true }
       );
     } else {
+      // 카테고리만 필터에 넣었을 때
       if (postFilter && postFilter !== "All") {
         postsList = await axios.get(
           `https://localhost:4000/search?category=${postFilter}&total=&title=`,
           { withCredentials: true }
         );
       } else {
+        // 필터값에 아무것도 안넣었을 때
         postsList = await axios.get(
           `https://localhost:4000/search?category=&total=&title=`,
           { withCredentials: true }
@@ -263,7 +261,6 @@ const PublicBoard = (props) => {
           {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! */}
         </div>
       </div>
-      <div className="B_footer">Welcome to the party</div>
     </div>
   );
 };
