@@ -15,10 +15,8 @@
 }
 
 .List_filter {
-  position: absolute;
-  top: 200px;
-  left: 550px;
-  width: 170px;
+  width: 30%;
+  margin-left: 60%;
 }
 
 .List_container {

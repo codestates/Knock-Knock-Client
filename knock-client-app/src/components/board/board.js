@@ -88,7 +88,6 @@ const PublicBoard = (props) => {
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
-  
     const postId = event.nativeEvent.path[0].attributes.value.value;
     for (let post of posts) {
       if (post.id === Number(postId)) {
@@ -222,7 +221,8 @@ const PublicBoard = (props) => {
                   </div>
                 );
               }
-            } else if (post.category === "Question") {
+            }
+            if (post.category === "Question") {
               return (
                 <div
                   className="B_RoomCard"

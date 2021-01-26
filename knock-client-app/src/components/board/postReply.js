@@ -27,7 +27,7 @@ const PostReply = (props) => {
     if (idx >= 0) {
       return (
         <li key={idx} value={value.id} className="postReply">
-          {props.value[0].user.id === userId ? (
+          {value.user.id === userId ? (
             <button
               className="reply_del_btn"
               onClick={() => props.deleteCommentHandler(value.id)}
