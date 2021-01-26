@@ -80,7 +80,6 @@ const RoomInfo = (props) => {
   };
 
   const sendReply = () => {
-    let replyInfo = {};
     if (text === "") {
       setErrmessage("텍스트를 입력하세요");
     } else {
@@ -106,7 +105,6 @@ const RoomInfo = (props) => {
             });
         });
     }
-    setReply(() => [...reply, replyInfo]);
   };
 
   const commentChangeHandler = (event) => {
@@ -161,9 +159,13 @@ const RoomInfo = (props) => {
                   {props.location.state.backend}명
                 </div>
                 <div className="B_info-stacks">
-                  {props.location.state.post_stacks.map((stack) => {
-                    return <div className="B_info-stack">{stack}</div>;
-                  })}
+                  {props.location.state.post_stacks ? (
+                    props.location.state.post_stacks.map((stack) => {
+                      return <div className="B_info-stack">{stack}</div>;
+                    })
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

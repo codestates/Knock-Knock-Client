@@ -54,8 +54,8 @@ const CreateRoom = (props) => {
           category: category,
           title: title,
           total: crew,
-          backend: position[0],
-          frontend: position[1],
+          backend: position[1],
+          frontend: position[0],
           // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
           post_stacks: `${String(stack)}`,
           content: description,
