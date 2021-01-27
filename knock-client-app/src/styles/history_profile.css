@@ -21,7 +21,16 @@
 
 .List_container {
   overflow: scroll;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
+.List_container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .MyList {
   display: flex;
   border-radius: 20px;
@@ -52,12 +61,20 @@
   font-weight: 600;
 }
 
+.post_stacks {
+  display: flex;
+}
+
+.post_stacks_more {
+  margin-left: 3%;
+  text-decoration: underline;
+}
+
 .MyList_status {
   display: flex;
   flex-direction: column;
   flex: 3;
-  padding-left: 16%;
-  margin-right: 6%;
+  margin-right: 3%;
 }
 
 .status_createdAt {

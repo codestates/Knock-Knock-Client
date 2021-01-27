@@ -118,6 +118,14 @@
   flex: 6;
   border: 1px solid black;
   overflow: scroll;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mypageContainer_boardListSec::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .boardListSec_openboardWrap {

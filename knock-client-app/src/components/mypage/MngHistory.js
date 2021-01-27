@@ -112,57 +112,62 @@ class MngHistory extends Component {
   }
 
   dangerBtn() {
-    axios
-      .delete(`https://localhost:4000/posts`, {
-        data: {
-          postid: this.state.currentPostId,
-        },
-        withCredentials: true,
-      })
-      .then((posts) => {
-        alert("참여한 게시물을 삭제하였습니다!");
+    if (window.confirm("참여된 게시물을 삭제하시겠습니까?")) {
+      axios
+        .delete(`https://localhost:4000/posts`, {
+          data: {
+            postid: this.state.currentPostId,
+          },
+          withCredentials: true,
+        })
+        .then((posts) => {
+          alert("참여한 게시물을 삭제하였습니다!");
 
-        posts.data.data.sort(
-          (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        );
-        this.setState({
-          userPosts: posts.data.data,
-          isRetroListAndInput: false,
-          journals: [],
+          posts.data.data.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+          this.setState({
+            userPosts: posts.data.data,
+            isRetroListAndInput: false,
+            journals: [],
+          });
         });
-      });
+    }
   }
 
   sendEmailForRetroHandler() {
-    let sendEmailStr = "";
+    if (window.confirm("회고 기록을 이메일로 보내시겠습니까?")) {
+      let sendEmailStr = "";
 
-    this.state.journals.forEach((journal) => {
-      for (let key in journal) {
-        if (key === "created_at") {
-          sendEmailStr += `작성일: ${journal.created_at.split("T")[0]} \n`;
+      this.state.journals.forEach((journal) => {
+        for (let key in journal) {
+          if (key === "created_at") {
+            sendEmailStr += `작성일: ${journal.created_at.split("T")[0]} \n`;
+          }
+          if (key === "content") {
+            sendEmailStr += `내용: ${journal.content} \n`;
+          }
         }
-        if (key === "content") {
-          sendEmailStr += `내용: ${journal.content} \n`;
-        }
-      }
-    });
-
-    emailjs
-      .send(
-        "service_3hy8xhq",
-        "template_4xcepjp",
-        {
-          to_email: this.state.userData.email,
-          to_name: this.state.userData.username,
-          from_name: "KnockKnock",
-          post_title: this.state.selectOneHisInfo.title,
-          message: sendEmailStr.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
-        },
-        "user_i7cqOYLkPzGQWTE60qCvw"
-      )
-      .then((result) => {
-        console.log("이메일 보내기 = ", result);
+        sendEmailStr += "\n";
       });
+
+      emailjs
+        .send(
+          "service_3hy8xhq",
+          "template_4xcepjp",
+          {
+            to_email: this.state.userData.email,
+            to_name: this.state.userData.username,
+            from_name: "KnockKnock",
+            post_title: this.state.selectOneHisInfo.title,
+            message: sendEmailStr.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
+          },
+          "user_i7cqOYLkPzGQWTE60qCvw"
+        )
+        .then((result) => {
+          console.log("이메일 보내기 = ", result);
+        });
+    }
   }
 
   render() {
@@ -189,12 +194,15 @@ class MngHistory extends Component {
                   레포삭제
                 </button>
               </div>
+              <div>{this.state.selectOneHisInfo.post_stacks}</div>
+
               <button
                 onClick={this.sendEmailForRetroHandler}
                 className="HisList_sendBtn"
               >
                 회고 겟또
               </button>
+
               <div className="His_submitForm">
                 <textarea
                   className="Journal_box"
