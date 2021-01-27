@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../styles/mypage.css";
 import { mbti, stacks } from "../../utils/options";
 import Profile from "./Profile";
+import PrintLogo from "../mypage/PrintStackLogo";
 
 class MngAccount extends React.Component {
   constructor(props) {
@@ -149,7 +150,7 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
-              <div className="Stack">{this.stackList}</div>
+              <PrintLogo />
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">

@@ -12,48 +12,47 @@ const RoomInfo = (props) => {
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
-  const [position, setPosition] = useState("");
-  const [positionRatio, setPositionRatio] = useState({
-    backend: 0,
-    frontend: 0,
-  });
+  const [positionRatio, setPositionRatio] = useState({});
 
   const submitForm = () => {
-    if (props.location.state.category === "Project") {
-      position === "frontend"
-        ? setPositionRatio({ frontend: 1, backend: 0 })
-        : setPositionRatio({ frontend: 0, backend: 1 });
-    }
+    if (window.localStorage.getItem("isLogin")) {
+      const body = {
+        backend: positionRatio.backend,
+        frontend: positionRatio.frontend,
+        postid: props.location.state.id,
+        category: props.location.state.category,
+      };
 
-    const body = {
-      backend: positionRatio.backend,
-      frontend: positionRatio.frontend,
-      postid: props.location.state.id,
-      category: props.location.state.category,
-    };
-
-    if (props.location.state.category === "Project") {
-      // 버튼을 두번 눌러야 요청이 간다.
-      if (position) {
+      if (props.location.state.category === "Project") {
+        // 버튼을 두번 눌러야 요청이 간다.
+        if (positionRatio !== {}) {
+          axios
+            .post(`https://localhost:4000/join`, body, {
+              withCredentials: true,
+            })
+            .then((data) => {
+              console.log("res message =", data.message);
+              // ? alert(`${position} 포지션으로 신청되었습니다.`)
+              // : alert("다시 시도해주세요.");
+            });
+          // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
+        } else {
+          alert("원하는 포지션을 선택해주세요.");
+        }
+      } else if (props.location.state.category === "Study") {
         axios
-          .post(`https://localhost:4000/join`, body, { withCredentials: true })
+          .post(
+            `https://localhost:4000/join`,
+            { ...body, frontend: 0, backend: 0 },
+            { withCredentials: true }
+          )
           .then((data) => {
-            console.log("res message =", data.message);
-            // ? alert(`${position} 포지션으로 신청되었습니다.`)
-            // : alert("다시 시도해주세요.");
+            console.log("data", data);
+            alert("다시 시도해주세요.");
           });
-        // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
       } else {
-        // setErrmessage("원하는 포지션을 선택해주세요.");
-        alert("원하는 포지션을 선택해주세요.");
+        alert("로그인을 해주세요.");
       }
-    } else if (props.location.state.category === "Study") {
-      axios
-        .post(`https://localhost:4000/join`, body, { withCredentials: true })
-        .then((data) => {
-          console.log("data", data);
-          alert("다시 시도해주세요.");
-        });
     }
   };
 
@@ -66,30 +65,34 @@ const RoomInfo = (props) => {
   };
 
   const sendReply = () => {
-    if (text === "") {
-      setErrmessage("텍스트를 입력하세요");
-    } else {
-      setErrmessage("");
+    if (window.localStorage.getItem("isLogin")) {
+      if (text === "") {
+        setErrmessage("텍스트를 입력하세요");
+      } else {
+        setErrmessage("");
 
-      axios
-        .get("https://localhost:4000/profile", { withCredentials: true })
-        .then((getUserInfo) => {
-          const { id, username } = getUserInfo.data.userdata;
-          axios
-            .post(
-              "https://localhost:4000/comments",
-              {
-                writer: username,
-                comment: text,
-                userid: id,
-                postid: props.location.state.id,
-              },
-              { withCredentials: true }
-            )
-            .then((postComments) => {
-              setReply(postComments.data.data);
-            });
-        });
+        axios
+          .get("https://localhost:4000/profile", { withCredentials: true })
+          .then((getUserInfo) => {
+            const { id, username } = getUserInfo.data.userdata;
+            axios
+              .post(
+                "https://localhost:4000/comments",
+                {
+                  writer: username,
+                  comment: text,
+                  userid: id,
+                  postid: props.location.state.id,
+                },
+                { withCredentials: true }
+              )
+              .then((postComments) => {
+                setReply(postComments.data.data);
+              });
+          });
+      }
+    } else {
+      alert("로그인을 해주세요.");
     }
   };
 
@@ -234,7 +237,9 @@ const RoomInfo = (props) => {
                             프론트엔드
                           </label>
                           <input
-                            onChange={(e) => setPosition(e.target.value)}
+                            onChange={() =>
+                              setPositionRatio({ frontend: 1, backend: 0 })
+                            }
                             type="radio"
                             id="frontend"
                             value="frontend"
@@ -250,7 +255,9 @@ const RoomInfo = (props) => {
                             백엔드
                           </label>
                           <input
-                            onChange={(e) => setPosition(e.target.value)}
+                            onChange={() =>
+                              setPositionRatio({ frontend: 0, backend: 1 })
+                            }
                             type="radio"
                             id="backend"
                             value="backend"
@@ -262,8 +269,7 @@ const RoomInfo = (props) => {
                       ) : (
                         <></>
                       )}
-                      {props.location.state.category === "Project" &&
-                      window.localStorage.getItem("isLogin") ? (
+                      {props.location.state.category !== "Question" ? (
                         <button
                           className="submitBtn"
                           onClick={() => submitForm()}
@@ -271,12 +277,7 @@ const RoomInfo = (props) => {
                           신청하기
                         </button>
                       ) : (
-                        <button
-                          className="study_submitBtn"
-                          onClick={() => submitForm()}
-                        >
-                          신청하기
-                        </button>
+                        <></>
                       )}
                     </div>
                   ) : (
@@ -304,19 +305,10 @@ const RoomInfo = (props) => {
               </ul>
             )}
             <div className="Reply_input_form">
-              {window.localStorage.getItem("isLogin") ? (
-                <>
-                  <textarea
-                    onChange={commentChangeHandler}
-                    className="ReplyBox"
-                  />
-                  <button onClick={sendReply} className="SendBtn">
-                    Send
-                  </button>
-                </>
-              ) : (
-                <></>
-              )}
+              <textarea onChange={commentChangeHandler} className="ReplyBox" />
+              <button onClick={sendReply} className="SendBtn">
+                Send
+              </button>
             </div>
           </div>
         </div>
