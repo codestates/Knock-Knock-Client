@@ -13,6 +13,7 @@ const RoomInfo = (props) => {
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
   const [positionRatio, setPositionRatio] = useState({});
+  const [crewCounter, setCrewCounter] = useState({});
 
   const submitForm = () => {
     if (window.localStorage.getItem("isLogin")) {
@@ -31,25 +32,25 @@ const RoomInfo = (props) => {
               withCredentials: true,
             })
             .then((data) => {
-              console.log("res message =", data.message);
-              // ? alert(`${position} 포지션으로 신청되었습니다.`)
-              // : alert("다시 시도해주세요.");
+              data.message !== "userid not found!"
+                ? alert(
+                    `${
+                      positionRatio.frontend ? "Frontend" : "Backend"
+                    } 포지션으로 신청되었습니다.`
+                  )
+                : alert("다시 시도해주세요.");
             });
           // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
         } else {
           alert("원하는 포지션을 선택해주세요.");
         }
-      } else if (props.location.state.category === "Study") {
-        axios
-          .post(
+        if (props.location.state.category === "Study") {
+          axios.post(
             `https://localhost:4000/join`,
             { ...body, frontend: 0, backend: 0 },
             { withCredentials: true }
-          )
-          .then((data) => {
-            console.log("data", data);
-            alert("다시 시도해주세요.");
-          });
+          );
+        }
       } else {
         alert("로그인을 해주세요.");
       }
@@ -118,6 +119,7 @@ const RoomInfo = (props) => {
   };
 
   useEffect(() => {
+    console.log("프랍스로케이션스테이트", props.location);
     getPostComments();
   }, [props.location.state.id]);
 
@@ -213,6 +215,7 @@ const RoomInfo = (props) => {
                     ></div>
                   </div>
                 </div>
+
                 <div className="Detail_info-involve">
                   {props.location.state.category !== "Question" ? (
                     props.location.state.category === "Project" ? (
@@ -287,6 +290,7 @@ const RoomInfo = (props) => {
               </div>
             </div>
           </div>
+
           <div className="ReplyZone">
             {errmessage ? (
               <ul>

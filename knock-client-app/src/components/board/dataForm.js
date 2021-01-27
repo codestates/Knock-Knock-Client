@@ -5,7 +5,6 @@ import "../../styles/createRoom.css";
 import PrintLogo from "../mypage/PrintStackLogo";
 
 const DataForm = (props) => {
-  console.log("하늘에서 온 스택", props.stack);
   const [stack, setStack] = useState([]);
   const [isOver, setIsOver] = useState(false);
   const isCheck = (e) => {

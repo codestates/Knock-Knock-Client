@@ -79,10 +79,27 @@ const PublicBoard = (props) => {
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
+    let userInvolved = {};
+    const userInfo = axios
+      .get("https://localhost:4000/profile", {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log("방정보가져와라", data.data.postdata);
+        if (data.data.postdata) {
+          userInvolved = data;
+        } else {
+          userInvolved = "";
+        }
+      });
+    console.log("유저 involved", userInvolved);
     const postId = event.nativeEvent.path[0].attributes.value.value;
     for (let post of posts) {
       if (post.id === Number(postId)) {
-        props.history.push("/roomInfo", post);
+        props.history.push("/roomInfo", {
+          ...post,
+          userInvolved,
+        });
       }
     }
   };
@@ -144,6 +161,7 @@ const PublicBoard = (props) => {
                   <div
                     className="B_RoomCard"
                     value={post.id}
+                    key={idx}
                     onClick={roomCardClickHandler}
                   >
                     <img
