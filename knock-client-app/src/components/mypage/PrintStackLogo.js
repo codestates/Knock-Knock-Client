@@ -25,10 +25,18 @@ const PrintLogo = (props) => {
   };
   return (
     <div className="StackLogo">
-      <img src={Cshop} className="logo" value="C" />
-
-      <input onChange={select} type="checkbox" name="logo" value="c" id="c" />
-      <label htmlFor="c">
+      <input onChange={select} type="checkbox" name="logo" value="c#" id="c#" />
+      <label htmlFor="c#">
+        <img src={Cshop} className="logo" value="c#" />
+      </label>
+      <input
+        onChange={select}
+        type="checkbox"
+        name="logo"
+        value="c++"
+        id="c++"
+      />
+      <label htmlFor="c++">
         <img src={CC} className="logo" />
       </label>
 

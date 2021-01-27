@@ -11,9 +11,7 @@ const SendRetrospect = ({ journals, userData, retroDeleteHandler }) => {
             <button
               onClick={() => retroDeleteHandler(journal.id)}
               className="Journal_DelBtn"
-            >
-              삭제
-            </button>
+            ></button>
             <p className="Journal_username">{userData.username}</p>
             <p className="Journal_date">{journal.created_at.split("T")[0]}</p>
             <div

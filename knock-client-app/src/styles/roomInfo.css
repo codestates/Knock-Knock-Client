@@ -261,13 +261,10 @@
   border: none;
   font-size: 2px;
   border-radius: 100px;
-  padding-left: 0.452vw;
-  padding-right: 0.44vw;
-  padding-top: 0.35vw;
-  padding-bottom: 0.25vw;
+  padding: 0.8%;
   background-color: #ed462f;
-  right: 0.8vw;
-  bottom: 0.8vw;
+  right: 0.1vw;
+  bottom: 0.3vw;
   text-align: center;
   color: rgb(12, 12, 12);
 }

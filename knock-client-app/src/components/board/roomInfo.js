@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/roomInfo.css";
 import together from "../../images/boardImg/together.png";
-import closed from "../../images/boardImg/closed.png";
 import question from "../../images/boardImg/Question.png";
 import study from "../../images/boardImg/studyGroup.png";
 import PostReply from "./postReply";
@@ -31,7 +30,7 @@ const RoomInfo = (props) => {
               withCredentials: true,
             })
             .then((data) => {
-              console.log("res message =", data.message);
+              console.log("res message =", data);
               // ? alert(`${position} 포지션으로 신청되었습니다.`)
               // : alert("다시 시도해주세요.");
             });
@@ -47,8 +46,7 @@ const RoomInfo = (props) => {
             { withCredentials: true }
           )
           .then((data) => {
-            console.log("data", data);
-            alert("다시 시도해주세요.");
+            alert("신청되었습니다!");
           });
       } else {
         alert("로그인을 해주세요.");
@@ -134,7 +132,7 @@ const RoomInfo = (props) => {
                   props.location.state.category !== "Closed" ? (
                     <img src={study} className="Brief_img" />
                   ) : (
-                    <img src={closed} className="Brief_img" />
+                    <></>
                   )
                 ) : (
                   <img src={question} className="Brief_img" />

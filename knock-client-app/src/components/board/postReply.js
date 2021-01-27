@@ -27,9 +27,7 @@ const PostReply = (props) => {
             <button
               className="reply_del_btn"
               onClick={() => props.deleteCommentHandler(value.id)}
-            >
-              X
-            </button>
+            ></button>
           ) : (
             <></>
           )}

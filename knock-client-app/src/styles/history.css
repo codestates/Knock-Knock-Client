@@ -85,7 +85,13 @@
 
 .Journal_DelBtn {
   position: relative;
-  right: 3vw;
+  right: 0.7vw;
+  bottom: -0.1vw;
+  border: none;
+  background-color: #fd5e48;
+  color: rgb(12, 12, 12);
+  border-radius: 20px;
+  padding: 1.5%;
 }
 
 .Retro_list {
