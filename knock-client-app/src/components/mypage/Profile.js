@@ -24,7 +24,7 @@ class Profile extends React.Component {
   }
 
   async componentDidMount() {
-// 최초 O-auth로그인 후 사용자에 대한 세션발급 요청
+    // 최초 O-auth로그인 후 사용자에 대한 세션발급 요청
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
     if (authorizationCode && !window.localStorage.getItem("isLogin")) {

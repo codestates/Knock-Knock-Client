@@ -24,6 +24,9 @@ const ModalRouter = (props) => {
   const googleOAuthUrl = `
       https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=https://localhost:3000/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
       `;
+
+  const gitOAuthUrl = `https://github.com/login/oauth/authorize?client_id=e363bc17f9ecc211cdee&redirect_uri=https://localhost:3000/mngAccount`;
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(false);
 
@@ -35,6 +38,12 @@ const ModalRouter = (props) => {
     window.location.href = googleOAuthUrl;
     setIsOpen(false);
   }
+
+  function gitOAuthHandler() {
+    window.location.href = gitOAuthUrl;
+    setIsOpen(false);
+  }
+
   useEffect(() => {
     if (props.isModalLogin || window.localStorage.getItem("isLogin"))
       setIsLogin(true);
@@ -122,7 +131,7 @@ const ModalRouter = (props) => {
             ></img>
             <img
               className="github"
-              onClick={(e) => console.log(e.target.value)}
+              onClick={gitOAuthHandler}
               alt=""
               value="github"
               src={github}
