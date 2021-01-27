@@ -1,10 +1,12 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { stacks } from "../../utils/options";
+// import { stacks } from "../../utils/options";
 import "../../styles/createRoom.css";
+import PrintLogo from "../mypage/PrintStackLogo";
 
 const DataForm = (props) => {
-  const [message, setMessage] = useState("");
+  console.log("하늘에서 온 스택", props.stack);
+  const [stack, setStack] = useState([]);
   const [isOver, setIsOver] = useState(false);
   const isCheck = (e) => {
     if (e.target.checked) {
@@ -39,7 +41,7 @@ const DataForm = (props) => {
 
   const getTogether = howMany.map((el, idx) => {
     return (
-      <>
+      <span key={idx}>
         <input
           onChange={(e) => {
             isCheck(e);
@@ -51,13 +53,13 @@ const DataForm = (props) => {
           key={idx}
         />
         <label htmlFor={el}>{el === "4명이상" ? `${el}` : `${el}명`}</label>
-      </>
+      </span>
     );
   });
 
   const overMember = overPeople.map((el, idx) => {
     return (
-      <>
+      <span key={idx}>
         <input
           onChange={(e) => {
             overCheck(e);
@@ -66,30 +68,21 @@ const DataForm = (props) => {
           id={el}
           name="dul"
           value={el}
-          key={idx}
         />
         <label htmlFor={el}>{el}명</label>
-      </>
+      </span>
     );
   });
 
-  const stack = stacks.map((el, idx) => {
-    return (
-      <>
-        <input
-          onChange={(e) => {
-            choiceStack(e);
-          }}
-          type="checkbox"
-          id={el}
-          name="stack"
-          value={el}
-          key={idx}
-        />
-        <label htmlFor={el}>{el}</label>
-      </>
-    );
-  });
+  const getStack = (e) => {
+    if (stack.includes(e)) {
+      stack.splice(stack.indexOf(e), 1);
+      setStack(stack);
+    } else {
+      setStack(() => [...stack, e]);
+    }
+    props.stack(stack);
+  };
 
   return (
     <div className="Data_Container">
@@ -138,13 +131,15 @@ const DataForm = (props) => {
 
             <div className="Q_three">
               <p>3.스택을 추가해주세요.</p>
-              <div className="Stack">{stack}</div>
+              <PrintLogo stack={getStack} />
+              {/* <div className="Stack">{stack}</div> */}
             </div>
           </>
         ) : (
           <div className="Q_three">
             <p>2.스택을 추가해주세요.</p>
-            <div className="Stack">{stack}</div>
+            <PrintLogo stack={getStack} />
+            {/* <div className="Stack">{stack}</div> */}
           </div>
         )}
       </form>

@@ -152,10 +152,11 @@ class MngHistory extends Component {
         "service_3hy8xhq",
         "template_4xcepjp",
         {
+          to_email: this.state.userData.email,
           to_name: this.state.userData.username,
           from_name: "KnockKnock",
           post_title: this.state.selectOneHisInfo.title,
-          message: sendEmailStr,
+          message: sendEmailStr.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
         },
         "user_i7cqOYLkPzGQWTE60qCvw"
       )
@@ -175,25 +176,25 @@ class MngHistory extends Component {
         />
 
         <div className="mypageContainer_editUserInfoFormSec">
-          <p>{}</p>
-          {this.state.isRetroListAndInput ? (
-            <button
-              onClick={() => {
-                this.dangerBtn();
-              }}
-              className="DangerBtn"
-            >
-              레포삭제
-            </button>
-          ) : (
-            <></>
-          )}
-
-          <button onClick={this.sendEmailForRetroHandler}>회고 겟또</button>
-
           {this.state.isRetroListAndInput ? (
             <>
-              <h1>{this.state.selectOneHisInfo.title}</h1>
+              <div className="HisInfo_header">
+                <h1>{this.state.selectOneHisInfo.title}</h1>
+                <button
+                  onClick={() => {
+                    this.dangerBtn();
+                  }}
+                  className="DangerBtn"
+                >
+                  레포삭제
+                </button>
+              </div>
+              <button
+                onClick={this.sendEmailForRetroHandler}
+                className="HisList_sendBtn"
+              >
+                회고 겟또
+              </button>
               <div className="His_submitForm">
                 <textarea
                   className="Journal_box"

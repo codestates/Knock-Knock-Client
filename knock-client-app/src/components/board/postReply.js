@@ -15,10 +15,6 @@ const PostReply = (props) => {
     console.log(userId);
   });
 
-  // 날짜기준으로 정렬 하기
-  // 혹시몰라서 놔둠
-  //props.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
   const comment = props.value.map((value, idx) => {
     let created_at;
     if (value.created_at) {
@@ -26,8 +22,8 @@ const PostReply = (props) => {
     }
     if (idx >= 0) {
       return (
-        <li key={idx} id={value.id} value={value.id} className="postReply">
-          {props.value[0].user.id === userId ? (
+        <li key={idx} value={value.id} className="postReply">
+          {value.user.id === userId ? (
             <button
               className="reply_del_btn"
               onClick={() => props.deleteCommentHandler(value.id)}

@@ -8,12 +8,7 @@ import study from "../../images/boardImg/studyGroup.png";
 import axios from "axios";
 
 const PublicBoard = (props) => {
-  console.log("프랍스 로케이션 스테이트", props.location);
-
-  //const btnList = ["All", "Study", "Project", "Q&A"];
-
   const [posts, setPosts] = useState([]);
-  const [postStacks, setPostStacks] = useState([]);
   const [postFilter, setPostFilter] = useState("");
   const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
@@ -81,8 +76,6 @@ const PublicBoard = (props) => {
       .then((user) => {
         setIsUser(user);
       });
-
-    console.log("isUser = ", isUser);
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
@@ -208,18 +201,23 @@ const PublicBoard = (props) => {
                       최대 인원 {post.total}명
                     </div>
                     <div className="B_RoomCard-stacks" value={post.id}>
-                      {post.post_stacks.map((stack) => {
-                        return (
-                          <div className="B_RoomCard-stack" value={post.id}>
-                            {stack}
-                          </div>
-                        );
-                      })}
+                      {post.post_stacks ? (
+                        post.post_stacks.map((stack) => {
+                          return (
+                            <div className="B_RoomCard-stack" value={post.id}>
+                              {stack}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 );
               }
-            } else if (post.category === "Question") {
+            }
+            if (post.category === "Question") {
               return (
                 <div
                   className="B_RoomCard"

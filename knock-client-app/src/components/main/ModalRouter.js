@@ -36,11 +36,6 @@ const ModalRouter = (props) => {
     setIsOpen(false);
   }
   useEffect(() => {
-    console.log(
-      "window.localStorage.get = ",
-      window.localStorage.getItem("isLogin")
-    );
-
     if (props.isModalLogin || window.localStorage.getItem("isLogin"))
       setIsLogin(true);
   }, [props.isModalLogin]);
@@ -64,9 +59,16 @@ const ModalRouter = (props) => {
     axios({
       method: "post",
       url: "https://localhost:4000/profile/signout",
+      withCredentials: true,
     });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
-    if (props.accHistory.location.pathname !== "/") props.accHistory.push("/");
+    if (props.accHistory.location.pathname) {
+      if (props.accHistory.location.pathname !== "/") {
+        props.accHistory.push("/");
+      }
+    } else {
+      return;
+    }
   }
 
   console.log("각시탈", props.accHistory);
