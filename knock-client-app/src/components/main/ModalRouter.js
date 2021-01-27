@@ -71,13 +71,7 @@ const ModalRouter = (props) => {
       withCredentials: true,
     });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
-    if (props.accHistory.location.pathname) {
-      if (props.accHistory.location.pathname !== "/") {
-        props.accHistory.push("/");
-      }
-    } else {
-      return;
-    }
+    if (props.accHistory.location.pathname !== "/") props.accHistory.push("/");
   }
 
   console.log("각시탈", props.accHistory);

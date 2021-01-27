@@ -1,18 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import axios from "axios";
-import PrintLogo from "./PrintStackLogo"; // lines number of 101 to 104
-/*
-window.localStorage.setItem =>인자값두개 (키,벨류)
- 현재 인자값으로 넣어야할 것 -> userid / username / isLogin은 true
- 타이밍은 오어스 로그인
 
- window.localStorage.getItem => (키)
-
-window.localStorage.removeItem => (키)
- 로그아웃 버튼을 누르면 모든 userid / username 삭제 / isLogin은 false
-
-*/
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -117,7 +106,7 @@ class Profile extends React.Component {
             Logo={this.state.userInfo ? this.state.userInfo.user_stacks : ""}
           /> */}
           <div>
-            {this.state.userInfo ? this.state.userInfo.user_stacks : ""}
+            {/* {this.state.userInfo ? this.state.userInfo.user_stacks : ""} */}
           </div>
         </div>
       </div>

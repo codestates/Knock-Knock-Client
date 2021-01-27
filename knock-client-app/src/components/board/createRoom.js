@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
@@ -14,6 +14,10 @@ const CreateRoom = (props) => {
   const [crew, setCrew] = useState(0); // project 필수 Study 필수 Question 없음
   const [position, setPosition] = useState([]); // project 필수 Study 없음 Question 없음
   const [stack, setStack] = useState([]); // project 필수 Study 선택 Question 선택
+
+  useEffect(() => {
+    console.log("크리에이트룸 부분 스택에 들어가니 ?", stack);
+  });
 
   const getCrew = (e) => {
     setCrew(e);

@@ -27,8 +27,8 @@
 }
 
 .logo {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border: 1px solid black;
   border-radius: 6px;
 }
@@ -38,20 +38,4 @@
 
 input[type="checkbox"] {
   display: none;
-}
-
-input[type="checkbox"] + label {
-  background: #999;
-  height: 16px;
-  width: 16px;
-  display: inline-block;
-  padding: 0 0 0 0px;
-}
-
-input[type="checkbox"]:checked + label {
-  background: #0080ff;
-  height: 16px;
-  width: 16px;
-  display: inline-block;
-  padding: 0 0 0 0px;
 }

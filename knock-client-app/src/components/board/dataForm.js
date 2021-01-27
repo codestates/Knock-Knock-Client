@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { stacks } from "../../utils/options";
 import "../../styles/createRoom.css";
 import PrintLogo from "../mypage/PrintStackLogo";
@@ -75,13 +75,15 @@ const DataForm = (props) => {
   });
 
   const getStack = (e) => {
+    props.stack(e); // 크리에이트 룸
+
     if (stack.includes(e)) {
+      //스택을 뭘 클릭햇는지 출력해주기 위해
       stack.splice(stack.indexOf(e), 1);
-      setStack(stack);
+      setStack(() => [...stack]);
     } else {
       setStack(() => [...stack, e]);
     }
-    props.stack(stack);
   };
 
   return (
@@ -131,6 +133,7 @@ const DataForm = (props) => {
 
             <div className="Q_three">
               <p>3.스택을 추가해주세요.</p>
+              <div>{stack}</div>
               <PrintLogo stack={getStack} />
               {/* <div className="Stack">{stack}</div> */}
             </div>
@@ -138,6 +141,7 @@ const DataForm = (props) => {
         ) : (
           <div className="Q_three">
             <p>2.스택을 추가해주세요.</p>
+            <div>{stack}</div>
             <PrintLogo stack={getStack} />
             {/* <div className="Stack">{stack}</div> */}
           </div>

@@ -12,20 +12,10 @@ const RoomInfo = (props) => {
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
-  const [position, setPosition] = useState("");
-  const [positionRatio, setPositionRatio] = useState({
-    backend: 0,
-    frontend: 0,
-  });
+  const [positionRatio, setPositionRatio] = useState({});
 
   const submitForm = () => {
     if (window.localStorage.getItem("isLogin")) {
-      if (props.location.state.category === "Project") {
-        position === "frontend"
-          ? setPositionRatio({ frontend: 1, backend: 0 })
-          : setPositionRatio({ frontend: 0, backend: 1 });
-      }
-
       const body = {
         backend: positionRatio.backend,
         frontend: positionRatio.frontend,
@@ -35,7 +25,7 @@ const RoomInfo = (props) => {
 
       if (props.location.state.category === "Project") {
         // 버튼을 두번 눌러야 요청이 간다.
-        if (position) {
+        if (positionRatio !== {}) {
           axios
             .post(`https://localhost:4000/join`, body, {
               withCredentials: true,
@@ -47,19 +37,22 @@ const RoomInfo = (props) => {
             });
           // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
         } else {
-          // setErrmessage("원하는 포지션을 선택해주세요.");
           alert("원하는 포지션을 선택해주세요.");
         }
       } else if (props.location.state.category === "Study") {
         axios
-          .post(`https://localhost:4000/join`, body, { withCredentials: true })
+          .post(
+            `https://localhost:4000/join`,
+            { ...body, frontend: 0, backend: 0 },
+            { withCredentials: true }
+          )
           .then((data) => {
             console.log("data", data);
             alert("다시 시도해주세요.");
           });
+      } else {
+        alert("로그인을 해주세요.");
       }
-    } else {
-      alert("로그인을 해주세요.");
     }
   };
 
@@ -244,7 +237,9 @@ const RoomInfo = (props) => {
                             프론트엔드
                           </label>
                           <input
-                            onChange={(e) => setPosition(e.target.value)}
+                            onChange={() =>
+                              setPositionRatio({ frontend: 1, backend: 0 })
+                            }
                             type="radio"
                             id="frontend"
                             value="frontend"
@@ -260,7 +255,9 @@ const RoomInfo = (props) => {
                             백엔드
                           </label>
                           <input
-                            onChange={(e) => setPosition(e.target.value)}
+                            onChange={() =>
+                              setPositionRatio({ frontend: 0, backend: 1 })
+                            }
                             type="radio"
                             id="backend"
                             value="backend"
