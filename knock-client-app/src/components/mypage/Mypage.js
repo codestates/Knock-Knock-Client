@@ -83,8 +83,12 @@ class Mypage extends React.Component {
                       <h2>OPEN</h2>
                     </div>
                     <div className="boardList_openboard_detail">
-                      <p>{post.content}</p>
-                      <p>스택 : {post.post_stacks}</p>
+                      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
+                      {post.post_stacks ? (
+                        <p>스택 : {post.post_stacks}</p>
+                      ) : (
+                        <p>스택 없음</p>
+                      )}
                     </div>
                   </div>
                 );
@@ -98,16 +102,20 @@ class Mypage extends React.Component {
             <div className="closeboardWrap_boardList">
               {closedPosts.map((post) => {
                 return (
-                  <div className="boardList_openboard">
-                    <div className="boardList_openboard_brief">
+                  <div className="boardList_closeboard">
+                    <div className="boardList_closeboard_brief">
                       <h1>{post.title}</h1>
 
                       <h2>CLOSED</h2>
                     </div>
-                    <div className="boardList_openboard_detail">
-                      <p>{post.content}</p>
+                    <div className="boardList_closeboard_detail">
+                      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
 
-                      <p>스택 : {post.post_stacks}</p>
+                      {post.post_stacks ? (
+                        <p>스택 : {post.post_stacks}</p>
+                      ) : (
+                        <p>스택 없음</p>
+                      )}
                     </div>
                   </div>
                 );

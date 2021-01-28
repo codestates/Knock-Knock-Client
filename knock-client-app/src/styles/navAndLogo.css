@@ -4,11 +4,16 @@
   width: 100%;
   list-style: none;
   /* background-color: #ffea00; */
-  border: 1px solid #e9e9e9;
 }
 
 .navbar_home {
   flex: 9;
+}
+
+.navbar_homeImgYel {
+  max-width: 4%;
+  margin-left: 2%;
+  margin-top: 1%;
 }
 
 .navbar_board {

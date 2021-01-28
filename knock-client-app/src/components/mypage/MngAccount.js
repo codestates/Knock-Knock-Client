@@ -18,6 +18,7 @@ class MngAccount extends React.Component {
     this.getStack = this.getStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
     this.getHisfromAccWithProfile = this.getHisfromAccWithProfile.bind(this);
+    this.getUserInfoFromProfile = this.getUserInfoFromProfile.bind(this);
 
     this.state = {
       isMypage: true,
@@ -74,15 +75,18 @@ class MngAccount extends React.Component {
       mood: this.mood,
       user_stacks: `${String(this.stack)}`,
     };
-
-    axios
-      .post("https://localhost:4000/profile", userInfo, {
-        withCredentials: true,
-      })
-      .then((updatedUserInfo) => {
-        console.log("수정된 사용자 정보 = ", updatedUserInfo);
-        this.props.history.push("/mypage", userInfo);
-      });
+    if (userInfo.username && userInfo.username.split("").includes("기")) {
+      axios
+        .post("https://localhost:4000/profile", userInfo, {
+          withCredentials: true,
+        })
+        .then((updatedUserInfo) => {
+          this.setState({ userInfo: updatedUserInfo.data.data });
+          this.props.history.push("/mypage", userInfo);
+        });
+    } else {
+      alert("유저이름을 예시와 동일하게 반드시 입력해주세요");
+    }
   }
 
   retrospectClickHandler() {
@@ -91,6 +95,10 @@ class MngAccount extends React.Component {
 
   getHisfromAccWithProfile() {
     this.props.getHistoryHandler(this.props.history);
+  }
+
+  getUserInfoFromProfile(userInfo) {
+    this.setState({ userInfo });
   }
 
   render() {
@@ -104,49 +112,64 @@ class MngAccount extends React.Component {
           userInfo={this.state.userInfo}
           modalLoginHandler={this.props.modalLoginHandler}
           getHisfromAccWithProfile={this.getHisfromAccWithProfile}
+          getUserInfoFromProfile={this.getUserInfoFromProfile}
         />
         <div className="mypageContainer_editUserInfoFormSec">
-          <div className="editUserInfoFormSec_term">
-            <div className="editUserInfoFormSec_term_phrase">
-              <h1>코드스테이츠의 기수와 이름을 반드시 입력해주세요.</h1>
-
-              <input
-                onChange={(e) => this.userGrade(e)}
-                tpye="text"
-                placeholder="예시) PRE7기 이준희"
-              />
+          <div className="editUserInfoFormSec_wrap">
+            <div className="editUserInfoFormSec_term">
+              <div className="editUserInfoFormSec_term_phrase">
+                <div className="editUserInfoFormSec_phrase">
+                  코드스테이츠의 기수와 이름을 반드시 입력해주세요.
+                </div>
+                <h5>{`예시) 프리코스일 경우 PRE7기 정코딩 / 이머시브일 경우 IM24기 이코딩`}</h5>
+                <input
+                  onChange={(e) => this.userGrade(e)}
+                  tpye="text"
+                  placeholder="예시) PRE7기 봄코딩"
+                />
+              </div>
             </div>
-          </div>
-          <div className="editUserInfoFormSec_propensity">
-            <div className="editUserInfoFormSec_propensity_phrase">
-              <h1>회원님의 성향을 체크해주세요</h1>
-              <select onChange={this.userPropensity}>{this.mbtiChecker}</select>
+            <div className="editUserInfoFormSec_propensity">
+              <div className="editUserInfoFormSec_propensity_phrase">
+                <div className="editUserInfoFormSec_phrase">
+                  회원님의 성향을 체크해주세요
+                </div>
+                <select onChange={this.userPropensity}>
+                  {this.mbtiChecker}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="editUserInfoFormSec_mood">
-            <div className="editUserInfoFormSec_mood_phrase">
-              <h1> 오늘 기분에 대해 알려주세요</h1>
-              <textarea
-                onChange={(e) => {
-                  this.userMood(e);
-                }}
-                placeholder="오늘 기분을 알려주세요 : )"
-              />
+            <div className="editUserInfoFormSec_mood">
+              <div className="editUserInfoFormSec_mood_phrase">
+                <div className="editUserInfoFormSec_phrase">
+                  {" "}
+                  오늘 기분에 대해 알려주세요
+                </div>
+                <textarea
+                  onChange={(e) => {
+                    this.userMood(e);
+                  }}
+                  placeholder="오늘 기분을 알려주세요 : )"
+                />
+              </div>
             </div>
-          </div>
-          <div className="editUserInfoFormSec_mood">
-            <div className="editUserInfoFormSec_mood_phrase">
-              <h1>
-                {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
-              </h1>
+            <div className="editUserInfoFormSec_stacks_wrap">
+              <div className="editUserInfoFormSec_phrase">
+                {this.state.userInfo.username}님이 주로 사용하는 스택을
+                선택해주세요.
+              </div>
               <div className="showStack">
                 {`현재 ${this.state.userStack}을 선택하셨습니다.`}
               </div>
+
               <PrintLogo userStack={this.getStack} />
             </div>
-          </div>
-          <div className="editUserInfoFormSec_saveBtn">
-            <button onClick={() => this.storageInfo()}>내마음속에저장</button>
+            <div
+              className="editUserInfoFormSec_saveBtn"
+              onClick={() => this.storageInfo()}
+            >
+              내마음속에저장
+            </div>
           </div>
         </div>
       </div>

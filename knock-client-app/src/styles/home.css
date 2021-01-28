@@ -5,8 +5,6 @@
 
 .H_container {
   width: 100%;
-
-  border: 1px solid black;
 }
 
 .H_container section {
@@ -16,7 +14,6 @@
 .H_header {
   display: flex;
   width: 100%;
-  border: 1px solid black;
   position: sticky;
   top: 0px;
 }
@@ -132,6 +129,13 @@
 .H_searchBoxBoundary {
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.H_boardSearchTextBox {
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 15px;
 }
 
 .H_boardSearchBtn {

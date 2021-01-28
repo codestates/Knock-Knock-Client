@@ -75,6 +75,7 @@ const Home = (props) => {
             <input
               type="text"
               className="H_boardSearchTextBox"
+              placeholder="검색어를 입력해주세요"
               onChange={boardSearchTextHandler}
             />
             <div className="H_boardSearchBtn">
