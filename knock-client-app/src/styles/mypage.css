@@ -103,7 +103,7 @@
   width: 60px;
   height: 60px;
   border-radius: 6px;
-  margin: 0.5%;
+  margin: 1.5%;
 }
 
 /* ------------------------------------------- */
@@ -283,6 +283,13 @@
   padding-top: 3%;
 }
 
+.editUserInfoFormSec_usernameText {
+  border: none;
+  resize: none;
+  font-size: 20px;
+  width: 250px;
+}
+
 .editUserInfoFormSec_propensity {
   flex: 3;
 
@@ -290,10 +297,25 @@
   padding-top: 3%;
 }
 
+.editUserInfoFormSec_propensitySelect {
+  border: 1px solid lightgray;
+  margin-top: 2%;
+  font-size: 15px;
+  color: gray;
+}
+
 .editUserInfoFormSec_mood {
   flex: 3;
   padding-left: 3%;
   padding-top: 3%;
+}
+
+.editUserInfoFormSec_moodText {
+  border: none;
+  resize: none;
+  margin-top: 2%;
+  font-size: 20px;
+  width: 250px;
 }
 
 .editUserInfoFormSec_stacks_wrap {
@@ -310,6 +332,10 @@
 .showStack {
   opacity: 0;
   transition: all 0.1s ease;
+}
+
+.showStack_stacks {
+  font-weight: 700;
 }
 
 .StackLogo {

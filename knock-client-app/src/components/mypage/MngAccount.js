@@ -125,7 +125,8 @@ class MngAccount extends React.Component {
                 <input
                   onChange={(e) => this.userGrade(e)}
                   tpye="text"
-                  placeholder="예시) PRE7기 봄코딩"
+                  placeholder="여기에 기수를 입력해주세요"
+                  className="editUserInfoFormSec_usernameText"
                 />
               </div>
             </div>
@@ -134,7 +135,10 @@ class MngAccount extends React.Component {
                 <div className="editUserInfoFormSec_phrase">
                   회원님의 성향을 체크해주세요
                 </div>
-                <select onChange={this.userPropensity}>
+                <select
+                  onChange={this.userPropensity}
+                  className="editUserInfoFormSec_propensitySelect"
+                >
                   {this.mbtiChecker}
                 </select>
               </div>
@@ -145,11 +149,13 @@ class MngAccount extends React.Component {
                   {" "}
                   오늘 기분에 대해 알려주세요
                 </div>
-                <textarea
+                <input
+                  type="text"
                   onChange={(e) => {
                     this.userMood(e);
                   }}
                   placeholder="오늘 기분을 알려주세요 : )"
+                  className="editUserInfoFormSec_moodText"
                 />
               </div>
             </div>
@@ -159,7 +165,11 @@ class MngAccount extends React.Component {
                 선택해주세요.
               </div>
               <div className="showStack">
-                {`현재 ${this.state.userStack}을 선택하셨습니다.`}
+                현재
+                <span className="showStack_stacks">
+                  {this.state.userStack + ""}
+                </span>
+                을 선택하셨습니다.
               </div>
 
               <PrintLogo userStack={this.getStack} />
