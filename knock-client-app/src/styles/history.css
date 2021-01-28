@@ -83,10 +83,29 @@
   list-style-type: none;
 }
 
+.Journal_DelBtn {
+  position: relative;
+  right: 0.7vw;
+  bottom: -0.1vw;
+  border: none;
+  background-color: #fd5e48;
+  color: rgb(12, 12, 12);
+  border-radius: 20px;
+  padding: 1.5%;
+}
+
 .Retro_list {
   flex: 7;
   display: table-column;
   overflow: scroll;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.Retro_list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 /* ----------------------------- */

@@ -1,10 +1,9 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import "../../styles/roomInfo.css";
-import together from "../../images/boardImg/together.png";
-import closed from "../../images/boardImg/closed.png";
-import question from "../../images/boardImg/Question.png";
-import study from "../../images/boardImg/studyGroup.png";
+import together from "../../images/boardImg/together.jpg";
+import question from "../../images/boardImg/Question.jpg";
+import study from "../../images/boardImg/studyGroup.jpg";
 import PostReply from "./postReply";
 import axios from "axios";
 
@@ -136,7 +135,7 @@ const RoomInfo = (props) => {
                   props.location.state.category !== "Closed" ? (
                     <img src={study} className="Brief_img" />
                   ) : (
-                    <img src={closed} className="Brief_img" />
+                    <></>
                   )
                 ) : (
                   <img src={question} className="Brief_img" />
@@ -216,77 +215,81 @@ const RoomInfo = (props) => {
                   </div>
                 </div>
 
-                <div className="Detail_info-involve">
-                  {props.location.state.category !== "Question" ? (
-                    props.location.state.category === "Project" ? (
-                      <div className="Detail_info-involve-title">포지션</div>
+                {!props.location.state.userInvolved ? (
+                  <div className="Detail_info-involve">
+                    {props.location.state.category !== "Question" ? (
+                      props.location.state.category === "Project" ? (
+                        <div className="Detail_info-involve-title">포지션</div>
+                      ) : (
+                        <div className="Detail_info-involve-title">
+                          스터디 참여
+                        </div>
+                      )
                     ) : (
-                      <div className="Detail_info-involve-title">
-                        스터디 참여
+                      <></>
+                    )}
+
+                    {props.location.state.category !== "Question" ? (
+                      <div className="Detail_info-involve-position">
+                        {props.location.state.category !== "Study" ? (
+                          <>
+                            <label
+                              htmlFor="frontend"
+                              className="involve_frontend-label"
+                            >
+                              프론트엔드
+                            </label>
+                            <input
+                              onChange={() =>
+                                setPositionRatio({ frontend: 1, backend: 0 })
+                              }
+                              type="radio"
+                              id="frontend"
+                              value="frontend"
+                              key="frontend"
+                              name="position"
+                              className="involve_position-chkBox"
+                            ></input>
+
+                            <label
+                              htmlFor="backend"
+                              className="involve_backend-label"
+                            >
+                              백엔드
+                            </label>
+                            <input
+                              onChange={() =>
+                                setPositionRatio({ frontend: 0, backend: 1 })
+                              }
+                              type="radio"
+                              id="backend"
+                              value="backend"
+                              key="backend"
+                              name="position"
+                              className="involve_position-chkBox"
+                            ></input>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        {props.location.state.category !== "Question" ? (
+                          <button
+                            className="submitBtn"
+                            onClick={() => submitForm()}
+                          >
+                            신청하기
+                          </button>
+                        ) : (
+                          <></>
+                        )}
                       </div>
-                    )
-                  ) : (
-                    <></>
-                  )}
-
-                  {props.location.state.category !== "Question" ? (
-                    <div className="Detail_info-involve-position">
-                      {props.location.state.category !== "Study" ? (
-                        <>
-                          <label
-                            htmlFor="frontend"
-                            className="involve_frontend-label"
-                          >
-                            프론트엔드
-                          </label>
-                          <input
-                            onChange={() =>
-                              setPositionRatio({ frontend: 1, backend: 0 })
-                            }
-                            type="radio"
-                            id="frontend"
-                            value="frontend"
-                            key="frontend"
-                            name="position"
-                            className="involve_position-chkBox"
-                          ></input>
-
-                          <label
-                            htmlFor="backend"
-                            className="involve_backend-label"
-                          >
-                            백엔드
-                          </label>
-                          <input
-                            onChange={() =>
-                              setPositionRatio({ frontend: 0, backend: 1 })
-                            }
-                            type="radio"
-                            id="backend"
-                            value="backend"
-                            key="backend"
-                            name="position"
-                            className="involve_position-chkBox"
-                          ></input>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      {props.location.state.category !== "Question" ? (
-                        <button
-                          className="submitBtn"
-                          onClick={() => submitForm()}
-                        >
-                          신청하기
-                        </button>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                ) : (
+                  <h2>신청이 완료된 게시물입니다.</h2>
+                )}
               </div>
             </div>
           </div>

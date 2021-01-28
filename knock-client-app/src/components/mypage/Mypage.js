@@ -74,13 +74,12 @@ class Mypage extends React.Component {
               <h1>열린 게시물</h1>
             </div>
             <div className="openboardWrap_boardList">
-              {openPosts.map((post) => {
+              {openPosts.map((post, idx) => {
                 return (
-                  <div className="boardList_openboard">
+                  <div key={idx} className="boardList_openboard">
                     <div className="boardList_openboard_brief">
                       <h1>{post.title}</h1>
                       <h2>인원 : {post.total}</h2>
-                      {/* 사용자 포지션 들어가야함!!!!!!! */}
                       <h2>진행중</h2>
                     </div>
                     <div className="boardList_openboard_detail">

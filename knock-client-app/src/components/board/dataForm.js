@@ -26,10 +26,6 @@ const DataForm = (props) => {
     }
   };
 
-  const choiceStack = (e) => {
-    props.stack(e.target.value);
-  };
-
   const isPosition = (e) => {
     // 비율에 대한 에러 [이준희]
     props.position(e.target.value);
@@ -87,65 +83,80 @@ const DataForm = (props) => {
 
   return (
     <div className="Data_Container">
-      <form className="DataForm">
-        <div className="Q_one">
-          <p>1. 인원을 선택해주세요.[project는 최대 4명이 권장사항 입니다.]</p>
-          <>{getTogether}</>
-          {isOver ? (
-            <div>
-              <p>***최대 모집인원은 8명입니다***</p>
-              <>{overMember}</>
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
-        {props.category === "Project" ? (
-          <>
-            <div className="Q_two">
-              <p>2. 원하시는 Position 비율을 입력해주세요.</p>
-              <p>
-                [이때 본인의 포지션은 비율에서 제외합니다. 4명 모집에 본인이
-                백엔드를 원하면 /프론트 2명 백엔드 1명]
-              </p>
+      {props.category !== "Question" && props.category !== "Category" ? (
+        <form className="DataForm">
+          <div className="Q_one">
+            {props.category === "Project" ? (
+              <h2>모든 사항을 반드시 선택해주세요.</h2>
+            ) : (
+              <></>
+            )}
+            <h4>
+              * 1. 인원을 선택해주세요.[project는 최대 4명이 권장사항 입니다.]
+            </h4>
+            <>{getTogether}</>
+            {isOver ? (
               <div>
-                <input
-                  onChange={(e) => {
-                    isPosition(e);
-                  }}
-                  className="Front_end"
-                  type="text"
-                  placeholder="프론트엔드"
-                />
-                <span>명</span>
-                <input
-                  onChange={(e) => {
-                    isPosition(e);
-                  }}
-                  className="Back_end"
-                  type="text"
-                  placeholder="백엔드"
-                />
-                <span>명</span>
+                <p>***최대 모집인원은 8명입니다***</p>
+                <>{overMember}</>
               </div>
-            </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          {props.category === "Project" ? (
+            <>
+              <div className="Q_two">
+                <h4> * 2. 원하시는 Position 비율을 입력해주세요.</h4>
+                <h5>
+                  [이때 본인의 포지션은 비율에서 제외합니다. 4명 모집에 본인이
+                  백엔드를 원하면 /프론트 2명 백엔드 1명]
+                </h5>
+                <div>
+                  <input
+                    onChange={(e) => {
+                      isPosition(e);
+                    }}
+                    className="Front_end"
+                    type="text"
+                    placeholder="프론트엔드"
+                  />
+                  <span>명</span>
+                  <input
+                    onChange={(e) => {
+                      isPosition(e);
+                    }}
+                    className="Back_end"
+                    type="text"
+                    placeholder="백엔드"
+                  />
+                  <span>명</span>
+                </div>
+              </div>
 
+              <div className="Q_three">
+                <h4>* 3.스택을 추가해주세요.</h4>
+                <div className="showStack">
+                  {`현재 ${stack}을 선택하셨습니다.`}
+                </div>
+                <PrintLogo stack={getStack} />
+                {/* <div className="Stack">{stack}</div> */}
+              </div>
+            </>
+          ) : (
             <div className="Q_three">
-              <p>3.스택을 추가해주세요.</p>
-              <div>{stack}</div>
+              <h4>2.스택을 추가해주세요.</h4>
+              <div className="showStack">
+                {`현재 ${stack}을 선택하셨습니다.`}
+              </div>
               <PrintLogo stack={getStack} />
               {/* <div className="Stack">{stack}</div> */}
             </div>
-          </>
-        ) : (
-          <div className="Q_three">
-            <p>2.스택을 추가해주세요.</p>
-            <div>{stack}</div>
-            <PrintLogo stack={getStack} />
-            {/* <div className="Stack">{stack}</div> */}
-          </div>
-        )}
-      </form>
+          )}
+        </form>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

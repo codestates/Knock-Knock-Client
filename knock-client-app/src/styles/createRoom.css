@@ -94,3 +94,9 @@
 .sendBtn:hover {
   background-color: #683232;
 }
+
+.showStack {
+  border: 2px solid white;
+  height: 30px;
+  width: auto;
+}

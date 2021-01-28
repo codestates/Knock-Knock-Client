@@ -53,9 +53,34 @@ const CreateRoom = (props) => {
           post_stacks: `${String(stack)}`,
           content: description,
         };
-        console.log("body = ", body);
+        if (category === "Project") {
+          if (
+            !body.total ||
+            !body.post_stacks ||
+            !body.backend ||
+            !body.frontend ||
+            !body.content
+          ) {
+            return alert("모든 항목을 반드시 입력해주세요.");
+          } else if (
+            !(
+              parseInt(body.backend) + parseInt(body.frontend) <
+              parseInt(body.total)
+            )
+          )
+            console.log("?????", body.frontend, body.backend, body.total);
+          return alert("설명을 다시 읽고 비율을 입력해주세요.");
+        }
+
+        if (category === "Study") {
+          if (!body.total) {
+            return alert("모집인원을 선택해주세요.");
+          }
+        }
         axios
-          .post("https://localhost:4000/posts", body, { withCredentials: true })
+          .post("https://localhost:4000/posts", body, {
+            withCredentials: true,
+          })
           .then(() => {
             props.history.push("/board");
           });
