@@ -21,8 +21,10 @@ import typescript from "../../images/logo/typescript.png";
 
 const PrintLogo = (props) => {
   const select = (e) => {
-    props.stack(e.target.value);
+    console.log("선택한 스택", e.target.value);
+    props.stack ? props.stack(e.target.value) : props.userStack(e.target.value);
   };
+
   return (
     <div className="StackLogo">
       <input onChange={select} type="checkbox" name="logo" value="c#" id="c#" />

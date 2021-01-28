@@ -15,13 +15,14 @@ class MngAccount extends React.Component {
     this.userPropensity = this.userPropensity.bind(this);
     this.userMood = this.userMood.bind(this);
     this.storageInfo = this.storageInfo.bind(this);
-    this.userStack = this.userStack.bind(this);
+    this.getStack = this.getStack.bind(this);
     this.retrospectClickHandler = this.retrospectClickHandler.bind(this);
     this.getHisfromAccWithProfile = this.getHisfromAccWithProfile.bind(this);
 
     this.state = {
       isMypage: true,
       userInfo: {},
+      userStack: [],
     };
     this.grade = "";
     this.propensity = "";
@@ -33,22 +34,6 @@ class MngAccount extends React.Component {
         <option key={idx} value={el}>
           {el}
         </option>
-      );
-    });
-
-    this.stackList = stacks.map((el, idx) => {
-      return (
-        <>
-          <input
-            onChange={this.userStack}
-            type="checkbox"
-            id={el}
-            name="stack"
-            value={el}
-            key={idx}
-          />
-          <label htmlFor={el}>{el}</label>
-        </>
       );
     });
   }
@@ -67,14 +52,19 @@ class MngAccount extends React.Component {
     this.propensity = value.target.value;
   }
 
-  userStack(value) {
-    value.target.checked
-      ? this.stack.push(value.target.value)
-      : this.stack.splice(this.stack.indexOf(value.target.value), 1);
-  }
-
   userMood(value) {
     this.mood = value.target.value;
+  }
+
+  getStack(e) {
+    if (this.stack.includes(e)) {
+      this.stack.splice(this.stack.indexOf(e), 1);
+      this.setState({ userStack: this.stack });
+    } else {
+      this.stack.push(e);
+      this.setState({ userStack: this.stack });
+    }
+    console.log("프로필의 스택입니다.", this.stack);
   }
 
   storageInfo() {
@@ -91,7 +81,6 @@ class MngAccount extends React.Component {
       })
       .then((updatedUserInfo) => {
         console.log("수정된 사용자 정보 = ", updatedUserInfo);
-        //this.setState({userInfo: updatedUserInfo.data.userdata})
         this.props.history.push("/mypage", userInfo);
       });
   }
@@ -150,7 +139,10 @@ class MngAccount extends React.Component {
               <h1>
                 {this.state.username}님이 주로 사용하는 스택을 선택해주세요.
               </h1>
-              <PrintLogo />
+              <div className="showStack">
+                {`현재 ${this.state.userStack}을 선택하셨습니다.`}
+              </div>
+              <PrintLogo userStack={this.getStack} />
             </div>
           </div>
           <div className="editUserInfoFormSec_saveBtn">
