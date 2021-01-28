@@ -79,13 +79,10 @@ class Mypage extends React.Component {
                   <div key={idx} className="boardList_openboard">
                     <div className="boardList_openboard_brief">
                       <h1>{post.title}</h1>
-                      <h2>인원 : {post.total}</h2>
-                      <h2>진행중</h2>
+
+                      <h2>OPEN</h2>
                     </div>
                     <div className="boardList_openboard_detail">
-                      <div className="openboard_detail_title_writer">
-                        <h2>그룹장: {post.writer}</h2>
-                      </div>
                       <p>{post.content}</p>
                       <p>스택 : {post.post_stacks}</p>
                     </div>
@@ -104,15 +101,12 @@ class Mypage extends React.Component {
                   <div className="boardList_openboard">
                     <div className="boardList_openboard_brief">
                       <h1>{post.title}</h1>
-                      <h2>인원 : {post.total}</h2>
-                      {/* 사용자 포지션 들어가야함!!!!!!! */}
-                      <h2>종료</h2>
+
+                      <h2>CLOSED</h2>
                     </div>
                     <div className="boardList_openboard_detail">
-                      <div className="openboard_detail_title_writer">
-                        <h2>그룹장: {post.writer}</h2>
-                      </div>
                       <p>{post.content}</p>
+
                       <p>스택 : {post.post_stacks}</p>
                     </div>
                   </div>

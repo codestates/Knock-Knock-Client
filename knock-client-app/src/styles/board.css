@@ -38,7 +38,7 @@ li {
   display: flex;
   flex: 9;
   flex-wrap: wrap;
-  margin-left: 6vw;
+  margin-left: 1vw;
   margin-top: 3vw;
 
   overflow: scroll;
@@ -48,47 +48,60 @@ li {
   display: flex;
   background: #fff;
   margin: 2vw;
-  border: 3px solid yellow;
-  border-radius: 50px;
+  border: 3px solid rgb(252, 252, 196);
+  border-radius: 34px;
   overflow-x: auto;
   cursor: pointer;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 16vw;
-  height: 27vw;
+  width: 16.5vw;
+  height: 23vw;
+  padding: 0.5vw;
 }
 
 .B_RoomCard-image {
-  max-width: 100%;
+  max-width: 93%;
   flex: 2;
-  border: 1px solid black;
 }
 
 .B_RoomCard-Status {
-  width: 100%;
-  flex: 2;
-  border: 1px solid black;
+  flex: 0.5;
+  border: 1.8px solid lightgray;
+  border-radius: 10px;
+  color: gray;
+  margin-top: 1.1vw;
+  padding: 1% 5%;
+  font-size: 0.9vw;
 }
 
 .B_RommCard-info {
   width: 100%;
   flex: 2;
-  border: 1px solid black;
+}
+
+.B_RoomCard-category {
+  margin-top: 6%;
+  font-size: 1.1vw;
+  color: rgb(109, 107, 107);
 }
 
 .B_RoomCard-writer-createdAt {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
-  width: 100%;
+  width: 87%;
   flex: 2;
-  border: 1px solid black;
+  font-size: 0.75vw;
+  color: rgb(73, 72, 72);
 }
 
 .B_RoomCard-title {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(53, 52, 52);
+  padding: 3% 13%;
 }
 
 .B_RoomCard-stack {
@@ -112,15 +125,19 @@ li {
 
 @media (max-width: 1200px) {
   .B_RoomContaniner {
-    display: block;
     margin-left: 12vw;
   }
 
   .B_RoomCard {
     width: 50vw;
+    height: 67vw;
   }
 
   .B_RoomCard-stack {
     width: 10vw;
+  }
+
+  .B_RoomCard-image {
+    max-width: 100%;
   }
 }

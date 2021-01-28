@@ -26,11 +26,6 @@ const DataForm = (props) => {
     }
   };
 
-  const isPosition = (e) => {
-    // 비율에 대한 에러 [이준희]
-    props.position(e.target.value);
-  };
-
   const howMany = [2, 3, 4, "4명이상"];
   const overPeople = [5, 6, 7, 8];
 
@@ -114,18 +109,14 @@ const DataForm = (props) => {
                 </h5>
                 <div>
                   <input
-                    onChange={(e) => {
-                      isPosition(e);
-                    }}
+                    onChange={(e) => props.positionFront(e.target.value)}
                     className="Front_end"
                     type="text"
                     placeholder="프론트엔드"
                   />
                   <span>명</span>
                   <input
-                    onChange={(e) => {
-                      isPosition(e);
-                    }}
+                    onChange={(e) => props.positionBack(e.target.value)}
                     className="Back_end"
                     type="text"
                     placeholder="백엔드"

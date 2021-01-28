@@ -165,23 +165,24 @@
   justify-content: space-between;
 }
 
+.boardList_openboard_brief h1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+  overflow: hidden;
+}
+
 .boardList_openboard_detail {
   opacity: 0;
   border-top: 1px solid black;
   transition: all 0.1s ease;
 }
 
-.openboard_detail_title_writer {
-  display: flex;
-  justify-content: space-between;
-}
-
 .boardList_openboard:hover {
-  height: 200px;
+  height: auto;
 }
 
 .boardList_openboard:hover .boardList_openboard_detail {
-  height: 200px;
   opacity: 1;
   transform: translateY(0);
 }
