@@ -46,7 +46,8 @@
 /* ----설문조사 폼에 대한 css---*/
 .Data_Container {
   background-color: rgb(255, 255, 177);
-
+  width: 64%;
+  margin-left: 18%;
   margin-top: 1.5%;
 }
 
@@ -67,7 +68,18 @@
   border: 1px solid rgb(65, 64, 64);
 } */
 
-.Q_one {
+.Q_three:hover {
+  height: auto;
+}
+
+.Q_three:hover .showStack {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.Q_three:hover .StackLogo {
+  opacity: 1;
+  transform: translateY(0);
 }
 /* ----footer 폼에 대한 css---*/
 

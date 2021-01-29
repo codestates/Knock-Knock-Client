@@ -19,6 +19,7 @@
 }
 
 .startBtn {
+  cursor: pointer;
   width: 6vw;
   margin-top: 30%;
   font-size: 20px;
