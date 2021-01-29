@@ -30,7 +30,6 @@ const App = (props) => {
       <div className="navbar">
         <div className="navbar_home">
           <Link to="/">
-            {props.location}
             <img src={navHomeYel} className="navbar_homeImgYel" />
           </Link>
         </div>

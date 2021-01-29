@@ -38,7 +38,7 @@ class Mypage extends React.Component {
   }
 
   retrospectClickHandler() {
-    this.props.history.push("/mngHistory");
+    this.props.history.push("/mngHistory", { isMypage: true });
   }
 
   getHisfromAccWithProfile() {

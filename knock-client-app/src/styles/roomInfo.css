@@ -47,6 +47,7 @@
   border-radius: 45px;
   text-align: center;
   margin-left: 2.8%;
+  padding-top: 3%;
   padding-bottom: 0.5%;
 }
 
@@ -84,26 +85,16 @@
 .B_info-category {
   margin-top: 5%;
   margin-bottom: 2%;
-  font-size: 1.6vw;
+  font-size: 30px;
   color: rgb(109, 107, 107);
 }
 
 .B_info-title {
-  margin-top: 4%;
-  font-size: 1.8vw;
-  height: 5.7vw;
+  margin-top: 2%;
+  font-size: 1.6vw;
+  margin-bottom: 18%;
+
   overflow: scroll;
-}
-
-.D_info-stakcs {
-  display: flex;
-}
-
-.D_info-stack {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  margin: 0.5%;
 }
 
 /* ---------------------------------- */
@@ -128,7 +119,7 @@
 }
 
 .D_info-category {
-  font-size: 2.5vw;
+  font-size: 40px;
   font-weight: 350;
   color: lightgray;
   margin-bottom: 0.3vw;
@@ -138,6 +129,17 @@
   font-size: 3vw;
   font-weight: 400;
   margin-bottom: 1vw;
+}
+
+.D_info-stakcs {
+  display: flex;
+}
+
+.D_info-stack {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  margin: 0.5%;
 }
 
 .D_info_total_position {
@@ -158,6 +160,12 @@
 }
 
 .D_info-stakcs {
+  font-size: 1.5vw;
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+}
+
+.D_info-stakcs-none {
   font-size: 1.5vw;
   margin-left: 1vw;
   margin-bottom: 1vw;
@@ -319,7 +327,7 @@
   border: none;
   font-size: 2px;
   border-radius: 100px;
-  padding: 0.8%;
+  padding: 1%;
   background-color: #ed462f;
   right: 0.1vw;
   bottom: 0.3vw;
@@ -329,11 +337,14 @@
 
 .Reply_input_form {
   display: flex;
-  margin-left: 40px;
+  margin-left: 3%;
 }
 
 .ReplyBox {
   width: 71.5vw;
+  padding-left: 0.4%;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .SendBtn {
@@ -342,6 +353,8 @@
   color: white;
   background-color: #391b1b;
   border: 1px solid #391b1b;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* ---------------------------------- */
@@ -359,5 +372,117 @@
 
   .submitBtn {
     font-size: 1px;
+  }
+
+  .RoomInfo_Brief {
+    width: 90%;
+  }
+
+  .Brief_status {
+    font-size: 18px;
+  }
+
+  .Brief_img {
+    max-width: 70%;
+    flex: 4;
+  }
+
+  .B_info-category {
+    margin-top: 3%;
+
+    font-size: 20px;
+    color: rgb(109, 107, 107);
+  }
+
+  .B_info-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-align: center;
+    width: 60%;
+    margin-left: 21%;
+    margin-bottom: 2%;
+  }
+
+  .D_info-category {
+    margin-top: 2%;
+    font-size: 27px;
+    font-weight: 600;
+  }
+
+  .D_info-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 2%;
+    margin-bottom: 3%;
+  }
+
+  .D_info_total_position {
+    font-size: 20px;
+    margin-bottom: 3%;
+  }
+
+  .D_info-stacks-title {
+    font-size: 20px;
+  }
+
+  .D_info-stacks-wrap {
+    margin-bottom: 5%;
+  }
+
+  .D_info-content-title {
+    font-size: 20px;
+  }
+
+  .D_info-content {
+    font-size: 15px;
+  }
+
+  .D_question-content-title {
+    font-size: 20px;
+  }
+
+  .D_question-content {
+    font-size: 15px;
+  }
+
+  .D_info-stakcs-none {
+    font-size: 20px;
+  }
+
+  .reply_username_date {
+    font-size: 15px;
+  }
+
+  .reply_text {
+    font-size: 15px;
+  }
+
+  .reply_del_btn {
+    padding-top: 2.5%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+
+    right: -1%;
+  }
+
+  .Reply_input_form {
+    margin-left: 3%;
+    margin-right: -2.8%;
+  }
+
+  .ReplyBox {
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  .SendBtn {
+    width: 13%;
+    height: 10vw;
+    font-size: 0.3vw;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
   }
 }

@@ -49,10 +49,22 @@ class ProfileEdit extends Component {
     return (
       <div className="mypageContainer_profileSec">
         <header className="P_headers">
-          <p className="P_subtitle">히스토리</p>
-          <button onClick={() => this.props.mypageHandleFromHisPro()}>
-            마이페이지
-          </button>
+          {this.props.breadcrumbHandler.state ? (
+            <div
+              className="P_breadcrumb"
+              onClick={() => this.props.mypageHandleFromHisPro()}
+            >
+              마이페이지 &gt;&nbsp;
+            </div>
+          ) : (
+            <div
+              className="P_breadcrumb"
+              onClick={() => this.props.mngAccountHandleFromHisPro()}
+            >
+              계정관리 &gt;&nbsp;
+            </div>
+          )}
+          <div className="P_subtitle">히스토리</div>
         </header>
 
         <select className="List_filter" onChange={this.filter}>

@@ -5,6 +5,10 @@ import "../../styles/home.css";
 import github from "../../images/logo/github.png";
 import google from "../../images/logo/google.png";
 import { BrowserRouter as Route, Link } from "react-router-dom";
+
+import navRightImg1 from "../../images/homeImg/navRight1.png";
+import navRightImg2 from "../../images/homeImg/navRight2.jpg";
+
 const axios = require("axios");
 
 const customStyles = {
@@ -17,6 +21,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
+  overlay: { zIndex: 1000 },
 };
 
 const ModalRouter = (props) => {
@@ -71,13 +76,19 @@ const ModalRouter = (props) => {
       withCredentials: true,
     });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
-    if (props.accHistory.location.pathname !== "/") props.accHistory.push("/");
+    if (
+      props.accHistory.location.pathname &&
+      props.accHistory.location.pathname !== "/"
+    ) {
+      props.accHistory.push("/");
+    }
   }
 
   console.log("각시탈", props.accHistory);
   return isLogin ? (
     <div>
-      <button onClick={openModal}>로그인상태</button>
+      <img className="navRightImg" src={navRightImg1} onClick={openModal} />
+
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -104,7 +115,9 @@ const ModalRouter = (props) => {
     </div>
   ) : (
     <div>
-      <button onClick={openModal}>로그아웃상태</button>
+      <div className="startBtn" onClick={openModal}>
+        시작하기
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
