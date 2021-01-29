@@ -6,13 +6,13 @@ import question from "../../images/boardImg/Question.jpg";
 import study from "../../images/boardImg/studyGroup.jpg";
 import PostReply from "./postReply";
 import axios from "axios";
+import { logoImg } from "../../utils/options";
 
 const RoomInfo = (props) => {
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
   const [positionRatio, setPositionRatio] = useState({});
-  const [crewCounter, setCrewCounter] = useState({});
 
   const submitForm = () => {
     if (window.localStorage.getItem("isLogin")) {
@@ -50,9 +50,9 @@ const RoomInfo = (props) => {
             { withCredentials: true }
           );
         }
-      } else {
-        alert("로그인을 해주세요.");
       }
+    } else {
+      alert("로그인을 해주세요.");
     }
   };
 
@@ -133,36 +133,46 @@ const RoomInfo = (props) => {
               {props.location.state.category !== "Project" ? (
                 props.location.state.category !== "Question" ? (
                   props.location.state.category !== "Closed" ? (
-                    <img src={study} className="Brief_img" />
+                    <>
+                      <div className="Brief_status">OPEN</div>
+                      <img src={study} className="Brief_img" />
+                    </>
                   ) : (
                     <></>
                   )
+                ) : props.location.state.open ? (
+                  <>
+                    <div className="Brief_status">OPEN</div>
+                    <img src={question} className="Brief_img" />
+                  </>
                 ) : (
-                  <img src={question} className="Brief_img" />
+                  <>
+                    <div className="Brief_status">CLOSED</div>
+                    <img src={question} className="Brief_img" />
+                  </>
                 )
               ) : (
-                <img src={together} className="Brief_img" />
+                <>
+                  <div className="Brief_status">OPEN</div>
+                  <img src={together} className="Brief_img" />
+                </>
               )}
               <div className="Brief_info">
                 <div className="B_info-category">
                   {props.location.state.category}
                 </div>
-                <div className="B_info-title">{props.location.state.title}</div>
-                <div className="B_info-total">
-                  최대 인원 {props.location.state.total}명
+                <div className="B_info-title">
+                  {props.location.state.title.length >= 32
+                    ? props.location.state.title.substr(0, 32) + "..."
+                    : props.location.state.title}
                 </div>
-                <div className="B_info-position">
-                  프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
-                  {props.location.state.backend}명
+              </div>
+              <div className="Brief_writer_createdAt">
+                <div className="Brief_writer">
+                  {props.location.state.writer}
                 </div>
-                <div className="B_info-stacks">
-                  {props.location.state.post_stacks ? (
-                    props.location.state.post_stacks.map((stack) => {
-                      return <div className="B_info-stack">{stack}</div>;
-                    })
-                  ) : (
-                    <></>
-                  )}
+                <div className="Brief_createdAt">
+                  {props.location.state.created_at.split("T")[0]}
                 </div>
               </div>
             </div>
@@ -197,21 +207,45 @@ const RoomInfo = (props) => {
                     <div className="D_info-stacks-title">스택</div>
                     {props.location.state.post_stacks ? (
                       <div className="D_info-stakcs">
-                        {props.location.state.post_stacks}
+                        {props.location.state.post_stacks.map((stack) => {
+                          for (let key in logoImg) {
+                            if (stack === key) {
+                              return (
+                                <img
+                                  className="D_info-stack"
+                                  src={logoImg[key]}
+                                />
+                              );
+                            }
+                          }
+                        })}
                       </div>
                     ) : (
                       <div className="D_info-stakcs">스택없음</div>
                     )}
                   </div>
-
                   <div className="D_info-content-wrap">
-                    <div className="D_info-content-title">소개</div>
-                    <div
-                      className="D_info-content"
-                      dangerouslySetInnerHTML={{
-                        __html: props.location.state.content,
-                      }}
-                    ></div>
+                    {props.location.state.category !== "Question" ? (
+                      <>
+                        <div className="D_info-content-title">소개</div>
+                        <div
+                          className="D_info-content"
+                          dangerouslySetInnerHTML={{
+                            __html: props.location.state.content,
+                          }}
+                        ></div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="D_question-content-title">질문</div>
+                        <div
+                          className="D_question-content"
+                          dangerouslySetInnerHTML={{
+                            __html: props.location.state.content,
+                          }}
+                        ></div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -288,7 +322,13 @@ const RoomInfo = (props) => {
                     )}
                   </div>
                 ) : (
+                  <></>
+                )}
+
+                {props.location.state.category !== "Question" ? (
                   <h2>신청이 완료된 게시물입니다.</h2>
+                ) : (
+                  <></>
                 )}
               </div>
             </div>

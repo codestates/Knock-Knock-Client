@@ -22,12 +22,11 @@
   .mypageContainer_profileSec {
     height: 100vh;
     background: #f7e462;
-    border: 1px solid black;
   }
 
   .mypageContainer_editUserInfoFormSec {
     flex: 6;
-    border: 1px solid black;
+
     overflow: scroll;
   }
 }
@@ -36,7 +35,6 @@
 
 .mypageContainer_blankSec {
   flex: 1;
-  border: 1px solid black;
 }
 
 /* ------------------------------------------- */
@@ -46,7 +44,6 @@
   flex-direction: column;
   flex: 3;
   background: #f7e462;
-  border: 1px solid black;
 }
 
 .profileSec_profileImg {
@@ -54,7 +51,6 @@
   justify-content: center;
   align-items: center;
   flex: 2;
-  border: 1px solid black;
 }
 
 .profileSec_profileImg img {
@@ -66,7 +62,6 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
-  border: 1px solid black;
 }
 
 .profileSec_name_mood p {
@@ -83,7 +78,6 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
-  border: 1px solid black;
 }
 
 .profileSec_btns button {
@@ -103,11 +97,13 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  border: 1px solid black;
 }
 
-.profileSec_stacks img {
-  margin: 2%;
+.profileSec_stack {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  margin: 1.5%;
 }
 
 /* ------------------------------------------- */
@@ -116,7 +112,7 @@
   display: flex;
   flex-direction: column;
   flex: 6;
-  border: 1px solid black;
+
   overflow: scroll;
 
   /* 스크롤바 숨기기 */
@@ -132,13 +128,12 @@
   display: flex;
   flex-direction: column;
   flex: 5;
-  border: 1px solid black;
+  overflow: scroll;
 }
 
 .openboardWrap_title {
   flex: 1;
   padding-left: 3%;
-  border: 1px solid black;
 }
 
 .openboardWrap_boardList {
@@ -146,15 +141,14 @@
   flex-direction: column;
   align-items: center;
   flex: 9;
-  border: 1px solid black;
 }
 
 .boardList_openboard {
   height: 100px;
   width: 80%;
   margin: 2%;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 3px solid rgb(196, 196, 196);
+  border-radius: 20px;
   transition: all 0.1s ease;
   padding-left: 2%;
   padding-right: 2%;
@@ -165,23 +159,30 @@
   justify-content: space-between;
 }
 
+.boardList_openboard_brief h1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.boardList_openboard_brief h2 {
+  color: green;
+}
+
 .boardList_openboard_detail {
   opacity: 0;
   border-top: 1px solid black;
   transition: all 0.1s ease;
 }
 
-.openboard_detail_title_writer {
-  display: flex;
-  justify-content: space-between;
-}
-
 .boardList_openboard:hover {
-  height: 200px;
+  height: auto;
+  box-shadow: 5px 5px 5px 5px lightgray;
 }
 
 .boardList_openboard:hover .boardList_openboard_detail {
-  height: 200px;
   opacity: 1;
   transform: translateY(0);
 }
@@ -191,15 +192,13 @@
 .boardListSec_closeboardWrap {
   display: flex;
   flex-direction: column;
-
   flex: 5;
-  border: 1px solid black;
+  overflow: scroll;
 }
 
 .closeboardWrap_title {
   flex: 1;
   padding-left: 3%;
-  border: 1px solid black;
 }
 
 .closeboardWrap_boardList {
@@ -207,15 +206,14 @@
   flex-direction: column;
   align-items: center;
   flex: 9;
-  border: 1px solid black;
 }
 
 .boardList_closeboard {
   height: 100px;
   width: 80%;
   margin: 2%;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 3px solid rgb(196, 196, 196);
+  border-radius: 20px;
   transition: all 0.1s ease;
   padding-left: 2%;
   padding-right: 2%;
@@ -224,6 +222,18 @@
 .boardList_closeboard_brief {
   display: flex;
   justify-content: space-between;
+}
+
+.boardList_closeboard_brief h1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.boardList_closeboard_brief h2 {
+  color: red;
 }
 
 .boardList_closeboard_detail {
@@ -238,7 +248,8 @@
 }
 
 .boardList_closeboard:hover {
-  height: 200px;
+  height: auto;
+  box-shadow: 5px 5px 5px 5px lightgray;
 }
 
 .boardList_closeboard:hover .boardList_closeboard_detail {
@@ -253,43 +264,114 @@
   display: flex;
   flex-direction: column;
   flex: 6;
-  border: 1px solid black;
   overflow: scroll;
+}
+
+.editUserInfoFormSec_wrap {
+  border: 3px solid rgb(255, 255, 183);
+  margin-top: 10%;
+  margin-left: 13%;
+  margin-right: 13%;
+  border-radius: 21px;
+  padding-top: 3%;
 }
 
 .editUserInfoFormSec_term {
   flex: 3;
-  border: 1px solid black;
+
   padding-left: 3%;
   padding-top: 3%;
+}
+
+.editUserInfoFormSec_usernameText {
+  border: none;
+  resize: none;
+  font-size: 20px;
+  width: 250px;
 }
 
 .editUserInfoFormSec_propensity {
   flex: 3;
-  border: 1px solid black;
+
   padding-left: 3%;
   padding-top: 3%;
+}
+
+.editUserInfoFormSec_propensitySelect {
+  border: 1px solid lightgray;
+  margin-top: 2%;
+  font-size: 15px;
+  color: gray;
 }
 
 .editUserInfoFormSec_mood {
   flex: 3;
-  border: 1px solid black;
   padding-left: 3%;
   padding-top: 3%;
 }
 
-.editUserInfoFormSec_saveBtn {
+.editUserInfoFormSec_moodText {
+  border: none;
+  resize: none;
+  margin-top: 2%;
+  font-size: 20px;
+  width: 250px;
+}
+
+.editUserInfoFormSec_stacks_wrap {
+  flex: 3;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_phrase {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.showStack {
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
+.showStack_stacks {
+  font-weight: 700;
+}
+
+.StackLogo {
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
+.editUserInfoFormSec_stacks_wrap:hover {
+  height: auto;
+}
+
+.editUserInfoFormSec_stacks_wrap:hover .showStack {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.editUserInfoFormSec_stacks_wrap:hover .StackLogo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.showStack .editUserInfoFormSec_saveBtn {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.editUserInfoFormSec_saveBtn button {
-  width: 200px;
-  height: 100px;
+.editUserInfoFormSec_saveBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 5vw;
   border: none;
   border-radius: 20px;
   background: #f7e462;
-  font-size: 30px;
   font-weight: 900;
+  padding-bottom: 0.1%;
 }

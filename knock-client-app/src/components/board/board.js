@@ -71,25 +71,36 @@ const PublicBoard = (props) => {
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
-    const userInfo = await axios.get("https://localhost:4000/profile", {
-      withCredentials: true,
-    });
-
-    const userInvolved = [];
-    userInfo.data.postdata.filter((el) => {
-      userInvolved.push(el.id);
-    });
-    console.log("asdsa", userInvolved);
-
     const postId = event.nativeEvent.path[0].attributes.value.value;
-    for (let post of posts) {
-      if (post.id === Number(postId)) {
-        if (userInvolved.indexOf(post.id) !== -1) {
-          props.history.push("/roomInfo", {
-            ...post,
-            userInvolved: true,
-          });
-        } else {
+    if (window.localStorage.getItem("isLogin")) {
+      const userInfo = await axios.get("https://localhost:4000/profile", {
+        withCredentials: true,
+      });
+
+      const userInvolved = [];
+      userInfo.data.postdata.filter((el) => {
+        userInvolved.push(el.id);
+      });
+      console.log("asdsa", userInvolved);
+
+      for (let post of posts) {
+        if (post.id === Number(postId)) {
+          if (userInvolved.indexOf(post.id) !== -1) {
+            props.history.push("/roomInfo", {
+              ...post,
+              userInvolved: true,
+            });
+          } else {
+            props.history.push("/roomInfo", {
+              ...post,
+              userInvolved: false,
+            });
+          }
+        }
+      }
+    } else {
+      for (let post of posts) {
+        if (post.id === Number(postId)) {
           props.history.push("/roomInfo", {
             ...post,
             userInvolved: false,
@@ -168,12 +179,14 @@ const PublicBoard = (props) => {
                       value={post.id}
                     />
 
-                    <div className="B_RommCard-info">
+                    <div className="B_RommCard-info" value={post.id}>
                       <div className="B_RoomCard-category" value={post.id}>
                         {post.category}
                       </div>
                       <div className="B_RoomCard-title" value={post.id}>
-                        {post.title}
+                        {post.title.length >= 23
+                          ? post.title.substr(0, 23) + "..."
+                          : post.title}
                       </div>
                     </div>
                     <div
@@ -206,12 +219,14 @@ const PublicBoard = (props) => {
                       className="B_RoomCard-image"
                       value={post.id}
                     />
-                    <div className="B_RommCard-info">
+                    <div className="B_RommCard-info" value={post.id}>
                       <div className="B_RoomCard-category" value={post.id}>
                         {post.category}
                       </div>
                       <div className="B_RoomCard-title" value={post.id}>
-                        {post.title}
+                        {post.title.length >= 23
+                          ? post.title.substr(0, 23) + "..."
+                          : post.title}
                       </div>
                     </div>
 
@@ -246,11 +261,15 @@ const PublicBoard = (props) => {
                     className="B_RoomCard-image"
                     value={post.id}
                   />
-                  <div className="B_RoomCard-category" value={post.id}>
-                    {post.category}
-                  </div>
-                  <div className="B_RoomCard-title" value={post.id}>
-                    {post.title}
+                  <div className="B_RommCard-info" value={post.id}>
+                    <div className="B_RoomCard-category" value={post.id}>
+                      {post.category}
+                    </div>
+                    <div className="B_RoomCard-title" value={post.id}>
+                      {post.title.length >= 23
+                        ? post.title.substr(0, 23) + "..."
+                        : post.title}
+                    </div>
                   </div>
                   <div className="B_RoomCard-writer-createdAt" value={post.id}>
                     <div className="B_RoomCard-writer" value={post.id}>

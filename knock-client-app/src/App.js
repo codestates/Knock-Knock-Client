@@ -11,8 +11,9 @@ import RoomInfo from "./components/board/roomInfo";
 import MngAccount from "./components/mypage/MngAccount";
 import MngHistory from "./components/mypage/MngHistory";
 import ModalRouter from "./components/main/ModalRouter";
+import navHomeYel from "./images/homeImg/Logo_yel.png";
 
-const App = () => {
+const App = (props) => {
   const [isModalLogin, setIsModalLogin] = useState(false);
   const [accHistory, setAccHistory] = useState({});
 
@@ -28,7 +29,10 @@ const App = () => {
     <Router>
       <div className="navbar">
         <div className="navbar_home">
-          <Link to="/">HOME</Link>
+          <Link to="/">
+            {props.location}
+            <img src={navHomeYel} className="navbar_homeImgYel" />
+          </Link>
         </div>
         <ModalRouter isModalLogin={isModalLogin} accHistory={accHistory} />
       </div>

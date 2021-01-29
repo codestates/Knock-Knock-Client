@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import axios from "axios";
+import { logoImg } from "../../utils/options";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -41,6 +42,9 @@ class Profile extends React.Component {
       .then((userInfo) => {
         console.log("프로필 userInfo = ", userInfo);
         this.setState({ userInfo: userInfo.data.userdata });
+        if (this.props.getUserInfoFromProfile) {
+          this.props.getUserInfoFromProfile(userInfo.data.userdata);
+        }
 
         //서버에서 사용자 정보를 가져오면서 로컬스토리지에 사용자 정보가 들어간다.
         window.localStorage.setItem("userid", userInfo.data.userdata.id);
@@ -101,13 +105,19 @@ class Profile extends React.Component {
           )}
         </div>
         <div className="profileSec_stacks">
-          {/* 밑에 있는 로직은 로고를 이미지로 보여주기 위한 컴포넌트 [PrintStackLogo.js]구상중 */}
-          {/* <PrintLogo
-            Logo={this.state.userInfo ? this.state.userInfo.user_stacks : ""}
-          /> */}
-          <div>
-            {/* {this.state.userInfo ? this.state.userInfo.user_stacks : ""} */}
-          </div>
+          {this.state.userInfo.user_stacks ? (
+            this.state.userInfo.user_stacks.split(",").map((stack) => {
+              for (let key in logoImg) {
+                if (stack === key) {
+                  return (
+                    <img className="profileSec_stack" src={logoImg[key]} />
+                  );
+                }
+              }
+            })
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

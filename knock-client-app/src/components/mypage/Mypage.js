@@ -79,15 +79,16 @@ class Mypage extends React.Component {
                   <div key={idx} className="boardList_openboard">
                     <div className="boardList_openboard_brief">
                       <h1>{post.title}</h1>
-                      <h2>인원 : {post.total}</h2>
-                      <h2>진행중</h2>
+
+                      <h2>OPEN</h2>
                     </div>
                     <div className="boardList_openboard_detail">
-                      <div className="openboard_detail_title_writer">
-                        <h2>그룹장: {post.writer}</h2>
-                      </div>
-                      <p>{post.content}</p>
-                      <p>스택 : {post.post_stacks}</p>
+                      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
+                      {post.post_stacks ? (
+                        <p>스택 : {post.post_stacks}</p>
+                      ) : (
+                        <p>스택 없음</p>
+                      )}
                     </div>
                   </div>
                 );
@@ -101,19 +102,20 @@ class Mypage extends React.Component {
             <div className="closeboardWrap_boardList">
               {closedPosts.map((post) => {
                 return (
-                  <div className="boardList_openboard">
-                    <div className="boardList_openboard_brief">
+                  <div className="boardList_closeboard">
+                    <div className="boardList_closeboard_brief">
                       <h1>{post.title}</h1>
-                      <h2>인원 : {post.total}</h2>
-                      {/* 사용자 포지션 들어가야함!!!!!!! */}
-                      <h2>종료</h2>
+
+                      <h2>CLOSED</h2>
                     </div>
-                    <div className="boardList_openboard_detail">
-                      <div className="openboard_detail_title_writer">
-                        <h2>그룹장: {post.writer}</h2>
-                      </div>
-                      <p>{post.content}</p>
-                      <p>스택 : {post.post_stacks}</p>
+                    <div className="boardList_closeboard_detail">
+                      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
+
+                      {post.post_stacks ? (
+                        <p>스택 : {post.post_stacks}</p>
+                      ) : (
+                        <p>스택 없음</p>
+                      )}
                     </div>
                   </div>
                 );
