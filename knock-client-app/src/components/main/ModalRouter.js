@@ -15,12 +15,14 @@ const axios = require("axios");
 const customStyles = {
   content: {
     width: "300px",
+    height: "300px",
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    radius: "100px",
   },
   overlay: { zIndex: 1000 },
 };
@@ -51,6 +53,7 @@ const ModalRouter = (props) => {
   }
 
   useEffect(() => {
+    console.log(isLogin);
     if (props.isModalLogin || window.localStorage.getItem("isLogin"))
       setIsLogin(true);
   }, [props.isModalLogin]);
@@ -85,7 +88,6 @@ const ModalRouter = (props) => {
     }
   }
 
-  console.log("각시탈", props.accHistory);
   return isLogin ? (
     <div>
       <img className="navRightImg" src={navRightImg1} onClick={openModal} />
@@ -121,14 +123,16 @@ const ModalRouter = (props) => {
             </Link>
           </span>
         </div>
-        <button onClick={logOut}>로그아웃</button>
-        <button onClick={closeModal}>뒤로가기</button>
+        <span className="navBtnOpt">
+          <button onClick={logOut}>로그아웃</button>
+          <button onClick={closeModal}>뒤로가기</button>
+        </span>
       </Modal>
     </div>
   ) : (
     <div>
       <div className="startBtn" onClick={openModal}>
-        시작하기
+        들어가기
       </div>
       <Modal
         isOpen={modalIsOpen}
