@@ -60,7 +60,6 @@ const ModalRouter = (props) => {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
   }
 
   function closeModal() {
@@ -80,10 +79,7 @@ const ModalRouter = (props) => {
       withCredentials: true,
     });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!
-    if (
-      props.accHistory.location.pathname &&
-      props.accHistory.location.pathname !== "/"
-    ) {
+    if (props.accHistory && props.accHistory.location.pathname !== "/") {
       props.accHistory.push("/");
     }
   }
@@ -99,8 +95,13 @@ const ModalRouter = (props) => {
         style={customStyles}
         ariaHideApp={false}
       >
-        <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>
-        <div>나는 멋진 감자</div>
+        <h1
+          className="modal_subtitle"
+          ref={(_subtitle) => (subtitle = _subtitle)}
+        >
+          Knock Knock
+        </h1>
+
         <div className="navBtn">
           <span onClick={closeModal} className="navbar_board">
             <Link to="/board">
@@ -123,10 +124,14 @@ const ModalRouter = (props) => {
             </Link>
           </span>
         </div>
-        <span className="navBtnOpt">
-          <button onClick={logOut}>로그아웃</button>
-          <button onClick={closeModal}>뒤로가기</button>
-        </span>
+        <div className="navBtnOpt">
+          <button className="navBtnOpt_logoutBtn" onClick={logOut}>
+            로그아웃
+          </button>
+          <button className="navBtnOpt_backBtn" onClick={closeModal}>
+            뒤로가기
+          </button>
+        </div>
       </Modal>
     </div>
   ) : (
@@ -141,27 +146,29 @@ const ModalRouter = (props) => {
         style={customStyles}
         ariaHideApp={false}
       >
-        <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>
-        <div>로그인을 해주세요.</div>
-        <form>
+        <h1
+          className="modal_subtitle"
+          ref={(_subtitle) => (subtitle = _subtitle)}
+        >
+          Knock Knock
+        </h1>
+
+        <div>
           <div className="login_logo">
-            <img
-              className="google"
-              onClick={googleOAuthHandler}
-              alt=""
-              value="google"
-              src={google}
-            ></img>
-            <img
-              className="github"
-              onClick={gitOAuthHandler}
-              alt=""
-              value="github"
-              src={github}
-            ></img>
+            <div className="login_google" onClick={googleOAuthHandler}>
+              {" "}
+              <img className="google" alt="" value="google" src={google}></img>
+              <div className="login_google_phrase">Sign With Google</div>
+            </div>
+            <div className="login_github" onClick={gitOAuthHandler}>
+              <img className="github" alt="" value="github" src={github}></img>
+              <div className="login_github_phrase">Sign With Google</div>
+            </div>
+            <button className="login_backBtn" onClick={closeModal}>
+              뒤로가기
+            </button>
           </div>
-        </form>
-        <button onClick={closeModal}>뒤로가기</button>
+        </div>
       </Modal>
     </div>
   );

@@ -72,6 +72,7 @@ const Home = (props) => {
                 <option value="">게시물 유형</option>
                 <option value="project">프로젝트</option>
                 <option value="study">스터디</option>
+                <option value="question">{"Q&A"}</option>
               </select>
               <div className="H_searchBoxBoundary">|</div>
               <select
@@ -82,7 +83,10 @@ const Home = (props) => {
                 <option value="2">2명</option>
                 <option value="3">3명</option>
                 <option value="4">4명</option>
-                <option value="more">4명 이상</option>
+                <option value="5">5명</option>
+                <option value="6">6명</option>
+                <option value="7">7명</option>
+                <option value="8">8명</option>
               </select>
               <div className="H_searchBoxBoundary">|</div>
               <input
@@ -153,7 +157,7 @@ const Home = (props) => {
         </section>
 
         <section className="H_sec4">
-          <img src={Layer98} alt="" />
+          {/* <img src={Layer98} alt="" /> */}
         </section>
 
         <section className="H_sec5">
@@ -162,11 +166,7 @@ const Home = (props) => {
           <img src={question} onClick={() => props.history.push("/board")} />
           <img src={retrospect} onClick={() => alert("회고를 기록하세요!")} />
         </section>
-        <footer className="H_footer">
-          <div className="H_GoToBoard" onClick={moreBoardHandler}>
-            더보기
-          </div>
-        </footer>
+        <footer className="H_footer"></footer>
       </div>
     </>
   );

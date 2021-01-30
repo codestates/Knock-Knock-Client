@@ -23,7 +23,7 @@
   margin-top: 215px;
   margin-left: 400px;
   z-index: 2;
-  opacity: 1;
+  opacity: 0;
 }
 
 .home_main_sec_person:hover {
@@ -281,7 +281,6 @@
   align-items: center;
   padding-left: 5%;
   padding-right: 5%;
-  border: 1px solid black;
 }
 
 .H_sec5 img {
@@ -298,7 +297,7 @@
 /* ------------------------------ */
 
 .H_footer {
-  background-color: yellow;
+  background-color: #f7e462;
   color: #ffffff;
   text-align: center;
   font: bold;
@@ -316,31 +315,4 @@
 
 .H_GoToBoard:hover {
   border: 1px solid #cc0000;
-}
-
-/* ----------------모달창에 대한 설정값---------------------*/
-
-.login_logo {
-  display: flex;
-  justify-content: space-between;
-}
-
-.google {
-  height: 70px;
-  width: 70px;
-  border: 1px solid black;
-  border-radius: 4px;
-}
-.google:hover {
-  border: 1px solid yellow;
-}
-
-.github {
-  height: 70px;
-  width: 70px;
-  border: 1px solid black;
-  border-radius: 4px;
-}
-.github:hover {
-  border: 1px solid yellow;
 }

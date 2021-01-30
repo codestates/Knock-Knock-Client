@@ -17,9 +17,37 @@
 }
 
 .navBtnOpt {
-  display: inline-flex;
-  justify-content: space-between;
-  margin: 4%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navBtnOpt button {
+  margin-top: 3%;
+  height: 50px;
+  border-radius: 30px;
+  background: white;
+  font-size: 16px;
+  font-weight: 800;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.navBtnOpt_logoutBtn {
+  border: 2px solid #f44336;
+}
+
+.navBtnOpt_logoutBtn:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.navBtnOpt_backBtn {
+  border: 2px solid #f8e35d;
+}
+
+.navBtnOpt_backBtn:hover {
+  background-color: #f8e35d;
+  color: white;
 }
 
 .navbar_home {
@@ -64,6 +92,13 @@
   flex: 1;
 }
 
+/* ------------------------------- */
+
+.modal_subtitle {
+  text-align: center;
+  color: rgba(255, 255, 4, 0.89);
+}
+
 /* ---------------LOGO-------------- */
 
 .StackLogo {
@@ -91,5 +126,72 @@ input[type="checkbox"] {
 /* ---------------Login Modal-------------- */
 
 .login_logo {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_google {
+  cursor: pointer;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 30px;
+  margin-bottom: 5%;
+}
+
+.login_google img {
+  flex: 1;
+  width: 20%;
+  height: 20%;
+}
+
+.login_google_phrase {
+  flex: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+/* -------------------------- */
+
+.login_github {
+  cursor: pointer;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 30px;
+  margin-bottom: 5%;
+}
+
+.login_github img {
+  flex: 1;
+  border-radius: 30px;
+  width: 20%;
+
+  height: 20%;
+}
+
+.login_github_phrase {
+  flex: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+/* -------------------------- */
+
+.login_backBtn {
+  cursor: pointer;
+  height: 50px;
+  border: 2px solid #f8e35d;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 800;
+  background: white;
+  transition-duration: 0.4s;
+}
+
+.login_backBtn:hover {
+  background: #f8e35d;
+  color: white;
 }

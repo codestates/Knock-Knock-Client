@@ -69,6 +69,10 @@ li {
   padding: 0.5vw;
 }
 
+.B_RoomCard:hover {
+  border: 3px solid yellow;
+}
+
 .B_RoomCard-image {
   max-width: 93%;
   flex: 2;
