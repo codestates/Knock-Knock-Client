@@ -10,6 +10,9 @@ import project from "../../images/homeImg/project.png";
 import question from "../../images/homeImg/question.png";
 import retrospect from "../../images/homeImg/retrospect.png";
 import homeMainSec1Img from "../../images/homeImg/main_sec1_img.png";
+import Layer96 from "../../images/homeImg/Layer96.png";
+import Layer97 from "../../images/homeImg/Layer97.png";
+import Layer98 from "../../images/homeImg/Layer98.png";
 
 const Home = (props) => {
   const searchParams = {
@@ -94,24 +97,23 @@ const Home = (props) => {
           </div>
         </section>
         <section className="H_sec2">
-          <div className="H_sec2_wrap1">
-            <p>새로운 사람들과 함께 나아가고 여러분의 발자취를 남겨보세요!</p>
-            <p>
-              여러분의 스터디, 프로젝트를 차분히 시작하거나 직접 참여해보세요!
-            </p>
-            <p>이제, 여러분의 시작을 두드리세요!</p>
-          </div>
-          <div className="H_sec2_wrap2">
-            <img src={explainImg} className="H_explainImg" alt="" />
-          </div>
+          <img src={Layer96} alt="" />
         </section>
+
         <section className="H_sec3">
+          <img src={Layer97} alt="" />
+        </section>
+
+        <section className="H_sec4">
+          <img src={Layer98} alt="" />
+        </section>
+
+        <section className="H_sec5">
           <img src={project} onClick={() => props.history.push("/board")} />
           <img src={study} onClick={() => props.history.push("/board")} />
           <img src={question} onClick={() => props.history.push("/board")} />
-          <img src={retrospect} onClick={() => alert("회고를 기록")} />
+          <img src={retrospect} onClick={() => alert("회고를 기록하세요!")} />
         </section>
-        <section className="H_sec4"></section>
         <footer className="H_footer">
           <div className="H_GoToBoard" onClick={moreBoardHandler}>
             더보기

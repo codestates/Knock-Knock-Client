@@ -273,7 +273,7 @@ const PublicBoard = (props) => {
                   </div>
                   <div className="B_RoomCard-writer-createdAt" value={post.id}>
                     <div className="B_RoomCard-writer" value={post.id}>
-                      {post.writer}
+                      {"Question"}
                     </div>
                     <div className="B_RoomCard-createdAt" value={post.id}>
                       {post.created_at.split("T")[0]}

@@ -17,11 +17,13 @@
 }
 
 .home_main_sec_person {
-  position: relative;
-  left: 11.7%;
-  top: 12%;
+  position: static;
+  text-align: center;
+
+  margin-top: 215px;
+  margin-left: 400px;
   z-index: 2;
-  opacity: 0;
+  opacity: 1;
 }
 
 .home_main_sec_person:hover {
@@ -32,7 +34,7 @@
 
 .home_main_sec_logo {
   position: relative;
-  left: 2%;
+  right: 150px;
   top: 2%;
   z-index: 2;
 }
@@ -245,46 +247,25 @@
 
 /* ------------------------------ */
 
-.H_sec2 {
-  display: flex;
-  border: 1px solid black;
+.H_sec2 img {
+  width: 100%;
 }
 
-.H_sec2_wrap1 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  flex: 5;
-  border: 1px solid black;
+/* ---------------------------------------*/
+
+.H_sec3 img {
+  width: 100%;
 }
 
-.H_sec2_wrap1 p {
-  font-size: 25px;
-  font-weight: 900;
-}
+/* ---------------------------------------*/
 
-.H_sec2_wrap2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 6;
-  border: 1px solid black;
-}
-
-.H_sec2_wrap2 p {
-  font-size: large;
-  font-weight: bold;
-}
-
-.H_explainImg {
-  width: 600px;
-  height: 400px;
+.H_sec4 img {
+  width: 100%;
 }
 
 /* ------------------------------ */
 
-.H_sec3 {
+.H_sec5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -293,71 +274,17 @@
   border: 1px solid black;
 }
 
-.H_sec3 img {
+.H_sec5 img {
   border-radius: 50px;
   height: 90%;
 
   box-shadow: 5px 5px 5px 5px lightgray;
 }
 
-.H_sec3 img:hover {
+.H_sec5 img:hover {
   border: 3px solid #f7f54b;
 }
 
-.H_sec3_wrap1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.H_sec3_wrap2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 9;
-}
-
-.H_sec3_wrap1 p {
-  font-size: large;
-}
-
-/* ---------------------------------------*/
-
-.H_sec4 {
-  text-align: center;
-  order: 1;
-  flex: 1;
-  background-color: #ecb6b6;
-  height: 600px;
-}
-
-.H_exhibition {
-  animation: mymove 10s infinite;
-  animation-delay: 2s;
-  position: relative;
-  display: flex;
-  float: left;
-  background: #fff;
-  border: 2px solid rgb(250, 250, 167);
-  margin: 20px 0px 0px 20px;
-  width: 60px;
-  height: 130px;
-  padding: 100px;
-  border-radius: 14%;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-@keyframes mymove {
-  from {
-    left: 0px;
-  }
-  to {
-    left: 100%;
-  }
-}
 /* ------------------------------ */
 
 .H_footer {

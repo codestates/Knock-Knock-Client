@@ -169,7 +169,9 @@ const RoomInfo = (props) => {
               </div>
               <div className="Brief_writer_createdAt">
                 <div className="Brief_writer">
-                  {props.location.state.writer}
+                  {props.location.state.category === "Question"
+                    ? "Question"
+                    : props.location.state.writer}
                 </div>
                 <div className="Brief_createdAt">
                   {props.location.state.created_at.split("T")[0]}
@@ -340,6 +342,7 @@ const RoomInfo = (props) => {
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
+                  category={props.location ? props.location.state.category : ""}
                 />
                 <li>{errmessage}</li>
               </ul>
@@ -348,6 +351,7 @@ const RoomInfo = (props) => {
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
+                  category={props.location ? props.location.state.category : ""}
                 />
               </ul>
             )}
