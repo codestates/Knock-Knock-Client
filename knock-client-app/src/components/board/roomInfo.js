@@ -221,7 +221,7 @@ const RoomInfo = (props) => {
                         })}
                       </div>
                     ) : (
-                      <div className="D_info-stakcs">스택없음</div>
+                      <div className="D_info-stakcs-none">스택없음</div>
                     )}
                   </div>
                   <div className="D_info-content-wrap">

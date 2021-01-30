@@ -29,6 +29,9 @@ class MngHistory extends Component {
     this.mypageHandleFromHisPro = this.mypageHandleFromHisPro.bind(this);
     this.retroDeleteHandler = this.retroDeleteHandler.bind(this);
     this.sendEmailForRetroHandler = this.sendEmailForRetroHandler.bind(this);
+    this.mngAccountHandleFromHisPro = this.mngAccountHandleFromHisPro.bind(
+      this
+    );
   }
 
   async componentDidMount() {
@@ -71,6 +74,10 @@ class MngHistory extends Component {
 
   mypageHandleFromHisPro() {
     this.props.history.push("/mypage");
+  }
+
+  mngAccountHandleFromHisPro() {
+    this.props.history.push("/mngAccount");
   }
 
   keepJournal(value) {
@@ -178,6 +185,8 @@ class MngHistory extends Component {
           userPosts={this.state.userPosts}
           boardRetroHandler={this.boardRetroHandler}
           mypageHandleFromHisPro={this.mypageHandleFromHisPro}
+          mngAccountHandleFromHisPro={this.mngAccountHandleFromHisPro}
+          breadcrumbHandler={this.props.location}
         />
 
         <div className="mypageContainer_editUserInfoFormSec">
@@ -194,7 +203,6 @@ class MngHistory extends Component {
                   레포삭제
                 </button>
               </div>
-              <div>{this.state.selectOneHisInfo.post_stacks}</div>
 
               <button
                 onClick={this.sendEmailForRetroHandler}

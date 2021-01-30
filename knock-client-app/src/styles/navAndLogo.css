@@ -1,9 +1,25 @@
 .navbar {
   display: flex;
+  justify-content: space-between;
   position: fixed;
   width: 100%;
   list-style: none;
+
   /* background-color: #ffea00; */
+}
+
+.Icon {
+  display: inline-flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin: 3%;
+}
+
+.navBtnOpt {
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 4%;
 }
 
 .navbar_home {
@@ -14,6 +30,19 @@
   max-width: 4%;
   margin-left: 2%;
   margin-top: 1%;
+}
+
+.startBtn {
+  width: 6vw;
+  margin-top: 30%;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.navRightImg {
+  max-width: 30%;
+  margin-left: 45%;
+  margin-top: 13%;
 }
 
 .navbar_board {

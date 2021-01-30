@@ -16,7 +16,7 @@
 
 /* ----방 세부 설정에 대한 css---*/
 .Category {
-  margin-top: 2.5%;
+  margin-top: 5%;
   margin-left: 18%;
   width: 170px;
   height: 35px;
@@ -34,8 +34,7 @@
   margin-top: 1%;
   margin-left: 18%;
   height: 42px;
-  display: block;
-  width: 100%;
+
   border: none;
   resize: none;
   outline: none;
@@ -47,8 +46,7 @@
 /* ----설문조사 폼에 대한 css---*/
 .Data_Container {
   background-color: rgb(255, 255, 177);
-  margin-left: 18%;
-  margin-right: 18%;
+
   margin-top: 1.5%;
 }
 
@@ -74,20 +72,25 @@
 /* ----footer 폼에 대한 css---*/
 
 .C_footer {
-  display: absolute;
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 0px;
   background-color: #f7ea5b;
   color: #ffffff;
   text-align: center;
   font-style: inherit;
-  height: 70px;
   font-size: 17px;
 }
 
 .sendBtn {
-  height: 40px;
-  margin-left: 89%;
-  margin-right: 3%;
-  border-radius: 30px;
+  display: flex;
+  padding: 1% 3%;
+  margin: 0.7%;
+  margin-right: 5%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
   background-color: #391b1b;
   cursor: pointer;
 }

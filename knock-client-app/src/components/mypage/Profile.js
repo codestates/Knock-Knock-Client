@@ -2,6 +2,7 @@
 import React from "react";
 import axios from "axios";
 import { logoImg } from "../../utils/options";
+import profileImg from "../../images/profile/profile.png";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class Profile extends React.Component {
     return (
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">
-          {/* 프로필 사진 이미지 [이준희]*/}
+          <img src={profileImg} className="profileImg" />
         </div>
         <div className="profileSec_name_mood">
           <p className="profileSec_username">
