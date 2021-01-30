@@ -7,19 +7,22 @@ import google from "../../images/logo/google.png";
 import { BrowserRouter as Route, Link } from "react-router-dom";
 
 import navRightImg1 from "../../images/homeImg/navRight1.png";
-import navRightImg2 from "../../images/homeImg/navRight2.jpg";
-
+import createRoom from "../../images/homeImg/createRoom.png";
+import mypage from "../../images/homeImg/mypage.png";
+import board from "../../images/homeImg/board.png";
 const axios = require("axios");
 
 const customStyles = {
   content: {
     width: "300px",
+    height: "300px",
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    radius: "100px",
   },
   overlay: { zIndex: 1000 },
 };
@@ -50,6 +53,7 @@ const ModalRouter = (props) => {
   }
 
   useEffect(() => {
+    console.log(isLogin);
     if (props.isModalLogin || window.localStorage.getItem("isLogin"))
       setIsLogin(true);
   }, [props.isModalLogin]);
@@ -84,7 +88,6 @@ const ModalRouter = (props) => {
     }
   }
 
-  console.log("각시탈", props.accHistory);
   return isLogin ? (
     <div>
       <img className="navRightImg" src={navRightImg1} onClick={openModal} />
@@ -100,23 +103,36 @@ const ModalRouter = (props) => {
         <div>나는 멋진 감자</div>
         <div className="navBtn">
           <span onClick={closeModal} className="navbar_board">
-            <Link to="/board">BOARD</Link>
+            <Link to="/board">
+              <img className="Icon" src={board} value="board" alt="" />
+            </Link>
           </span>
           <span onClick={closeModal} className="navbar_mypage">
-            <Link to="/mypage">Mypage</Link>
+            <Link to="/mypage">
+              <img className="Icon" src={mypage} value="mypage" alt="" />
+            </Link>
           </span>
           <span onClick={closeModal} className="navbar_mypage">
-            <Link to="/createRoom">CreateRoom</Link>
+            <Link to="/createRoom">
+              <img
+                className="Icon"
+                src={createRoom}
+                value="createRoom"
+                alt=""
+              />
+            </Link>
           </span>
         </div>
-        <button onClick={logOut}>로그아웃</button>
-        <button onClick={closeModal}>뒤로가기</button>
+        <span className="navBtnOpt">
+          <button onClick={logOut}>로그아웃</button>
+          <button onClick={closeModal}>뒤로가기</button>
+        </span>
       </Modal>
     </div>
   ) : (
     <div>
       <div className="startBtn" onClick={openModal}>
-        시작하기
+        들어가기
       </div>
       <Modal
         isOpen={modalIsOpen}

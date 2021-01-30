@@ -8,6 +8,20 @@
   /* background-color: #ffea00; */
 }
 
+.Icon {
+  display: inline-flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin: 3%;
+}
+
+.navBtnOpt {
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 4%;
+}
+
 .navbar_home {
   flex: 9;
 }
@@ -19,13 +33,23 @@
 }
 
 .startBtn {
-  cursor: pointer;
-  width: 6vw;
-  margin-top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(94, 93, 93);
+  height: 2vw;
+  width: 5vw;
+  border-radius: 10px;
+  margin-right: 27px;
+  margin-top: 15%;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
+  color: rgb(80, 78, 78);
+  cursor: pointer;
 }
-
+.startBtn:hover {
+  background-color: rgb(255, 236, 66);
+}
 .navRightImg {
   max-width: 30%;
   margin-left: 45%;

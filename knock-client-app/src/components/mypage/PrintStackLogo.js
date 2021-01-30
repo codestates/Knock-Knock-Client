@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import "../../styles/navAndLogo.css";
+import c from "../../images/logo/c1.png";
 import Cshop from "../../images/logo/c.png";
 import CC from "../../images/logo/C++.png";
 import docker from "../../images/logo/docker.png";
@@ -27,6 +28,10 @@ const PrintLogo = (props) => {
 
   return (
     <div className="StackLogo">
+      <input onChange={select} type="checkbox" name="logo" value="c" id="c" />
+      <label htmlFor="c">
+        <img src={c} className="logo" value="c" />
+      </label>
       <input onChange={select} type="checkbox" name="logo" value="c#" id="c#" />
       <label htmlFor="c#">
         <img src={Cshop} className="logo" value="c#" />
