@@ -77,6 +77,16 @@ class Profile extends React.Component {
           </p>
         </div>
         <div className="profileSec_btns">
+          {this.props.isAccountMng ? (
+            <button
+              className="profileSec_btns_accountMng"
+              onClick={() => this.props.accountMngClickHandler()}
+            >
+              계정 관리
+            </button>
+          ) : (
+            <button className="profileSec_btns_false">계정관리</button>
+          )}
           {this.props.isMypage ? (
             <button
               className="profileSec_btns_mypage"
@@ -94,16 +104,6 @@ class Profile extends React.Component {
           >
             히스토리
           </button>
-          {this.props.isAccountMng ? (
-            <button
-              className="profileSec_btns_accountMng"
-              onClick={() => this.props.accountMngClickHandler()}
-            >
-              계정 관리
-            </button>
-          ) : (
-            <button className="profileSec_btns_false">계정관리</button>
-          )}
         </div>
         <div className="profileSec_stacks">
           {this.state.userInfo.user_stacks ? (

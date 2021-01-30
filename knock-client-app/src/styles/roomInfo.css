@@ -95,6 +95,13 @@
   margin-bottom: 18%;
 
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.B_info-title::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 /* ---------------------------------- */
@@ -186,6 +193,13 @@
   width: 95%;
   height: 100px;
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.D_info-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .D_question-content-title {
@@ -203,6 +217,13 @@
   width: 93.5%;
   height: 300px;
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.D_question-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .Detail_info-involve {

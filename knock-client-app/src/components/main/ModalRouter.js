@@ -142,7 +142,7 @@ const ModalRouter = (props) => {
         ariaHideApp={false}
       >
         <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>
-        <div>로그인을 해주세요.</div>
+        <div>로그인 후에 이용해주세요.</div>
         <form>
           <div className="login_logo">
             <img

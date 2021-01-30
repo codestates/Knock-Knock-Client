@@ -52,7 +52,7 @@ const RoomInfo = (props) => {
         }
       }
     } else {
-      alert("로그인을 해주세요.");
+      alert("로그인 후에 이용해주세요.");
     }
   };
 
@@ -92,7 +92,7 @@ const RoomInfo = (props) => {
           });
       }
     } else {
-      alert("로그인을 해주세요.");
+      alert("로그인 후에 이용해주세요.");
     }
   };
 

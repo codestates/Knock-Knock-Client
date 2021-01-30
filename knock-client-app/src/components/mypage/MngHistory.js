@@ -194,23 +194,7 @@ class MngHistory extends Component {
             <>
               <div className="HisInfo_header">
                 <h1>{this.state.selectOneHisInfo.title}</h1>
-                <button
-                  onClick={() => {
-                    this.dangerBtn();
-                  }}
-                  className="DangerBtn"
-                >
-                  레포삭제
-                </button>
               </div>
-
-              <button
-                onClick={this.sendEmailForRetroHandler}
-                className="HisList_sendBtn"
-              >
-                회고 겟또
-              </button>
-
               <div className="His_submitForm">
                 <textarea
                   className="Journal_box"
@@ -231,6 +215,22 @@ class MngHistory extends Component {
                   retroDeleteHandler={this.retroDeleteHandler}
                 />
               </ul>
+              <span className="Felx">
+                <button
+                  onClick={this.sendEmailForRetroHandler}
+                  className="HisList_sendBtn"
+                >
+                  회고받기
+                </button>
+                <button
+                  onClick={() => {
+                    this.dangerBtn();
+                  }}
+                  className="DangerBtn"
+                >
+                  레포삭제
+                </button>
+              </span>
             </>
           ) : (
             <></>

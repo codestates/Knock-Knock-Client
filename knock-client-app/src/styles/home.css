@@ -242,19 +242,29 @@
 }
 
 .H_mainSimpleExplain p {
-  margin: 5px;
+  margin: 10px;
 }
 
 /* ------------------------------ */
 
+.H_sec2 {
+  /* display: flex; */
+  align-items: flex-end;
+  background: rgb(248, 152, 152);
+}
+
 .H_sec2 img {
   width: 100%;
+  height: 70%;
 }
 
 /* ---------------------------------------*/
 
-.H_sec3 img {
-  width: 100%;
+.H_sec3 {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  background: #f8ec99;
 }
 
 /* ---------------------------------------*/
@@ -288,7 +298,8 @@
 /* ------------------------------ */
 
 .H_footer {
-  background-color: yellow;
+  display: flex;
+  background-color: rgb(253, 253, 120);
   color: #ffffff;
   text-align: center;
   font: bold;

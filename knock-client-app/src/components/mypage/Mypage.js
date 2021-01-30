@@ -71,6 +71,7 @@ class Mypage extends React.Component {
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">
             <div className="openboardWrap_title">
+
               <h1>열린 게시물</h1>
             </div>
             <div className="openboardWrap_boardList">
@@ -87,7 +88,7 @@ class Mypage extends React.Component {
                       {post.post_stacks ? (
                         <p>스택 : {post.post_stacks}</p>
                       ) : (
-                        <p>스택 없음</p>
+                        <p>스택 : 스택 없음</p>
                       )}
                     </div>
                   </div>

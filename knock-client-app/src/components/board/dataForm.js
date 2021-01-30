@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-// import { stacks } from "../../utils/options";
 import "../../styles/createRoom.css";
 import PrintLogo from "../mypage/PrintStackLogo";
 
@@ -131,7 +130,6 @@ const DataForm = (props) => {
                   {`현재 ${stack}을 선택하셨습니다.`}
                 </div>
                 <PrintLogo stack={getStack} />
-                {/* <div className="Stack">{stack}</div> */}
               </div>
             </>
           ) : (
@@ -141,7 +139,6 @@ const DataForm = (props) => {
                 {`현재 ${stack}을 선택하셨습니다.`}
               </div>
               <PrintLogo stack={getStack} />
-              {/* <div className="Stack">{stack}</div> */}
             </div>
           )}
         </form>

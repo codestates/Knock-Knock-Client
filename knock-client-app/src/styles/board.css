@@ -12,11 +12,13 @@ li {
 .B_SideBarSec {
   background-color: #f7e462;
   padding-right: 2vw;
-  padding-top: 10vw;
+  padding-top: 13vw;
 }
 
 .B_filterBtn {
+  padding-top: 2%;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   border: 1.5px solid gray;
@@ -25,13 +27,13 @@ li {
   margin-bottom: 3vw;
   color: gray;
   font-size: 1.1vw;
-  background-color: rgb(253, 253, 0);
+  background: #f3dd4c;
   border: none;
-  box-shadow: 1.5px 1.5px 1.5px 1.5px lightgray;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(135, 136, 93);
 }
 
 .B_filterBtn:hover {
-  border: 1.5px solid yellow;
+  background: rgb(211, 200, 81);
 }
 
 .B_RoomContaniner {
@@ -42,6 +44,13 @@ li {
   margin-top: 3vw;
 
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.B_RoomContaniner::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .B_RoomCard {
@@ -59,6 +68,10 @@ li {
   width: 16.5vw;
   height: 23vw;
   padding: 0.5vw;
+}
+
+.B_RoomCard:hover {
+  border: 3px solid #ffe229;
 }
 
 .B_RoomCard-image {

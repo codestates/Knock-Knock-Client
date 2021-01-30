@@ -55,16 +55,16 @@
 }
 
 .profileSec_profileImg img {
-  width: 50%;
+  width: 60%;
   border: 1px solid rgb(129, 91, 91);
-  border-radius: 200px;
+  border-radius: 20vw;
 }
 
 .profileSec_name_mood {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 2vw;
   flex: 1;
 }
 
@@ -77,21 +77,30 @@
   font-weight: 700;
 }
 
+.profileSec_mood {
+  font-size: 20px;
+}
+
 .profileSec_btns {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5%;
+  margin-bottom: 6%;
   flex: 1;
 }
 
 .profileSec_btns button {
+  cursor: pointer;
   margin: 3%;
   width: 20%;
   height: 50px;
   border: none;
-  background: #f7e462;
-  box-shadow: 1.5px 1.5px 1.5px 1.5px lightgray;
+  background: #f3dd4c;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(110, 110, 110);
+}
+
+.profileSec_btns button:hover {
+  background: rgb(211, 200, 81);
 }
 
 .profileSec_btns_false {
@@ -103,6 +112,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 18%;
   flex: 1;
 }
 
@@ -136,6 +146,13 @@
   flex-direction: column;
   flex: 5;
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.boardListSec_openboardWrap::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .openboardWrap_title {
@@ -159,6 +176,7 @@
   transition: all 0.1s ease;
   padding-left: 2%;
   padding-right: 2%;
+  background-color: rgb(249, 252, 204);
 }
 
 .boardList_openboard_brief {
@@ -201,6 +219,13 @@
   flex-direction: column;
   flex: 5;
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.boardListSec_closeboardWrap::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .closeboardWrap_title {
@@ -224,6 +249,7 @@
   transition: all 0.1s ease;
   padding-left: 2%;
   padding-right: 2%;
+  background-color: rgb(253, 253, 193);
 }
 
 .boardList_closeboard_brief {
@@ -272,13 +298,20 @@
   flex-direction: column;
   flex: 6;
   overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mypageContainer_editUserInfoFormSec::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .editUserInfoFormSec_wrap {
   display: flex;
   flex-direction: column;
   border: 3px solid rgb(255, 255, 183);
-  margin-top: 5%;
+  margin-top: 6vw;
   margin-left: 13%;
   margin-right: 13%;
   border-radius: 21px;
