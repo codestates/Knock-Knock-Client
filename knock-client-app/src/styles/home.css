@@ -17,9 +17,9 @@
 }
 
 .home_main_sec_person {
-  position: relative;
-  left: 11.7%;
-  top: 12%;
+  position: absolute;
+  left: 40vw;
+  top: 30vw;
   z-index: 2;
   opacity: 0;
 }
@@ -45,7 +45,7 @@
 }
 
 .home_main_sec_open_door {
-  position: absolute;
+  position: relative;
   z-index: 1;
 }
 
