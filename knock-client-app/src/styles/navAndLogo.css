@@ -28,7 +28,7 @@
 
 .navbar_homeImgYel {
   max-width: 4%;
-  margin-left: 2%;
+  margin-left: 3.2%;
   margin-top: 1%;
 }
 
@@ -63,7 +63,9 @@
 .navbar_mypage {
   flex: 1;
 }
+
 /* ---------------LOGO-------------- */
+
 .StackLogo {
   display: inline;
   /* float: left; */
@@ -84,4 +86,10 @@
 
 input[type="checkbox"] {
   display: none;
+}
+
+/* ---------------Login Modal-------------- */
+
+.login_logo {
+  width: 100%;
 }

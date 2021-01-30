@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import "../../styles/home.css";
+import "../../styles/carousel.css";
 import homeMainSecLogo from "../../images/homeImg/knockknocklogo.png";
 import homeMainSecOpenDoor from "../../images/homeImg/opendoor.png";
 import homeMainSecPerson from "../../images/homeImg/person.png";
@@ -11,8 +12,12 @@ import question from "../../images/homeImg/question.png";
 import retrospect from "../../images/homeImg/retrospect.png";
 import homeMainSec1Img from "../../images/homeImg/main_sec1_img.png";
 import Layer96 from "../../images/homeImg/Layer96.png";
-import Layer97 from "../../images/homeImg/Layer97.png";
+import Layer97_1 from "../../images/homeImg/Layer97-1.png";
+import Layer97_2 from "../../images/homeImg/Layer97-2.png";
+import Layer97_3 from "../../images/homeImg/Layer97-3.png";
+import Layer97_4 from "../../images/homeImg/Layer97-4.png";
 import Layer98 from "../../images/homeImg/Layer98.png";
+import carouselArrowDark from "../../images/homeImg/carousel-arrow-dark.png";
 
 const Home = (props) => {
   const searchParams = {
@@ -101,7 +106,50 @@ const Home = (props) => {
         </section>
 
         <section className="H_sec3">
-          <img src={Layer97} alt="" />
+          <div className="carousel-wrapper">
+            <span id="target-item-1"></span>
+            <span id="target-item-2"></span>
+            <span id="target-item-3"></span>
+            <span id="target-item-4"></span>
+
+            <div className="carousel-item item-1">
+              <img src={Layer97_1} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-4">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-2">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+
+            <div className="carousel-item item-2">
+              <img src={Layer97_2} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-1">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-3">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-3">
+              <img src={Layer97_3} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-2">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-4">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-4">
+              <img src={Layer97_4} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-3">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-1">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+          </div>
         </section>
 
         <section className="H_sec4">
