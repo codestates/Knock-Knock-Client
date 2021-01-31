@@ -146,14 +146,9 @@ const ModalRouter = (props) => {
         style={customStyles}
         ariaHideApp={false}
       >
-        <h1
-          className="modal_subtitle"
-          ref={(_subtitle) => (subtitle = _subtitle)}
-        >
-          Knock Knock
-        </h1>
-
-        <div>
+        <h1 ref={(_subtitle) => (subtitle = _subtitle)}>Knock Knock</h1>
+        <div>로그인 후에 이용해주세요.</div>
+        <form>
           <div className="login_logo">
             <div className="login_google" onClick={googleOAuthHandler}>
               {" "}
@@ -168,7 +163,7 @@ const ModalRouter = (props) => {
               뒤로가기
             </button>
           </div>
-        </div>
+        </form>
       </Modal>
     </div>
   );

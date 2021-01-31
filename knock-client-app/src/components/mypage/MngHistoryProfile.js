@@ -99,15 +99,23 @@ class ProfileEdit extends Component {
                           postStacksArr[idx].map((stack, stackIndex) => {
                             if (stackIndex < 1) {
                               return (
-                                <div value={project.id} className="post_stack">
-                                  {stack}/
+                                <div className="showStack">
+                                  현재
+                                  <span className="showStack_stacks">
+                                    {this.state.userStack + ""}
+                                  </span>
+                                  을 선택하셨습니다.
                                 </div>
                               );
                             }
                             if (stackIndex < 2) {
                               return (
-                                <div value={project.id} className="post_stack">
-                                  {stack}
+                                <div className="showStack">
+                                  현재
+                                  <span className="showStack_stacks">
+                                    {this.state.userStack + ""}
+                                  </span>
+                                  을 선택하셨습니다.
                                 </div>
                               );
                             }

@@ -12,10 +12,11 @@ li {
 .B_SideBarSec {
   background-color: #f7e462;
   padding-right: 2vw;
-  padding-top: 15vw;
+  padding-top: 13vw;
 }
 
 .B_filterBtn {
+  padding-top: 2%;
   display: flex;
   cursor: pointer;
   justify-content: center;
@@ -28,11 +29,11 @@ li {
   font-size: 1.1vw;
   background: #f3dd4c;
   border: none;
-  box-shadow: 1.5px 1.5px 1.5px 1.5px lightgray;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(135, 136, 93);
 }
 
 .B_filterBtn:hover {
-  background: rgb(116, 88, 88);
+  background: rgb(211, 200, 81);
 }
 
 .B_RoomContaniner {
@@ -70,7 +71,7 @@ li {
 }
 
 .B_RoomCard:hover {
-  border: 3px solid yellow;
+  border: 3px solid #ffe229;
 }
 
 .B_RoomCard-image {

@@ -195,7 +195,6 @@ class MngHistory extends Component {
               <div className="HisInfo_header">
                 <h1>{this.state.selectOneHisInfo.title}</h1>
               </div>
-
               <div className="His_submitForm">
                 <textarea
                   className="Journal_box"
@@ -230,7 +229,7 @@ class MngHistory extends Component {
                   onClick={this.sendEmailForRetroHandler}
                   className="HisList_sendBtn"
                 >
-                  회고 겟또
+                  메일로 보내기
                 </button>
               </div>
             </>

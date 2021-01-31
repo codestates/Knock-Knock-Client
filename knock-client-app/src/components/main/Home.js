@@ -4,7 +4,6 @@ import "../../styles/home.css";
 import homeMainSecLogo from "../../images/homeImg/knockknocklogo.png";
 import homeMainSecOpenDoor from "../../images/homeImg/opendoor.png";
 import homeMainSecPerson from "../../images/homeImg/person.png";
-import explainImg from "../../images/homeImg/explainImg.png";
 import study from "../../images/homeImg/study.png";
 import project from "../../images/homeImg/project.png";
 import question from "../../images/homeImg/question.png";
@@ -112,7 +111,12 @@ const Home = (props) => {
           <img src={project} onClick={() => props.history.push("/board")} />
           <img src={study} onClick={() => props.history.push("/board")} />
           <img src={question} onClick={() => props.history.push("/board")} />
-          <img src={retrospect} onClick={() => alert("회고를 기록하세요!")} />
+          <img
+            src={retrospect}
+            onClick={() =>
+              alert("회고기능은 로그인을 하셔야 이용이 가능합니다. : )")
+            }
+          />
         </section>
         <footer className="H_footer"></footer>
       </div>
