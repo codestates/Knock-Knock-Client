@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import "../../styles/home.css";
+import "../../styles/carousel.css";
 import homeMainSecLogo from "../../images/homeImg/knockknocklogo.png";
 import homeMainSecOpenDoor from "../../images/homeImg/opendoor.png";
 import homeMainSecPerson from "../../images/homeImg/person.png";
@@ -9,9 +10,16 @@ import project from "../../images/homeImg/project.png";
 import question from "../../images/homeImg/question.png";
 import retrospect from "../../images/homeImg/retrospect.png";
 import homeMainSec1Img from "../../images/homeImg/main_sec1_img.png";
-
 import interviewImg from "../../images/homeImg/interview.png";
-import processImg from "../../images/homeImg/process.png";
+
+// 캐러셀 이미지
+import carouselImg1 from "../../images/homeImg/carouselImg1.png";
+import carouselImg2 from "../../images/homeImg/carouselImg2.png";
+import carouselImg3 from "../../images/homeImg/carouselImg3.png";
+import carouselImg4 from "../../images/homeImg/carouselImg4.png";
+import carouselImg5 from "../../images/homeImg/carouselImg5.png";
+import carouselImg6 from "../../images/homeImg/carouselImg6.png";
+import carouselArrowDark from "../../images/homeImg/carousel-arrow-dark.png";
 
 const Home = (props) => {
   const searchParams = {
@@ -34,10 +42,6 @@ const Home = (props) => {
   // 홈에서 검색 필터
   async function boardSearchClickHandler() {
     props.history.push("/board", searchParams);
-  }
-
-  function moreBoardHandler() {
-    props.history.push("/board");
   }
 
   return (
@@ -104,7 +108,71 @@ const Home = (props) => {
         </section>
 
         <section className="H_sec3">
-          <img src={processImg} alt="" />
+          <div className="carousel-wrapper">
+            <span id="target-item-1"></span>
+            <span id="target-item-2"></span>
+            <span id="target-item-3"></span>
+            <span id="target-item-4"></span>
+            <span id="target-item-5"></span>
+            <span id="target-item-6"></span>
+
+            <div className="carousel-item item-1">
+              <img src={carouselImg1} alt="" />
+
+              <a className="arrow arrow-prev" href="#target-item-4">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-2">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+
+            <div className="carousel-item item-2">
+              <img src={carouselImg2} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-1">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-3">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-3">
+              <img src={carouselImg3} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-2">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-4">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-4">
+              <img src={carouselImg4} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-3">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-5">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-5">
+              <img src={carouselImg5} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-4">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-6">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+            <div className="carousel-item item-6">
+              <img src={carouselImg6} alt="" />
+              <a className="arrow arrow-prev" href="#target-item-5">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+              <a className="arrow arrow-next" href="#target-item-1">
+                <img src={carouselArrowDark} alt="" />
+              </a>
+            </div>
+          </div>
         </section>
 
         <section className="H_sec5">

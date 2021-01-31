@@ -5,9 +5,7 @@
 } */
 
 .HisInfo_header {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 4vw;
+  margin-top: 3.7vw;
   margin-left: 2%;
 }
 
@@ -43,7 +41,7 @@
 
 .His_submitForm {
   display: flex;
-  margin-top: 85px;
+  margin-top: 48px;
   margin-left: 15%;
   margin-right: 15%;
   flex: 1;

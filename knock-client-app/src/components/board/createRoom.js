@@ -35,6 +35,10 @@ const CreateRoom = (props) => {
   };
 
   const postRoomInfo = () => {
+    if (category === "Category") {
+      alert("카테고리를 선택해주세요.");
+      return;
+    }
     axios
       .get("https://localhost:4000/profile", {
         withCredentials: true,

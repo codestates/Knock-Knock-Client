@@ -264,12 +264,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
-}
 
-.H_sec3 img {
-  width: 70%;
-  height: 70%;
+  background: white;
 }
 
 /* ---------------------------------------*/
@@ -282,7 +278,7 @@
 
 .H_sec5 {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding-left: 5%;
   padding-right: 5%;
@@ -290,7 +286,8 @@
 
 .H_sec5 img {
   border-radius: 50px;
-  height: 90%;
+  margin: 2.7%;
+  height: 70%;
 
   box-shadow: 5px 5px 5px 5px lightgray;
 }
@@ -320,4 +317,32 @@
 
 .H_GoToBoard:hover {
   border: 1px solid #cc0000;
+}
+
+/* ------------------------------ */
+
+@media (max-width: 1000px) {
+  .H_sec1 {
+    display: block;
+  }
+
+  .H_sec1_wrap1 img {
+    display: none;
+  }
+
+  .H_sec2 {
+    display: none;
+  }
+
+  .H_sec3 {
+    display: none;
+  }
+
+  .H_sec4 {
+    display: none;
+  }
+
+  .H_sec5 {
+    display: none;
+  }
 }

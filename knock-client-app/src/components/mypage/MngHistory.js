@@ -63,6 +63,10 @@ class MngHistory extends Component {
       }
     });
 
+    if (selectOneHisInfo.category === "Question") {
+      this.props.history.push("/roominfo", selectOneHisInfo);
+    }
+
     retros.data.data.sort((a, b) => {
       return new Date(b.created_at) - new Date(a.created_at);
     });
@@ -199,6 +203,7 @@ class MngHistory extends Component {
             <>
               <div className="HisInfo_header">
                 <h1>{this.state.selectOneHisInfo.title}</h1>
+                <h3>회고를 작성하는 공간입니다.</h3>
               </div>
               <div className="His_submitForm">
                 <textarea
