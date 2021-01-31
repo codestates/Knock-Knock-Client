@@ -90,7 +90,7 @@ class ProfileEdit extends Component {
                     <div className="Context_projectTitle" value={project.id}>
                       {project.title}
                     </div>
-                    <div className="post_stacksSec">
+                    <div className="post_stacksSec" value={project.id}>
                       <div className="post_stacks_title" value={project.id}>
                         스택
                       </div>
