@@ -41,7 +41,12 @@ const App = (props) => {
         <Route
           exact
           path="/board"
-          render={(routeProps) => <PublicBoard {...routeProps} />}
+          render={(routeProps) => (
+            <PublicBoard
+              {...routeProps}
+              getHistoryHandler={getHistoryHandler}
+            />
+          )}
         />
 
         <Route
@@ -59,20 +64,26 @@ const App = (props) => {
         <Route
           exact
           path="/"
-          render={(routeProps) => <Home {...routeProps} />}
+          render={(routeProps) => (
+            <Home {...routeProps} getHistoryHandler={getHistoryHandler} />
+          )}
         />
 
         {/* board 경로 */}
         <Route
           exact
           path="/roomInfo"
-          render={(routeProps) => <RoomInfo {...routeProps} />}
+          render={(routeProps) => (
+            <RoomInfo {...routeProps} getHistoryHandler={getHistoryHandler} />
+          )}
         />
 
         <Route
           exact
           path="/createRoom"
-          render={(routeProps) => <CreateRoom {...routeProps} />}
+          render={(routeProps) => (
+            <CreateRoom {...routeProps} getHistoryHandler={getHistoryHandler} />
+          )}
         />
 
         {/* Mypage 경로 */}
@@ -92,7 +103,9 @@ const App = (props) => {
         <Route
           exact
           path="/mngHistory"
-          render={(routeProps) => <MngHistory {...routeProps} />}
+          render={(routeProps) => (
+            <MngHistory {...routeProps} getHistoryHandler={getHistoryHandler} />
+          )}
         />
       </Switch>
     </Router>

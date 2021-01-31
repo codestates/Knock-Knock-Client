@@ -79,9 +79,9 @@
   background-color: rgb(255, 236, 66);
 }
 .navRightImg {
-  max-width: 30%;
-  margin-left: 45%;
-  margin-top: 13%;
+  max-width: 2.3vw;
+  margin-left: -90%;
+  margin-top: 40%;
 }
 
 .navbar_board {
@@ -96,7 +96,7 @@
 
 .modal_subtitle {
   text-align: center;
-  color: rgba(255, 255, 4, 0.89);
+  color: #f8e235;
 }
 
 /* ---------------LOGO-------------- */

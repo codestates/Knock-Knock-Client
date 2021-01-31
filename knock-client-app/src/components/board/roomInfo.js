@@ -9,56 +9,88 @@ import axios from "axios";
 import { logoImg } from "../../utils/options";
 
 const RoomInfo = (props) => {
+  // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
+  props.getHistoryHandler(props.history);
+
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
   const [positionRatio, setPositionRatio] = useState({});
+  const [isInvolved, setIsInvolved] = useState(
+    props.location.state.userInvolved
+  );
+  const [backend, setBackend] = useState("");
+  const [frontend, setFrontend] = useState("");
+  const [total, setTotal] = useState("");
+
+  // board.js 로 push 받은 게시물 정보를 초기값으로 설정
+  // 게시물 신청 후 신청된 게시물에 대한 정보로 postInfo 값 변경
+  const [postInfo, setPostInfo] = useState(props.location.state);
 
   const submitForm = () => {
     if (window.localStorage.getItem("isLogin")) {
       const body = {
         backend: positionRatio.backend,
         frontend: positionRatio.frontend,
-        postid: props.location.state.id,
-        category: props.location.state.category,
+        postid: postInfo.id,
+        category: postInfo.category,
       };
 
-      if (props.location.state.category === "Project") {
-        // 버튼을 두번 눌러야 요청이 간다.
-        if (positionRatio !== {}) {
+      if (postInfo.category === "Project") {
+        if (positionRatio.frontend || positionRatio.backend) {
           axios
             .post(`https://localhost:4000/join`, body, {
               withCredentials: true,
             })
             .then((data) => {
-              data.message !== "userid not found!"
-                ? alert(
-                    `${
-                      positionRatio.frontend ? "Frontend" : "Backend"
-                    } 포지션으로 신청되었습니다.`
-                  )
-                : alert("다시 시도해주세요.");
+              console.log("조인 후 = ", data);
+              if (data.message !== "userid not found!") {
+                alert(
+                  `${
+                    positionRatio.frontend ? "Frontend" : "Backend"
+                  } 포지션으로 신청되었습니다.`
+                );
+                setPostInfo(() => ({ ...data.data.data, postInfo }));
+                setIsInvolved(true);
+                return;
+              }
             });
-          // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
         } else {
-          alert("원하는 포지션을 선택해주세요.");
+          return alert("원하는 포지션을 선택해주세요.");
         }
-        if (props.location.state.category === "Study") {
-          axios.post(
+      }
+      if (postInfo.category === "Study") {
+        axios
+          .post(
             `https://localhost:4000/join`,
             { ...body, frontend: 0, backend: 0 },
             { withCredentials: true }
-          );
-        }
+          )
+          .then((data) => {
+            if (data.message !== "userid not found!") {
+              alert(`스터디가 신청되었습니다.`);
+              setPostInfo(() => ({ ...data.data.data, postInfo }));
+              setIsInvolved(true);
+            } else {
+              alert("이미 신청하셨습니다.");
+            }
+          });
       }
-    } else {
+    } else if (
+      window.localStorage.getItem("isLogin") &&
+      !postInfo.username.split("").includes("기")
+    ) {
+      alert(
+        "계정관리에서 유저아이디를 코드스테이츠 기수로 변경 후 이용해주세요."
+      );
+    } else if (window.localStorage.getItem("isLogin")) {
       alert("로그인 후에 이용해주세요.");
     }
   };
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `https://localhost:4000/comments/${props.location.state.id}`,
+      `https://localhost:4000/comments/${postInfo.id}`,
       { withCredentials: true }
     );
     setReply(postComments.data.data);
@@ -82,7 +114,7 @@ const RoomInfo = (props) => {
                   writer: username,
                   comment: text,
                   userid: id,
-                  postid: props.location.state.id,
+                  postid: postInfo.id,
                 },
                 { withCredentials: true }
               )
@@ -105,34 +137,44 @@ const RoomInfo = (props) => {
     axios
       .delete("https://localhost:4000/comments", {
         data: {
-          postid: props.location.state.id,
+          postid: postInfo.id,
           commentid: delCommentId,
         },
         withCredentials: true,
       })
       .then((afterDelCommentList) => {
         alert("댓글을 삭제했습니다!");
-        console.log("afterDelCommentList = ", afterDelCommentList);
         setReply(afterDelCommentList.data.data);
       });
   };
 
   useEffect(() => {
-    console.log("프랍스로케이션스테이트", props.location);
     getPostComments();
-  }, [props.location.state.id]);
+
+    console.log("조인 전 = ", postInfo);
+
+    // if (postInfo.userInvolved) {
+    //   setIsInvolved(true);
+    // } else {
+    //   setIsInvolved(false);
+    // }
+
+    setBackend(postInfo.backend);
+    setFrontend(postInfo.frontend);
+    setTotal(postInfo.total);
+  }, [postInfo, isInvolved]);
 
   return (
     <>
       <div className="C_flexbox-container">
         <header className="board"></header>
-        <div className="C_SideBarSec">{/* <ul>{sideBar}</ul> */}</div>
+        <div className="C_SideBarSec"></div>
         <div className="Body_sec">
           <div className="RoomInfo">
             <div className="RoomInfo_Brief">
-              {props.location.state.category !== "Project" ? (
-                props.location.state.category !== "Question" ? (
-                  props.location.state.category !== "Closed" ? (
+              {postInfo.category !== "Project" ? (
+                postInfo.category !== "Question" ? (
+                  postInfo.category !== "Closed" ? (
                     <>
                       <div className="Brief_status">OPEN</div>
                       <img src={study} className="Brief_img" />
@@ -140,7 +182,7 @@ const RoomInfo = (props) => {
                   ) : (
                     <></>
                   )
-                ) : props.location.state.open ? (
+                ) : postInfo.open ? (
                   <>
                     <div className="Brief_status">OPEN</div>
                     <img src={question} className="Brief_img" />
@@ -158,47 +200,38 @@ const RoomInfo = (props) => {
                 </>
               )}
               <div className="Brief_info">
-                <div className="B_info-category">
-                  {props.location.state.category}
-                </div>
+                <div className="B_info-category">{postInfo.category}</div>
                 <div className="B_info-title">
-                  {props.location.state.title.length >= 32
-                    ? props.location.state.title.substr(0, 32) + "..."
-                    : props.location.state.title}
+                  {postInfo.title.length >= 32
+                    ? postInfo.title.substr(0, 32) + "..."
+                    : postInfo.title}
                 </div>
               </div>
               <div className="Brief_writer_createdAt">
                 <div className="Brief_writer">
-                  {props.location.state.category === "Question"
+                  {postInfo.category === "Question"
                     ? "Question"
-                    : props.location.state.writer}
+                    : postInfo.writer}
                 </div>
                 <div className="Brief_createdAt">
-                  {props.location.state.created_at.split("T")[0]}
+                  {postInfo.created_at.split("T")[0]}
                 </div>
               </div>
             </div>
             <div className="RoomInfo_Detail">
               <div className="Detail_info-wrap">
                 <div className="Detail_info">
-                  <div className="D_info-category">
-                    {props.location.state.category}
-                  </div>
-                  <div className="D_info-title">
-                    {props.location.state.title}
-                  </div>
+                  <div className="D_info-category">{postInfo.category}</div>
+                  <div className="D_info-title">{postInfo.title}</div>
                   <div className="D_info_total_position">
-                    {props.location.state.category !== "Question" ? (
-                      <div className="D_info-total">
-                        최대 인원 {props.location.state.total}명
-                      </div>
+                    {postInfo.category !== "Question" ? (
+                      <div className="D_info-total">최대 인원 {total}명</div>
                     ) : (
                       <></>
                     )}
-                    {props.location.state.category === "Project" ? (
+                    {postInfo.category === "Project" ? (
                       <div className="D_info-position">
-                        프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
-                        {props.location.state.backend}명
+                        프론트엔드 {frontend}명 / 백엔드 {backend}명
                       </div>
                     ) : (
                       <></>
@@ -207,9 +240,9 @@ const RoomInfo = (props) => {
 
                   <div className="D_info-stacks-wrap">
                     <div className="D_info-stacks-title">스택</div>
-                    {props.location.state.post_stacks ? (
+                    {postInfo.post_stacks ? (
                       <div className="D_info-stakcs">
-                        {props.location.state.post_stacks.map((stack) => {
+                        {postInfo.post_stacks.split(",").map((stack) => {
                           for (let key in logoImg) {
                             if (stack === key) {
                               return (
@@ -227,13 +260,13 @@ const RoomInfo = (props) => {
                     )}
                   </div>
                   <div className="D_info-content-wrap">
-                    {props.location.state.category !== "Question" ? (
+                    {postInfo.category !== "Question" ? (
                       <>
                         <div className="D_info-content-title">소개</div>
                         <div
                           className="D_info-content"
                           dangerouslySetInnerHTML={{
-                            __html: props.location.state.content,
+                            __html: postInfo.content,
                           }}
                         ></div>
                       </>
@@ -243,7 +276,7 @@ const RoomInfo = (props) => {
                         <div
                           className="D_question-content"
                           dangerouslySetInnerHTML={{
-                            __html: props.location.state.content,
+                            __html: postInfo.content,
                           }}
                         ></div>
                       </>
@@ -251,10 +284,10 @@ const RoomInfo = (props) => {
                   </div>
                 </div>
 
-                {!props.location.state.userInvolved ? (
+                {!isInvolved ? (
                   <div className="Detail_info-involve">
-                    {props.location.state.category !== "Question" ? (
-                      props.location.state.category === "Project" ? (
+                    {postInfo.category !== "Question" ? (
+                      postInfo.category === "Project" ? (
                         <div className="Detail_info-involve-title">포지션</div>
                       ) : (
                         <div className="Detail_info-involve-title">
@@ -265,9 +298,9 @@ const RoomInfo = (props) => {
                       <></>
                     )}
 
-                    {props.location.state.category !== "Question" ? (
+                    {postInfo.category !== "Question" ? (
                       <div className="Detail_info-involve-position">
-                        {props.location.state.category !== "Study" ? (
+                        {postInfo.category !== "Study" ? (
                           <>
                             <label
                               htmlFor="frontend"
@@ -308,7 +341,7 @@ const RoomInfo = (props) => {
                         ) : (
                           <></>
                         )}
-                        {props.location.state.category !== "Question" ? (
+                        {postInfo.category !== "Question" ? (
                           <button
                             className="submitBtn"
                             onClick={() => submitForm()}
@@ -323,11 +356,7 @@ const RoomInfo = (props) => {
                       <></>
                     )}
                   </div>
-                ) : (
-                  <></>
-                )}
-
-                {props.location.state.category !== "Question" ? (
+                ) : postInfo.category !== "Question" ? (
                   <h2>신청이 완료된 게시물입니다.</h2>
                 ) : (
                   <></>
@@ -342,7 +371,7 @@ const RoomInfo = (props) => {
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
-                  category={props.location ? props.location.state.category : ""}
+                  category={props.location ? postInfo.category : ""}
                 />
                 <li>{errmessage}</li>
               </ul>
@@ -351,7 +380,7 @@ const RoomInfo = (props) => {
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
-                  category={props.location ? props.location.state.category : ""}
+                  category={props.location ? postInfo.category : ""}
                 />
               </ul>
             )}
