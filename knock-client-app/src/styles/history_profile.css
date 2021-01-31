@@ -1,29 +1,39 @@
 .P_headers {
+  display: flex;
+  align-items: center;
   margin-top: 15%;
   margin-bottom: 9%;
-
-  height: 75px;
   border: 1px solid black;
   background-color: #525151;
   color: white;
   font-size: 25px;
+  font-weight: 700;
+  padding-top: 3%;
+  padding-left: 3%;
+  padding-bottom: 3%;
 }
 
-.P_subtitle {
-  font-weight: bold;
-  padding: 0px 60px;
+.P_breadcrumb:hover {
+  color: #f7e462;
 }
 
 .List_filter {
-  position: absolute;
-  top: 200px;
-  left: 550px;
-  width: 170px;
+  width: 30%;
+  margin-left: 60%;
 }
 
 .List_container {
   overflow: scroll;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
+.List_container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .MyList {
   display: flex;
   border-radius: 20px;
@@ -54,12 +64,20 @@
   font-weight: 600;
 }
 
+.post_stacks {
+  display: flex;
+}
+
+.post_stacks_more {
+  margin-left: 3%;
+  text-decoration: underline;
+}
+
 .MyList_status {
   display: flex;
   flex-direction: column;
   flex: 3;
-  padding-left: 16%;
-  margin-right: 6%;
+  margin-right: 3%;
 }
 
 .status_createdAt {

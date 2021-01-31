@@ -49,10 +49,22 @@ class ProfileEdit extends Component {
     return (
       <div className="mypageContainer_profileSec">
         <header className="P_headers">
-          <p className="P_subtitle">히스토리</p>
-          <button onClick={() => this.props.mypageHandleFromHisPro()}>
-            마이페이지
-          </button>
+          {this.props.breadcrumbHandler.state ? (
+            <div
+              className="P_breadcrumb"
+              onClick={() => this.props.mypageHandleFromHisPro()}
+            >
+              마이페이지 &gt;&nbsp;
+            </div>
+          ) : (
+            <div
+              className="P_breadcrumb"
+              onClick={() => this.props.mngAccountHandleFromHisPro()}
+            >
+              계정관리 &gt;&nbsp;
+            </div>
+          )}
+          <div className="P_subtitle">히스토리</div>
         </header>
 
         <select className="List_filter" onChange={this.filter}>
@@ -62,7 +74,7 @@ class ProfileEdit extends Component {
           <option value="Question">Question</option>
         </select>
 
-        <nav className="List_container">
+        <div className="List_container">
           {filteredPosts.map((project, idx) => {
             return (
               <div
@@ -78,13 +90,56 @@ class ProfileEdit extends Component {
                     <div className="Context_projectTitle" value={project.id}>
                       {project.title}
                     </div>
-                    {postStacksArr[idx] ? (
-                      postStacksArr[idx].map((stack) => {
-                        return <div value={project.id}>{stack}</div>;
-                      })
-                    ) : (
-                      <div value={project.id}>스택 없음</div>
-                    )}
+                    <div className="post_stacksSec">
+                      <div className="post_stacks_title" value={project.id}>
+                        스택
+                      </div>
+                      <div className="post_stacks" value={project.id}>
+                        {postStacksArr[idx] ? (
+                          postStacksArr[idx].map((stack, stackIndex) => {
+                            if (stackIndex < 1) {
+                              return (
+                                <div className="showStack">
+                                  현재
+                                  <span className="showStack_stacks">
+                                    {this.state.userStack + ""}
+                                  </span>
+                                  을 선택하셨습니다.
+                                </div>
+                              );
+                            }
+                            if (stackIndex < 2) {
+                              return (
+                                <div className="showStack">
+                                  현재
+                                  <span className="showStack_stacks">
+                                    {this.state.userStack + ""}
+                                  </span>
+                                  을 선택하셨습니다.
+                                </div>
+                              );
+                            }
+                          })
+                        ) : (
+                          <div value={project.id}>스택 없음</div>
+                        )}
+
+                        {postStacksArr[idx] ? (
+                          postStacksArr[idx].length > 3 ? (
+                            <div
+                              value={project.id}
+                              className="post_stacks_more"
+                            >
+                              More
+                            </div>
+                          ) : (
+                            <></>
+                          )
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className="MyList_status" value={project.id}>
                     <div className="status_createdAt" value={project.id}>
@@ -104,7 +159,7 @@ class ProfileEdit extends Component {
               </div>
             );
           })}
-        </nav>
+        </div>
       </div>
     );
   }

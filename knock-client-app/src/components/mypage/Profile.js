@@ -1,18 +1,9 @@
 /* eslint-disable */
 import React from "react";
 import axios from "axios";
-import PrintLogo from "./PrintStackLogo"; // lines number of 101 to 104
-/*
-window.localStorage.setItem =>인자값두개 (키,벨류)
- 현재 인자값으로 넣어야할 것 -> userid / username / isLogin은 true
- 타이밍은 오어스 로그인
+import { logoImg } from "../../utils/options";
+import profileImg from "../../images/profile/profile.png";
 
- window.localStorage.getItem => (키)
-
-window.localStorage.removeItem => (키)
- 로그아웃 버튼을 누르면 모든 userid / username 삭제 / isLogin은 false
-
-*/
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +15,7 @@ class Profile extends React.Component {
   }
 
   async componentDidMount() {
-// 최초 O-auth로그인 후 사용자에 대한 세션발급 요청
+    // 최초 O-auth로그인 후 사용자에 대한 세션발급 요청
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
     if (authorizationCode && !window.localStorage.getItem("isLogin")) {
@@ -52,6 +43,9 @@ class Profile extends React.Component {
       .then((userInfo) => {
         console.log("프로필 userInfo = ", userInfo);
         this.setState({ userInfo: userInfo.data.userdata });
+        if (this.props.getUserInfoFromProfile) {
+          this.props.getUserInfoFromProfile(userInfo.data.userdata);
+        }
 
         //서버에서 사용자 정보를 가져오면서 로컬스토리지에 사용자 정보가 들어간다.
         window.localStorage.setItem("userid", userInfo.data.userdata.id);
@@ -72,7 +66,7 @@ class Profile extends React.Component {
     return (
       <div className="mypageContainer_profileSec">
         <div className="profileSec_profileImg">
-          {/* 프로필 사진 이미지 [이준희]*/}
+          <img src={profileImg} className="profileImg" />
         </div>
         <div className="profileSec_name_mood">
           <p className="profileSec_username">
@@ -83,6 +77,16 @@ class Profile extends React.Component {
           </p>
         </div>
         <div className="profileSec_btns">
+          {this.props.isAccountMng ? (
+            <button
+              className="profileSec_btns_accountMng"
+              onClick={() => this.props.accountMngClickHandler()}
+            >
+              계정 관리
+            </button>
+          ) : (
+            <button className="profileSec_btns_false">계정관리</button>
+          )}
           {this.props.isMypage ? (
             <button
               className="profileSec_btns_mypage"
@@ -100,25 +104,21 @@ class Profile extends React.Component {
           >
             히스토리
           </button>
-          {this.props.isAccountMng ? (
-            <button
-              className="profileSec_btns_accountMng"
-              onClick={() => this.props.accountMngClickHandler()}
-            >
-              계정 관리
-            </button>
-          ) : (
-            <button className="profileSec_btns_false">계정관리</button>
-          )}
         </div>
         <div className="profileSec_stacks">
-          {/* 밑에 있는 로직은 로고를 이미지로 보여주기 위한 컴포넌트 [PrintStackLogo.js]구상중 */}
-          {/* <PrintLogo
-            Logo={this.state.userInfo ? this.state.userInfo.user_stacks : ""}
-          /> */}
-          <div>
-            {this.state.userInfo ? this.state.userInfo.user_stacks : ""}
-          </div>
+          {this.state.userInfo.user_stacks ? (
+            this.state.userInfo.user_stacks.split(",").map((stack) => {
+              for (let key in logoImg) {
+                if (stack === key) {
+                  return (
+                    <img className="profileSec_stack" src={logoImg[key]} />
+                  );
+                }
+              }
+            })
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

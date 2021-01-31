@@ -1,21 +1,14 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import "../../styles/board.css";
-import together from "../../images/boardImg/together.png";
-import closed from "../../images/boardImg/closed.png";
-import question from "../../images/boardImg/Question.png";
-import study from "../../images/boardImg/studyGroup.png";
+import together from "../../images/boardImg/together.jpg";
+import question from "../../images/boardImg/Question.jpg";
+import study from "../../images/boardImg/studyGroup.jpg";
 import axios from "axios";
 
 const PublicBoard = (props) => {
-  console.log("프랍스 로케이션 스테이트", props.location);
-
-  //const btnList = ["All", "Study", "Project", "Q&A"];
-
   const [posts, setPosts] = useState([]);
-  const [postStacks, setPostStacks] = useState([]);
   const [postFilter, setPostFilter] = useState("");
-  const [isUser, setIsUser] = useState(""); // 유저의 로그인 여부
 
   useEffect(async () => {
     let postsList;
@@ -52,6 +45,7 @@ const PublicBoard = (props) => {
     postsList.data.data.forEach((post) => {
       let postObj = {
         id: post.id,
+        writer: post.writer,
         category: post.category,
         title: post.title,
         content: post.content,
@@ -74,22 +68,44 @@ const PublicBoard = (props) => {
     postsArr.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     setPosts(postsArr);
-
-    // 나중에 수정 해야함(사용자 정보 변경 요청 주소 바뀔 경우)
-    axios
-      .get("https://localhost:4000/profile", { withCredentials: true })
-      .then((user) => {
-        setIsUser(user);
-      });
-
-    console.log("isUser = ", isUser);
   }, [props.location.state, postFilter]);
 
   const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
-    for (let post of posts) {
-      if (post.id === Number(postId)) {
-        props.history.push("/roomInfo", post);
+    if (window.localStorage.getItem("isLogin")) {
+      const userInfo = await axios.get("https://localhost:4000/profile", {
+        withCredentials: true,
+      });
+
+      const userInvolved = [];
+      userInfo.data.postdata.filter((el) => {
+        userInvolved.push(el.id);
+      });
+      console.log("asdsa", userInvolved);
+
+      for (let post of posts) {
+        if (post.id === Number(postId)) {
+          if (userInvolved.indexOf(post.id) !== -1) {
+            props.history.push("/roomInfo", {
+              ...post,
+              userInvolved: true,
+            });
+          } else {
+            props.history.push("/roomInfo", {
+              ...post,
+              userInvolved: false,
+            });
+          }
+        }
+      }
+    } else {
+      for (let post of posts) {
+        if (post.id === Number(postId)) {
+          props.history.push("/roomInfo", {
+            ...post,
+            userInvolved: false,
+          });
+        }
       }
     }
   };
@@ -129,7 +145,7 @@ const PublicBoard = (props) => {
               Q{"&"}A
             </li>
 
-            {isUser ? (
+            {window.localStorage.getItem("isLogin") ? (
               <li
                 className="B_filterBtn"
                 onClick={() => props.history.push("/createRoom")}
@@ -151,35 +167,37 @@ const PublicBoard = (props) => {
                   <div
                     className="B_RoomCard"
                     value={post.id}
+                    key={idx}
                     onClick={roomCardClickHandler}
                   >
+                    <div className="B_RoomCard-Status" value={post.id}>
+                      OPEN
+                    </div>
                     <img
                       src={together}
-                      className="B_RoomCard-Img1"
-                      alt=""
+                      className="B_RoomCard-image"
                       value={post.id}
                     />
-                    <div className="B_RommCard-info">
+
+                    <div className="B_RommCard-info" value={post.id}>
                       <div className="B_RoomCard-category" value={post.id}>
                         {post.category}
                       </div>
                       <div className="B_RoomCard-title" value={post.id}>
-                        {post.title}
+                        {post.title.length >= 23
+                          ? post.title.substr(0, 23) + "..."
+                          : post.title}
                       </div>
-                      <div className="B_RoomCard-total" value={post.id}>
-                        최대 인원 {post.total}명
+                    </div>
+                    <div
+                      className="B_RoomCard-writer-createdAt"
+                      value={post.id}
+                    >
+                      <div className="B_RoomCard-writer" value={post.id}>
+                        {post.writer}
                       </div>
-                      <div className="B_RoomCard-position" value={post.id}>
-                        프론트엔드 {post.frontend}명 / 백엔드 {post.backend}명
-                      </div>
-                      <div className="B_RoomCard-stacks" value={post.id}>
-                        {post.post_stacks.map((stack) => {
-                          return (
-                            <div className="B_RoomCard-stack" value={post.id}>
-                              {stack}
-                            </div>
-                          );
-                        })}
+                      <div className="B_RoomCard-createdAt" value={post.id}>
+                        {post.created_at.split("T")[0]}
                       </div>
                     </div>
                   </div>
@@ -188,68 +206,78 @@ const PublicBoard = (props) => {
               if (post.category === "Study") {
                 return (
                   <div
+                    key={idx}
                     className="B_RoomCard"
                     value={post.id}
                     onClick={roomCardClickHandler}
                   >
+                    <div className="B_RoomCard-Status" value={post.id}>
+                      OPEN
+                    </div>
                     <img
                       src={study}
-                      className="B_RoomCard-Img3"
-                      alt=""
+                      className="B_RoomCard-image"
                       value={post.id}
                     />
-                    <div className="B_RoomCard-category" value={post.id}>
-                      {post.category}
+                    <div className="B_RommCard-info" value={post.id}>
+                      <div className="B_RoomCard-category" value={post.id}>
+                        {post.category}
+                      </div>
+                      <div className="B_RoomCard-title" value={post.id}>
+                        {post.title.length >= 23
+                          ? post.title.substr(0, 23) + "..."
+                          : post.title}
+                      </div>
                     </div>
-                    <div className="B_RoomCard-title" value={post.id}>
-                      {post.title}
-                    </div>
-                    <div className="B_RoomCard-total" value={post.id}>
-                      최대 인원 {post.total}명
-                    </div>
-                    <div className="B_RoomCard-stacks" value={post.id}>
-                      {post.post_stacks.map((stack) => {
-                        return (
-                          <div className="B_RoomCard-stack" value={post.id}>
-                            {stack}
-                          </div>
-                        );
-                      })}
+
+                    <div
+                      className="B_RoomCard-writer-createdAt"
+                      value={post.id}
+                    >
+                      <div className="B_RoomCard-writer" value={post.id}>
+                        {post.writer}
+                      </div>
+                      <div className="B_RoomCard-createdAt" value={post.id}>
+                        {post.created_at.split("T")[0]}
+                      </div>
                     </div>
                   </div>
                 );
               }
-            } else if (post.category === "Question") {
+            }
+            if (post.category === "Question") {
               return (
                 <div
+                  key={idx}
                   className="B_RoomCard"
                   value={post.id}
                   onClick={roomCardClickHandler}
                 >
+                  <div className="B_RoomCard-Status" value={post.id}>
+                    {post.open ? "OPEN" : "CLOSED"}
+                  </div>
                   <img
                     src={question}
-                    className="B_RoomCard-Img4"
-                    alt=""
+                    className="B_RoomCard-image"
                     value={post.id}
                   />
-                  <div className="B_RoomCard-category" value={post.id}>
-                    {post.category}
+                  <div className="B_RommCard-info" value={post.id}>
+                    <div className="B_RoomCard-category" value={post.id}>
+                      {post.category}
+                    </div>
+                    <div className="B_RoomCard-title" value={post.id}>
+                      {post.title.length >= 23
+                        ? post.title.substr(0, 23) + "..."
+                        : post.title}
+                    </div>
                   </div>
-                  <div className="B_RoomCard-title" value={post.id}>
-                    {post.title}
-                  </div>
-                  <div className="B_RoomCard-stacks" value={post.id}>
-                    {post.post_stacks ? (
-                      post.post_stacks.map((stack) => {
-                        return (
-                          <div className="B_RoomCard-stack" value={post.id}>
-                            {stack}
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <></>
-                    )}
+                  <div className="B_RoomCard-writer-createdAt" value={post.id}>
+                    <div className="B_RoomCard-writer" value={post.id}>
+                      {"Question"}
+                    </div>
+                    <div className="B_RoomCard-createdAt" value={post.id}>
+                      {post.created_at.split("T")[0]}
+                    </div>
                   </div>
                 </div>
               );

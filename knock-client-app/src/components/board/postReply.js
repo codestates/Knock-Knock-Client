@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/roomInfo.css";
 
 const PostReply = (props) => {
+  console.log("포스트리플라이 부분의 프랍스", props);
   const [userId, setUserId] = useState("");
 
   useEffect(async () => {
@@ -15,10 +16,6 @@ const PostReply = (props) => {
     console.log(userId);
   });
 
-  // 날짜기준으로 정렬 하기
-  // 혹시몰라서 놔둠
-  //props.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
   const comment = props.value.map((value, idx) => {
     let created_at;
     if (value.created_at) {
@@ -27,19 +24,21 @@ const PostReply = (props) => {
     if (idx >= 0) {
       return (
         <li key={idx} value={value.id} className="postReply">
-          {props.value[0].user.id === userId ? (
+          {value.user.id === userId ? (
             <button
               className="reply_del_btn"
               onClick={() => props.deleteCommentHandler(value.id)}
-            >
-              X
-            </button>
+            ></button>
           ) : (
             <></>
           )}
           <div className="reply_info">
             <div className="reply_username_date">
-              <p className="reply_username">{value.writer}</p>
+              <p className="reply_username">
+                {props.category === "Question"
+                  ? `코드스테이츠 ${value.user.id}`
+                  : value.writer}
+              </p>
               <p className="reply_date">{created_at}</p>
             </div>
             <p className="reply_text">{value.comment}</p>

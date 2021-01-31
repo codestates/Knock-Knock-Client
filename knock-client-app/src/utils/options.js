@@ -2,6 +2,44 @@
 로직에서 select tag에 있는 옵션들을 이곳에 정렬시켜놓자.
 */
 
+import Cshop from "../images/logo/c.png";
+import CC from "../images/logo/C++.png";
+import docker from "../images/logo/docker.png";
+import express from "../images/logo/express.png";
+import go from "../images/logo/go.png";
+import java from "../images/logo/java.png";
+import Javascript from "../images/logo/javascript.png";
+import mongo from "../images/logo/mongo.png";
+import mysql from "../images/logo/mysql.png";
+import nest from "../images/logo/nest.png";
+import node from "../images/logo/node.png";
+import php from "../images/logo/php.png";
+import post from "../images/logo/postgresql.png";
+import react from "../images/logo/react.png";
+import Rust from "../images/logo/Rust.png";
+import Rudy from "../images/logo/Ruby.png";
+import typescript from "../images/logo/typescript.png";
+
+export const logoImg = {
+  "c#": Cshop,
+  "c++": CC,
+  docker,
+  express,
+  go,
+  java,
+  javascript: Javascript,
+  mongo,
+  mysql,
+  nest,
+  node,
+  php,
+  post,
+  react,
+  Rust,
+  Rudy,
+  typescript,
+};
+
 const mbti = [
   "성향을 체크해주세요:)",
   "INTJ",
@@ -23,23 +61,23 @@ const mbti = [
 ];
 
 const stacks = [
-  "C#",
-  "C++",
-  "Docker",
-  "Express",
-  "Graphql",
-  "Java",
-  "MongoDB",
-  "Mysql",
-  "Nest.js",
-  "Node.js",
-  "PHP",
-  "Postgresql",
-  "GO",
-  "Javascript",
-  "Typescript",
-  "Rudy",
-  "Rust",
+  "C",
+  "CC",
+  "docker",
+  "express",
+  "graphql",
+  "java",
+  "mongo",
+  "mysql",
+  "nest",
+  "node",
+  "php",
+  "post",
+  "javascript",
+  "typescript",
+  "rudy",
+  "rust",
+  "go",
 ];
 
 const fakeData = [

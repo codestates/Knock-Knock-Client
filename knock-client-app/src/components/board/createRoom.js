@@ -1,36 +1,25 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import DataForm from "./dataForm";
+
 import "../../styles/createRoom.css";
+
 import axios from "axios";
 
 const CreateRoom = (props) => {
   const [category, setCategory] = useState("Category");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [roominfo, setRoomInfo] = useState("");
-  const [isCreater, setIsCreater] = useState(true);
-
   const [crew, setCrew] = useState(0); // project 필수 Study 필수 Question 없음
-  const [position, setPosition] = useState([]); // project 필수 Study 없음 Question 없음
   const [stack, setStack] = useState([]); // project 필수 Study 선택 Question 선택
-
-  const moveToCreater = () => {
-    this.props.history.push("/createRoom");
-    setIsCreater(false);
-  };
+  const [posFront, setPosFront] = useState(0); // project 필수 Study 없음 Question 없음
+  const [posBack, setPosBack] = useState(0); // project 필수 Study 없음 Question 없음
 
   const getCrew = (e) => {
     setCrew(e);
     console.log("crew", crew);
-  };
-
-  const getPosition = (e) => {
-    setPosition(position.concat(e));
-    console.log("position", position);
-    console.log(e);
   };
 
   const getStack = (e) => {
@@ -54,15 +43,45 @@ const CreateRoom = (props) => {
           category: category,
           title: title,
           total: crew,
-          backend: position[0],
-          frontend: position[1],
+          backend: posBack,
+          frontend: posFront,
           // 스택에 대한 수정 // 양쪽 괄호 빼기[이준희]
           post_stacks: `${String(stack)}`,
           content: description,
         };
-        console.log("body = ", body);
+        if (category === "Project") {
+          if (
+            !body.total ||
+            !body.post_stacks ||
+            !body.backend ||
+            !body.frontend ||
+            !body.content
+          ) {
+            return alert("모든 항목을 반드시 입력해주세요.");
+          } else if (
+            !(
+              parseInt(body.backend) + parseInt(body.frontend) ===
+              parseInt(body.total) - 1
+            )
+          ) {
+            console.log(
+              "parseInt(body.backend) + parseInt(body.frontend) = ",
+              parseInt(body.backend) + parseInt(body.frontend)
+            );
+            console.log("?????", body.frontend, body.backend, body.total);
+            return alert("설명을 다시 읽고 비율을 입력해주세요.");
+          }
+        }
+
+        if (category === "Study") {
+          if (!body.total) {
+            return alert("모집인원을 선택해주세요.");
+          }
+        }
         axios
-          .post("https://localhost:4000/posts", body, { withCredentials: true })
+          .post("https://localhost:4000/posts", body, {
+            withCredentials: true,
+          })
           .then(() => {
             props.history.push("/board");
           });
@@ -78,6 +97,11 @@ const CreateRoom = (props) => {
       </option>
     );
   });
+
+  useEffect(() => {
+    console.log("posFront = ", posFront);
+    console.log("posBack = ", posBack);
+  }, [posFront, posBack]);
 
   return (
     <div className="Create_Container">
@@ -98,7 +122,8 @@ const CreateRoom = (props) => {
       <DataForm
         category={category}
         crew={getCrew}
-        position={getPosition}
+        positionFront={setPosFront}
+        positionBack={setPosBack}
         stack={getStack}
       ></DataForm>
 

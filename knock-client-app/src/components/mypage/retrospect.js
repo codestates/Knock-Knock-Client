@@ -8,8 +8,16 @@ const SendRetrospect = ({ journals, userData, retroDeleteHandler }) => {
       return (
         <>
           <li key={idx} className="His_JournalForm">
-            <p className="Journal_username">{userData.username}</p>
-            <p className="Journal_date">{journal.created_at.split("T")[0]}</p>
+            <button
+              onClick={() => retroDeleteHandler(journal.id)}
+              className="Journal_DelBtn"
+            ></button>
+            <div className="Journal_username_date">
+              <div className="Journal_username">{userData.username}</div>
+              <div className="Journal_date">
+                {journal.created_at.split("T")[0]}
+              </div>
+            </div>
             <div
               className="Journal_text"
               dangerouslySetInnerHTML={{
@@ -17,7 +25,6 @@ const SendRetrospect = ({ journals, userData, retroDeleteHandler }) => {
               }}
             ></div>
           </li>
-          <button onClick={() => retroDeleteHandler(journal.id)}>삭제</button>
         </>
       );
     }

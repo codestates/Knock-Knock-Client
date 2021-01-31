@@ -1,70 +1,58 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import "../../styles/roomInfo.css";
-import together from "../../images/boardImg/together.png";
+import together from "../../images/boardImg/together.jpg";
+import question from "../../images/boardImg/Question.jpg";
+import study from "../../images/boardImg/studyGroup.jpg";
 import PostReply from "./postReply";
 import axios from "axios";
+import { logoImg } from "../../utils/options";
 
 const RoomInfo = (props) => {
-  console.log("이 안에는 뭐가 있나요 ?= ", props);
   const [reply, setReply] = useState([]); //
   const [text, setText] = useState("");
   const [errmessage, setErrmessage] = useState("");
-  const [position, setPosition] = useState("");
-  const [positionRatio, setPositionRatio] = useState({
-    backend: 0,
-    frontend: 0,
-  });
-
-  // const btnList = ["All", "Study", "Project", "Q&A", "그룹만들기"];
-  // const sideBar = btnList.map((el, idx) => {
-  //   return (
-  //     <li className="C_filterBtn" key={idx}>
-  //       {el}
-  //     </li>
-  //   );
-  // });
+  const [positionRatio, setPositionRatio] = useState({});
 
   const submitForm = () => {
-    console.log("이게 무엇인거 :??", positionRatio);
-    if (props.location.state.category === "Project") {
-      position === "frontend"
-        ? setPositionRatio({ frontend: 1, backend: 0 })
-        : setPositionRatio({ frontend: 0, backend: 1 });
-    }
+    if (window.localStorage.getItem("isLogin")) {
+      const body = {
+        backend: positionRatio.backend,
+        frontend: positionRatio.frontend,
+        postid: props.location.state.id,
+        category: props.location.state.category,
+      };
 
-    const body = {
-      backend: positionRatio.backend,
-      frontend: positionRatio.frontend,
-      postid: props.location.state.id,
-      category: props.location.state.category,
-    };
-
-    if (props.location.state.category === "Project") {
-      if (position) {
-        axios
-          .post(`https://localhost:4000/join`, body, { withCredentials: true })
-          .then((data) => {
-            console.log("data", data);
-            data.data !== "바보"
-              ? alert(`${position} 포지션으로 신청되었습니다.`)
-              : alert("다시 시도해주세요.");
-          });
-        // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
-      } else {
-        // setErrmessage("원하는 포지션을 선택해주세요.");
-        alert("원하는 포지션을 선택해주세요.");
+      if (props.location.state.category === "Project") {
+        // 버튼을 두번 눌러야 요청이 간다.
+        if (positionRatio !== {}) {
+          axios
+            .post(`https://localhost:4000/join`, body, {
+              withCredentials: true,
+            })
+            .then((data) => {
+              data.message !== "userid not found!"
+                ? alert(
+                    `${
+                      positionRatio.frontend ? "Frontend" : "Backend"
+                    } 포지션으로 신청되었습니다.`
+                  )
+                : alert("다시 시도해주세요.");
+            });
+          // 방에 대한 정보를 받아 온 후 마이페이지에 방의 정보가 등록되게 해야한다.
+        } else {
+          alert("원하는 포지션을 선택해주세요.");
+        }
+        if (props.location.state.category === "Study") {
+          axios.post(
+            `https://localhost:4000/join`,
+            { ...body, frontend: 0, backend: 0 },
+            { withCredentials: true }
+          );
+        }
       }
-    } else if (props.location.state.category === "Study") {
-      axios
-        .post(`https://localhost:4000/join`, body, { withCredentials: true })
-        .then((data) => {
-          console.log("data", data);
-          //만약 이미 참가한 상태의 유저라면 "이미 그룹에 속해있습니다."
-          //만약 방이 클로스가 되었다면 "Closed된 게시글 입니다."
-
-          alert("다시 시도해주세요.");
-        });
+    } else {
+      alert("로그인 후에 이용해주세요.");
     }
   };
 
@@ -73,51 +61,45 @@ const RoomInfo = (props) => {
       `https://localhost:4000/comments/${props.location.state.id}`,
       { withCredentials: true }
     );
-
-    console.log("postComments = ", postComments);
-
     setReply(postComments.data.data);
   };
 
   const sendReply = () => {
-    let replyInfo = {};
-    if (text === "") {
-      setErrmessage("텍스트를 입력하세요");
-    } else {
-      setErrmessage("");
+    if (window.localStorage.getItem("isLogin")) {
+      if (text === "") {
+        setErrmessage("텍스트를 입력하세요");
+      } else {
+        setErrmessage("");
 
-      axios
-        .get("https://localhost:4000/profile", { withCredentials: true })
-        .then((getUserInfo) => {
-          const { id, username } = getUserInfo.data.userdata;
-          axios
-            .post(
-              "https://localhost:4000/comments",
-              {
-                writer: username,
-                comment: text,
-                userid: id,
-                postid: props.location.state.id,
-              },
-              { withCredentials: true }
-            )
-            .then((postComments) => {
-              setReply(postComments.data.data);
-            });
-        });
+        axios
+          .get("https://localhost:4000/profile", { withCredentials: true })
+          .then((getUserInfo) => {
+            const { id, username } = getUserInfo.data.userdata;
+            axios
+              .post(
+                "https://localhost:4000/comments",
+                {
+                  writer: username,
+                  comment: text,
+                  userid: id,
+                  postid: props.location.state.id,
+                },
+                { withCredentials: true }
+              )
+              .then((postComments) => {
+                setReply(postComments.data.data);
+              });
+          });
+      }
+    } else {
+      alert("로그인 후에 이용해주세요.");
     }
-    setReply(() => [...reply, replyInfo]);
   };
 
   const commentChangeHandler = (event) => {
     setText(event.target.value);
   };
 
-  /*
-    댓글 삭제 메소드
-    PostReply 컴포넌트로 props 내린 후 댓글의 id 를
-    매개변수로 받아서 처리
-  */
   const deleteCommentHandler = (delCommentId) => {
     console.log("delCommentId = ", delCommentId);
     axios
@@ -136,6 +118,7 @@ const RoomInfo = (props) => {
   };
 
   useEffect(() => {
+    console.log("프랍스로케이션스테이트", props.location);
     getPostComments();
   }, [props.location.state.id]);
 
@@ -147,23 +130,51 @@ const RoomInfo = (props) => {
         <div className="Body_sec">
           <div className="RoomInfo">
             <div className="RoomInfo_Brief">
-              <img src={together} className="Brief_img" />
+              {props.location.state.category !== "Project" ? (
+                props.location.state.category !== "Question" ? (
+                  props.location.state.category !== "Closed" ? (
+                    <>
+                      <div className="Brief_status">OPEN</div>
+                      <img src={study} className="Brief_img" />
+                    </>
+                  ) : (
+                    <></>
+                  )
+                ) : props.location.state.open ? (
+                  <>
+                    <div className="Brief_status">OPEN</div>
+                    <img src={question} className="Brief_img" />
+                  </>
+                ) : (
+                  <>
+                    <div className="Brief_status">CLOSED</div>
+                    <img src={question} className="Brief_img" />
+                  </>
+                )
+              ) : (
+                <>
+                  <div className="Brief_status">OPEN</div>
+                  <img src={together} className="Brief_img" />
+                </>
+              )}
               <div className="Brief_info">
                 <div className="B_info-category">
                   {props.location.state.category}
                 </div>
-                <div className="B_info-title">{props.location.state.title}</div>
-                <div className="B_info-total">
-                  최대 인원 {props.location.state.total}명
+                <div className="B_info-title">
+                  {props.location.state.title.length >= 32
+                    ? props.location.state.title.substr(0, 32) + "..."
+                    : props.location.state.title}
                 </div>
-                <div className="B_info-position">
-                  프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
-                  {props.location.state.backend}명
+              </div>
+              <div className="Brief_writer_createdAt">
+                <div className="Brief_writer">
+                  {props.location.state.category === "Question"
+                    ? "Question"
+                    : props.location.state.writer}
                 </div>
-                <div className="B_info-stacks">
-                  {props.location.state.post_stacks.map((stack) => {
-                    return <div className="B_info-stack">{stack}</div>;
-                  })}
+                <div className="Brief_createdAt">
+                  {props.location.state.created_at.split("T")[0]}
                 </div>
               </div>
             </div>
@@ -177,109 +188,161 @@ const RoomInfo = (props) => {
                     {props.location.state.title}
                   </div>
                   <div className="D_info_total_position">
-                    <div className="D_info-total">
-                      최대 인원 {props.location.state.total}명
-                    </div>
-                    <div className="D_info-position">
-                      프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
-                      {props.location.state.backend}명
-                    </div>
+                    {props.location.state.category !== "Question" ? (
+                      <div className="D_info-total">
+                        최대 인원 {props.location.state.total}명
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {props.location.state.category === "Project" ? (
+                      <div className="D_info-position">
+                        프론트엔드 {props.location.state.frontend}명 / 백엔드{" "}
+                        {props.location.state.backend}명
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
 
                   <div className="D_info-stacks-wrap">
                     <div className="D_info-stacks-title">스택</div>
-                    <div className="D_info-stakcs">
-                      {props.location.state.post_stacks}
-                    </div>
+                    {props.location.state.post_stacks ? (
+                      <div className="D_info-stakcs">
+                        {props.location.state.post_stacks.map((stack) => {
+                          for (let key in logoImg) {
+                            if (stack === key) {
+                              return (
+                                <img
+                                  className="D_info-stack"
+                                  src={logoImg[key]}
+                                />
+                              );
+                            }
+                          }
+                        })}
+                      </div>
+                    ) : (
+                      <div className="D_info-stakcs-none">스택없음</div>
+                    )}
                   </div>
-
                   <div className="D_info-content-wrap">
-                    <div className="D_info-content-title">소개</div>
-                    <div
-                      className="D_info-content"
-                      dangerouslySetInnerHTML={{
-                        __html: props.location.state.content,
-                      }}
-                    ></div>
+                    {props.location.state.category !== "Question" ? (
+                      <>
+                        <div className="D_info-content-title">소개</div>
+                        <div
+                          className="D_info-content"
+                          dangerouslySetInnerHTML={{
+                            __html: props.location.state.content,
+                          }}
+                        ></div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="D_question-content-title">질문</div>
+                        <div
+                          className="D_question-content"
+                          dangerouslySetInnerHTML={{
+                            __html: props.location.state.content,
+                          }}
+                        ></div>
+                      </>
+                    )}
                   </div>
                 </div>
-                <div className="Detail_info-involve">
-                  {props.location.state.category === "Project" ? (
-                    <div className="Detail_info-involve-title">포지션</div>
-                  ) : (
-                    <div className="Detail_info-involve-title">스터디 참여</div>
-                  )}
 
-                  {props.location.state.category !== "Question" ? (
-                    <div className="Detail_info-involve-position">
-                      {props.location.state.category !== "Study" ? (
-                        <>
-                          <label
-                            htmlFor="frontend"
-                            className="involve_frontend-label"
-                          >
-                            프론트엔드
-                          </label>
-                          <input
-                            onChange={(e) => setPosition(e.target.value)}
-                            type="radio"
-                            id="frontend"
-                            value="frontend"
-                            key="frontend"
-                            name="position"
-                            className="involve_position-chkBox"
-                          ></input>
+                {!props.location.state.userInvolved ? (
+                  <div className="Detail_info-involve">
+                    {props.location.state.category !== "Question" ? (
+                      props.location.state.category === "Project" ? (
+                        <div className="Detail_info-involve-title">포지션</div>
+                      ) : (
+                        <div className="Detail_info-involve-title">
+                          스터디 참여
+                        </div>
+                      )
+                    ) : (
+                      <></>
+                    )}
 
-                          <label
-                            htmlFor="backend"
-                            className="involve_backend-label"
+                    {props.location.state.category !== "Question" ? (
+                      <div className="Detail_info-involve-position">
+                        {props.location.state.category !== "Study" ? (
+                          <>
+                            <label
+                              htmlFor="frontend"
+                              className="involve_frontend-label"
+                            >
+                              프론트엔드
+                            </label>
+                            <input
+                              onChange={() =>
+                                setPositionRatio({ frontend: 1, backend: 0 })
+                              }
+                              type="radio"
+                              id="frontend"
+                              value="frontend"
+                              key="frontend"
+                              name="position"
+                              className="involve_position-chkBox"
+                            ></input>
+
+                            <label
+                              htmlFor="backend"
+                              className="involve_backend-label"
+                            >
+                              백엔드
+                            </label>
+                            <input
+                              onChange={() =>
+                                setPositionRatio({ frontend: 0, backend: 1 })
+                              }
+                              type="radio"
+                              id="backend"
+                              value="backend"
+                              key="backend"
+                              name="position"
+                              className="involve_position-chkBox"
+                            ></input>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        {props.location.state.category !== "Question" ? (
+                          <button
+                            className="submitBtn"
+                            onClick={() => submitForm()}
                           >
-                            백엔드
-                          </label>
-                          <input
-                            onChange={(e) => setPosition(e.target.value)}
-                            type="radio"
-                            id="backend"
-                            value="backend"
-                            key="backend"
-                            name="position"
-                            className="involve_position-chkBox"
-                          ></input>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      {props.location.state.category === "Project" ? (
-                        <button
-                          className="submitBtn"
-                          onClick={() => submitForm()}
-                        >
-                          신청하기
-                        </button>
-                      ) : (
-                        <button
-                          className="study_submitBtn"
-                          onClick={() => submitForm()}
-                        >
-                          신청하기
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+                            신청하기
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                ) : (
+                  <></>
+                )}
+
+                {props.location.state.category !== "Question" ? (
+                  <h2>신청이 완료된 게시물입니다.</h2>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
 
-          {/* 룸인포 -> 방정보/ 프로젝트or스터디orQuestion에 대한 소개글 [피그마 참고]*/}
           <div className="ReplyZone">
             {errmessage ? (
               <ul>
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
+                  category={props.location ? props.location.state.category : ""}
                 />
                 <li>{errmessage}</li>
               </ul>
@@ -288,6 +351,7 @@ const RoomInfo = (props) => {
                 <PostReply
                   value={reply}
                   deleteCommentHandler={deleteCommentHandler}
+                  category={props.location ? props.location.state.category : ""}
                 />
               </ul>
             )}
