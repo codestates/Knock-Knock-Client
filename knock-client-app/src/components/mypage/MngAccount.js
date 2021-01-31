@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import "../../styles/history_profile.css";
 import "../../styles/mypage.css";
-import { mbti} from "../../utils/options";
+import { mbti } from "../../utils/options";
 import Profile from "./Profile";
 import PrintLogo from "../mypage/PrintStackLogo";
 

@@ -215,13 +215,8 @@ class MngHistory extends Component {
                   retroDeleteHandler={this.retroDeleteHandler}
                 />
               </ul>
-              <span className="Felx">
-                <button
-                  onClick={this.sendEmailForRetroHandler}
-                  className="HisList_sendBtn"
-                >
-                  회고받기
-                </button>
+
+              <div className="His_delete_and_email_btns">
                 <button
                   onClick={() => {
                     this.dangerBtn();
@@ -230,7 +225,13 @@ class MngHistory extends Component {
                 >
                   레포삭제
                 </button>
-              </span>
+                <button
+                  onClick={this.sendEmailForRetroHandler}
+                  className="HisList_sendBtn"
+                >
+                  메일로 보내기
+                </button>
+              </div>
             </>
           ) : (
             <></>
