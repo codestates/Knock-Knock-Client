@@ -35,6 +35,9 @@ class MngHistory extends Component {
   }
 
   async componentDidMount() {
+    // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
+    this.props.getHistoryHandler(this.props.history);
+
     const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });
@@ -143,6 +146,8 @@ class MngHistory extends Component {
   }
 
   sendEmailForRetroHandler() {
+    const toEmail = window.prompt("회고 기록을 받을 이메일을 작성해주세요.");
+
     if (window.confirm("회고 기록을 이메일로 보내시겠습니까?")) {
       let sendEmailStr = "";
 
@@ -163,7 +168,7 @@ class MngHistory extends Component {
           "service_3hy8xhq",
           "template_4xcepjp",
           {
-            to_email: this.state.userData.email,
+            to_email: toEmail,
             to_name: this.state.userData.username,
             from_name: "KnockKnock",
             post_title: this.state.selectOneHisInfo.title,

@@ -11,19 +11,38 @@ const PublicBoard = (props) => {
   const [postFilter, setPostFilter] = useState("");
 
   useEffect(async () => {
+    // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
+    props.getHistoryHandler(props.history);
+
     let postsList;
 
+    console.log("board props.location.state = ", props.location.state);
     if (props.location.state) {
-      const {
-        boardType,
-        boardPeopleNum,
-        boardSearchText,
-      } = props.location.state;
-      // 모든 값을 필터에 넣었을 때
-      postsList = await axios.get(
-        `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
-        { withCredentials: true }
-      );
+      if (!postFilter) {
+        const {
+          boardType,
+          boardPeopleNum,
+          boardSearchText,
+        } = props.location.state;
+        // 모든 값을 필터에 넣었을 때
+        postsList = await axios.get(
+          `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
+          { withCredentials: true }
+        );
+      } else {
+        if (postFilter && postFilter !== "All") {
+          postsList = await axios.get(
+            `https://localhost:4000/search?category=${postFilter}&total=&title=`,
+            { withCredentials: true }
+          );
+        } else {
+          // 필터값에 아무것도 안넣었을 때
+          postsList = await axios.get(
+            `https://localhost:4000/search?category=&total=&title=`,
+            { withCredentials: true }
+          );
+        }
+      }
     } else {
       // 카테고리만 필터에 넣었을 때
       if (postFilter && postFilter !== "All") {
@@ -49,6 +68,7 @@ const PublicBoard = (props) => {
         category: post.category,
         title: post.title,
         content: post.content,
+        post_stacks: post.post_stacks,
         total: post.total,
         open: post.open,
         frontend: post.frontend,
@@ -56,11 +76,6 @@ const PublicBoard = (props) => {
         created_at: post.created_at,
         updated_at: post.updated_at,
       };
-
-      // 스택 가공 코드 수정 해야함 [이준희]
-      if (post.post_stacks) {
-        postObj.post_stacks = post.post_stacks.split(",");
-      }
 
       postsArr.push(postObj);
     });
@@ -81,7 +96,6 @@ const PublicBoard = (props) => {
       userInfo.data.postdata.filter((el) => {
         userInvolved.push(el.id);
       });
-      console.log("asdsa", userInvolved);
 
       for (let post of posts) {
         if (post.id === Number(postId)) {
@@ -94,6 +108,7 @@ const PublicBoard = (props) => {
             props.history.push("/roomInfo", {
               ...post,
               userInvolved: false,
+              username: userInfo.data.userdata.username,
             });
           }
         }
@@ -116,7 +131,6 @@ const PublicBoard = (props) => {
 
   return (
     <div className="B_container">
-      {/* <header className="B_header"></header> */}
       <div className="B_flexbox-container">
         <nav className="B_SideBarSec">
           <ul>
@@ -158,8 +172,6 @@ const PublicBoard = (props) => {
           </ul>
         </nav>
         <div className="B_RoomContaniner">
-          {/* !!!!!!!!!!!다른 카테고리의 게시물들 수정해야됨!!!!!!!!! / 컴포넌트화 [이준희] */}
-
           {posts.map((post, idx) => {
             if (post.open) {
               if (post.category === "Project") {

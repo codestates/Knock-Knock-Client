@@ -71,7 +71,6 @@ class Mypage extends React.Component {
         <div className="mypageContainer_boardListSec">
           <div className="boardListSec_openboardWrap">
             <div className="openboardWrap_title">
-
               <h1>열린 게시물</h1>
             </div>
             <div className="openboardWrap_boardList">
@@ -101,9 +100,9 @@ class Mypage extends React.Component {
               <h1>닫힌 게시물</h1>
             </div>
             <div className="closeboardWrap_boardList">
-              {closedPosts.map((post) => {
+              {closedPosts.map((post, idx) => {
                 return (
-                  <div className="boardList_closeboard">
+                  <div key={idx} className="boardList_closeboard">
                     <div className="boardList_closeboard_brief">
                       <h1>{post.title}</h1>
 
