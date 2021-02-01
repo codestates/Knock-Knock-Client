@@ -77,7 +77,7 @@ class MngAccount extends React.Component {
     };
     if (userInfo.username && userInfo.username.split("").includes("기")) {
       axios
-        .post("https://localhost:4000/profile", userInfo, {
+        .post("https://server.knocknrole.com/profile", userInfo, {
           withCredentials: true,
         })
         .then((updatedUserInfo) => {
