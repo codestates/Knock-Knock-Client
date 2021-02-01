@@ -10,8 +10,6 @@ class Profile extends React.Component {
     this.state = {
       userInfo: {},
     };
-
-    console.log("this.props.userInfo = ", this.props);
   }
 
   async componentDidMount() {
@@ -41,7 +39,6 @@ class Profile extends React.Component {
         withCredentials: true,
       })
       .then((userInfo) => {
-        console.log("프로필 userInfo = ", userInfo);
         this.setState({ userInfo: userInfo.data.userdata });
         if (this.props.getUserInfoFromProfile) {
           this.props.getUserInfoFromProfile(userInfo.data.userdata);
@@ -59,7 +56,6 @@ class Profile extends React.Component {
         this.props.getHisfromAccWithProfile();
       });
     // .then((value) => {
-    // console.log("로그인 테스팅", value);
   }
 
   render() {

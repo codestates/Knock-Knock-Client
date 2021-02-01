@@ -16,7 +16,6 @@ const PublicBoard = (props) => {
 
     let postsList;
 
-    console.log("board props.location.state = ", props.location.state);
     if (props.location.state) {
       if (!postFilter) {
         const {

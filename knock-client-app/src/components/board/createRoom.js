@@ -22,7 +22,6 @@ const CreateRoom = (props) => {
 
   const getCrew = (e) => {
     setCrew(e);
-    console.log("crew", crew);
   };
 
   const getStack = (e) => {
@@ -52,7 +51,7 @@ const CreateRoom = (props) => {
             "계정관리에서 유저아이디를 코드스테이츠 기수로 변경 후 이용해주세요."
           );
         }
-        console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
+
         const body = {
           writer: userInfo.data.userdata.username,
           category: category,
@@ -140,18 +139,13 @@ const CreateRoom = (props) => {
         editor={ClassicEditor}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
-          console.log("Editor is ready to use!", editor);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
           setDescription(data);
         }}
-        onBlur={(event, editor) => {
-          console.log("Blur.", editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log("Focus.", editor);
-        }}
+        onBlur={(event, editor) => {}}
+        onFocus={(event, editor) => {}}
       />
 
       <footer className="C_footer">

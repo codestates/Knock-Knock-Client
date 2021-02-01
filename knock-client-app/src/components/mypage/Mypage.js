@@ -26,7 +26,6 @@ class Mypage extends React.Component {
       withCredentials: true,
     });
 
-    console.log("userInfo.data.postdata = ", userInfo);
     this.setState({
       userPosts: userInfo.data.postdata,
     });
