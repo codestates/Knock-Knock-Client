@@ -39,7 +39,7 @@ const CreateRoom = (props) => {
       return;
     }
     axios
-      .get("https://localhost:4000/profile", {
+      .get("https://server.knocknrole.com/profile", {
         withCredentials: true,
       })
       .then((userInfo) => {
@@ -92,7 +92,7 @@ const CreateRoom = (props) => {
           }
         }
         axios
-          .post("https://localhost:4000/posts", body, {
+          .post("https://server.knocknrole.com/posts", body, {
             withCredentials: true,
           })
           .then(() => {
