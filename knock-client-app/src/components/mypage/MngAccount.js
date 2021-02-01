@@ -66,7 +66,6 @@ class MngAccount extends React.Component {
       this.stack.push(e);
       this.setState({ userStack: this.stack });
     }
-    console.log("프로필의 스택입니다.", this.stack);
   }
 
   storageInfo() {

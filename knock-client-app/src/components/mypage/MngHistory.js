@@ -180,9 +180,7 @@ class MngHistory extends Component {
           },
           "user_i7cqOYLkPzGQWTE60qCvw"
         )
-        .then((result) => {
-          console.log("이메일 보내기 = ", result);
-        });
+        .then((result) => {});
     }
   }
 

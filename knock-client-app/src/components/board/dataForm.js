@@ -8,7 +8,6 @@ const DataForm = (props) => {
   const [isOver, setIsOver] = useState(false);
   const isCheck = (e) => {
     if (e.target.checked) {
-      console.log(e.target.value);
       if (e.target.value === "4명이상") {
         setIsOver(true);
         alert("그룹 인원은 최대 8명까지 설정할 수 있습니다.");

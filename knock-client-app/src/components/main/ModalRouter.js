@@ -53,7 +53,6 @@ const ModalRouter = (props) => {
   }
 
   useEffect(() => {
-    console.log(isLogin);
     if (props.isModalLogin || window.localStorage.getItem("isLogin"))
       setIsLogin(true);
   }, [props.isModalLogin]);

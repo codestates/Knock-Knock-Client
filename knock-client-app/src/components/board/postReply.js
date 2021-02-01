@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import "../../styles/roomInfo.css";
 
 const PostReply = (props) => {
-  console.log("포스트리플라이 부분의 프랍스", props);
   const [userId, setUserId] = useState("");
 
   useEffect(async () => {
@@ -13,7 +12,6 @@ const PostReply = (props) => {
     });
 
     setUserId(userInfo.data.userdata.id);
-    console.log(userId);
   });
 
   const comment = props.value.map((value, idx) => {
