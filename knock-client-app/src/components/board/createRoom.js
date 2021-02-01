@@ -9,6 +9,9 @@ import "../../styles/createRoom.css";
 import axios from "axios";
 
 const CreateRoom = (props) => {
+  // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
+  props.getHistoryHandler(props.history);
+
   const [category, setCategory] = useState("Category");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -37,6 +40,14 @@ const CreateRoom = (props) => {
         withCredentials: true,
       })
       .then((userInfo) => {
+        if (
+          window.localStorage.getItem("isLogin") &&
+          !userInfo.data.userdata.username.split("").includes("기")
+        ) {
+          return alert(
+            "계정관리에서 유저아이디를 코드스테이츠 기수로 변경 후 이용해주세요."
+          );
+        }
         console.log("크리에이트 룸의 유저인포입니다!!!!!!!!", userInfo);
         const body = {
           writer: userInfo.data.userdata.username,
@@ -68,7 +79,6 @@ const CreateRoom = (props) => {
               "parseInt(body.backend) + parseInt(body.frontend) = ",
               parseInt(body.backend) + parseInt(body.frontend)
             );
-            console.log("?????", body.frontend, body.backend, body.total);
             return alert("설명을 다시 읽고 비율을 입력해주세요.");
           }
         }
@@ -97,11 +107,6 @@ const CreateRoom = (props) => {
       </option>
     );
   });
-
-  useEffect(() => {
-    console.log("posFront = ", posFront);
-    console.log("posBack = ", posBack);
-  }, [posFront, posBack]);
 
   return (
     <div className="Create_Container">

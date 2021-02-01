@@ -47,6 +47,7 @@
 .Data_Container {
   background-color: rgb(255, 255, 177);
   width: 64%;
+
   margin-left: 18%;
   margin-top: 1.5%;
 }
@@ -54,6 +55,10 @@
 .DataForm {
   padding: 0px 0px 0px;
   margin-left: 3%;
+}
+
+.Q_one {
+  padding-top: 1%;
 }
 
 /* .Stack {
