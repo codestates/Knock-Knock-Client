@@ -19,7 +19,7 @@ class Profile extends React.Component {
     if (authorizationCode && !window.localStorage.getItem("isLogin")) {
       await axios
         .post(
-          "https://localhost:4000/oauth",
+          "https://server.knocknrole.com/oauth",
           {
             authorizationCode: authorizationCode,
           },
@@ -27,7 +27,7 @@ class Profile extends React.Component {
         )
         .then(async (oauthUserInfo) => {
           await axios.get(
-            `https://localhost:4000/profile/${oauthUserInfo.data.data.id}`,
+            `https://server.knocknrole.com/profile/${oauthUserInfo.data.data.id}`,
             {
               withCredentials: true,
             }
@@ -35,7 +35,7 @@ class Profile extends React.Component {
         });
     }
     await axios
-      .get("https://localhost:4000/profile", {
+      .get("https://server.knocknrole.com/profile", {
         withCredentials: true,
       })
       .then((userInfo) => {

@@ -38,7 +38,7 @@ class MngHistory extends Component {
     // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
     this.props.getHistoryHandler(this.props.history);
 
-    const userInfo = await axios.get("https://localhost:4000/profile", {
+    const userInfo = await axios.get("https://server.knocknrole.com/profile", {
       withCredentials: true,
     });
 
@@ -52,9 +52,12 @@ class MngHistory extends Component {
   }
 
   async boardRetroHandler(retroNum) {
-    const retros = await axios.get(`https://localhost:4000/diary/${retroNum}`, {
-      withCredentials: true,
-    });
+    const retros = await axios.get(
+      `https://server.knocknrole.com/diary/${retroNum}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     let selectOneHisInfo;
     this.state.userPosts.forEach((post) => {
@@ -97,7 +100,7 @@ class MngHistory extends Component {
       content: this.retrospect,
     };
     axios
-      .post("https://localhost:4000/diary", regiJournal, {
+      .post("https://server.knocknrole.com/diary", regiJournal, {
         withCredentials: true,
       })
       .then((regiJournal) => {
@@ -110,7 +113,7 @@ class MngHistory extends Component {
 
   retroDeleteHandler(delRetroId) {
     axios
-      .delete("https://localhost:4000/diary", {
+      .delete("https://server.knocknrole.com/diary", {
         data: {
           diaryid: delRetroId,
           postid: this.state.selectOneHisInfo.id,
@@ -128,7 +131,7 @@ class MngHistory extends Component {
   dangerBtn() {
     if (window.confirm("참여된 게시물을 삭제하시겠습니까?")) {
       axios
-        .delete(`https://localhost:4000/posts`, {
+        .delete(`https://server.knocknrole.com/posts`, {
           data: {
             postid: this.state.currentPostId,
           },

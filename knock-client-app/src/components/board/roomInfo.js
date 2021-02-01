@@ -39,7 +39,7 @@ const RoomInfo = (props) => {
       if (postInfo.category === "Project") {
         if (positionRatio.frontend || positionRatio.backend) {
           axios
-            .post(`https://localhost:4000/join`, body, {
+            .post(`https://server.knocknrole.com/join`, body, {
               withCredentials: true,
             })
             .then((data) => {
@@ -61,7 +61,7 @@ const RoomInfo = (props) => {
       if (postInfo.category === "Study") {
         axios
           .post(
-            `https://localhost:4000/join`,
+            `https://server.knocknrole.com/join`,
             { ...body, frontend: 0, backend: 0 },
             { withCredentials: true }
           )
@@ -89,7 +89,7 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `https://localhost:4000/comments/${postInfo.id}`,
+      `https://server.knocknrole.com/comments/${postInfo.id}`,
       { withCredentials: true }
     );
     setReply(postComments.data.data);
@@ -103,12 +103,14 @@ const RoomInfo = (props) => {
         setErrmessage("");
 
         axios
-          .get("https://localhost:4000/profile", { withCredentials: true })
+          .get("https://server.knocknrole.com/profile", {
+            withCredentials: true,
+          })
           .then((getUserInfo) => {
             const { id, username } = getUserInfo.data.userdata;
             axios
               .post(
-                "https://localhost:4000/comments",
+                "https://server.knocknrole.com/comments",
                 {
                   writer: username,
                   comment: text,
@@ -133,7 +135,7 @@ const RoomInfo = (props) => {
 
   const deleteCommentHandler = (delCommentId) => {
     axios
-      .delete("https://localhost:4000/comments", {
+      .delete("https://server.knocknrole.com/comments", {
         data: {
           postid: postInfo.id,
           commentid: delCommentId,
