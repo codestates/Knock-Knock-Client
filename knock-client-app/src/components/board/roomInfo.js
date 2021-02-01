@@ -356,8 +356,10 @@ const RoomInfo = (props) => {
                       <></>
                     )}
                   </div>
-                ) : (
+                ) : postInfo.category !== "Question" ? (
                   <h2>신청이 완료된 게시물입니다.</h2>
+                ) : (
+                  <></>
                 )}
               </div>
             </div>
