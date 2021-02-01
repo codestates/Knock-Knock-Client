@@ -43,7 +43,6 @@ const RoomInfo = (props) => {
               withCredentials: true,
             })
             .then((data) => {
-              console.log("조인 후 = ", data);
               if (data.message !== "userid not found!") {
                 alert(
                   `${
@@ -83,7 +82,7 @@ const RoomInfo = (props) => {
       alert(
         "계정관리에서 유저아이디를 코드스테이츠 기수로 변경 후 이용해주세요."
       );
-    } else if (window.localStorage.getItem("isLogin")) {
+    } else if (!window.localStorage.getItem("isLogin")) {
       alert("로그인 후에 이용해주세요.");
     }
   };
@@ -133,7 +132,6 @@ const RoomInfo = (props) => {
   };
 
   const deleteCommentHandler = (delCommentId) => {
-    console.log("delCommentId = ", delCommentId);
     axios
       .delete("https://localhost:4000/comments", {
         data: {
@@ -150,14 +148,6 @@ const RoomInfo = (props) => {
 
   useEffect(() => {
     getPostComments();
-
-    console.log("조인 전 = ", postInfo);
-
-    // if (postInfo.userInvolved) {
-    //   setIsInvolved(true);
-    // } else {
-    //   setIsInvolved(false);
-    // }
 
     setBackend(postInfo.backend);
     setFrontend(postInfo.frontend);

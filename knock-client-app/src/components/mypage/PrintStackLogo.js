@@ -22,7 +22,6 @@ import typescript from "../../images/logo/typescript.png";
 
 const PrintLogo = (props) => {
   const select = (e) => {
-    console.log("선택한 스택", e.target.value);
     props.stack ? props.stack(e.target.value) : props.userStack(e.target.value);
   };
 
