@@ -59,22 +59,18 @@
   flex: 1;
 }
 
-.His_submit button {
+.His_submit .His_submitBtn {
   width: 116px;
   height: 126px;
+  font-size: 18px;
   background-color: #f7e462;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
+  text-align: center;
 }
 
-.His_submit button:hover {
+.His_submit .His_submitBtn:hover {
   background-color: black;
-  color: white;
-}
-
-.His_submit_p {
-  font-size: 14px;
-  font-weight: bold;
   color: white;
 }
 

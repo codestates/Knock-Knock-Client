@@ -6,8 +6,8 @@
 /* ----CKeditor에 대한 설정---*/
 .ck.ck-editor {
   margin-top: 0.5%;
-  margin-left: 18%;
-  max-width: 64%;
+
+  max-width: 80%;
 }
 
 .ck.ck-editor__editable {
@@ -46,15 +46,18 @@
 /* ----설문조사 폼에 대한 css---*/
 .Data_Container {
   background-color: rgb(255, 255, 177);
-  width: 64%;
+  width: 80%;
 
-  margin-left: 18%;
   margin-top: 1.5%;
 }
 
 .DataForm {
   padding: 0px 0px 0px;
   margin-left: 3%;
+}
+
+.ckeditor_container {
+  margin-left: 18%;
 }
 
 .Q_one {

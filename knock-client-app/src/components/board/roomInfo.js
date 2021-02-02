@@ -38,8 +38,15 @@ const RoomInfo = (props) => {
 
       if (postInfo.category === "Project") {
         if (positionRatio.frontend || positionRatio.backend) {
+          if (
+            (postInfo.frontend === 0 && positionRatio.frontend) ||
+            (postInfo.backend === 0 && positionRatio.backend)
+          ) {
+            alert("신청할 수 없는 포지션입니다!");
+            return;
+          }
           axios
-            .post(`https://server.knocknrole.com/join`, body, {
+            .post(`https://localhost:4000/join`, body, {
               withCredentials: true,
             })
             .then((data) => {
@@ -59,9 +66,14 @@ const RoomInfo = (props) => {
         }
       }
       if (postInfo.category === "Study") {
+        if (postInfo.total === 0) {
+          alert("해당 스터디는 신청할 수 없습니다!");
+          return;
+        }
+
         axios
           .post(
-            `https://server.knocknrole.com/join`,
+            `https://localhost:4000/join`,
             { ...body, frontend: 0, backend: 0 },
             { withCredentials: true }
           )
@@ -89,7 +101,7 @@ const RoomInfo = (props) => {
 
   const getPostComments = async () => {
     const postComments = await axios.get(
-      `https://server.knocknrole.com/comments/${postInfo.id}`,
+      `https://localhost:4000/comments/${postInfo.id}`,
       { withCredentials: true }
     );
     setReply(postComments.data.data);
@@ -103,14 +115,14 @@ const RoomInfo = (props) => {
         setErrmessage("");
 
         axios
-          .get("https://server.knocknrole.com/profile", {
+          .get("https://localhost:4000/profile", {
             withCredentials: true,
           })
           .then((getUserInfo) => {
             const { id, username } = getUserInfo.data.userdata;
             axios
               .post(
-                "https://server.knocknrole.com/comments",
+                "https://localhost:4000/comments",
                 {
                   writer: username,
                   comment: text,
@@ -135,7 +147,7 @@ const RoomInfo = (props) => {
 
   const deleteCommentHandler = (delCommentId) => {
     axios
-      .delete("https://server.knocknrole.com/comments", {
+      .delete("https://localhost:4000/comments", {
         data: {
           postid: postInfo.id,
           commentid: delCommentId,
@@ -376,11 +388,20 @@ const RoomInfo = (props) => {
                 />
               </ul>
             )}
-            <div className="Reply_input_form">
-              <textarea onChange={commentChangeHandler} className="ReplyBox" />
-              <button onClick={sendReply} className="SendBtn">
-                Send
-              </button>
+            <div>
+              <form className="Reply_input_form">
+                <textarea
+                  onChange={commentChangeHandler}
+                  className="ReplyBox"
+                />
+
+                <input
+                  className="SendBtn"
+                  type="reset"
+                  value="Send"
+                  onClick={sendReply}
+                />
+              </form>
             </div>
           </div>
         </div>
