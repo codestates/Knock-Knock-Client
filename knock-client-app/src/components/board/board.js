@@ -25,19 +25,19 @@ const PublicBoard = (props) => {
         } = props.location.state;
         // 모든 값을 필터에 넣었을 때
         postsList = await axios.get(
-          `https://server.knocknrole.com/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
+          `https://localhost:4000/search?category=${boardType}&total=${boardPeopleNum}&title=${boardSearchText}`,
           { withCredentials: true }
         );
       } else {
         if (postFilter && postFilter !== "All") {
           postsList = await axios.get(
-            `https://server.knocknrole.com/search?category=${postFilter}&total=&title=`,
+            `https://localhost:4000/search?category=${postFilter}&total=&title=`,
             { withCredentials: true }
           );
         } else {
           // 필터값에 아무것도 안넣었을 때
           postsList = await axios.get(
-            `https://server.knocknrole.com/search?category=&total=&title=`,
+            `https://localhost:4000/search?category=&total=&title=`,
             { withCredentials: true }
           );
         }
@@ -46,13 +46,13 @@ const PublicBoard = (props) => {
       // 카테고리만 필터에 넣었을 때
       if (postFilter && postFilter !== "All") {
         postsList = await axios.get(
-          `https://server.knocknrole.com/search?category=${postFilter}&total=&title=`,
+          `https://localhost:4000/search?category=${postFilter}&total=&title=`,
           { withCredentials: true }
         );
       } else {
         // 필터값에 아무것도 안넣었을 때
         postsList = await axios.get(
-          `https://server.knocknrole.com/search?category=&total=&title=`,
+          `https://localhost:4000/search?category=&total=&title=`,
           { withCredentials: true }
         );
       }
@@ -87,12 +87,9 @@ const PublicBoard = (props) => {
   const roomCardClickHandler = async (event) => {
     const postId = event.nativeEvent.path[0].attributes.value.value;
     if (window.localStorage.getItem("isLogin")) {
-      const userInfo = await axios.get(
-        "https://server.knocknrole.com/profile",
-        {
-          withCredentials: true,
-        }
-      );
+      const userInfo = await axios.get("https://localhost:4000/profile", {
+        withCredentials: true,
+      });
 
       const userInvolved = [];
       userInfo.data.postdata.filter((el) => {

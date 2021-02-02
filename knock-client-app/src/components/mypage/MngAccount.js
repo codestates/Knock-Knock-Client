@@ -77,7 +77,7 @@ class MngAccount extends React.Component {
     };
     if (userInfo.username && userInfo.username.split("").includes("기")) {
       axios
-        .post("https://server.knocknrole.com/profile", userInfo, {
+        .post("https://localhost:4000/profile", userInfo, {
           withCredentials: true,
         })
         .then((updatedUserInfo) => {
@@ -127,7 +127,6 @@ class MngAccount extends React.Component {
                   tpye="text"
                   placeholder="여기에 기수를 입력해주세요"
                   className="editUserInfoFormSec_usernameText"
-                  value={this.state.userInfo.username}
                 />
               </div>
             </div>
@@ -157,7 +156,6 @@ class MngAccount extends React.Component {
                   }}
                   placeholder="오늘 기분을 알려주세요 : )"
                   className="editUserInfoFormSec_moodText"
-                  value={this.state.userInfo.mood}
                 />
               </div>
             </div>

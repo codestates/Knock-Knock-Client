@@ -38,7 +38,7 @@ class MngHistory extends Component {
     // 네비게이션 모달 로그아웃을 위한 히스토리 객체 전달
     this.props.getHistoryHandler(this.props.history);
 
-    const userInfo = await axios.get("https://server.knocknrole.com/profile", {
+    const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });
 
@@ -52,12 +52,9 @@ class MngHistory extends Component {
   }
 
   async boardRetroHandler(retroNum) {
-    const retros = await axios.get(
-      `https://server.knocknrole.com/diary/${retroNum}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const retros = await axios.get(`https://localhost:4000/diary/${retroNum}`, {
+      withCredentials: true,
+    });
 
     let selectOneHisInfo;
     this.state.userPosts.forEach((post) => {
@@ -100,7 +97,7 @@ class MngHistory extends Component {
       content: this.retrospect,
     };
     axios
-      .post("https://server.knocknrole.com/diary", regiJournal, {
+      .post("https://localhost:4000/diary", regiJournal, {
         withCredentials: true,
       })
       .then((regiJournal) => {
@@ -113,7 +110,7 @@ class MngHistory extends Component {
 
   retroDeleteHandler(delRetroId) {
     axios
-      .delete("https://server.knocknrole.com/diary", {
+      .delete("https://localhost:4000/diary", {
         data: {
           diaryid: delRetroId,
           postid: this.state.selectOneHisInfo.id,
@@ -131,7 +128,7 @@ class MngHistory extends Component {
   dangerBtn() {
     if (window.confirm("참여된 게시물을 삭제하시겠습니까?")) {
       axios
-        .delete(`https://server.knocknrole.com/posts`, {
+        .delete(`https://localhost:4000/posts`, {
           data: {
             postid: this.state.currentPostId,
           },
@@ -206,7 +203,7 @@ class MngHistory extends Component {
                 <h1>{this.state.selectOneHisInfo.title}</h1>
                 <h3>회고를 작성하는 공간입니다.</h3>
               </div>
-              <div className="His_submitForm">
+              <form className="His_submitForm">
                 <textarea
                   className="Journal_box"
                   placeholder="Why not to keep a journal about what you did!!!??"
@@ -214,11 +211,14 @@ class MngHistory extends Component {
                 />
 
                 <div className="His_submit">
-                  <button onClick={() => this.registerJouranl()}>
-                    <p className="His_submit_p">등록</p>
-                  </button>
+                  <input
+                    type="reset"
+                    className="His_submitBtn"
+                    onClick={() => this.registerJouranl()}
+                    value="등록"
+                  />
                 </div>
-              </div>
+              </form>
               <ul className="Retro_list">
                 <SendRetrospect
                   journals={this.state.journals}

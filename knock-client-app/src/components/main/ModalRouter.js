@@ -30,10 +30,10 @@ const customStyles = {
 const ModalRouter = (props) => {
   var subtitle;
   const googleOAuthUrl = `
-      https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=https://knocknrole.com/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
+      https://accounts.google.com/o/oauth2/v2/auth?client_id=872667981680-k0ccru0v0ilhup1bs98maa4vhl2v80qd.apps.googleusercontent.com&redirect_uri=https://localhost:3000/mngAccount&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
       `;
 
-  const gitOAuthUrl = `https://github.com/login/oauth/authorize?client_id=e363bc17f9ecc211cdee&redirect_uri=https://knocknrole.com/mngAccount`;
+  const gitOAuthUrl = `https://github.com/login/oauth/authorize?client_id=e363bc17f9ecc211cdee&redirect_uri=https://localhost:3000/mngAccount`;
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(false);
@@ -74,7 +74,7 @@ const ModalRouter = (props) => {
     window.localStorage.removeItem("userid");
     axios({
       method: "post",
-      url: "https://server.knocknrole.com/profile/signout",
+      url: "https://localhost:4000/profile/signout",
       withCredentials: true,
     });
     //path로 길을 내야 사용할 수 있다. 그래서 profile까지 path를 연결한 것!

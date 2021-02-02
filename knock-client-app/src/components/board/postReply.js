@@ -7,7 +7,7 @@ const PostReply = (props) => {
   const [userId, setUserId] = useState("");
 
   useEffect(async () => {
-    const userInfo = await axios.get("https://server.knocknrole.com/profile", {
+    const userInfo = await axios.get("https://localhost:4000/profile", {
       withCredentials: true,
     });
 

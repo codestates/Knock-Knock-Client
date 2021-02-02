@@ -39,7 +39,7 @@ const CreateRoom = (props) => {
       return;
     }
     axios
-      .get("https://server.knocknrole.com/profile", {
+      .get("https://localhost:4000/profile", {
         withCredentials: true,
       })
       .then((userInfo) => {
@@ -92,7 +92,7 @@ const CreateRoom = (props) => {
           }
         }
         axios
-          .post("https://server.knocknrole.com/posts", body, {
+          .post("https://localhost:4000/posts", body, {
             withCredentials: true,
           })
           .then(() => {
@@ -126,27 +126,28 @@ const CreateRoom = (props) => {
           onChange={(e) => setTitle(e.target.value)}
         ></textarea>
       </div>
+      <div className="ckeditor_container">
+        <DataForm
+          category={category}
+          crew={getCrew}
+          positionFront={setPosFront}
+          positionBack={setPosBack}
+          stack={getStack}
+        ></DataForm>
 
-      <DataForm
-        category={category}
-        crew={getCrew}
-        positionFront={setPosFront}
-        positionBack={setPosBack}
-        stack={getStack}
-      ></DataForm>
-
-      <CKEditor
-        editor={ClassicEditor}
-        onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setDescription(data);
-        }}
-        onBlur={(event, editor) => {}}
-        onFocus={(event, editor) => {}}
-      />
+        <CKEditor
+          editor={ClassicEditor}
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setDescription(data);
+          }}
+          onBlur={(event, editor) => {}}
+          onFocus={(event, editor) => {}}
+        />
+      </div>
 
       <footer className="C_footer">
         <div className="sendBtn" onClick={() => postRoomInfo()}>
