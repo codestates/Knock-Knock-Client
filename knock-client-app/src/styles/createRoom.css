@@ -1,0 +1,126 @@
+.Create_Container {
+  /* display: block; */
+  height: 100%;
+}
+
+/* ----CKeditor에 대한 설정---*/
+.ck.ck-editor {
+  margin-top: 0.5%;
+
+  max-width: 80%;
+}
+
+.ck.ck-editor__editable {
+  min-height: 700px;
+}
+
+/* ----방 세부 설정에 대한 css---*/
+.Category {
+  margin-top: 5%;
+  margin-left: 18%;
+  width: 170px;
+  height: 35px;
+  border: 1px solid #e9e9e9;
+  color: #909090;
+  outline: none;
+  cursor: pointer;
+}
+.Category:hover {
+  border: 1px solid rgb(65, 64, 64);
+}
+
+.title {
+  font-size: 35px;
+  margin-top: 1%;
+  margin-left: 18%;
+  height: 42px;
+  width: 60%;
+  border: none;
+  resize: none;
+  outline: none;
+  line-height: 40px;
+  overflow: hidden;
+  letter-spacing: 1px;
+}
+
+/* ----설문조사 폼에 대한 css---*/
+.Data_Container {
+  background-color: rgb(255, 255, 177);
+  width: 80%;
+
+  margin-top: 1.5%;
+}
+
+.DataForm {
+  padding: 0px 0px 0px;
+  margin-left: 3%;
+}
+
+.ckeditor_container {
+  margin-left: 18%;
+}
+
+.Q_one {
+  padding-top: 1%;
+}
+
+/* .Stack {
+  width: 120px;
+  height: 30px;
+  border: 1px solid #e9e9e9;
+  font-style: normal;
+  outline: none;
+  cursor: pointer;
+}
+.Stack:hover {
+  border: 1px solid rgb(65, 64, 64);
+} */
+
+.Q_three:hover {
+  height: auto;
+}
+
+.Q_three:hover .showStack {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.Q_three:hover .StackLogo {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ----footer 폼에 대한 css---*/
+
+.C_footer {
+  display: flex;
+  height: 70px;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 0px;
+  background-color: #f7ea5b;
+  color: #ffffff;
+  text-align: center;
+  font-style: inherit;
+  font-size: 17px;
+}
+
+.sendBtn {
+  display: flex;
+  padding: 1% 3%;
+  margin: 0.7%;
+  margin-right: 4%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: #391b1b;
+  cursor: pointer;
+}
+.sendBtn:hover {
+  background-color: #683232;
+}
+
+.showStack {
+  border: 2px solid white;
+  height: 30px;
+  width: auto;
+}

@@ -1,0 +1,420 @@
+.mypageContainer {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+}
+
+@media (max-width: 1300px) {
+  .mypageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 2000px;
+    border: 1px solid black;
+    overflow: scroll;
+  }
+
+  .mypageContainer_blankSec {
+    display: none;
+  }
+
+  .mypageContainer_profileSec {
+    height: 100vh;
+    background: #f7e462;
+  }
+
+  .mypageContainer_editUserInfoFormSec {
+    flex: 6;
+
+    overflow: scroll;
+  }
+}
+
+/* ------------------------------------------- */
+
+.mypageContainer_blankSec {
+  flex: 1;
+}
+
+/* ------------------------------------------- */
+
+.mypageContainer_profileSec {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  background: #f7e462;
+}
+
+.profileSec_profileImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin-top: 3%;
+}
+
+.profileSec_profileImg img {
+  width: 60%;
+  border: 1px solid rgb(129, 91, 91);
+  border-radius: 20vw;
+}
+
+.profileSec_name_mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vw;
+  flex: 1;
+}
+
+.profileSec_name_mood p {
+  margin: 2%;
+}
+
+.profileSec_username {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profileSec_mood {
+  font-size: 20px;
+}
+
+.profileSec_btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6%;
+  flex: 1;
+}
+
+.profileSec_btns button {
+  cursor: pointer;
+  margin: 3%;
+  width: 20%;
+  height: 50px;
+  border: none;
+  background: #f3dd4c;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(110, 110, 110);
+}
+
+.profileSec_btns button:hover {
+  background: rgb(211, 200, 81);
+}
+
+.profileSec_btns_false {
+  background: none;
+  font-weight: 900;
+}
+
+.profileSec_stacks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18%;
+  flex: 1;
+}
+
+.profileSec_stack {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  margin: 1.5%;
+}
+
+/* ------------------------------------------- */
+
+.mypageContainer_boardListSec {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+
+  overflow: scroll;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mypageContainer_boardListSec::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.boardListSec_openboardWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  margin-top: 6%;
+  overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.boardListSec_openboardWrap::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.openboardWrap_title {
+  flex: 1;
+  padding-left: 3%;
+}
+
+.openboardWrap_boardList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 9;
+}
+
+.boardList_openboard {
+  height: 100px;
+  width: 80%;
+  margin: 2%;
+  border: 3px solid rgb(196, 196, 196);
+  border-radius: 20px;
+  transition: all 0.1s ease;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: rgb(249, 252, 204);
+}
+
+.boardList_openboard_brief {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_openboard_brief h1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.boardList_openboard_brief h2 {
+  color: green;
+}
+
+.boardList_openboard_detail {
+  opacity: 0;
+  border-top: 1px solid black;
+  transition: all 0.1s ease;
+}
+
+.boardList_openboard:hover {
+  height: auto;
+  box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.boardList_openboard:hover .boardList_openboard_detail {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------- */
+
+.boardListSec_closeboardWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.boardListSec_closeboardWrap::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.closeboardWrap_title {
+  flex: 1;
+  padding-left: 3%;
+}
+
+.closeboardWrap_boardList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 9;
+}
+
+.boardList_closeboard {
+  height: 100px;
+  width: 80%;
+  margin: 2%;
+  border: 3px solid rgb(196, 196, 196);
+  border-radius: 20px;
+  transition: all 0.1s ease;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: rgb(253, 253, 193);
+}
+
+.boardList_closeboard_brief {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_closeboard_brief h1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.boardList_closeboard_brief h2 {
+  color: red;
+}
+
+.boardList_closeboard_detail {
+  opacity: 0;
+  border-top: 1px solid black;
+  transition: all 0.1s ease;
+}
+
+.closeboard_detail_title_writer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boardList_closeboard:hover {
+  height: auto;
+  box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.boardList_closeboard:hover .boardList_closeboard_detail {
+  height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* AccountMng 계정관리 Styles */
+
+.mypageContainer_editUserInfoFormSec {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+  overflow: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.mypageContainer_editUserInfoFormSec::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.editUserInfoFormSec_wrap {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid rgb(255, 255, 183);
+  margin-top: 6vw;
+  margin-left: 13%;
+  margin-right: 13%;
+  border-radius: 21px;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_term {
+  flex: 4;
+
+  padding-left: 3%;
+  padding-top: 2vw;
+}
+
+.editUserInfoFormSec_usernameText {
+  border: none;
+  resize: none;
+  font-size: 20px;
+  width: 250px;
+}
+
+.editUserInfoFormSec_propensity {
+  flex: 3;
+
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_propensitySelect {
+  border: 1px solid lightgray;
+  margin-top: 2%;
+  font-size: 15px;
+  color: gray;
+}
+
+.editUserInfoFormSec_mood {
+  flex: 3;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_moodText {
+  border: none;
+  resize: none;
+  margin-top: 2%;
+  font-size: 20px;
+  width: 250px;
+}
+
+.editUserInfoFormSec_stacks_wrap {
+  flex: 3;
+  padding-left: 3%;
+  padding-top: 3%;
+}
+
+.editUserInfoFormSec_phrase {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.showStack {
+  transition: all 0.1s ease;
+}
+
+.showStack_stacks {
+  font-weight: 700;
+}
+
+.StackLogo {
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
+.editUserInfoFormSec_stacks_wrap:hover {
+  height: auto;
+}
+
+.editUserInfoFormSec_stacks_wrap:hover .showStack {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.editUserInfoFormSec_stacks_wrap:hover .StackLogo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.showStack .editUserInfoFormSec_saveBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editUserInfoFormSec_saveBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 5vw;
+  border: none;
+  border-radius: 20px;
+  background: #f7e462;
+  font-weight: 900;
+  padding-bottom: 0.1%;
+  margin-top: 3vw;
+}
