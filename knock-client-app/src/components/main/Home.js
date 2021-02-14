@@ -56,10 +56,7 @@ const Home = (props) => {
         </section>
         <section className="H_sec1" id="H_sec1">
           <div className="H_sec1_wrap1">
-            <img
-              src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F16e487ff-cbaf-44e1-93d5-87922bf57da9%2Fmain_sec1_img.png?table=block&id=1ca2ed69-22a0-4a90-a667-fc8c76d58d5c&spaceId=51ec0fd9-0cd6-4091-8b9f-e3587774c992&width=2260&userId=636607dd-ac79-48d7-b6d7-40e31ff47bc3&cache=v2"
-              alt=""
-            />
+            <img src={homeMainSec1Img} alt="" />
           </div>
 
           <div className="H_sec1_wrap3">
